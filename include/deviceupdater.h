@@ -34,8 +34,12 @@ namespace openalpp {
 /**
  * Updater for sound input devices (like microphones).
  */
-class DeviceUpdater : public StreamUpdater {
+class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
   PortAudioStream *stream_;
+  ost::Mutex inputmutex;
+  char *tmpbuffer_;
+  int tmpbufsize_,maxtmpbufsize_;
+  int bytesperframe_;
  public:
   /**
    * Constructor.
@@ -61,6 +65,24 @@ class DeviceUpdater : public StreamUpdater {
    * This will be called when the updater is Start():ed..
    */
   void Run();
+
+  /**
+   * Enter critical section.
+   */
+  inline void Enter() {inputmutex.EnterMutex();}
+
+  /**
+   * Leave critical section.
+   */
+  inline void Leave() {inputmutex.LeaveMutex();}
+
+  /**
+   * Copy input from callback to temporary buffer.
+   * Update will copy the data from the temporary buffer to a sound buffer.
+   * @param tempbuffer is a pointer to the buffer
+   * @param length is the length - in bytes - of the buffer
+   */
+  void CopyInput(void *tempbuffer,int length);
 };
 
 }

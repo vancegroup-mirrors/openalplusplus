@@ -29,17 +29,31 @@ namespace openalpp {
 static int RecordCallback(void *inputbuffer,void *outputbuffer,
 			  unsigned long nframes,
 			  PaTimestamp outtime, void *object) {
-  // TODO: This is (probably) illegal to do in this callback. That might
-  // be the explanation for the failures on small buffer sizes. Should
-  // Implement an alternative solution that copies data and uses a semaphore
-  // to signal that data has arrived..
-  return (int)((DeviceUpdater *)object)->Update(inputbuffer,nframes*2);
+  ((DeviceUpdater *)object)->Enter();
+  ((DeviceUpdater *)object)->CopyInput(inputbuffer,nframes);
+  ((DeviceUpdater *)object)->Post();
+  ((DeviceUpdater *)object)->Leave();
+  return 0;
+}
+
+ALenum ALFormat(SampleFormat format) {
+  switch(format) {
+    case(Mono8):
+      return AL_FORMAT_MONO8;
+    case(Mono16):
+      return AL_FORMAT_MONO16;
+    case(Stereo8):
+      return AL_FORMAT_STEREO8;
+    case(Stereo16):
+      return AL_FORMAT_STEREO16;
+  }
+  return 0;
 }
 
 DeviceUpdater::DeviceUpdater(int device, unsigned int frequency,unsigned int buffersize,
 			     SampleFormat format,
 			     ALuint buffer1,ALuint buffer2) 
-			     :  StreamUpdater(buffer1,buffer2,AL_FORMAT_MONO8,frequency) {
+			     :  StreamUpdater(buffer1,buffer2,ALFormat(format),frequency) {
   PaSampleFormat paformat;
   int nchannels;
   switch(format) {
@@ -47,21 +61,25 @@ DeviceUpdater::DeviceUpdater(int device, unsigned int frequency,unsigned int buf
       format_=AL_FORMAT_MONO8;
       paformat=paInt8;
       nchannels=1;
+      bytesperframe_=1;
       break;
     case(Mono16):
       format_=AL_FORMAT_MONO16;
       paformat=paInt16;
       nchannels=1;
+      bytesperframe_=2;
       break;
     case(Stereo8):
       format_=AL_FORMAT_STEREO8;
       paformat=paInt8;
       nchannels=2;
+      bytesperframe_=2;
       break;
     case(Stereo16):
       format_=AL_FORMAT_STEREO16;
       paformat=paInt16;
       nchannels=2;
+      bytesperframe_=4;
       break;
   }
 
@@ -77,22 +95,44 @@ DeviceUpdater::DeviceUpdater(int device, unsigned int frequency,unsigned int buf
     throw InitError("No such device");
   if(devid==paNoDevice)
     throw InitError("Couldn't open device");  
+
+  maxtmpbufsize_=buffersize;
+  tmpbuffer_=new char[buffersize];
+  
   PaError err=Pa_OpenStream(&stream_,
 			    devid,nchannels,paformat,NULL,
 			    paNoDevice,0,paformat,NULL,
-			    frequency,buffersize,2,paClipOff,
+			    frequency,buffersize/bytesperframe_,2,paClipOff,
 			    RecordCallback,this);
 }
 
 DeviceUpdater::~DeviceUpdater() {
   Pa_CloseStream(stream_);
+  delete[] tmpbuffer_;
 }
 
 void DeviceUpdater::Run() {
   Pa_StartStream(stream_);
+  Wait();
+  Enter();
+  while(!Update(tmpbuffer_,tmpbufsize_)) {
+    Leave();
+    Wait();
+    Enter();
+  }
+  Leave();
+  Pa_StopStream(stream_);
+}
 
-  while(Pa_StreamActive(stream_))
-    Pa_Sleep(1000);
+void DeviceUpdater::CopyInput(void *tempbuffer,int length) {
+  if(!tempbuffer)
+    return;
+  length*=bytesperframe_;
+  if(length>maxtmpbufsize_)
+    tmpbufsize_=maxtmpbufsize_;
+  else
+    tmpbufsize_=length;
+  memcpy(tmpbuffer_,tempbuffer,tmpbufsize_);
 }
 
 }

@@ -40,7 +40,7 @@ void InputDevice::Init() {
 
 InputDevice::InputDevice() {
   Init();
-  updater_=new DeviceUpdater(-1,44100,10000,Mono16,buffername_,buffer2_->GetName());
+  updater_=new DeviceUpdater(-1,22050,10000,Mono16,buffername_,buffer2_->GetName());
 }
 
 InputDevice::InputDevice(int device,unsigned int samplerate,unsigned int buffersize,
