@@ -3,6 +3,7 @@
 
 #include <cc++/thread.h>
 #include <AL/al.h>
+#include "windowsstuff.h"
 
 namespace openalpp {
 
