@@ -7,13 +7,17 @@ LDFLAGS= -L.
 LIBLDFLAGS= -shared -Wl,-soname,libopenalpp.so.1
 CFLAGS= -Wall -DUSE_POSIXMUTEX -O3 -fPIC
 LIBS= -lopenalpp
-LLIBS= -lopenal -lpthread -lccxx
-OBJECTS= audioenviroment.o listener.o audiobase.o sourcebase.o source.o sample.o sounddata.o stream.o error.o groupsource.o inputdevice.o netstream.o streamupdater.o deviceupdater.o netupdater.o
+LLIBS= -lopenal -lpthread -lccgnu
+OBJECTS= audioenviroment.o listener.o audiobase.o sourcebase.o source.o sample.o sounddata.o stream.o error.o groupsource.o inputdevice.o netstream.o streamupdater.o deviceupdater.o netupdater.o audioconvert.o
 
 alpp: $(OBJECTS) Makefile
 	$(CC) $(LIBLDFLAGS) $(LLIBS) -o libopenalpp.so.1.1 $(OBJECTS)
 test: test.o Makefile
 	$(CC) $(LDFLAGS) $(LIBS) -o testlib test.o
+teststream: teststream.o Makefile
+	$(CC) $(LDFLAGS) $(LIBS) -o teststream teststream.o
+testsend: testsend.o Makefile
+	$(CC) $(LDFLAGS) $(LIBS) -o testsend testsend.o
 docs:	
 	doxygen Doxyfile
 test.o: test.cpp alpp.h
@@ -24,10 +28,12 @@ listener.o: positionedobject.h audiobase.h
 audioenviroment.o: audiobase.h
 sourcebase.o: positionedobject.h audiobase.h error.h
 source.o: positionedobject.h sourcebase.h audiobase.h
-groupsource.o: positionedobject.h sourcebase.h audiobase.h
+groupsource.o: positionedobject.h sourcebase.h audiobase.h audioconvert.h
 sample.o: sounddata.h
 stream.o: sounddata.h
 inputdevice.o: deviceupdater.h streamupdater.h stream.h sounddata.h
 netstream.o: deviceupdater.h netupdater.h stream.h sounddata.h
+deviceupdater.o: streamupdater.h
+netupdater.o: streamupdater.h
 clean:
 	rm -f *.o core core.* *~
