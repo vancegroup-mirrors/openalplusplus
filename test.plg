@@ -3,120 +3,33 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: test - Win32 Release--------------------
+--------------------Configuration: test - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\WINDOWS\TEMP\RSP193.TMP" with contents
+Creating temporary file "C:\WINDOWS\TEMP\RSP1360.TMP" with contents
 [
-/nologo /G5 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Release/test.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+/nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"test___Win32_Debug/test.pch" /YX /Fo"test___Win32_Debug/" /Fd"test___Win32_Debug/" /FD /GZ /c 
 "C:\Source\alpp\test.cpp"
 ]
-Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP193.TMP" 
-Creating temporary file "C:\WINDOWS\TEMP\RSP0194.TMP" with contents
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP1360.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP1361.TMP" with contents
 [
-kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib /nologo /subsystem:console /incremental:no /pdb:"Release/test.pdb" /machine:I386 /nodefaultlib:"msvcrt.lib" /out:"Release/test.exe" /libpath:"./Release" 
-.\Release\test.obj
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib ccgnu32v2.lib /nologo /subsystem:console /incremental:yes /pdb:"test___Win32_Debug/test.pdb" /debug /machine:I386 /out:"test___Win32_Debug/test.exe" /pdbtype:sept /libpath:".\Debug" 
+.\test___Win32_Debug\test.obj
+.\Debug\openalpp.lib
 ]
-Creating command line "link.exe @C:\WINDOWS\TEMP\RSP0194.TMP"
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP1361.TMP"
 <h3>Output Window</h3>
 Compiling...
 test.cpp
 C:\Source\alpp\test.cpp(79) : warning C4305: 'argument' : truncation from 'const double' to 'float'
 C:\Source\alpp\test.cpp(81) : warning C4305: 'argument' : truncation from 'const double' to 'float'
 Linking...
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-openalpp.lib(audioenviroment.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-test.obj : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-openalpp.lib(audiobase.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol "const  type_info::`vftable'" (??_7type_info@@6B@)
-test.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) void __cdecl ost::ccxx_sleep(unsigned long)" (__imp_?ccxx_sleep@ost@@YAXK@Z)
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(listener.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-test.obj : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(source.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol ___CxxFrameHandler
-openalpp.lib(listener.obj) : error LNK2001: unresolved external symbol __fltused
-openalpp.lib(audioenviroment.obj) : error LNK2001: unresolved external symbol __fltused
-test.obj : error LNK2001: unresolved external symbol __fltused
-openalpp.lib(source.obj) : error LNK2001: unresolved external symbol __fltused
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __fltused
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __fltused
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(listener.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol __except_list
-test.obj : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(source.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __except_list
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(audioenviroment.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(audiobase.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(listener.obj) : error LNK2001: unresolved external symbol _atexit
-test.obj : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(error.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(source.obj) : error LNK2001: unresolved external symbol _atexit
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol _atexit
-LINK : error LNK2001: unresolved external symbol _mainCRTStartup
-openalpp.lib(source.obj) : error LNK2001: unresolved external symbol "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z)
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(audioenviroment.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(audiobase.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __CxxThrowException@8
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(audioenviroment.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(sounddata.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(audiobase.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __imp__memmove
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __CIacos
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __ftol
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __imp__free
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __imp__free
-openalpp.lib(sample.obj) : error LNK2001: unresolved external symbol __imp__free
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol __imp__malloc
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __imp__malloc
-openalpp.lib(groupsource.obj) : error LNK2001: unresolved external symbol "void * __cdecl openalpp::AudioConvert(void *,int,unsigned int,unsigned int,int,unsigned int,unsigned int *)" (?AudioConvert@openalpp@@YAPAXPAXHIIHIPAI@Z)
-openalpp.lib(sourcebase.obj) : error LNK2001: unresolved external symbol __imp__realloc
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) public: int __thiscall ost::Thread::Start(class ost::Semaphore *)" (__imp_?Start@Thread@ost@@QAEHPAVSemaphore@2@@Z)
-openalpp.lib(stream.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) public: void __thiscall ost::Thread::Suspend(void)" (__imp_?Suspend@Thread@ost@@QAEXXZ)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "protected: virtual void __thiscall ost::Thread::Notify(class ost::Thread *)" (?Notify@Thread@ost@@MAEXPAV12@@Z)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "protected: virtual void * __thiscall ost::Thread::getExtended(void)" (?getExtended@Thread@ost@@MAEPAXXZ)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "protected: virtual void __thiscall ost::Thread::Initial(void)" (?Initial@Thread@ost@@MAEXXZ)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "protected: virtual void __thiscall ost::Thread::Final(void)" (?Final@Thread@ost@@MAEXXZ)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol __purecall
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall ost::Thread::Thread(int,unsigned int)" (__imp_??0Thread@ost@@QAE@HI@Z)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) protected: void __thiscall ost::Thread::Terminate(void)" (__imp_?Terminate@Thread@ost@@IAEXXZ)
-openalpp.lib(streamupdater.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) protected: void __thiscall ost::Thread::Sleep(unsigned long)" (__imp_?Sleep@Thread@ost@@IAEXK@Z)
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _fclose
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _malloc
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _fseek
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _fread
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _fopen
-alut.lib(ALut.obj) : error LNK2001: unresolved external symbol _free
-msvcprt.lib(delop_s.obj) : error LNK2001: unresolved external symbol _free
-Release/test.exe : fatal error LNK1120: 32 unresolved externals
-Error executing link.exe.
 
 
 
 <h3>Results</h3>
-test.exe - 87 error(s), 2 warning(s)
+test.exe - 0 error(s), 2 warning(s)
 </pre>
 </body>
 </html>

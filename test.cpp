@@ -25,7 +25,7 @@ using openalpp::Error;
 int main() {
   try {
     AudioEnviroment test;
-    test.InitiateReverb();
+    //test.InitiateReverb();
     cerr << "Distance model used is: ";
     switch(test.GetDistanceModel()) {
       case(None):
