@@ -8,7 +8,7 @@
  */
 
 #include "source.h"
-#include "audioenviroment.h"
+#include "audioenvironment.h"
 #include "listener.h"
 #include "groupsource.h"
 #include "sample.h"
