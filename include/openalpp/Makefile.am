@@ -18,4 +18,6 @@ pkginclude_HEADERS = \
     sourcebase.h \
     stream.h \
     streamupdater.h \
+    filestream.h \
+    filestreamupdater.h \
     windowsstuff.h 
