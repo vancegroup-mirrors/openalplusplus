@@ -38,6 +38,7 @@ Source::Source(const Source &source) : SourceBase(source) {
 }
 
 Source::~Source() {
+  Stop();
   delete sounddata_;
 }
 
@@ -92,6 +93,7 @@ void Source::Play() {
 void Source::Stop() {
   if(streaming_)
     ((Stream *)sounddata_)->Stop(sourcename_);
+  SourceBase::Stop();
 }
 
 bool Source::IsStreaming() {
