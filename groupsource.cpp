@@ -331,6 +331,7 @@ void GroupSource::MixSources(unsigned int frequency)
   ALsizei bsize=0,size=0,loadsize=0,bits,freq;
   ALenum format;
   ALboolean success;
+  AudioConvert converter(AL_FORMAT_STEREO16,frequency);
 
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
@@ -342,9 +343,9 @@ void GroupSource::MixSources(unsigned int frequency)
   if(success==AL_FALSE || !loaddata)
     throw FileError("Error opening file for mixing");
 
-  bdata=(ALshort *)AudioConvert(loaddata,format,loadsize,freq,
-				AL_FORMAT_STEREO16,
-				frequency,(ALuint *)&bsize);
+  bsize=loadsize;
+  bdata=(ALshort *)converter.Apply(loaddata,format,freq,bsize);
+
   if(!bdata)
     throw FatalError("Error converting data to internal format!");
 
@@ -359,9 +360,8 @@ void GroupSource::MixSources(unsigned int frequency)
     if(success==AL_FALSE || !loaddata)
       throw FileError("Error opening file for mixing");
     
-    data=(ALshort *)AudioConvert(loaddata,format,loadsize,freq,
-				 AL_FORMAT_STEREO16,
-				 frequency,(ALuint *)&size);  
+    size=loadsize;
+    data=(ALshort *)converter.Apply(loaddata,format,freq,size);
     if(!data)
       throw FatalError("Error converting data to internal format!");
 
