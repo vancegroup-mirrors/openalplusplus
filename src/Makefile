@@ -10,6 +10,7 @@ INCL=../include/
 
 alpp: $(OBJECTS) Makefile
 	$(CC) $(LDFLAGS) $(LIBS) -o ../lib/libopenalpp.so.1.1 $(OBJECTS)
+	cd ../lib && $(MAKE) links
 %.o: %.cpp $(INCL)%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 listener.o: $(INCL)positionedobject.h $(INCL)audiobase.h
