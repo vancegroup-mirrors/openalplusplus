@@ -37,6 +37,8 @@
 #include "openalpp/groupsource.h"
 #include "openalpp/sample.h"
 #include "openalpp/netstream.h"
-//#include "openalpp/inputdevice.h"
+#ifdef _WIN32
+#include "openalpp/inputdevice.h"
+#endif
 
 #endif
