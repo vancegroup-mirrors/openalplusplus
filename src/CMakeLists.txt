@@ -1,0 +1,1 @@
+ADD_LIBRARY(openalpp audiobase audioconvert audioenvironment deviceupdater error filestream filestreamupdater groupsource inputdevice listener netstream netupdater sample sounddata source sourcebase stream streamupdater)
