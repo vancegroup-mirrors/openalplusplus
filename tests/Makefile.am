@@ -15,7 +15,6 @@ endif
 LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs) $(ogglibs) -lOpenThreads
 
 
-bin_PROGRAMS = testfstream multiple testmic simple moving 
 noinst_PROGRAMS = testfstream multiple testmic simple moving 
 
 testmic_SOURCES = testmic.cpp
