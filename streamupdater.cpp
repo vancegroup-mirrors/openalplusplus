@@ -8,6 +8,11 @@ StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
   nrefs_=1;
+  setCancel(ost::THREAD_CANCEL_IMMEDIATE);
+}
+
+StreamUpdater::~StreamUpdater() {
+  Terminate();
 }
 
 // TODO: Neither AddSource nor RemoveSource work as they should now...
@@ -22,20 +27,35 @@ void StreamUpdater::AddSource(ALuint sourcename) {
 void StreamUpdater::RemoveSource(ALuint sourcename) {
   ENTER_CRITICAL;
   removesources_.push_back(sourcename);
+  alSourceStop(sourcename);
+  alSourceUnqueueBuffers(sourcename,2,buffers_);
+  alGetError();
   LEAVE_CRITICAL;
 }
 
 void StreamUpdater::Update(void *buffer,unsigned int length) {
-  ALint processed,state;
+  ALint processed,nprocessed,state,nstate;
   ALuint albuffer;
 
   ENTER_CRITICAL;
 
-  // TODO: Remove sources here. Must make sure to unqueue all buffers
+  while(removesources_.size()>0) {
+    bool found=false;
+    for(unsigned int i=0;i<sources_.size();i++) {
+      if(removesources_.back()==sources_[i])
+	found=true;
+      if(found && (i+1)<sources_.size())
+	sources_[i]=sources_[i+1];
+    }
+    sources_.pop_back();
+    removesources_.pop_back();
+  }
 
   while(newsources_.size() || !sources_.size()) // Add any new sources
     if(newsources_.size()) {
       sources_.push_back(newsources_.back());
+      alSourceQueueBuffers(newsources_.back(),2,buffers_);
+      alSourceStop(newsources_.back());
       newsources_.pop_back();
     } else {
       LEAVE_CRITICAL;
@@ -43,6 +63,53 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
       ENTER_CRITICAL;
     }
 
+  processed=0;
+  while(!processed) {
+    state=AL_PLAYING;
+    for(unsigned int i=0;i<sources_.size();i++) {
+      alGetSourceiv(sources_[i],AL_SOURCE_STATE,&nstate);
+      state&=nstate;
+    }
+
+    if(state!=AL_PLAYING) {
+      for(unsigned int i=0;i<sources_.size();i++) {
+	alSourceStop(sources_[i]);
+        alSourceUnqueueBuffers(sources_[i],2,buffers_);
+      }
+      alBufferData(buffers_[0],format_,buffer,length/2,frequency_);
+      alBufferData(buffers_[1],format_,
+		   (char *)buffer+length/2,length/2,frequency_);
+      for(unsigned int i=0;i<sources_.size();i++) {
+        alSourceQueueBuffers(sources_[i],2,buffers_);
+	alSourcePlay(sources_[i]);  // TODO: This would be better handled by alSourcePlayv..
+      }
+    } else {
+      processed=1;
+      for(unsigned int i=0;i<sources_.size();i++) {
+        alGetSourceiv(sources_[i],AL_BUFFERS_PROCESSED,&nprocessed);
+	processed=processed && nprocessed;
+	if(!processed)
+	  break;
+      }
+      if(processed) {
+	for(unsigned int i=0;i<sources_.size();i++)
+          alSourceUnqueueBuffers(sources_[i],1,&albuffer);
+        alBufferData(albuffer,format_,buffer,length,frequency_);
+	for(unsigned int i=0;i<sources_.size();i++)
+          alSourceQueueBuffers(sources_[i],1,&albuffer);
+      } else {
+	LEAVE_CRITICAL;
+        Sleep(50);
+	ENTER_CRITICAL;
+	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
+	  LEAVE_CRITICAL;
+	  Update(buffer,length);
+	  return;
+	}
+      }
+    }
+  }
+/*
   processed=0;
   while(!processed) {
     alGetSourceiv(sources_[0],AL_SOURCE_STATE,&state);
@@ -62,6 +129,7 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
     } else
       Sleep(50);
   }
+*/  
   LEAVE_CRITICAL;
 }
 
@@ -72,10 +140,9 @@ StreamUpdater *StreamUpdater::Reference() {
 
 void StreamUpdater::DeReference() throw (FatalError) {
   nrefs_--;
-  if(!nrefs_) {
-    Exit();
+  if(!nrefs_)
     delete this;
-  } else if(nrefs_<0)
+  else if(nrefs_<0)
     throw FatalError("StreamUpdater dereferenced too many times!");
 }
 

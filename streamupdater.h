@@ -37,6 +37,11 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
 		ALenum format,unsigned int frequency);
 
   /**
+   * Destructor.
+   */
+  ~StreamUpdater();
+
+  /**
    * Add a source to the stream.
    * @param sourcename is the OpenAL name of the source.
    */
@@ -85,7 +90,7 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
   /**
    * Source to update.
    */
-  vector<ALuint> sources_,newsources_,removesources_;
+  std::vector<ALuint> sources_,newsources_,removesources_;
 };
 
 }
