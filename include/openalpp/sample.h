@@ -67,6 +67,11 @@ class Sample : public SoundData {
 
 };
 
+/**
+ * Check how large a sample is in the given format.
+ */
+unsigned int SampleSize(SampleFormat format);
+unsigned int SampleSize(ALenum format);
 }
 
 #endif /* SAMPLE_H_INCLUDED_C4211F97 */
