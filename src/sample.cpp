@@ -23,7 +23,7 @@
  */
 
 #include "openalpp/sample.h"
-#include <strstream>
+#include <sstream>
 
 namespace openalpp {
 
@@ -41,9 +41,9 @@ Sample::Sample(const char *filename) throw (FileError)
       throw FileError("Error buffering sound");
     free(data);
   } else {
-    std::strstream str;
+    std::ostringstream str;
     str << "Unable to load file: " << filename << std::ends;
-    throw FileError(str.str());
+    throw FileError(str.str().c_str());
   }
 }
 

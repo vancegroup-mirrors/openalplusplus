@@ -44,13 +44,13 @@ int main() {
     ost::Thread::sleep(3000);
 
     float limits[2] = {0.5,-0.5};
-    float delay=10;
-    float time=0,angle=0;
+    //float delay=10;
+    //float time=0,angle=0;
     
     source.SetPosition(limits[0],0.0,0.0);
 	  source.Play();
 
-    const int no_laps=5;
+    //const int no_laps=5;
 
     std::cerr << "Moving sound 5 times..." << std::endl;
 

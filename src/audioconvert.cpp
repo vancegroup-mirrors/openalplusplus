@@ -29,7 +29,7 @@
 #include "openalpp/audioconvert.h"
 
 #include <iostream>
-#include <strstream>
+#include <sstream>
 
 /*
  * TODO: The code in this file is copied from AL source.. I did this 
@@ -128,8 +128,8 @@ void *AudioConvert::Apply(void *data,ALenum format,
     compressed = data = retval;
   }
 
-  unsigned int insize=size;  
-  unsigned short inbits=Bits(format),inchannels=Channels(format);
+  //unsigned int insize=size;  
+  //unsigned short inbits=Bits(format),inchannels=Channels(format);
 
   if(acBuildAudioCVT(&s16le,
 		     /* from */
@@ -923,9 +923,9 @@ int IMA_ADPCM_decode(ALubyte *indata, ALubyte *outdata,
       /* Reserved byte in buffer header, should be 0 */
       if ( *indata++ != 0 ) {
 	    /* Uh oh, corrupt data?  Buggy code? */
-        std::strstream str;
+        std::ostringstream str;
         str << __FILE__ << ": " << __LINE__ << ": " << "Reserved byte in buffer should be 0" << std::ends;
-        throw FatalError(str.str());
+        throw FatalError(str.str().c_str());
       }
       
       /* Store the initial valprev we start with */

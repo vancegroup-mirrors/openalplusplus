@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p6 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -80,20 +80,30 @@ VERSION = @VERSION@
 
 INCLUDES = -I$(top_builddir)/include
 
-LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs)
+@WITH_CCGNU_TRUE@ccgnulibs = @CCGNULIBS@
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@portaudiolibs = -lportaudio
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@ogglibs = -lvorbisfile -lvorbis -logg
 
-bin_PROGRAMS = teststream testsend $(portaudiotests) simple
+@WITH_CCGNU_TRUE@LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs) $(ogglibs)
 
-teststream_SOURCES = teststream.cpp
+@WITH_CCGNU_TRUE@bin_PROGRAMS = teststream testsend testfstream testmic simple moving
 
-testsend_SOURCES = testsend.cpp
+@WITH_CCGNU_TRUE@teststream_SOURCES = teststream.cpp
 
-testmic_SOURCES = testmic.cpp
+@WITH_CCGNU_TRUE@testsend_SOURCES = testsend.cpp
 
-simple_SOURCES = simple.cpp
+@WITH_CCGNU_TRUE@testmic_SOURCES = testmic.cpp
+
+@WITH_CCGNU_TRUE@simple_SOURCES = simple.cpp
+
+@WITH_CCGNU_TRUE@moving_SOURCES = moving.cpp
+
+@WITH_CCGNU_TRUE@testfstream_SOURCES = testfstream.cpp
 mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_CLEAN_FILES = 
-bin_PROGRAMS =  teststream$(EXEEXT) testsend$(EXEEXT) simple$(EXEEXT)
+@WITH_CCGNU_TRUE@bin_PROGRAMS =  teststream$(EXEEXT) testsend$(EXEEXT) \
+@WITH_CCGNU_TRUE@testfstream$(EXEEXT) testmic$(EXEEXT) simple$(EXEEXT) \
+@WITH_CCGNU_TRUE@moving$(EXEEXT)
 PROGRAMS =  $(bin_PROGRAMS)
 
 
@@ -101,18 +111,78 @@ DEFS = @DEFS@ -I. -I$(srcdir)
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-teststream_OBJECTS =  teststream.$(OBJEXT)
+@WITH_CCGNU_TRUE@teststream_OBJECTS =  teststream.$(OBJEXT)
 teststream_LDADD = $(LDADD)
-teststream_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@teststream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@teststream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@teststream_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@teststream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@teststream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
 teststream_LDFLAGS = 
-testsend_OBJECTS =  testsend.$(OBJEXT)
+@WITH_CCGNU_TRUE@testsend_OBJECTS =  testsend.$(OBJEXT)
 testsend_LDADD = $(LDADD)
-testsend_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@testsend_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@testsend_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@testsend_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@testsend_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@testsend_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
 testsend_LDFLAGS = 
-simple_OBJECTS =  simple.$(OBJEXT)
+@WITH_CCGNU_TRUE@testfstream_OBJECTS =  testfstream.$(OBJEXT)
+testfstream_LDADD = $(LDADD)
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@testfstream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@testfstream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@testfstream_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@testfstream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@testfstream_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
+testfstream_LDFLAGS = 
+@WITH_CCGNU_TRUE@testmic_OBJECTS =  testmic.$(OBJEXT)
+testmic_LDADD = $(LDADD)
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@testmic_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@testmic_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@testmic_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@testmic_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@testmic_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
+testmic_LDFLAGS = 
+@WITH_CCGNU_TRUE@simple_OBJECTS =  simple.$(OBJEXT)
 simple_LDADD = $(LDADD)
-simple_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@simple_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@simple_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@simple_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@simple_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@simple_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
 simple_LDFLAGS = 
+@WITH_CCGNU_TRUE@moving_OBJECTS =  moving.$(OBJEXT)
+moving_LDADD = $(LDADD)
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@moving_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@moving_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_FALSE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@moving_DEPENDENCIES =  ../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@moving_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_PORTAUDIO_TRUE@../src/libopenalpp.la
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@moving_DEPENDENCIES =  \
+@WITH_CCGNU_TRUE@@WITH_OGGVORBIS_TRUE@../src/libopenalpp.la
+moving_LDFLAGS = 
 CXXFLAGS = @CXXFLAGS@
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -125,9 +195,10 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-DEP_FILES =  .deps/simple.P .deps/testsend.P .deps/teststream.P
-SOURCES = $(teststream_SOURCES) $(testsend_SOURCES) $(simple_SOURCES)
-OBJECTS = $(teststream_OBJECTS) $(testsend_OBJECTS) $(simple_OBJECTS)
+DEP_FILES =  .deps/moving.P .deps/simple.P .deps/testfstream.P \
+.deps/testmic.P .deps/testsend.P .deps/teststream.P
+SOURCES = $(teststream_SOURCES) $(testsend_SOURCES) $(testfstream_SOURCES) $(testmic_SOURCES) $(simple_SOURCES) $(moving_SOURCES)
+OBJECTS = $(teststream_OBJECTS) $(testsend_OBJECTS) $(testfstream_OBJECTS) $(testmic_OBJECTS) $(simple_OBJECTS) $(moving_OBJECTS)
 
 all: all-redirect
 .SUFFIXES:
@@ -211,9 +282,21 @@ testsend$(EXEEXT): $(testsend_OBJECTS) $(testsend_DEPENDENCIES)
 	@rm -f testsend$(EXEEXT)
 	$(CXXLINK) $(testsend_LDFLAGS) $(testsend_OBJECTS) $(testsend_LDADD) $(LIBS)
 
+testfstream$(EXEEXT): $(testfstream_OBJECTS) $(testfstream_DEPENDENCIES)
+	@rm -f testfstream$(EXEEXT)
+	$(CXXLINK) $(testfstream_LDFLAGS) $(testfstream_OBJECTS) $(testfstream_LDADD) $(LIBS)
+
+testmic$(EXEEXT): $(testmic_OBJECTS) $(testmic_DEPENDENCIES)
+	@rm -f testmic$(EXEEXT)
+	$(CXXLINK) $(testmic_LDFLAGS) $(testmic_OBJECTS) $(testmic_LDADD) $(LIBS)
+
 simple$(EXEEXT): $(simple_OBJECTS) $(simple_DEPENDENCIES)
 	@rm -f simple$(EXEEXT)
 	$(CXXLINK) $(simple_LDFLAGS) $(simple_OBJECTS) $(simple_LDADD) $(LIBS)
+
+moving$(EXEEXT): $(moving_OBJECTS) $(moving_DEPENDENCIES)
+	@rm -f moving$(EXEEXT)
+	$(CXXLINK) $(moving_LDFLAGS) $(moving_OBJECTS) $(moving_LDADD) $(LIBS)
 .cpp.o:
 	$(CXXCOMPILE) -c $<
 .cpp.obj:
@@ -239,7 +322,7 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
 	  awk '    { files[$$0] = 1; } \
 	       END { for (i in files) print i; }'`; \
 	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
-	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+	  || (cd $(srcdir) && etags -o $$here/TAGS $(ETAGS_ARGS) $$tags  $$unique $(LISP))
 
 mostlyclean-tags:
 
@@ -398,12 +481,6 @@ all-redirect all-am all installdirs mostlyclean-generic \
 distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
 
-
-@WITH_CCGNU_TRUE@    ccgnulibs = @CCGNULIBS@
-
-@WITH_PORTAUDIO_TRUE@    portaudiolibs = -lportaudio
-
-@WITH_PORTAUDIO_TRUE@    portaudiotests = testmic
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

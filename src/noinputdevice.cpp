@@ -37,8 +37,8 @@ InputDevice::InputDevice() {
   Init();
 }
 
-InputDevice::InputDevice(int device,unsigned int samplerate,unsigned int buffersize,
-			 SampleFormat format) {
+InputDevice::InputDevice(int /*device*/, unsigned int /*samplerate*/, unsigned int /*buffersize*/,
+			 SampleFormat /*format*/) {
   Init();
 }
 
@@ -46,7 +46,8 @@ InputDevice::InputDevice(const InputDevice &input)
   : Stream((const Stream &)input) {
 }
 
-InputDevice &InputDevice::operator=(const InputDevice &input) {
+InputDevice &InputDevice::operator=(const InputDevice &/*input*/) {
+  return *this;
 }
 
 InputDevice::~InputDevice() {
