@@ -10,6 +10,7 @@ AC_PROG_CXXCPP
 dnl Checks for programs.
 AC_PROG_CPP
 AC_PROG_LN_S
+AC_CHECK_PROG(make,gmake,gmake,make)
 
 dnl "OBJECTS" is all the object files that should be linked into OpenAL++
 dnl Macros are defined here to get cleaner code in the library checks below

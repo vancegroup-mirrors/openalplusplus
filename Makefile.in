@@ -1,4 +1,4 @@
-MAKE= gmake
+MAKE= @make@
 PREFIX=@prefix@
 LIBDIR=$(PREFIX)/lib
 INCDIR=$(PREFIX)/include
