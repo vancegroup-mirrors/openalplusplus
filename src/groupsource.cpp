@@ -357,7 +357,7 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
 }
 
 void GroupSource::MixSources(unsigned int frequency)
-  throw (InitError,FileError,FatalError,ValueError,MemoryError) {
+  throw (InitError,FileError,FatalError,MemoryError,ValueError) {
   ALshort *loaddata=NULL,*data=NULL,*bdata=NULL;
   ALsizei bsize=0,size=0,loadsize=0,bits,freq;
   ALenum format;
@@ -460,7 +460,7 @@ void GroupSource::ExcludeSource(ALuint sourcename) throw (NameError) {
   throw NameError("Trying to exclude source that has not been included.");
 }
 
-GroupSource::GroupSource(const GroupSource &groupsource) {
+GroupSource::GroupSource(const GroupSource &groupsource) : SourceBase(groupsource) {
   sources_=groupsource.sources_;
   mixed_=false;
   alGenBuffers(1,&buffer_);
