@@ -46,9 +46,9 @@ class NetUpdater : public StreamUpdater {
   ost::TCPStream *controlsocket_;
 
   /**
-   * Size of sound packets (in bytes).
+   * Size of sound buffer (in bytes).
    */
-  unsigned int packetsize_;
+  unsigned int buffersize_;
  public:
   /**
    * Constructor.
@@ -59,12 +59,12 @@ class NetUpdater : public StreamUpdater {
    * @param buffer2 are the sound buffers to use.
    * @param format is the (OpenAL) format of the sound data.
    * @param frequency is the frequency of the sound data.
-   * @param packetsize is the size of the sound packets.
+   * @param buffersize is how much data to buffer before adding to the stream.
    */
   NetUpdater(ost::UDPSocket *socket,ost::TCPStream *controlsocket,
 	     const ALuint buffer1,ALuint buffer2,
 	     ALenum format,unsigned int frequency,
-	     unsigned int packetsize);
+	     unsigned int buffersize);
 
   /**
    * Inherited from Thread.

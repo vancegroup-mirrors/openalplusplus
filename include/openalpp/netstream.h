@@ -46,10 +46,10 @@ class NetStream : public Stream {
    * @param socket is the socket to stream data through.
    * @param controlsocket is an (optional) TCPStream that can be used to send
    * information about the stream. The constructor will begin with trying to
-   * read SampleFormat, frequency, and packetsize. The sender can also use the
+   * read SampleFormat, frequency, and buffer size. The sender can also use the
    * control socket to send "EXIT" when it's run out of data to send. If
    * this parameter is not given, defaults will be used (format=Mono8,
-   * frequency=11025, packetsize=1024).
+   * frequency=11025, buffersize=4096).
    */
   NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket=NULL);
 
@@ -58,10 +58,12 @@ class NetStream : public Stream {
    * @param socket is the socket to stream data through.
    * @param format is the format the data will be in.
    * @param frequency is the frequency of the sound.
-   * @param packetsize is the size of the packets the sound will be sent in.
+   * @param buffersize is the size of the sound buffer. Note that the actual
+   * packets sent over the network can be smaller (or bigger!); this is just
+   * the size of the buffer OpenAL++ will use to receive the data.
    */
   NetStream(ost::UDPSocket *socket,SampleFormat format,unsigned int frequency,
-	    unsigned int packetsize);
+	    unsigned int buffersize);
 
   /**
    * Copy constructor.
