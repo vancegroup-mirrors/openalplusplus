@@ -27,31 +27,33 @@
 using namespace openalpp;
 
 Stream::Stream() throw (NameError) : SoundData() {
-  buffer2_=new SoundBuffer();
+  buffer2_=new SoundData();
   updater_=NULL;
 }
 
 Stream::Stream(const Stream &stream) : SoundData((const SoundData &)stream) {
-  buffer2_=stream.buffer2_->reference();
-  updater_=stream.updater_->reference();
+  buffer2_=stream.buffer2_;//->reference();
+  updater_=stream.updater_;//->reference();
 }
 
 Stream &Stream::operator=(const Stream &stream) {
   if(this!=&stream) {
     SoundData::operator=((const SoundData &)stream);
-    buffer2_->deReference();
-    buffer2_=stream.buffer2_->reference();
-    updater_->deReference();
-    updater_=stream.updater_->reference();
+    //buffer2_->deReference();
+    buffer2_=stream.buffer2_;//->reference();
+//    updater_;//->deReference();
+    updater_=stream.updater_;//->reference();
   }
   return *this;
 }
 
 Stream::~Stream() {
-  if(buffer2_)
-    buffer2_->deReference();
-  if(updater_)
-    updater_->deReference();
+  std::cerr << "~Stream: " << buffername_ << std::endl;
+
+  //if(buffer2_)
+  //  buffer2_->deReference();
+  //if(updater_)
+  //  updater_->deReference();
 }
 
 void Stream::record(ALuint sourcename) {

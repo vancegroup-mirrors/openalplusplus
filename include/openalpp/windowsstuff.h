@@ -47,7 +47,9 @@ inline OPENALPP_API ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALin
 }
 
 // This should take care of VC++ strange way of handling loop variables...
-#define for if(0); else for
+//#define for if(0); else for
 
 #endif
+#else
+#include <unistd.h>
 #endif

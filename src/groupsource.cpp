@@ -366,10 +366,10 @@ void GroupSource::mixSources(unsigned int frequency)
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
 
-  std::cerr << ((Sample &)sources_[0]->getSound()).getFileName() << "\n";
+  std::cerr << ((Sample *)sources_[0]->getSound())->getFileName() << "\n";
 
   success=
-    alutLoadWAV(((Sample &)sources_[0]->getSound()).getFileName().c_str(),
+    alutLoadWAV(((Sample *)sources_[0]->getSound())->getFileName().c_str(),
 		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
   if(success==AL_FALSE || !loaddata)
     throw FileError("Error opening file for mixing");
@@ -383,11 +383,11 @@ void GroupSource::mixSources(unsigned int frequency)
 
   free(loaddata);
 
-  bdata=applyFilters(sources_[0],bdata,bsize,frequency);
+  bdata=applyFilters(sources_[0].get(),bdata,bsize,frequency);
 
   for(unsigned int s=1;s<sources_.size();s++) {
     success=
-      alutLoadWAV(((Sample &)sources_[s]->getSound()).getFileName().c_str(),
+      alutLoadWAV(((Sample *)sources_[s]->getSound())->getFileName().c_str(),
 		  (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
     if(success==AL_FALSE || !loaddata)
       throw FileError("Error opening file for mixing");
@@ -400,7 +400,7 @@ void GroupSource::mixSources(unsigned int frequency)
 
     free(loaddata);
 
-    data=applyFilters(sources_[s],data,size,frequency);
+    data=applyFilters(sources_[s].get(),data,size,frequency);
 
     if(size>bsize) {
       loaddata=bdata;

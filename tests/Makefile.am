@@ -14,7 +14,7 @@ endif
 
 LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs) $(ogglibs) -lOpenThreads
 
-bin_PROGRAMS = testfstream testmic simple moving #testsend teststream  
+bin_PROGRAMS = testfstream multiple testmic simple moving #testsend teststream  
 
 #teststream_SOURCES = teststream.cpp
 
@@ -26,5 +26,7 @@ simple_SOURCES = simple.cpp
 
 moving_SOURCES = moving.cpp
 
+
 testfstream_SOURCES = testfstream.cpp
 
+multiple_SOURCES = multiple.cpp

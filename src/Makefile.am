@@ -11,7 +11,8 @@ basicfiles = \
     sounddata.cpp \
     audioconvert.cpp \
     error.cpp \
-    groupsource.cpp
+    groupsource.cpp \
+    referenced.cpp
 if WITH_CCGNU
 streamfiles = \
     streamupdater.cpp \

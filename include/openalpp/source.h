@@ -51,7 +51,7 @@ class OPENALPP_API Source : public SourceBase {
    * Creates the source and a buffer with the specified file.
    * @param filename is the name of the file.
    */
-  Source(const char *filename,float x=0.0,float y=0.0,float z=0.0);
+  Source(const std::string& filename,float x=0.0,float y=0.0,float z=0.0);
 
   /**
    * Constructor.
@@ -72,10 +72,6 @@ class OPENALPP_API Source : public SourceBase {
    */
   Source(const Source &source);
     
-  /**
-   * Destructor.
-   */
-  ~Source();
 
   /**
    * Create a buffer for the source and load a file into it.
@@ -89,20 +85,20 @@ class OPENALPP_API Source : public SourceBase {
    * The source should _not_ be playing when doing this.
    * @param buffer is the new buffer.
    */
-  void setSound(const Sample &buffer);
+  void setSound(const Sample *buffer);
 
   /**
    * Sets a new (streamed) buffer for the source.
    * The source should _not_ be playing when doing this.
    * @param stream is the new buffer.
    */
-  void setSound(const Stream &stream);
+  void setSound(const Stream *stream);
 
   /**
    * Gets the buffer associated with the source.
    * @return the buffer.
    */
-  const SoundData &getSound() const;
+  const SoundData *getSound() const;
 
   /**
    * Play a file on the source.
@@ -116,14 +112,14 @@ class OPENALPP_API Source : public SourceBase {
    * This will change the source's buffer.
    * @param buffer is the buffer to play.
    */
-  void play(const Sample &buffer);
+  void play(const Sample *buffer);
     
   /**
    * Play a stream on the source.
    * This will change the source's buffer.
    * @param stream is the stream to play.
    */
-  void play(const Stream &stream);
+  void play(const Stream *stream);
     
   /**
    * Play this source.
@@ -155,11 +151,17 @@ class OPENALPP_API Source : public SourceBase {
    */
   Source &operator=(const Source &source);
 
+  protected:
+  /**
+   * Destructor.
+   */
+  virtual ~Source();
+
  private:
   /**
    * Pointer to the SoundData (buffer) associated with this source.
    */
-  SoundData *sounddata_;
+   openalpp::ref_ptr<SoundData> sounddata_;
 };
 
 }

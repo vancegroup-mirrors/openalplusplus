@@ -33,7 +33,8 @@ extern "C" {
 }
 #include "openalpp/windowsstuff.h"
 #include "openalpp/error.h"
-
+#include "openalpp/referenced.h"
+#include "openalpp/ref_ptr.h"
 /**
  * \mainpage
  * OpenAL++ is an object oriented API for OpenAL (www.openal.org). It also uses
@@ -51,6 +52,7 @@ extern "C" {
 /**
  * Namespace for OpenAL++.
  */
+
 namespace openalpp {
 
 /**
@@ -62,7 +64,7 @@ typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
  * Base class for enviroment, listener and source classes.
  * Takes care of initialisation/shutdown of anything necessary (e.g. ALut)
  */
-class OPENALPP_API AudioBase {
+class OPENALPP_API AudioBase : public Referenced{
   /**
    * Counter for #instances for enviroment, listener and source classes.
    * Used to determine when init and shutdown functions should be called

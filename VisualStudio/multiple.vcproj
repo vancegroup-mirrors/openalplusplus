@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="moving"
-	ProjectGUID="{B9EDEBD3-BCC0-4ADB-A2BE-CAA2FBCD587E}"
+	Name="multiple"
+	ProjectGUID="{B9EDEBD3-BCA0-4FDB-A2BE-CAA2FB2D5271}"
 	SccProjectName=""
 	SccLocalPath="">
 	<Platforms>
@@ -14,7 +14,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\bin"
-			IntermediateDirectory=".\moving_Debug"
+			IntermediateDirectory=".\multiple_Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -28,7 +28,7 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\Debug/moving.pch"
+				PrecompiledHeaderFile=".\Debug/multiple.pch"
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
@@ -47,11 +47,11 @@
 				AdditionalLibraryDirectories="..\lib"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile=".\Debug/moving.pdb"
+				ProgramDatabaseFile=".\Debug/multiple.pdb"
 				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
-				TypeLibraryName=".\Debug/moving.tlb"/>
+				TypeLibraryName=".\Debug/multiple.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -76,7 +76,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\bin"
-			IntermediateDirectory=".\moving_Release"
+			IntermediateDirectory=".\multiple_Release"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -91,7 +91,7 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\Release/moving.pch"
+				PrecompiledHeaderFile=".\Release/multiple.pch"
 				AssemblerListingLocation=".\Release/"
 				ObjectFile=".\Release/"
 				ProgramDataBaseFileName=".\Release/"
@@ -107,11 +107,11 @@
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
-				ProgramDatabaseFile=".\Release/moving.pdb"
+				ProgramDatabaseFile=".\Release/multiple.pdb"
 				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
-				TypeLibraryName=".\Release/moving.tlb"/>
+				TypeLibraryName=".\Release/multiple.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -141,7 +141,7 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="..\tests\moving.cpp">
+				RelativePath="..\tests\multiple.cpp">
 			</File>
 		</Filter>
 	</Files>

@@ -38,7 +38,6 @@ class OPENALPP_API PositionedObject : public AudioBase {
  public:
 
    PositionedObject() {}
-   virtual ~PositionedObject() {}
  
  /**
    * Set position.
@@ -71,6 +70,10 @@ class OPENALPP_API PositionedObject : public AudioBase {
    * @param vz z member of velocity vector.
    */
   virtual void getVelocity(float &vx, float &vy, float &vz) const =0;
+
+ protected:
+    virtual ~PositionedObject() {}
+
 };
 
 }

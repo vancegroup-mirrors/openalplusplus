@@ -50,10 +50,6 @@ class OPENALPP_API  FileStream : public Stream {
    */
   FileStream(const FileStream &stream);
 
-  /**
-   * Destructor.
-   */
-  ~FileStream();
 
   FileStream &operator=(const FileStream &stream);
 
@@ -62,7 +58,14 @@ class OPENALPP_API  FileStream : public Stream {
    * @param loop is true if the stream should loop, false otherwise.
    */
   void setLooping(bool loop = true);
+protected:
+    /**
+   * Destructor.
+   */
+  virtual ~FileStream();
+
 };
+
 
 }
 

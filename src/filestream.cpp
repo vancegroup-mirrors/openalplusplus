@@ -51,7 +51,7 @@ FileStream::FileStream(const std::string& filename,const int buffersize)
       format=AL_FORMAT_STEREO16;
     
     updater_=new FileStreamUpdater(oggfile,
-				   buffername_,buffer2_->getName(),
+				   buffername_,buffer2_->getAlBuffer(),
 				   format,ogginfo->rate,
 				   buffersize*sampleSize(format)); 
   } else {
@@ -75,6 +75,6 @@ FileStream &FileStream::operator=(const FileStream &stream) {
 }
 
 void FileStream::setLooping(bool loop) {
-  ((FileStreamUpdater *)updater_)->setLooping(loop);
+  ((FileStreamUpdater *)updater_.get())->setLooping(loop);
 }
 

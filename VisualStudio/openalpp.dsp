@@ -126,6 +126,10 @@ SOURCE=..\src\openalpp.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\referenced.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\sample.cpp
 # End Source File
 # Begin Source File

@@ -47,11 +47,17 @@ using namespace openalpp;
 }
 
 Sample::Sample(const Sample &sample)
-  : SoundData((const SoundData &)sample), filename_(sample.filename_) {
+  : SoundData(/*(const SoundData &)*/sample), filename_(sample.filename_) {
 }
 
 std::string Sample::getFileName() const {
   return filename_;
+}
+
+
+Sample::~Sample()
+{
+
 }
 
 Sample &Sample::operator=(const Sample &sample) {

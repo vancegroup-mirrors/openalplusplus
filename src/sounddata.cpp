@@ -20,7 +20,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
-
 #include "openalpp/sounddata.h"
 
 using namespace openalpp;
@@ -29,26 +28,11 @@ SoundData::SoundBuffer::SoundBuffer() throw (NameError) {
   alGenBuffers(1,&buffername_);
   if(alGetError()!=AL_FALSE)
     throw NameError("Error generating buffer name");
-  refcount_=1;
 }
 
 SoundData::SoundBuffer::~SoundBuffer() {
   alDeleteBuffers(1,&buffername_);
 }
-
-SoundData::SoundBuffer *SoundData::SoundBuffer::reference() {
-  refcount_++;
-  return this;
-}
-
-void SoundData::SoundBuffer::deReference() throw (FatalError) {
-  refcount_--;
-  if(!refcount_)
-    delete this;
-  else if(refcount_<0)
-    throw FatalError("SoundBuffer dereferenced too many times!");
-}
-
 
 
 SoundData::SoundData() throw (NameError,InitError) : AudioBase() {
@@ -57,13 +41,12 @@ SoundData::SoundData() throw (NameError,InitError) : AudioBase() {
 }
 
 SoundData::SoundData(const SoundData &sounddata)
-  : AudioBase(/*(const AudioBase &)sounddata*/) {
-  buffer_=sounddata.buffer_->reference();
+  : AudioBase() {
+    buffer_=sounddata.buffer_;
   buffername_=buffer_->getName();
 }
 
 SoundData::~SoundData() {
-  buffer_->deReference();
 }
 
 ALuint SoundData::getAlBuffer() const {
@@ -72,8 +55,7 @@ ALuint SoundData::getAlBuffer() const {
 
 SoundData &SoundData::operator=(const SoundData &sounddata) {
   if(this!=&sounddata) {
-    buffer_->deReference();
-    buffer_=sounddata.buffer_->reference();
+    buffer_=sounddata.buffer_;
     buffername_=buffer_->getName();
   }
   return *this;

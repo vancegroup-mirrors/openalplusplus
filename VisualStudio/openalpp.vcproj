@@ -182,6 +182,9 @@
 				RelativePath="..\src\openalpp.cpp">
 			</File>
 			<File
+				RelativePath="..\src\referenced.cpp">
+			</File>
+			<File
 				RelativePath="..\src\sample.cpp">
 			</File>
 			<File

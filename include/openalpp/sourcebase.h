@@ -327,11 +327,12 @@ class OPENALPP_API SourceBase : public PositionedObject {
    */
   SourceBase &operator=(const SourceBase &sourcebase);
 
+ protected:
   /**
    * Destructor.
    */
-  ~SourceBase();
- protected:
+  virtual ~SourceBase();
+
   /**
    * Constructor.
    */

@@ -42,17 +42,20 @@ class OPENALPP_API Listener : public PositionedObject {
 	    float vx,float vy,float vz,
 	    float directionx, float directiony, float directionz,
 	    float upx, float upy, float upz);
- public:
+ 
+protected:
+/**
+   * Destructor.
+   */
+  virtual ~Listener();
+  
+public:
   /**
    * Constructor.
    * Creates the listener at the default position.
    */
   Listener();
 
-  /**
-   * Destructor.
-   */
-  ~Listener();
   
   /**
    * Copy constructor.

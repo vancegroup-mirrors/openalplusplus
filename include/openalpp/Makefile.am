@@ -20,7 +20,8 @@ pkginclude_HEADERS = \
     filestreamupdater.h \
     export.h \
     windowsstuff.h \
-    config.h 
-
+    config.h \
+    referenced.h \
+    ref_ptr.h
 #    netstream.h \
 #    netupdater.h \

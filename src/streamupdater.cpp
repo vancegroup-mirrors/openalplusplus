@@ -36,12 +36,15 @@ StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
   : format_(format), frequency_(frequency), stoprunning_(false) {
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
-  nrefs_=1;
-  //setCancel(ost::Thread::cancelDisabled);
 }
 
 StreamUpdater::~StreamUpdater() {
-  //terminate();
+
+
+    runmutex_.lock();
+    stoprunning_=true;
+    runmutex_.unlock();
+
   cancel();
 }
 
@@ -63,7 +66,6 @@ void StreamUpdater::removeSource(ALuint sourcename) {
 bool StreamUpdater::update(void *buffer,unsigned int length) {
   if(!(length && buffer))     // Zero length or NULL pointer => return
     return false;
-
   ALint processed,state;
   ALuint albuffer;
 
@@ -165,21 +167,6 @@ bool StreamUpdater::update(void *buffer,unsigned int length) {
 }
 
 void StreamUpdater::cancelCleanup() {
+  std::cerr << "StreamUpdater::cancelCleanup: Should probably not delete this" << std::endl;
   delete this;
 } 
-
-StreamUpdater *StreamUpdater::reference() {
-  nrefs_++;
-  return this;
-}
-
-void StreamUpdater::deReference() throw (FatalError) {
-  nrefs_--;
-  if(!nrefs_) {
-    runmutex_.lock();
-    stoprunning_=true;
-    runmutex_.unlock();
-  } else if(nrefs_<0)
-    throw FatalError("StreamUpdater dereferenced too many times!");
-}
-

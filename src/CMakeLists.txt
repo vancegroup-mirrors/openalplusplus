@@ -1,4 +1,4 @@
-SET(SOURCEFILES audiobase audioconvert audioenvironment error groupsource listener sample sounddata source sourcebase)
+SET(SOURCEFILES audiobase audioconvert audioenvironment error groupsource listener sample sounddata source sourcebase referenced)
 
 IF(CCGNU_FOUND)
   SET(SOURCEFILES ${SOURCEFILES} stream netstream streamupdater netupdater)

@@ -26,10 +26,18 @@
 
 #include "openalpp/export.h"
 #include "openalpp/sounddata.h"
+#include "openalpp/ref_ptr.h"
+#include "openalpp/streamupdater.h"
+
+#ifdef WIN32
+// Ignore the dll interface warning using std::vector members
+#pragma warning(disable : 4251)
+#endif
+
 
 namespace openalpp {
 
-class StreamUpdater;
+//class StreamUpdater;
 
 /**
  * Base class for NetStream and InputDevice.
@@ -40,9 +48,9 @@ class OPENALPP_API Stream : public SoundData {
   /**
    * For double-buffering of sounds.
    */
-  SoundBuffer *buffer2_;
+  openalpp::ref_ptr<SoundData> buffer2_;
 
-  StreamUpdater *updater_;
+  openalpp::ref_ptr<StreamUpdater> updater_;
  public:
   /**
    * Default constructor.
@@ -59,10 +67,6 @@ class OPENALPP_API Stream : public SoundData {
    */
    Stream &operator=(const Stream &stream);
 
-  /**
-   * Destructor.
-   */
-   ~Stream();
 
   /**
    * Start recording.
@@ -76,6 +80,13 @@ class OPENALPP_API Stream : public SoundData {
    * @param sourcename is the (OpenAL) name of the source.
    */
    void stop(ALuint sourcename);
+
+protected:
+   /**
+   * Destructor.
+   */
+   virtual ~Stream();
+
 };
 
 }

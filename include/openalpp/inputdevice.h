@@ -65,10 +65,11 @@ class OPENALPP_API InputDevice : public Stream {
    */
   InputDevice &operator=(const InputDevice &input);
 
+protected:
   /**
    * Destructor.
    */
-  ~InputDevice();
+  virtual ~InputDevice();
 };
 
 }

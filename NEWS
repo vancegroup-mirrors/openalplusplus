@@ -1,5 +1,23 @@
 NEWS
 
+2004-11-10 Anders Backman:
+Major revision. Added referenced (smart) pointers to clean up the 
+responsibility of new/delete policy. This means that it is now not possible to create any instances of 
+Source, Streams, Sample, FileStreams at the stack. THey have to be created on the heap (using new).
+This is to avoid memory polution. Whenever possible a openalpp::ref_ptr<> should be used to 
+store the allocated objects.
+This ensures a clean and stable memory handling. See the examples for the changes.
+Several methods now have pointer to a class instead of a reference to a class as arguments.
+
+For example: pSource->setSound(pSample)
+
+A bug in the FileStream class is fixed, playing ogg files using certain sound cards under windows was known to cause crashes. This should now work. Linux is still an issue, as openal is not thread safe under linux. 
+Whenever OpenAL have stable ogg support, it will be working in OpenAL++
+rewind, pause, is still unstable for streaming sounds. start() and stop() method should work just fine.
+This in total, makes openal++ more stable and more useful than ever.
+
+
+
 2004-09-23 Anders Backman:
 Small fixes for the filestreaming class. 
 Changed the play method in sourcebase to not use array of linked sources.

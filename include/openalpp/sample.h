@@ -58,6 +58,12 @@ class OPENALPP_API Sample : public SoundData {
    */
   Sample &operator=(const Sample &sample);
 
+ protected:
+  /**
+   * Destructor
+   */
+  virtual ~Sample();
+
  private:
   /**
    * File name.

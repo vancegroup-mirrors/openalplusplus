@@ -27,6 +27,13 @@
 #include "openalpp/export.h"
 #include "openalpp/error.h"
 #include "openalpp/audiobase.h"
+#include "openalpp/referenced.h"
+
+#ifdef WIN32
+// Ignore the dll interface warning using std::vector members
+#pragma warning(disable : 4251)
+#endif
+
 
 namespace openalpp {
 
@@ -38,14 +45,13 @@ class OPENALPP_API SoundData : public AudioBase {
   /**
    * Protected class to handle generation/deletion of OpenAL buffers correctly.
    */
-  class SoundBuffer {
+   class SoundBuffer : public openalpp::Referenced {
     ALuint buffername_;
-    int refcount_;
+  protected:
+   virtual ~SoundBuffer();
+
   public:
     SoundBuffer() throw (NameError);
-    ~SoundBuffer();
-    SoundBuffer *reference();
-    void deReference() throw (FatalError);
     ALuint getName() {return buffername_;}
   };
  public:
@@ -66,19 +72,21 @@ class OPENALPP_API SoundData : public AudioBase {
   SoundData(const SoundData &sounddata);
 
   /**
-   * Destructor.
-   */
-  ~SoundData();
-
-  /**
    * Assignment operator.
    */
   SoundData &operator=(const SoundData &sounddata);
- protected:
+
+protected:
+
+  /**
+   * Destructor.
+   */
+  virtual ~SoundData();
+
   /**
    * See class SoundBuffer comment.
    */
-  SoundBuffer *buffer_;
+  openalpp::ref_ptr<SoundBuffer> buffer_;
 
   /**
    * OpenAL name for the buffer.

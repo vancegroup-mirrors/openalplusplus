@@ -40,17 +40,22 @@ int main(int argc,char **argv) {
   std::cout << "Playing " << file << "\n";
 
   try {
-    Source bgsound(file);   // Create source and load sound
-    bgsound.setGain(0.6f);	  // Lower gain (volume) 
-    bgsound.setLooping();
-    bgsound.setAmbient();	  // Make sound ambient (i.e. not attenuated)
-    bgsound.play();		  // Start playing
+    openalpp::ref_ptr<Source> bgsound = new Source; //(file);   // Create source and load sound
+    openalpp::ref_ptr<Sample> sample = new Sample(file);
+    bgsound->setSound(sample.get());
+    bgsound->setGain(0.6f);	  // Lower gain (volume) 
+    bgsound->setLooping();
+    bgsound->setAmbient();	  // Make sound ambient (i.e. not attenuated)
+    bgsound->play();		  // Start playing
     
     
-    std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
-    usleep(3000*1000);		  // Sleep for a while
+    std::cerr << "Press return to stop: " << std::endl;
+    //usleep(3000*1000);		  // Sleep for a while
+    std::string str;
+    std::getline(std::cin, str);
+    bgsound->stop();
     std::cerr << "Done " << std::endl;
-    bgsound.stop();
+    usleep(3000*1000);
 
   } catch(Error e) {
     std::cerr << e << "\n";

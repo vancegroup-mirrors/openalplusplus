@@ -39,20 +39,34 @@ int main(int argc,char **argv) {
   std::cout << argv[1] << "\n";
 
   try {
-    FileStream stream(argv[1]);
-    stream.setLooping();  // Remove this to play file once only.
 
-    Source source(stream);
+    std::vector<openalpp::ref_ptr<Source> > vec;
+    std::vector<openalpp::ref_ptr<FileStream> > fstream_vec;
 
-    source.setAmbient();
-    source.play();
-    std::cerr << "Press return to continue\n";
+    for(int i=0; i < 1; i++) {
+
+      openalpp::ref_ptr<FileStream> stream = new FileStream(argv[1]);
+      fstream_vec.push_back(stream);
+      stream->setLooping();  // Remove this to play file once only.
+
+    
+      Source *source = new Source(*stream.get());
+      vec.push_back(source);
+      source->setAmbient();
+      source->play();
+
+    }
+    std::cerr << "Press return to stop " << std::endl;
     std::cin.get();
-    source.stop();
+
+    for(unsigned int i=0; i < vec.size(); i++)
+      vec[i]->stop();
+    usleep(1000*1000);
+
   } catch(openalpp::Error e) {
     std::cerr << e << "\n";
-  //} catch(...) {
-  //  std::cerr << "Unknown error!\n";
+  } catch(...) {
+    std::cerr << "Unknown error!\n";
   }
   return 0;
 }

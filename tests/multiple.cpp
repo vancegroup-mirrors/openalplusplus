@@ -21,51 +21,46 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  *
  *  
- * Simple example for using OpenAL++.
- * Plays a file bee.wav and moves it left right. 
  */
 #include <openalpp/alpp.h>
 #include <iostream>
-
+#include <string>
+#include <vector>
 
 using namespace openalpp;
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+int main() 
+{
+  openalpp::ref_ptr<Sample> sample;
 
-
-int main() {
+  std::cerr << "Loads a sample at the time, plays it for a while, then loads another one etc.." << std::endl;
   try {
-    openalpp::ref_ptr<Source> beesound = new Source("bee.wav");
-    beesound->setGain(1);
-    beesound->setLooping();
 
-    float limits[2] = {5,-15};
-    float delay=10;
-    float time=0,angle=0;
+    std::vector<std::string> file_vector;
     
-    beesound->setPosition(limits[0],0.0,0.0);
-    beesound->play();
-    
-    const int no_laps=5;
-    
-    std::cerr << "Moving sound 5 laps..." << std::endl;
-    
-    // Do a cheat time loop.
-    while(angle<(M_PI*2.0*no_laps)) {
+    file_vector.push_back("a.wav");
+    file_vector.push_back("high-e.wav");
+    file_vector.push_back("low-e.wav");
+
+    openalpp::ref_ptr<Source> source = new Source;
+    unsigned int delay = 500;
+    for(int i = 0; i < 10; i++) {
+      if (sample.valid()) {
+        source->stop();
+      }
+      std::string file = file_vector[i % file_vector.size()];
+      std::cerr << "Loading and playing " << file << " for " << delay/1000.0 << " seconds" << std::endl;
+      sample = new Sample(file);
+      source->setSound(sample.get());     
+      source->setGain(1);
+      source->setLooping();
+      source->play();
       usleep(delay*1000); // Wait for delay milliseconds
-
-      time +=delay/1000; // Calculate the time in the loop
-      angle=M_PI *time;  // What is the resulting angle
-      
-      // Calculate a new position
-      beesound->setPosition(limits[0]*cos(angle),0.0,limits[1]*sin(angle));
     }
   } catch(Error e) {
     std::cerr << e << "\n";
-    return -1;
   }
+
   return 0;
 }
   

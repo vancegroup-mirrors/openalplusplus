@@ -28,6 +28,11 @@
 //#include <cc++/thread.h>
 #include <vector>
 
+#ifdef WIN32
+// Ignore the dll interface warning using std::vector members
+#pragma warning(disable : 4251)
+#endif
+
 extern "C" {
 #include <AL/al.h>
 }
@@ -40,18 +45,19 @@ extern "C" {
 #include "openalpp/windowsstuff.h"
 #include "OpenThreads/Thread"
 #include "OpenThreads/Mutex"
+#include "openalpp/referenced.h"
 
 namespace openalpp {
 
 /**
  * Base class for (threaded) updating of stream buffers.
  */
-  class StreamUpdater : public OpenThreads::Thread, public OpenThreads::Mutex { //ost::Mutex {
+  class OPENALPP_API StreamUpdater : public OpenThreads::Thread, public OpenThreads::Mutex, public openalpp::Referenced { //ost::Mutex {
   /**
    * #references to this instance.
    * If zero => delete this.
    */
-  int nrefs_;
+  //int nrefs_;
  public:
   /**
    * Constructor.
@@ -60,25 +66,21 @@ namespace openalpp {
    * @param format is the (OpenAL) format of the sound.
    * @param frequency is the frequency of the sound.
    */
-  OPENALPP_API StreamUpdater(ALuint buffer1,ALuint buffer2,
+  StreamUpdater(ALuint buffer1,ALuint buffer2,
 		ALenum format,unsigned int frequency);
 
-  /**
-   * Destructor.
-   */
-  OPENALPP_API ~StreamUpdater();
 
   /**
    * Add a source to the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  OPENALPP_API void addSource(ALuint sourcename);
+  void addSource(ALuint sourcename);
 
   /**
    * Remove a source from the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  OPENALPP_API void removeSource(ALuint sourcename);
+  void removeSource(ALuint sourcename);
 
   /**
    * Update the stream.
@@ -87,26 +89,33 @@ namespace openalpp {
    * @param length is the length of the sound data (in bytes).
    * @return done flag. I.e. stoprunning_.
    */
-  OPENALPP_API bool update(void *buffer,unsigned int length); 
+  bool update(void *buffer,unsigned int length); 
 
   /**
    * Inherited from Thread.
    * Is called after run() finishes, and deletes this.
    */
-  OPENALPP_API void cancelCleanup();
+  void cancelCleanup();
 
   /**
    * Reference this updater.
    * @return this.
    */
-  OPENALPP_API StreamUpdater *reference();
+  //StreamUpdater *reference();
 
   /**
    * Dereference this updater.
    */
-  OPENALPP_API void deReference() throw (FatalError);
+//   void deReference() throw (FatalError);
  protected:
-  /**
+
+   /**
+   * Destructor.
+   */
+  virtual ~StreamUpdater();
+
+   
+   /**
    * Names of the buffers to update.
    */
   ALuint buffers_[2];
@@ -134,7 +143,6 @@ namespace openalpp {
   /**
    * Mutex for stoprunning_.
    */
-  //ost::Mutex runmutex_;
   OpenThreads::Mutex runmutex_;
 
 };
