@@ -1,0 +1,46 @@
+Installation instructions for OpenAL++
+**************************************
+OpenAL++ uses the libraries OpenAL, PortAudio and CommonC++. However, it is possible to compile OpenAL++ without PortAudio and CommonC++, but then some features will be disabled.
+
+Linux/Unix
+----------
+Start by running configure ($ is the prompt):
+ $ ./configure
+This will create the Makefiles. Run configure --help to get information on the
+(optional) arguments. Now make the library:
+ $ make
+If you want to generate documentation, do the following:
+ $ make docs
+This will create html, latex and man directories with the documentation.
+The next step is to install. You probably have to log in as root to do this:
+ $ su
+ $ make install
+If you have created documentation, the man-files can also be installed:
+ $ make install-docs
+
+By default, all the files will be installed under /usr/local (e.g. the include-files under /usr/local/include). This can be changed by using the --prefix flag for configure (e.g. configure --prefix=/usr).
+
+Windows
+-------
+OpenAL++ has been successfully compiled using Visual C++. It should work using other compilers too.
+
+There are three ways to compile and install OpenAl++:
+- 1 -
+Open up the workspace (openalpp.dsw) in Visual C++.
+Make sure openalpp is the active project (Build/Set Active Configuration. Openalpp - Win32 Release).
+Build the library (hit F7)
+Copy openalpp.lib from the Release directory to C:\WINDOWS\SYSTEM
+Create the directory alpp somewhere in your include path.
+Copy all the *.h files from include to the newly created directory.
+- 2 -
+Edit W32INST.BAT to make sure the paths are correct
+Run W32INST.BAT. nmake must be installed for this to work.
+- 3 -
+Use another compiler to compile the library and do the last three steps in 1 to install it.
+
+Other platforms
+---------------
+OpenAL++ has not been tested on other platforms than Linux and Windows. If you get it to work on another platform, contact me with information on how you did, and I'll add information to this file. Also be sure to tell me about any necessary changes to configure.in and other files to get it to work.
+
+/Tomas Hämälä, VRlab, 2002
+(tomash@hpc2n.umu.se)
