@@ -1,6 +1,7 @@
 #ifndef SAMPLE_H_INCLUDED_C4211F97
 #define SAMPLE_H_INCLUDED_C4211F97
 
+#include "windowsstuff.h"
 #include "sounddata.h"
 #include "error.h"
 extern "C" {

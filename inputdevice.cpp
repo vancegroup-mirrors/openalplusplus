@@ -18,8 +18,8 @@ InputDevice::InputDevice(const InputDevice &input)
 }
 
 //##ModelId=3BDD2D7B01CD
-InputDevice &InputDevice::operator=(const InputDevice &input)
-{
+InputDevice &InputDevice::operator=(const InputDevice &input) {
+  return *this;
 }
 
 //##ModelId=3BE6464C028C

@@ -9,7 +9,7 @@ Source::Source(float x, float y, float z) : SourceBase(x,y,z) {
 }
 
 //##ModelId=3BD876DB013A
-Source::Source(const char *filename,float x=0.0,float y=0.0,float z=0.0)
+Source::Source(const char *filename,float x,float y,float z)
   : SourceBase(x,y,z) {
   streaming_=false;
   sounddata_=new Sample(filename);
@@ -17,7 +17,7 @@ Source::Source(const char *filename,float x=0.0,float y=0.0,float z=0.0)
 }
 
 //##ModelId=3BD876FC032D
-Source::Source(const Sample &buffer,float x=0.0,float y=0.0,float z=0.0)
+Source::Source(const Sample &buffer,float x,float y,float z)
   : SourceBase(x,y,z) {
   streaming_=false;
   sounddata_=new Sample(buffer);
@@ -25,7 +25,7 @@ Source::Source(const Sample &buffer,float x=0.0,float y=0.0,float z=0.0)
 }
 
 //##ModelId=3BD8772C029F
-Source::Source(const Stream &stream,float x=0.0,float y=0.0,float z=0.0) 
+Source::Source(const Stream &stream,float x,float y,float z) 
   : SourceBase(x,y,z) {
   streaming_=true;
   // TODO: Streaming!!!

@@ -3,7 +3,9 @@
 
 extern "C" {
 #include "../openal/linux/src/al_buffer.h"
+#ifndef WIN32
 #include "AL/alexttypes.h"
+#endif
 }
 #include "sourcebase.h"
 #include "source.h"

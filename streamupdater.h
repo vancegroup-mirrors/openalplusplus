@@ -9,7 +9,11 @@ namespace openalpp {
 /**
  * Base class for (threaded) updating of stream buffers.
  */
+#ifdef WIN32
+class StreamUpdater : public ost::Thread {
+#else
 class StreamUpdater : public Thread {
+#endif
  public:
   /**
    * Constructor.

@@ -16,6 +16,7 @@ NetStream::~NetStream() {
 
 //##ModelId=3BDD2D420059
 NetStream &NetStream::operator=(const NetStream &stream) {
+  return *this;
 }
 
 }

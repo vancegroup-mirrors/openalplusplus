@@ -22,7 +22,7 @@ class InputDevice : public Stream {
    * @param buffersize is the desired buffer size.
    * @param format is the desired sample format.
    */
-  InputDevice(unsigned int samplerate=22050,unsigned int buffersize=1024, 
+  InputDevice(unsigned int samplerate,unsigned int buffersize=1024, 
 	      SampleFormat format=Mono16);
 
   /**
