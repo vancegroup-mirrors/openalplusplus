@@ -41,6 +41,7 @@ int main(int argc,char **argv) {
 
   try {
     FileStream stream(argv[1]);
+    stream.SetLooping();  // Remove this to play file once only.
 
     Source source(stream);
 
