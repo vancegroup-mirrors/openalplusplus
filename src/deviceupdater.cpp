@@ -104,6 +104,8 @@ DeviceUpdater::DeviceUpdater(int device, unsigned int frequency,unsigned int buf
 			    paNoDevice,0,paformat,NULL,
 			    frequency,buffersize/bytesperframe_,2,paClipOff,
 			    RecordCallback,this);
+  if(err!=paNoError)
+    throw InitError("Failed to open input stream");
 }
 
 DeviceUpdater::~DeviceUpdater() {
