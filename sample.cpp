@@ -19,8 +19,8 @@ Sample::Sample(const char *filename) throw (FileError)
     throw FileError("Unable to load file");
 }
 
-Sample::Sample(const Sample &sample) : SoundData(sample) {
-  filename_=sample.filename_;
+Sample::Sample(const Sample &sample)
+  : SoundData((const SoundData &)sample), filename_(sample.filename_) {
 }
 
 std::string Sample::GetFileName() const {

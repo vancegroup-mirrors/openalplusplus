@@ -34,7 +34,7 @@ SoundData::SoundData() throw (NameError,InitError) : AudioBase() {
 }
 
 SoundData::SoundData(const SoundData &sounddata)
-  : AudioBase((const AudioBase &)sounddata) {
+  : AudioBase(/*(const AudioBase &)sounddata*/) {
   buffer_=sounddata.buffer_->Reference();
   buffername_=buffer_->GetName();
 }
