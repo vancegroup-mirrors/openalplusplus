@@ -3,13 +3,10 @@
 
 #include "sourcebase.h"
 #include "source.h"
-//#ifndef WIN32
-//extern "C" {
-//#include "AL/alexttypes.h"
-//}
-//#endif
+#include "audioconvert.h"
 #include <vector>
 #include <math.h>
+#include <stdlib.h>
 
 namespace openalpp {
 
@@ -57,8 +54,9 @@ class GroupSource : public SourceBase {
    * @param source is (a pointer to) the source.
    * @param buffer is the buffer containing the sound.
    * @param size is the size of the buffer.
+   * @return (new) pointer to buffer.
    */
-  void ApplyFilters(Source *source,ALshort *buffer,ALsizei size);
+  ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size);
  public:
   /**
    * Constructor.
@@ -81,8 +79,10 @@ class GroupSource : public SourceBase {
    * was called, so if you want the source to start playing as fast as
    * possible after the Play()-call, MixSources() should be called
    * separately
+   * @param frequency is the frequency that will be used when mixing.
    */
-  void MixSources() throw (InitError,FileError,FatalError);
+  void MixSources(unsigned int frequency=22050) 
+    throw (InitError,FileError,FatalError);
 
   /**
    * Includes a source in the group.
@@ -98,14 +98,14 @@ class GroupSource : public SourceBase {
    * This will of course require the remaining sources to be mixed again.
    * @param source is the source to exclude.
    */
-  void ExcludeSource(const Source &source);
+  void ExcludeSource(const Source &source) throw (NameError);
 
   /**
    * Removes a source from the group.
    * This will of course require the remaining sources to be mixed again.
    * @param source is the identifier of the source to exclude.
    */
-  void ExcludeSource(ALuint source);
+  void ExcludeSource(ALuint source) throw (NameError);
 
   /**
    * Copy constructor.
