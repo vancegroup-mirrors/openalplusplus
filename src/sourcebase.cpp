@@ -388,10 +388,10 @@ void SourceBase::SetPosition(float x, float y, float z) {
   if(error!=AL_FALSE)
     switch(error) {
       case(AL_INVALID_VALUE):
-	throw ValueError("Invalid value for position");
-	break;
+	      throw ValueError("Invalid value for position");
+	      break;
       default:
-	throw FatalError("Error trying to set position!");
+	      throw FatalError("Error trying to set position!");
     }
 }
 

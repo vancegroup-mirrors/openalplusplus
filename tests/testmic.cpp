@@ -37,19 +37,61 @@ using namespace std;
 
 
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+
 int main() {
+  try {
+    InputDevice mic;
 
-  InputDevice mic;
+    Source source(mic);
+    source.SetGain(2);
+	  //source.SetLooping();
+    source.Play();
+    ccxx_sleep(3000);
 
-  Source source(mic);
+    float limits[2] = {0.5,-0.5};
+    float delay=10;
+    float time=0,angle=0;
+    
+    source.SetPosition(limits[0],0.0,0.0);
+	  source.Play();
 
-  source.Play();
+    const int no_laps=5;
 
+    std::cerr << "Moving sound 5 times..." << std::endl;
 
+    // Do a cheat time loop.
+#if 0
+    while(angle<(M_PI*no_laps)) {
+	    ccxx_sleep(delay); // Wait for delay milliseconds
 
-  cerr << "Press return to continue\n";
+      time +=delay/1000; // Calculate the time in the loop
+      angle=M_PI *time;  // What is the resulting angle
+      
+      // Calculate a new position
+      std::cerr << cos(angle) << ", " << sin(angle) << std::endl;
+      source.SetPosition(limits[0]*cos(0),0.0,limits[1]*sin(0));
+	  }
+#else
+    std::cerr << "Moved to the left" << std::endl;
+    source.SetPosition(-0.5,0.0,0);
+  ccxx_sleep(3000);
+    std::cerr << "Moved to the right" << std::endl;
+    source.SetPosition(+0.5,0.0,0);
+  ccxx_sleep(3000);
+#endif
+  } catch(Error e) {
+    cerr << e << "\n";
+    return -1;
+  }
+ 
 
-  cin.get();
+  std::cerr << "Press return to continue\n";
+
+  std::cin.get();
 
   return 0;
 
