@@ -69,19 +69,6 @@ dnl Checks for libraries.
 # OpelAL
 AC_CHECK_LIB(openal,main)
 
-# Common C++
-#AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="no",,-lpthread -ldl)
-#AC_SUBST(CCGNULIBS)
-#AC_SUBST(CCGNUCFLAGS)
-WITH_CCGNU="no"
-
-if test "$WITH_CCGNU" = "yes"; then
-    CCGNULIBS="`ccgnu2-config --libs`"
-    CCGNUCFLAGS="-I`ccgnu2-config --includes`"
-    CPPFLAGS="$CPPFLAGS $CCGNUCFLAGS"
-fi
-AM_CONDITIONAL(WITH_CCGNU, test "$WITH_CCGNU" = "yes")
-
 # PortAudio
 AC_CHECK_LIB(portaudio,main,WITH_PORTAUDIO="yes")
 AM_CONDITIONAL(WITH_PORTAUDIO, test "$WITH_PORTAUDIO" = "yes")
