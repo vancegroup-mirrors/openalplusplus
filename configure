@@ -8291,7 +8291,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 
 
 
-
+#AC_CANONICAL_HOST
 
 # Check whether --enable-shared or --disable-shared was given.
 if test "${enable_shared+set}" = set; then

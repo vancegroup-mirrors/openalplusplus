@@ -29,7 +29,7 @@ AC_PROG_INSTALL
 AM_PROG_LIBTOOL
 
 dnl Check system type
-AC_CANONICAL_HOST
+#AC_CANONICAL_HOST
 
 dnl create only shared libtool-libraries
 AC_ENABLE_SHARED(yes)

@@ -6,5 +6,5 @@ includedir=@includedir@
 Name: OpenAL++
 Description: OpenAL C++ Abstraction Layer
 Version: @VERSION@
-Libs: -L${libdir} -lopenalpp -lopenal @CCGNULIBS@
-Cflags: -I${includedir} @CCGNUCFLAGS@
+Libs: -L${libdir} -lopenalpp -lopenal -lOpenThreads
+Cflags: -I${includedir} 
