@@ -12,6 +12,132 @@
 
 namespace openalpp {
 
+void *acLoadWAV(void *data, ALuint *size, void **udata, 
+                ALushort *fmt, ALushort *chan, ALushort *freq);
+ALenum _al_AC2ALFMT( ALuint acformat, ALuint channels );
+ALushort _al_AL2ACFMT( ALenum alformat );
+int acBuildAudioCVT(acAudioCVT *cvt,
+		    ALushort src_format, ALubyte src_channels, ALuint src_rate,
+		    ALushort dst_format, ALubyte dst_channels, ALuint dst_rate);
+int acConvertAudio(acAudioCVT *cvt);
+
+inline bool IsRaw(ALenum format) {
+  switch(format) {
+    case AL_FORMAT_MONO16:
+    case AL_FORMAT_MONO8:
+    case AL_FORMAT_STEREO16:
+    case AL_FORMAT_STEREO8:
+      return true;
+  }
+  return false;
+}
+
+inline unsigned short Channels(ALenum format) {
+  switch(format) {
+    case(AL_FORMAT_MONO8):
+    case(AL_FORMAT_MONO16):
+      return 1;
+    case(AL_FORMAT_STEREO8):
+    case(AL_FORMAT_STEREO16):
+      return 2;
+  }
+  return 0;
+}
+
+inline unsigned short Bits(ALenum format) {
+  switch(format) {
+    case(AL_FORMAT_MONO8):
+    case(AL_FORMAT_STEREO8):
+      return 8;
+    case(AL_FORMAT_MONO16):
+    case(AL_FORMAT_STEREO16):
+      return 16;
+  }
+  return 0;
+}
+
+AudioConvert::AudioConvert(ALenum format,unsigned int frequency)
+  : frequency_(frequency), format_(format) {
+  bits_=Bits(format);
+  channels_=Channels(format);
+  if(!(bits_ && channels_))
+    throw FatalError("Unknown format in AudioConvert!");
+}
+
+void *AudioConvert::Apply(void *data,ALenum format,
+			  unsigned int frequency,unsigned int &size) {
+  if(format==format_ && frequency==frequency_) {
+    void *ret=malloc(size);
+    if(!ret)
+      throw MemoryError("Out of memory");
+    memcpy(ret,data,size);
+    return ret;
+  }
+
+  ALvoid *compressed = NULL;
+  ALvoid *retval = NULL;
+  acAudioCVT s16le;
+
+  if(!IsRaw(format)) {    // Take care of compressed formats..
+    ALushort acfmt;
+    ALushort achan;
+    ALushort acfreq;
+
+    switch(format) {
+      case AL_FORMAT_IMA_ADPCM_MONO16_EXT:
+      case AL_FORMAT_IMA_ADPCM_STEREO16_EXT:
+      case AL_FORMAT_WAVE_EXT:
+	acLoadWAV(data,&size,&retval,&acfmt,&achan,&acfreq);
+	
+	format   = _al_AC2ALFMT(acfmt, achan);
+	frequency= acfreq;
+	break;
+      default:
+	break;
+    }
+
+    compressed = data = retval;
+  }
+
+  unsigned int insize=size;  
+  unsigned short inbits=Bits(format),inchannels=Channels(format);
+
+  if(acBuildAudioCVT(&s16le,
+		     /* from */
+		     _al_AL2ACFMT(format),
+		     _al_ALCHANNELS(format),
+		     frequency,
+
+		     /* to */
+		     _al_AL2ACFMT(format_),
+		     _al_ALCHANNELS(format_),
+		     frequency_) < 0) {
+    free(compressed);
+    throw FatalError("Couldn't build audio conversion data structure.");
+  }
+
+  s16le.buf=retval=malloc(size * s16le.len_mult);
+  if(retval==NULL) {
+    free(compressed);
+    throw MemoryError("Out of memory");
+  }
+  memcpy(retval,data,size);
+
+  s16le.len =size;
+
+  if(acConvertAudio(&s16le)<0) {
+    free(compressed);
+    return NULL;
+  }
+
+  size=s16le.len_cvt;
+
+  if(s16le.buf!=compressed)
+    free(compressed);
+
+  return s16le.buf;
+}
+
 static struct MS_ADPCM_decoder_FULL {
   alWaveFMT_LOKI wavefmt;
   ALushort wSamplesPerBlock;

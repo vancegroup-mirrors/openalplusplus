@@ -8,6 +8,31 @@
 
 namespace openalpp {
 
+/**
+ * Class for converting audio.
+ */
+class AudioConvert {
+  unsigned short channels_,bits_;
+  unsigned int frequency_;
+  ALenum format_;
+ public:
+  /**
+   * Constructor.
+   * @param format is the (OpenAL) format that data will be converted to.
+   * @param frequency is the frequency the data will be converted to.
+   */
+  AudioConvert(ALenum format,unsigned int frequency);
+
+  /**
+   * Apply the conversion to data.
+   * @param data is the data to convert.
+   * @param format is the (OpenAL) format of the data.
+   * @param frequency is the frequency of the data.
+   * @param size is the size of the data. It will be updated to the new size.
+   */
+  void *Apply(void *data,ALenum format,unsigned int frequency,unsigned int &size);
+};
+
 typedef struct _acAudioCVT {
   int needed;                     /* Set to 1 if conversion possible */
   ALushort src_format;            /* Source audio format */
@@ -101,11 +126,11 @@ typedef struct IMA_ADPCM_decoder {
   ALushort wSamplesPerBlock;
   alIMAADPCM_decodestate_LOKI state[2];
 } alIMAADPCM_state_LOKI;
-
+/*
 void *AudioConvert(ALvoid *data,
 		   ALenum f_format, ALuint f_size, ALuint f_freq,
 		   ALenum t_format, ALuint t_freq, ALuint *retsize);
-
+*/
 }
 
 #endif
