@@ -35,9 +35,12 @@ using namespace openalpp;
 #endif
 
 
-int main() {
+int main(int argc, char **argv) {
+  std::string file = "bee.wav";
+  if (argc > 1)
+    file = argv[1];
   try {
-    Source beesound("bee.wav");
+    Source beesound(file);
     beesound.setGain(1);
     beesound.setLooping();
 
@@ -50,11 +53,11 @@ int main() {
     
     const int no_laps=5;
     
-    std::cerr << "Moving sound 5 laps..." << std::endl;
+    std::cerr << "Moving " << file << " 5 laps..." << std::endl;
     
     // Do a cheat time loop.
     while(angle<(M_PI*2.0*no_laps)) {
-      usleep(delay*1000); // Wait for delay milliseconds
+      usleep(int(delay*1000)); // Wait for delay milliseconds
 
       time +=delay/1000; // Calculate the time in the loop
       angle=M_PI *time;  // What is the resulting angle

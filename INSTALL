@@ -3,15 +3,30 @@ Installation instructions for OpenAL++
 OpenAL++ uses the libraries OpenAL, PortAudio and OpenThreads. However, it is possible to compile OpenAL++ without PortAudio, but then some features will be disabled.
 
 
+Dependencies
+-----------
+
+OpenAL - http://www.openal.org
+  Portable low level sound library. Similar to OpenGL.
+  OpenAL also depends on ogg-vorbis.
+
+OggVorbis - http://www.vorbis.com/ 
+  Portable library for reading/writing ogg/vorbis files. Which is similar to MP3 in quality and compression, but FREE.
+
+OpenThreads -  http://openthreads.sourceforge.net/
+  Portable thread library
+
+Portaudio - 
+  Portable library for handling input/output devices in a platform independent way.
+
 Download
 ---------
-Download OpenThreads from http://openthreads.sourceforge.net/ and install it.
+To build OpenAL++ you first need to download and install OggVorbis, OpenAL, OpenThreads.
 
-If you want to use PortAudio for microphone capture (not very tested!) download that from: http://www.portaudio.com/ and install it.
+The use of Portaudio is not well tested and should be considered unstable!
 
-
-Linux/Unix
-----------
+Building OpenAL++ under Linux/Unix
+-----------------------------------
 Start by running configure ($ is the prompt):
  $ ./autogen.sh
 This will create the Makefiles. Run configure --help to get information on the
@@ -49,15 +64,23 @@ problem.
 OpenAL++ has been successfully compiled using Visual C++ 6.0/.NET2000/.NET2003. 
 It should work using other compilers too.
 
-There are three ways to compile and install OpenAl++. Whichever way you choose, you should make sure that the necessary paths (include, lib etc.) are correct. For example (in DOS) by using "set INCLUDE=%INCLUDE%;additional path here".
-- 1 -
-Open up the workspace (openalpp.dsw/openalpp.sln) in Visual C++.
-Make sure openalpp is the active project (Build/Set Active Configuration. Openalpp - Win32 Release).
-Be sure to set any include paths that might be necessary for PortAudio, CommonC++ and/or OpenAL. This can be done under Project/Settings/C/C++/Additional include directories.
-Also, if you have installed libraries in "non-standard" places, additional library paths should be set under Project/Settings/Link/Input/Additional library path.
-Build the library (hit F7)
-The library and dll files are named oalpp.lib oalpp.dll and resides in the lib and the bin directory
-in the project root.
+1. Make sure that the necessary paths (include, lib etc.) are correct. 
+   For example (in DOS) by using: 
+
+     DOS> set INCLUDE=%INCLUDE%;path to openal,oggvorbis, openthreads header files
+     DOS> set LIB=%LIB%;path to openal, oggvorbis, openthreads libraries
+     DOS> set PATH=%PATH%;path to openal, oggvorbis, openthreads  dll files
+
+
+2. Now open up the workspace/projects in your prefered build environment with the /useenv flag (for .NET)
+  
+     DOS> devenv /useenv visualstudio/openalpp.sln
+
+3. Build the projec with the sample projects
+
+The library and dll files are named oalpp.lib oalpp.dll and resides in the lib and the bin directory in the project root.
+
+To use OpenAL++ in your own project, add the include, lib and bin directory to the INCLUDE, LIB and PATH environment variables and restart your build environment, dont forget to use the /useenv flag.
 
 
 Other platforms
