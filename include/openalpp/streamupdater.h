@@ -30,15 +30,11 @@
 extern "C" {
 #include <AL/al.h>
 }
+#include "openalpp/audiobase.h"
 #include "openalpp/error.h"
 #include "openalpp/windowsstuff.h"
 
 namespace openalpp {
-
-/**
- * Format for sound data. Mono/Stereo, 8 or 16 bits.
- */
-typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
 
 /**
  * Base class for (threaded) updating of stream buffers.

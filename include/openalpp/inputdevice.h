@@ -25,9 +25,7 @@
 #ifndef INPUTDEVICE_H_INCLUDED_C41987DC
 #define INPUTDEVICE_H_INCLUDED_C41987DC
 
-#include "openalpp/deviceupdater.h"
 #include "openalpp/stream.h"
-#include <portaudio.h>
 
 namespace openalpp {
 
