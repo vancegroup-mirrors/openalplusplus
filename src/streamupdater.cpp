@@ -57,6 +57,9 @@ void StreamUpdater::RemoveSource(ALuint sourcename) {
 }
 
 bool StreamUpdater::Update(void *buffer,unsigned int length) {
+  if(!length)     // Zero length => return
+    return false;
+
   ALint processed,nprocessed,state,nstate;
   ALuint albuffer;
 
@@ -121,7 +124,7 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
           alSourceQueueBuffers(sources_[i],1,&albuffer);
       } else {
 	LEAVE_CRITICAL;
-        ccxx_yield(); //Sleep(50);
+        ost::ccxx_yield(); //ost::ccxx_sleep(50);
 	ENTER_CRITICAL;
 	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
 	  LEAVE_CRITICAL;
