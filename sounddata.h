@@ -2,6 +2,7 @@
 #define SOUNDDATA_H_INCLUDED_C4199A75
 
 #include "error.h"
+#include "audiobase.h"
 extern "C" {
 #include <AL/al.h>
 }
@@ -11,7 +12,7 @@ namespace openalpp {
 /**
  * Base class for sound data.
  */
-class SoundData {
+class SoundData : public AudioBase {
  protected:
   /**
    * Protected class to handle generation/deletion of OpenAL buffers correctly.
@@ -36,7 +37,7 @@ class SoundData {
   /**
    * Constructor.
    */
-  SoundData() throw (NameError);
+  SoundData() throw (NameError,InitError);
 
   /**
    * Copy constructor.

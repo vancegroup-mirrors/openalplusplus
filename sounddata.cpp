@@ -28,7 +28,7 @@ void SoundData::SoundBuffer::DeReference() throw (FatalError) {
 
 
 
-SoundData::SoundData() throw (NameError) {
+SoundData::SoundData() throw (NameError,InitError) : AudioBase() {
   buffer_=new SoundBuffer();
   buffername_=buffer_->GetName();
 }
