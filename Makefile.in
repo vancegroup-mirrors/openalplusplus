@@ -1,0 +1,26 @@
+MAKE= gmake
+PREFIX=@prefix@
+LIBDIR=$(PREFIX)/lib
+INCDIR=$(PREFIX)/include
+MANDIR=$(PREFIX)/man/man3
+
+alpp:
+	cd src && $(MAKE) alpp
+.PHONY : tests
+tests:
+	cd tests && $(MAKE) all
+docs:   
+	doxygen Doxyfile
+install: alpp
+	mkdir -p $(INCDIR)/alpp
+	install -m 644 include/*.h $(INCDIR)/alpp/
+	install lib/libopenalpp.so.1.1 $(LIBDIR)
+	ln -s -f $(LIBDIR)/libopenalpp.so.1.1 $(LIBDIR)/libopenalpp.so.1
+	ln -s -f $(LIBDIR)/libopenalpp.so.1 $(LIBDIR)/libopenalpp.so
+install-docs:
+	install -m 644 man/man3/* $(MANDIR)
+clean:
+	rm -f *.o core core.* *~
+	cd src && $(MAKE) clean
+	cd include && $(MAKE) clean
+	cd tests && $(MAKE) clean
