@@ -7,8 +7,12 @@
 #define alGetSourceiv alGetSourcei
 inline ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALint *format,
 			     ALsizei *size,ALsizei *bits,ALsizei *freq) {
-  alutLoadWAVFile(const_cast<char *>(fname),format,buffer,size,bits,
-		  (ALbyte *)freq);
+  ALboolean loop;
+  alutLoadWAVFile(const_cast<char *>(fname),format,buffer,size,freq,&loop);
+  if(*format==AL_FORMAT_STEREO16 || *format==AL_FORMAT_MONO16)
+    *bits=16;
+  else
+    *bits=8;
   return AL_TRUE;
 }
 
