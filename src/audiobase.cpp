@@ -33,7 +33,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     // Open a write (output) device. This should (in theory) make it possible
     // to open a read (input) device later.. 
 #ifdef _WIN32
-    char *initString = "DirectSound3D";
+    char *initString = 0L;//"DirectSound", "DirectSound3D", ;
     device_ =alcOpenDevice((unsigned char *)initString);
 
 #else
