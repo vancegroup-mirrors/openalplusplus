@@ -103,12 +103,14 @@ int main() {
     state=gsource.GetState();
     if(state!=Playing)
       cerr << "Group source is not playing!\n";    
-    sleep(6);
+    sleep(7);
     gsource.Stop();
     //source.SetReverbScale(1.0);
+    cerr << "Mixing again...\n";
     gsource.MixSources();
+    cerr << "And playing...\n";
     gsource.Play();
-    sleep(6);
+    sleep(7);
     gsource.Stop();
     sleep(1);
 

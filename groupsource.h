@@ -1,14 +1,13 @@
 #ifndef GROUPSOURCE_H_INCLUDED_C427B440
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
-extern "C" {
-#include "../openal/linux/src/al_buffer.h"
-#ifndef WIN32
-#include "AL/alexttypes.h"
-#endif
-}
 #include "sourcebase.h"
 #include "source.h"
+#ifndef WIN32
+extern "C" {
+#include "AL/alexttypes.h"
+}
+#endif
 #include <vector>
 #include <math.h>
 
