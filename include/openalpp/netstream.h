@@ -25,8 +25,12 @@
 #ifndef NETSTREAM_H_INCLUDED_C419F72E
 #define NETSTREAM_H_INCLUDED_C419F72E
 
-#include "openalpp/netupdater.h"
 #include "openalpp/stream.h"
+
+namespace ost {
+class UDPSocket;
+class TCPStream;
+}
 
 namespace openalpp {
 

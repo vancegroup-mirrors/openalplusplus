@@ -25,7 +25,6 @@
 #ifndef FILESTREAM_H_INCLUDED
 #define FILESTREAM_H_INCLUDED
 
-#include "openalpp/filestreamupdater.h"
 #include "openalpp/stream.h"
 
 namespace openalpp {
