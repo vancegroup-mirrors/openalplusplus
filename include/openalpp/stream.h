@@ -22,21 +22,60 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#ifndef ALPP_GLOBAL_H
-#define ALPP_GLOBAL_H
+#ifndef STREAM_H_INCLUDED_C41983DF
+#define STREAM_H_INCLUDED_C41983DF
+#include "openalpp/streamupdater.h"
+#include "openalpp/sounddata.h"
+
+namespace openalpp {
 
 /**
- * \file
- * This file should be included in any project using the OpenAL++ SDK.
- * No other files are needed.
+ * Base class for NetStream and InputDevice.
+ * Used for audio streams.
  */
+class Stream : public SoundData {
+ protected:
+  /**
+   * For double-buffering of sounds.
+   */
+  SoundBuffer *buffer2_;
 
-#include "source.h"
-#include "audioenvironment.h"
-#include "listener.h"
-#include "groupsource.h"
-#include "sample.h"
-#include "netstream.h"
-#include "inputdevice.h"
+  StreamUpdater *updater_;
+ public:
+  /**
+   * Default constructor.
+   */
+  Stream() throw (NameError);
 
-#endif
+  /**
+   * Copy constructor.
+   */
+  Stream(const Stream &stream);
+
+  /**
+   * Assignment operator.
+   */
+  Stream &operator=(const Stream &stream);
+
+  /**
+   * Destructor.
+   */
+  ~Stream();
+
+  /**
+   * Start recording.
+   * I.e. start copying data to buffers.
+   * @param sourcename is the (OpenAL) name of the source.
+   */
+  void Record(ALuint sourcename);
+
+  /**
+   * Stop recording.
+   * @param sourcename is the (OpenAL) name of the source.
+   */
+  void Stop(ALuint sourcename);
+};
+
+}
+
+#endif /* STREAM_H_INCLUDED_C41983DF */

@@ -23,7 +23,7 @@
  *
  * Example where sound is streamed from a microphone.
  */
-#include "../include/alpp.h"
+#include "openalpp/alpp.h"
 
 #include <iostream>
 

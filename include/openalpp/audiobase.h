@@ -31,8 +31,8 @@ extern "C" {
 #include <AL/alut.h>
 #include <AL/alc.h>
 }
-#include "windowsstuff.h"
-#include "error.h"
+#include "openalpp/windowsstuff.h"
+#include "openalpp/error.h"
 
 /**
  * \mainpage

@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "groupsource.h"
+#include "openalpp/groupsource.h"
 
 namespace openalpp {
   
@@ -140,8 +140,8 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   alGetListenerfv(AL_ORIENTATION,orientation);
   //Normalize at and up vectors
   dist=sqrt(orientation[0]*orientation[0]+
-	    orientation[1]*orientation[1]+
-	    orientation[2]*orientation[2]);
+    orientation[1]*orientation[1]+
+    orientation[2]*orientation[2]);
   if(dist<0.0001)
     throw FatalError("Faulty at vector in AL_ORIENTATION!");
   orientation[0]/=dist;

@@ -25,8 +25,8 @@
 #ifndef GROUPSOURCE_H_INCLUDED_C427B440
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
-#include "source.h"
-#include "audioconvert.h"
+#include "openalpp/source.h"
+#include "openalpp/audioconvert.h"
 #include <vector>
 #include <math.h>
 #include <stdlib.h>

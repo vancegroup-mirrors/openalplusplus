@@ -26,9 +26,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "audioconvert.h"
+#include "openalpp/audioconvert.h"
 
 #include <iostream>
+#include <strstream>
 
 /*
  * TODO: The code in this file is copied from AL source.. I did this 
@@ -920,8 +921,12 @@ int IMA_ADPCM_decode(ALubyte *indata, ALubyte *outdata,
 	state[c].valprev -= 0x10000;
       state[c].index = *indata++;
       /* Reserved byte in buffer header, should be 0 */
-      if ( *indata++ != 0 )
-	/* Uh oh, corrupt data?  Buggy code? */;
+      if ( *indata++ != 0 ) {
+	    /* Uh oh, corrupt data?  Buggy code? */
+        std::strstream str;
+        str << __FILE__ << ": " << __LINE__ << ": " << "Reserved byte in buffer should be 0" << std::ends;
+        throw FatalError(str.str());
+      }
       
       /* Store the initial valprev we start with */
       outdata[0] = state[c].valprev&0xFF;

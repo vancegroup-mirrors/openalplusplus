@@ -22,51 +22,21 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#ifndef SAMPLE_H_INCLUDED_C4211F97
-#define SAMPLE_H_INCLUDED_C4211F97
-
-#include "windowsstuff.h"
-#include "sounddata.h"
-#include "error.h"
-#include <string>
-
-namespace openalpp {
+#ifndef ALPP_GLOBAL_H
+#define ALPP_GLOBAL_H
 
 /**
- * Class for loading sampled files.
+ * \file
+ * This file should be included in any project using the OpenAL++ SDK.
+ * No other files are needed.
  */
-class Sample : public SoundData {
- public:
-  /**
-   * Constructor.
-   * @param filename is name of file to load.
-   */
-  Sample(const char *filename) throw (FileError);
 
-  /**
-   * Copy constructor.
-   */
-  Sample(const Sample &sample);
+#include "openalpp/source.h"
+#include "openalpp/audioenvironment.h"
+#include "openalpp/listener.h"
+#include "openalpp/groupsource.h"
+#include "openalpp/sample.h"
+#include "openalpp/netstream.h"
+#include "openalpp/inputdevice.h"
 
-  /**
-   * Get file name of loaded file.
-   * @return file name.
-   */
-  std::string GetFileName() const;
-
-  /**
-   * Assignment operator.
-   */
-  Sample &operator=(const Sample &sample);
-
- private:
-  /**
-   * File name.
-   */
-  std::string filename_;
-
-};
-
-}
-
-#endif /* SAMPLE_H_INCLUDED_C4211F97 */
+#endif

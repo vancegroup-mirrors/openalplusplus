@@ -25,7 +25,7 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav and moves it left right. 
  */
-#include <alpp.h>
+#include <openalpp/alpp.h>
 #include <cc++/thread.h>
 #include <iostream>
 

@@ -30,8 +30,8 @@
 extern "C" {
 #include <AL/al.h>
 }
-#include "error.h"
-#include "windowsstuff.h"
+#include "openalpp/error.h"
+#include "openalpp/windowsstuff.h"
 
 namespace openalpp {
 
@@ -90,7 +90,7 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * Inherited from Thread.
    * Is called after Run() finishes, and deletes this.
    */
-  void Final();
+  void final();
 
   /**
    * Reference this updater.

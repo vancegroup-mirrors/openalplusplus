@@ -22,60 +22,70 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#ifndef STREAM_H_INCLUDED_C41983DF
-#define STREAM_H_INCLUDED_C41983DF
-#include "streamupdater.h"
-#include "sounddata.h"
+#ifndef SOUNDDATA_H_INCLUDED_C4199A75
+#define SOUNDDATA_H_INCLUDED_C4199A75
+
+#include "openalpp/error.h"
+#include "openalpp/audiobase.h"
 
 namespace openalpp {
 
 /**
- * Base class for NetStream and InputDevice.
- * Used for audio streams.
+ * Base class for sound data.
  */
-class Stream : public SoundData {
+class SoundData : public AudioBase {
  protected:
   /**
-   * For double-buffering of sounds.
+   * Protected class to handle generation/deletion of OpenAL buffers correctly.
    */
-  SoundBuffer *buffer2_;
-
-  StreamUpdater *updater_;
+  class SoundBuffer {
+    ALuint buffername_;
+    int refcount_;
+  public:
+    SoundBuffer() throw (NameError);
+    ~SoundBuffer();
+    SoundBuffer *Reference();
+    void DeReference() throw (FatalError);
+    ALuint GetName() {return buffername_;}
+  };
  public:
   /**
-   * Default constructor.
+   * Get the OpenAL name for the buffer.
+   * @return the OpenAL name.
    */
-  Stream() throw (NameError);
+  ALuint GetAlBuffer() const;
+
+  /**
+   * Constructor.
+   */
+  SoundData() throw (NameError,InitError);
 
   /**
    * Copy constructor.
    */
-  Stream(const Stream &stream);
-
-  /**
-   * Assignment operator.
-   */
-  Stream &operator=(const Stream &stream);
+  SoundData(const SoundData &sounddata);
 
   /**
    * Destructor.
    */
-  ~Stream();
+  ~SoundData();
 
   /**
-   * Start recording.
-   * I.e. start copying data to buffers.
-   * @param sourcename is the (OpenAL) name of the source.
+   * Assignment operator.
    */
-  void Record(ALuint sourcename);
+  SoundData &operator=(const SoundData &sounddata);
+ protected:
+  /**
+   * See class SoundBuffer comment.
+   */
+  SoundBuffer *buffer_;
 
   /**
-   * Stop recording.
-   * @param sourcename is the (OpenAL) name of the source.
+   * OpenAL name for the buffer.
    */
-  void Stop(ALuint sourcename);
+  ALuint buffername_;
 };
 
 }
 
-#endif /* STREAM_H_INCLUDED_C41983DF */
+#endif /* SOUNDDATA_H_INCLUDED_C4199A75 */

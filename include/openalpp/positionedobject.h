@@ -25,7 +25,7 @@
 #ifndef POSITIONEDOBJECT_H_INCLUDED_C4278579
 #define POSITIONEDOBJECT_H_INCLUDED_C4278579
 
-#include "audiobase.h"
+#include "openalpp/audiobase.h"
 
 namespace openalpp {
 

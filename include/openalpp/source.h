@@ -25,9 +25,9 @@
 #ifndef SOURCE_H_INCLUDED_C419B739
 #define SOURCE_H_INCLUDED_C419B739
 
-#include "stream.h"
-#include "sourcebase.h"
-#include "sample.h"
+#include "openalpp/stream.h"
+#include "openalpp/sourcebase.h"
+#include "openalpp/sample.h"
 
 namespace openalpp {
 

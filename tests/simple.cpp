@@ -24,7 +24,7 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav in the background.
  */
-#include <alpp.h>
+#include <openalpp/alpp.h>
 #include <cc++/thread.h>
 #include <iostream>
 

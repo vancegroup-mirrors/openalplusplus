@@ -25,7 +25,7 @@
 #ifndef AUDIOENVIROMENT_H_INCLUDED_C4211030
 #define AUDIOENVIROMENT_H_INCLUDED_C4211030
 
-#include "audiobase.h"
+#include "openalpp/audiobase.h"
 
 namespace openalpp {
 

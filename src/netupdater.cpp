@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "netupdater.h"
+#include "openalpp/netupdater.h"
 
 namespace openalpp {
 
@@ -34,23 +34,24 @@ NetUpdater::NetUpdater(ost::UDPSocket *socket,ost::TCPStream *controlsocket,
   , controlsocket_(controlsocket), packetsize_(packetsize) {
 }
 
-void NetUpdater::Run() {
+void NetUpdater::run() {
   void *buffer=malloc(packetsize_);
   unsigned int len;
 
   runmutex_.enterMutex();
   while(!stoprunning_) {
     runmutex_.leaveMutex();
-    if(socket_->isPending(ost::Socket:pendingInput,1000)) {
+    if(socket_->isPending(ost::Socket::pendingInput,1000)) {
       len=socket_->receive(buffer,packetsize_);
       Update(buffer,len);
-    } else {
+    } 
+    else {
       if(controlsocket_ && 
-	 controlsocket_->isPending(ost::Socket:pendingInput,100)) {
-	char instr[100];
-	*controlsocket_ >> instr;
-	runmutex_.enterMutex();
-	break;
+        controlsocket_->isPending(ost::Socket::pendingInput,100)) {
+	      char instr[100];
+	      *controlsocket_ >> instr;
+	      runmutex_.enterMutex();
+	      break;
       }
     }
     runmutex_.enterMutex();

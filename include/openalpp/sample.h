@@ -22,57 +22,51 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#ifndef INPUTDEVICE_H_INCLUDED_C41987DC
-#define INPUTDEVICE_H_INCLUDED_C41987DC
+#ifndef SAMPLE_H_INCLUDED_C4211F97
+#define SAMPLE_H_INCLUDED_C4211F97
 
-#include "deviceupdater.h"
-#include "stream.h"
-#include <portaudio.h>
+#include "openalpp/windowsstuff.h"
+#include "openalpp/sounddata.h"
+#include "openalpp/error.h"
+#include <string>
 
 namespace openalpp {
 
 /**
- * Class for handling input devices, like microphones.
+ * Class for loading sampled files.
  */
-class InputDevice : public Stream {
-  static int nobjects_;
-
-  /**
-   * Initialize input. Called by constructor(s).
-   */
-  void Init();
+class Sample : public SoundData {
  public:
   /**
    * Constructor.
+   * @param filename is name of file to load.
    */
-  InputDevice();
-
-  /**
-   * Constructor.
-   * @param device is the device to open. -1 for default input.
-   * @param samplerate is the desired sample rate.
-   * @param buffersize is the desired buffer size.
-   * @param format is the desired sample format.
-   */
-  InputDevice(int device,unsigned int samplerate,unsigned int buffersize=1024, 
-	      SampleFormat format=Mono16);
+  Sample(const char *filename) throw (FileError);
 
   /**
    * Copy constructor.
    */
-  InputDevice(const InputDevice &input);
+  Sample(const Sample &sample);
+
+  /**
+   * Get file name of loaded file.
+   * @return file name.
+   */
+  std::string GetFileName() const;
 
   /**
    * Assignment operator.
    */
-  InputDevice &operator=(const InputDevice &input);
+  Sample &operator=(const Sample &sample);
 
+ private:
   /**
-   * Destructor.
+   * File name.
    */
-  ~InputDevice();
+  std::string filename_;
+
 };
 
 }
 
-#endif /* INPUTDEVICE_H_INCLUDED_C41987DC */
+#endif /* SAMPLE_H_INCLUDED_C4211F97 */

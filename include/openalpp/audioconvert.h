@@ -32,7 +32,7 @@
 #include <AL/al.h>
 #include <stdlib.h>
 #include <string.h>
-#include "error.h"
+#include "openalpp/error.h"
 
 namespace openalpp {
 

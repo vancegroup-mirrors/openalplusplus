@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "streamupdater.h"
+#include "openalpp/streamupdater.h"
 
 namespace openalpp {
 
@@ -162,7 +162,7 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
   return ret;
 }
 
-void StreamUpdater::Final() {
+void StreamUpdater::final() {
   delete this;
 } 
 

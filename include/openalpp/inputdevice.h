@@ -22,70 +22,57 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#ifndef SOUNDDATA_H_INCLUDED_C4199A75
-#define SOUNDDATA_H_INCLUDED_C4199A75
+#ifndef INPUTDEVICE_H_INCLUDED_C41987DC
+#define INPUTDEVICE_H_INCLUDED_C41987DC
 
-#include "error.h"
-#include "audiobase.h"
+#include "openalpp/deviceupdater.h"
+#include "openalpp/stream.h"
+#include <portaudio.h>
 
 namespace openalpp {
 
 /**
- * Base class for sound data.
+ * Class for handling input devices, like microphones.
  */
-class SoundData : public AudioBase {
- protected:
-  /**
-   * Protected class to handle generation/deletion of OpenAL buffers correctly.
-   */
-  class SoundBuffer {
-    ALuint buffername_;
-    int refcount_;
-  public:
-    SoundBuffer() throw (NameError);
-    ~SoundBuffer();
-    SoundBuffer *Reference();
-    void DeReference() throw (FatalError);
-    ALuint GetName() {return buffername_;}
-  };
- public:
-  /**
-   * Get the OpenAL name for the buffer.
-   * @return the OpenAL name.
-   */
-  ALuint GetAlBuffer() const;
+class InputDevice : public Stream {
+  static int nobjects_;
 
+  /**
+   * Initialize input. Called by constructor(s).
+   */
+  void Init();
+ public:
   /**
    * Constructor.
    */
-  SoundData() throw (NameError,InitError);
+  InputDevice();
+
+  /**
+   * Constructor.
+   * @param device is the device to open. -1 for default input.
+   * @param samplerate is the desired sample rate.
+   * @param buffersize is the desired buffer size.
+   * @param format is the desired sample format.
+   */
+  InputDevice(int device,unsigned int samplerate,unsigned int buffersize=1024, 
+	      SampleFormat format=Mono16);
 
   /**
    * Copy constructor.
    */
-  SoundData(const SoundData &sounddata);
-
-  /**
-   * Destructor.
-   */
-  ~SoundData();
+  InputDevice(const InputDevice &input);
 
   /**
    * Assignment operator.
    */
-  SoundData &operator=(const SoundData &sounddata);
- protected:
-  /**
-   * See class SoundBuffer comment.
-   */
-  SoundBuffer *buffer_;
+  InputDevice &operator=(const InputDevice &input);
 
   /**
-   * OpenAL name for the buffer.
+   * Destructor.
    */
-  ALuint buffername_;
+  ~InputDevice();
 };
 
 }
 
-#endif /* SOUNDDATA_H_INCLUDED_C4199A75 */
+#endif /* INPUTDEVICE_H_INCLUDED_C41987DC */

@@ -7,7 +7,7 @@ STREAMOBJECTS= netstream.o streamupdater.o netupdater.o  stream.o
 DEVICEOBJECTS= deviceupdater.o inputdevice.o
 OBJECTS=@OBJECTS@
 
-INCL=../include/
+INCL=../include/openalpp/
 
 alpp: $(OBJECTS) Makefile
 	$(CC) $(LDFLAGS) $(LIBS) -o ../lib/libopenalpp.so.1.1 $(OBJECTS)

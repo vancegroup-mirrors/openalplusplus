@@ -25,8 +25,8 @@
 #ifndef DEVICEUPDATER_H_INCLUDED_C419EA9C
 #define DEVICEUPDATER_H_INCLUDED_C419EA9C
 
-#include "streamupdater.h"
-#include "error.h"
+#include "openalpp/streamupdater.h"
+#include "openalpp/error.h"
 #include <portaudio.h>
 
 namespace openalpp {
@@ -64,7 +64,7 @@ class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
    * Inherited from Thread.
    * This will be called when the updater is Start():ed..
    */
-  void Run();
+  void run();
 
   /**
    * Enter critical section.

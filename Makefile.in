@@ -13,7 +13,7 @@ docs:
 	doxygen Doxyfile
 install: alpp
 	mkdir -p $(INCDIR)/alpp
-	install -m 644 include/*.h $(INCDIR)/alpp/
+	install -m 644 include/alpp/*.h $(INCDIR)/alpp/
 	install lib/libopenalpp.so.1.1 $(LIBDIR)
 	ln -s -f $(LIBDIR)/libopenalpp.so.1.1 $(LIBDIR)/libopenalpp.so.1
 	ln -s -f $(LIBDIR)/libopenalpp.so.1 $(LIBDIR)/libopenalpp.so

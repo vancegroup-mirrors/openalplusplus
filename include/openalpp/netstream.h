@@ -25,8 +25,8 @@
 #ifndef NETSTREAM_H_INCLUDED_C419F72E
 #define NETSTREAM_H_INCLUDED_C419F72E
 
-#include "netupdater.h"
-#include "stream.h"
+#include "openalpp/netupdater.h"
+#include "openalpp/stream.h"
 
 namespace openalpp {
 

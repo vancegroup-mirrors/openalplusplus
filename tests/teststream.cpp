@@ -27,7 +27,7 @@
  */
 #include <cc++/socket.h>
 #include <cc++/thread.h>
-#include <alpp.h>
+#include <openalpp/alpp.h>
 
 using namespace openalpp;
 using namespace ost;

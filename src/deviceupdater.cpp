@@ -22,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "deviceupdater.h"
+#include "openalpp/deviceupdater.h"
 
 namespace openalpp {
 
@@ -113,7 +113,7 @@ DeviceUpdater::~DeviceUpdater() {
   delete[] tmpbuffer_;
 }
 
-void DeviceUpdater::Run() {
+void DeviceUpdater::run() {
   Pa_StartStream(stream_);
   bool done=false;
   do {

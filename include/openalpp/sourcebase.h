@@ -24,8 +24,8 @@
 
 #ifndef SOURCEBASE_H_INCLUDED_C419E330
 #define SOURCEBASE_H_INCLUDED_C419E330
-#include "positionedobject.h"
-#include "error.h"
+#include "openalpp/positionedobject.h"
+#include "openalpp/error.h"
 
 namespace openalpp {
 

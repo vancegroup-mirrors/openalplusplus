@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <AL/al.h>
 #include <AL/alut.h>
-#include "../include/windowsstuff.h"
+#include "openalpp/windowsstuff.h"
 
 using namespace ost;
 

@@ -26,7 +26,7 @@
 #define NETUPDATER_H_INCLUDED_C419EF97
 
 #include <cc++/socket.h>
-#include "streamupdater.h"
+#include "openalpp/streamupdater.h"
 #include "stdlib.h"
 
 namespace openalpp {
@@ -70,7 +70,7 @@ class NetUpdater : public StreamUpdater {
    * Inherited from Thread.
    * This will be called when the updater is Start():ed..
    */
-  void Run();
+  void run();
 };
 
 }
