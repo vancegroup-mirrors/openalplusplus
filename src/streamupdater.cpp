@@ -57,7 +57,7 @@ void StreamUpdater::RemoveSource(ALuint sourcename) {
 }
 
 bool StreamUpdater::Update(void *buffer,unsigned int length) {
-  if(!length)     // Zero length => return
+  if(!(length && buffer))     // Zero length or NULL pointer => return
     return false;
 
   ALint processed,nprocessed,state,nstate;
