@@ -62,6 +62,12 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
   void Update(void *buffer,unsigned int length); 
 
   /**
+   * Inherited from Thread.
+   * Is called after Run() finishes, and deletes this.
+   */
+  void Final();
+
+  /**
    * Reference this updater.
    * @return this.
    */
@@ -91,6 +97,17 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * Source to update.
    */
   std::vector<ALuint> sources_,newsources_,removesources_;
+
+  /**
+   * Flag for when Run should stop running..
+   */ 
+  bool stoprunning_;
+
+  /**
+   * Mutex for stoprunning_.
+   */
+  ost::Mutex runmutex_;
+
 };
 
 }
