@@ -63,28 +63,34 @@ Source::Source(const Source &source) : SourceBase(source) {
 
 Source::~Source() {
   Stop();
-  delete sounddata_;
+  if (sounddata_)
+    delete sounddata_;
+
+  sounddata_ = 0L;
 }
 
 // TODO: Add flag for wether the sound should be loaded. This is useful for
 // dummy sources that will be used only for groupsources.
 void Source::SetSound(const char *filename) {
   streaming_=false;
-  delete sounddata_;
+  if (sounddata_)
+    delete sounddata_;
   sounddata_=new Sample(filename);
   alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
 }
 
 void Source::SetSound(const Sample &buffer) {
   streaming_=false;
-  delete sounddata_;
+  if (sounddata_)
+    delete sounddata_;
   sounddata_=new Sample(buffer);
   alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
 }
 
 void Source::SetSound(const Stream &stream) {
   streaming_=true;
-  delete sounddata_;
+  if (sounddata_)
+    delete sounddata_;
   sounddata_=new Stream(stream);
 }
 
@@ -130,7 +136,8 @@ bool Source::IsStreaming() {
 Source &Source::operator=(const Source &source) {
   if(this!=&source) {
     SourceBase::operator=(source);
-    delete sounddata_;
+    if (sounddata_)
+      delete sounddata_;
     streaming_=source.streaming_;
     if(streaming_)
       sounddata_=new Stream(*(Stream *)source.sounddata_);

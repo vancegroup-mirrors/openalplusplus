@@ -98,7 +98,7 @@ void AudioEnvironment::SetGain(float gain) {
 
 float AudioEnvironment::GetGain() throw (FatalError) {  
   ALfloat gain;
-  alGetListenerfv(AL_GAIN,&gain);
+  alGetListenerf(AL_GAIN,&gain);
   if(alGetError()!=AL_FALSE)          // This isn't strictly necessary...
     throw FatalError("Unknown error in AudioEnvironment::GetGain()");
   return gain;
@@ -144,6 +144,9 @@ void (*AudioBase::alReverbScale)(ALuint sid, ALfloat param);
 void (*AudioBase::alReverbDelay)(ALuint sid, ALfloat param);
 
 void AudioEnvironment::InitiateReverb() throw (InitError) {
+  if (reverbinitiated_)
+    return;
+ 
   alReverbScale=(void (*)(ALuint sid, ALfloat param))
     alGetProcAddress((ALubyte *)"alReverbScale_LOKI");
   alReverbDelay=(void (*)(ALuint sid, ALfloat param))
@@ -151,7 +154,7 @@ void AudioEnvironment::InitiateReverb() throw (InitError) {
   if(!(alReverbScale && alReverbDelay)) {
     throw InitError("Couldn't initiate reverb");
   } else
-    reverbinitiated_=true;
+  reverbinitiated_=true;
 }
 
 

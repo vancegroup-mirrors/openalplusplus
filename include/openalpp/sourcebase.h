@@ -85,17 +85,17 @@ class SourceBase : public PositionedObject {
 
   /**
    * Sets the direction of the source.
-   * @param direction x x value of the direction vector.
-   * @param direction y y value of the direction vector.
-   * @param direction z z value of the direction vector.
+   * @param directionx x value of the direction vector.
+   * @param directiony y value of the direction vector.
+   * @param directionz z value of the direction vector.
    */
   void SetDirection(float directionx, float directiony, float directionz);
 
   /**
    * Gets the direction of the source.
-   * @param direction x x value of the direction vector.
-   * @param direction y y value of the direction vector.
-   * @param direction z z value of the direction vector.
+   * @param directionx x value of the direction vector.
+   * @param directiony y value of the direction vector.
+   * @param directionz z value of the direction vector.
    */
   void GetDirection(float &directionx,float &directiony,float &directionz) const;
 

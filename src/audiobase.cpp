@@ -32,7 +32,13 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
   if(!instances_) {
     // Open a write (output) device. This should (in theory) make it possible
     // to open a read (input) device later.. 
+#ifdef _WIN32
+    char *initString = "DirectSound3D";
+    device_ =alcOpenDevice((unsigned char *)initString);
+
+#else
     device_=alcOpenDevice((/*const */ALubyte *)"'((direction \"write\"))");
+#endif
     if(!device_)
       throw InitError("Couldn't open device.");
     int attributes[7],i=0;
@@ -55,13 +61,34 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     context_=alcCreateContext(device_,attributes);
     if(!context_ || alcGetError()!=ALC_NO_ERROR) {
       if(context_)
-	alcDestroyContext(context_);
+	      alcDestroyContext(context_);
       alcCloseDevice(device_);
       throw InitError("Couldn't create context");
     } 
     alcMakeContextCurrent(context_);
     reverbinitiated_=false;
+
+    // Check for EAX 2.0 support
+    unsigned char *szFnName=0L;
+    ALboolean g_bEAX = alIsExtensionPresent((ALubyte*)"EAX2.0");
+    if (g_bEAX == AL_TRUE)
+    {
+      sprintf((char*)szFnName, "EAXSet");
+      ALvoid *eaxSet = alGetProcAddress(szFnName);
+      if (eaxSet == NULL) g_bEAX = AL_FALSE;
+    }
+    if (g_bEAX == AL_TRUE)
+    {
+      sprintf((char*)szFnName,"EAXGet");
+      ALvoid *eaxGet = alGetProcAddress(szFnName);
+      if (eaxGet == NULL) g_bEAX = AL_FALSE;
+    }
+    if (g_bEAX == AL_TRUE)
+      std::cerr << "Using OpenAL EAX2.0 extension" << std::endl;
+    else
+      std::cerr << "No OpenAL EAX2.0 extensions available" << std::endl;
   }
+
   instances_++;
 }
 

@@ -41,7 +41,7 @@ using namespace ost;
 
 int main() {
   try {
-    Source beesound("bee.wav");
+    Source beesound("c:\\temp\\mono.wav");
 	  beesound.SetGain(1);
 	  beesound.SetLooping();
 
