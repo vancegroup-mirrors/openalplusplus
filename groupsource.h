@@ -2,7 +2,7 @@
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
 extern "C" {
-#include "../cvs/openal/linux/src/al_buffer.h"
+#include "../openal/linux/src/al_buffer.h"
 #include "AL/alexttypes.h"
 }
 #include "sourcebase.h"
