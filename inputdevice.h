@@ -3,6 +3,7 @@
 
 #include "deviceupdater.h"
 #include "stream.h"
+#include <portaudio.h>
 
 namespace openalpp {
 
@@ -10,6 +11,12 @@ namespace openalpp {
  * Class for handling input devices, like microphones.
  */
 class InputDevice : public Stream {
+  static int nobjects_;
+
+  /**
+   * Initialize input. Called by constructor(s).
+   */
+  void Init();
  public:
   /**
    * Constructor.
@@ -18,11 +25,12 @@ class InputDevice : public Stream {
 
   /**
    * Constructor.
+   * @param device is the device to open. -1 for default input.
    * @param samplerate is the desired sample rate.
    * @param buffersize is the desired buffer size.
    * @param format is the desired sample format.
    */
-  InputDevice(unsigned int samplerate,unsigned int buffersize=1024, 
+  InputDevice(int device,unsigned int samplerate,unsigned int buffersize=1024, 
 	      SampleFormat format=Mono16);
 
   /**
@@ -39,12 +47,6 @@ class InputDevice : public Stream {
    * Destructor.
    */
   ~InputDevice();
-
- private:
-  /**
-   * Updater that runs in its own thread.
-   */
-  DeviceUpdater *updater_;
 };
 
 }

@@ -2,29 +2,47 @@
 
 namespace openalpp {
 
-//##ModelId=3BD87BD9035F
-InputDevice::InputDevice()
-{
+// Static
+int InputDevice::nobjects_=0;
+
+void InputDevice::Init() {
+  if(!nobjects_) {
+    PaError err=Pa_Initialize();
+    if(err!=paNoError)
+      throw InitError("Error initializing PortAudio");
+  }
+  nobjects_++;
 }
 
-//##ModelId=3BD87BE70283
-InputDevice::InputDevice(unsigned int samplerate, unsigned int buffersize, SampleFormat format )
-{
+InputDevice::InputDevice() {
+  Init();
+  updater_=new DeviceUpdater(-1,44100,10000,Mono16,buffername_,buffer2_->GetName());
 }
 
-//##ModelId=3BDD2D71006A
-InputDevice::InputDevice(const InputDevice &input)
-{
+InputDevice::InputDevice(int device,unsigned int samplerate,unsigned int buffersize,
+			 SampleFormat format) {
+  Init();
+
+  updater_=new DeviceUpdater(device,samplerate,buffersize,format,buffername_,buffer2_->GetName());
 }
 
-//##ModelId=3BDD2D7B01CD
+InputDevice::InputDevice(const InputDevice &input) {
+  // TODO: Copy/Reference etc. updater..
+}
+
 InputDevice &InputDevice::operator=(const InputDevice &input) {
+  if(this!=&input) {
+    // TODO: Delete/DeReference etc. updater..
+    // TODO: Copy/Reference etc. updater..
+  }
   return *this;
 }
 
-//##ModelId=3BE6464C028C
-InputDevice::~InputDevice()
-{
+InputDevice::~InputDevice() {
+  delete updater_;
+  nobjects_--;
+  if(!nobjects_)
+    Pa_Terminate();
 }
 
 }
