@@ -33,7 +33,7 @@ ALfloat FilterDoppler(ALuint source) {
  * Ripped from AL code...
  */
 ALfloat DbToLinear(ALfloat dBs) {
-  static const float logtab[] = {
+  static const double logtab[] = {
     0.00, 0.001, 0.002, 0.003, 0.004, 0.005, 0.01, 0.011,
     0.012, 0.013, 0.014, 0.015, 0.016, 0.02, 0.021, 0.022,
     0.023, 0.024, 0.025, 0.03, 0.031, 0.032, 0.033, 0.034,
@@ -85,11 +85,19 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   ALfloat iangle,oangle,ogain,dist,right[3];
   ALint relative;
 #ifdef WIN32
-  alGetSourcefv(source,AL_GAIN,&gain);
+  alGetSourcef(source,AL_GAIN,&gain);
   gain=DbToLinear(gain);
+  alGetSourcef(source,AL_MAX_DISTANCE,&maxdist);
+  alGetSourcef(source,AL_REFERENCE_DISTANCE,&refdist);
+  alGetSourcef(source,AL_ROLLOFF_FACTOR,&rolloff);
+  alGetSourcefv(source,AL_POSITION,position);
+  alGetSourcefv(source,AL_DIRECTION,direction);
+  alGetSourcef(source,AL_CONE_INNER_ANGLE,&iangle);
+  alGetSourcef(source,AL_CONE_OUTER_ANGLE,&oangle);
+  alGetSourcef(source,AL_CONE_OUTER_GAIN,&ogain);
+  alGetSourcei(source,AL_SOURCE_RELATIVE,&relative);
 #else
   alGetSourcefv(source,AL_GAIN_LINEAR_LOKI,&gain);
-#endif
   alGetSourcefv(source,AL_MAX_DISTANCE,&maxdist);
   alGetSourcefv(source,AL_REFERENCE_DISTANCE,&refdist);
   alGetSourcefv(source,AL_ROLLOFF_FACTOR,&rolloff);
@@ -99,6 +107,7 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   alGetSourcefv(source,AL_CONE_OUTER_ANGLE,&oangle);
   alGetSourcefv(source,AL_CONE_OUTER_GAIN,&ogain);
   alGetSourceiv(source,AL_SOURCE_RELATIVE,&relative);
+#endif
   
   float theta=0;
   ALfloat listener[3];
@@ -198,11 +207,11 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   if(theta<(iangle/2.0)) {
     // Should be empty, as it uses "normal" attenuation, as computed above
   } else if(theta<(oangle/2.0)) {
-    gain+=0.01;     // This is a bit weird.. Shouldn't ogain be part of this?
+    gain+=0.01f;     // This is a bit weird.. Shouldn't ogain be part of this?
     gain/=2.0;
   } else {
     if(ogain<0.01)
-      gain=0.01;
+      gain=0.01f;
     else
       gain=ogain;
   }
@@ -248,8 +257,13 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
   ALfloat pitch,lgain,rgain;
 
   //Pitch
+#ifndef WIN32
   alGetSourcefv(sourcename,AL_PITCH,&pitch);
+#else
+  alGetSourcef(sourcename,AL_PITCH,&pitch);
+#endif
   pitch*=FilterDoppler(sourcename);
+
   if(pitch>0.0) {
     ALsizei nsize=(ALsizei)(size/pitch);
     ALshort *nbuffer=(ALshort *)malloc(nsize);
@@ -284,8 +298,13 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
   rgain=FilterDistance(sourcename,Right);
   FilterReverb(source,buffer,size);
   ALfloat min,max;                          // minmax filter
+#ifndef WIN32
   alGetSourcefv(sourcename,AL_MIN_GAIN,&min);
   alGetSourcefv(sourcename,AL_MAX_GAIN,&max);
+#else
+  alGetSourcef(sourcename,AL_MIN_GAIN,&min);
+  alGetSourcef(sourcename,AL_MAX_GAIN,&max);
+#endif
 
   if(lgain<min)
     lgain=min;
@@ -306,25 +325,25 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
 }
 
 void GroupSource::MixSources(unsigned int frequency)
-  throw (InitError,FileError,FatalError) {
+  throw (InitError,FileError,FatalError,MemoryError,ValueError) {
   ALshort *loaddata=NULL,*data=NULL,*bdata=NULL;
   ALsizei bsize=0,size=0,loadsize=0,bits,freq;
   ALenum format;
   ALboolean success;
-    
+
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
   
+  std::cerr << ((Sample &)sources_[0]->GetSound()).GetFileName().c_str() << "\n";
   success=
     alutLoadWAV(((Sample &)sources_[0]->GetSound()).GetFileName().c_str(),
 		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
-  if(success==AL_FALSE)
+  if(success==AL_FALSE || !loaddata)
     throw FileError("Error opening file for mixing");
 
   bdata=(ALshort *)AudioConvert(loaddata,format,loadsize,freq,
 				AL_FORMAT_STEREO16,
 				frequency,(ALuint *)&bsize);
-
   if(!bdata)
     throw FatalError("Error converting data to internal format!");
 
@@ -336,7 +355,7 @@ void GroupSource::MixSources(unsigned int frequency)
     success=
       alutLoadWAV(((Sample &)sources_[s]->GetSound()).GetFileName().c_str(),
 		  (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
-    if(success==AL_FALSE)
+    if(success==AL_FALSE || !loaddata)
       throw FileError("Error opening file for mixing");
     
     data=(ALshort *)AudioConvert(loaddata,format,loadsize,freq,
@@ -369,10 +388,17 @@ void GroupSource::MixSources(unsigned int frequency)
     
     free(data);
   }
-    
+
   alBufferData(buffer_,AL_FORMAT_STEREO16,bdata,bsize,frequency);
-  mixed_=true;
-  
+  ALenum error=alGetError();
+  if(error==AL_OUT_OF_MEMORY)
+    throw MemoryError("Error buffering data");
+  else if(error==AL_INVALID_VALUE)
+    throw ValueError("Audio conversion failed");
+  else if(error!=AL_NO_ERROR)
+    throw FatalError((const char *)alGetString(error));
+
+  mixed_=true;  
   free(bdata);
 }
   
