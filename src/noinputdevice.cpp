@@ -23,7 +23,6 @@
  */
 
 #include "openalpp/inputdevice.h"
-#include <portaudio.h>
 
 namespace openalpp {
 
