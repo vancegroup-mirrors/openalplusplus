@@ -355,6 +355,10 @@ class SourceBase : public PositionedObject {
    */
   ALuint sourcename_;
 
+  /**
+   * Flag for whether the source is streaming.
+   */
+  bool streaming_;
  private:
   /**
    * Initiate source.

@@ -150,11 +150,6 @@ class Source : public SourceBase {
 
  private:
   /**
-   * Flag for whether the source is streaming.
-   */
-  bool streaming_;
-
-  /**
    * Pointer to the SoundData (buffer) associated with this source.
    */
   SoundData *sounddata_;

@@ -43,6 +43,7 @@ void SourceBase::Init() throw (MemoryError,NameError) {
   linkedsources_[0]=sourcename_;
   reverbscale_=0.25;
   reverbdelay_=0.0;
+  streaming_=false;
 }
 
 SourceBase::SourceBase() throw (MemoryError,NameError) : PositionedObject() {
@@ -139,7 +140,7 @@ SourceState SourceBase::GetState() const {
 }
 
 void SourceBase::SetLooping(bool loop) {
-  if(loop)
+  if(loop && !streaming_)
     alSourcei(sourcename_,AL_LOOPING,AL_TRUE);
   else
     alSourcei(sourcename_,AL_LOOPING,AL_FALSE);

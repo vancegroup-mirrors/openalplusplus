@@ -121,7 +121,7 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
           alSourceQueueBuffers(sources_[i],1,&albuffer);
       } else {
 	LEAVE_CRITICAL;
-        Sleep(50);
+        ccxx_yield(); //Sleep(50);
 	ENTER_CRITICAL;
 	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
 	  LEAVE_CRITICAL;
