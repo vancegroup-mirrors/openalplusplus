@@ -15,6 +15,21 @@ Package=<4>
 
 ###############################################################################
 
+Project: "simple"=.\tests\simple.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name openalpp
+    End Project Dependency
+}}}
+
+###############################################################################
+
 Project: "testmic"=.\tests\testmic.dsp - Package Owner=<4>
 
 Package=<5>
