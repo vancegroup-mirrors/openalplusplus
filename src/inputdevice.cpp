@@ -22,9 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "openalpp/deviceupdater.h"
 #include "openalpp/inputdevice.h"
-#include <portaudio.h>
 
 namespace openalpp {
 
@@ -35,7 +33,7 @@ void InputDevice::Init() {
   if(!nobjects_) {
     PaError err=Pa_Initialize();
     if(err!=paNoError)
-      throw InitError("Error initializing input device");
+      throw InitError("Error initializing PortAudio");
   }
   nobjects_++;
 }

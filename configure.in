@@ -84,9 +84,6 @@ AM_CONDITIONAL(WITH_CCGNU, test "$WITH_CCGNU" = "yes")
 AC_CHECK_LIB(portaudio,main,WITH_PORTAUDIO="yes")
 AM_CONDITIONAL(WITH_PORTAUDIO, test "$WITH_PORTAUDIO" = "yes")
 
-# Ogg Vorbis
-AC_CHECK_LIB(ogg,main,WITH_OGGVORBIS="yes")
-AM_CONDITIONAL(WITH_OGGVORBIS, test "$WITH_OGGVORBIS" = "yes")
 
 dnl Checks for header files.
 AC_HEADER_STDC

@@ -36,8 +36,9 @@
 #include "openalpp/listener.h"
 #include "openalpp/groupsource.h"
 #include "openalpp/sample.h"
-#include "openalpp/inputdevice.h"
 #include "openalpp/netstream.h"
-#include "openalpp/filestream.h"
+#ifdef _WIN32
+#include "openalpp/inputdevice.h"
+#endif
 
 #endif

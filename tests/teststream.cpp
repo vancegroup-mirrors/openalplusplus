@@ -30,6 +30,8 @@
 #include <openalpp/alpp.h>
 
 using namespace openalpp;
+using namespace ost;
+using namespace std;
 
 int main(int argc,char **argv) {
   unsigned int packetsize=10000;
@@ -38,7 +40,7 @@ int main(int argc,char **argv) {
   
   try {
     // Create a socket and listen for streamed data
-    ost::UDPSocket socket(ost::InetAddress("127.0.0.1"),33333);
+    UDPSocket socket(InetAddress("127.0.0.1"),33333);
 
     // Create a soundstream that will read its data from the socket
     NetStream stream(&socket,Mono16,44100,packetsize);
@@ -48,13 +50,13 @@ int main(int argc,char **argv) {
 
     source.SetAmbient();
     source.Play();
-    std::cout << "Press return to continue\n";
-    std::cin.get();
+    cerr << "Press return to continue\n";
+    cin.get();
     source.Stop();
   } catch(openalpp::Error e) {
-    std::cerr << e << "\n";
+    cerr << e << "\n";
   } catch(...) {
-    std::cerr << "Unknown error!\n";
+    cerr << "Unknown error!\n";
   }
   return 0;
 }

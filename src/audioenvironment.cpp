@@ -98,7 +98,7 @@ void AudioEnvironment::SetGain(float gain) {
 
 float AudioEnvironment::GetGain() throw (FatalError) {  
   ALfloat gain;
-  alGetListenerf(AL_GAIN,&gain);
+  alGetListenerfv(AL_GAIN,&gain);
   if(alGetError()!=AL_FALSE)          // This isn't strictly necessary...
     throw FatalError("Unknown error in AudioEnvironment::GetGain()");
   return gain;

@@ -23,15 +23,24 @@
  *
  * Example where sound is streamed from a microphone.
  */
-#include <cc++/thread.h>
 #include "openalpp/alpp.h"
+
 #include <iostream>
 
+
+
 using namespace openalpp;
+
+using namespace ost;
+
+using namespace std;
+
+
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
 
 int main() {
   try {
@@ -75,7 +84,7 @@ int main() {
     ost::Thread::sleep(3000);
 #endif
   } catch(Error e) {
-    std::cerr << e << "\n";
+    cerr << e << "\n";
     return -1;
   }
  

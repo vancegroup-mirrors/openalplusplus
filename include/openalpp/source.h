@@ -138,6 +138,13 @@ class Source : public SourceBase {
   void Stop();
 
   /**
+   * Pause this source.
+   * This is needed here for streaming sources...
+   */
+  void Pause();
+
+
+  /**
    * Check if the source is streaming.
    * @return true if the source is streaming, false otherwise.
    */

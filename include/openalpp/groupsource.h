@@ -110,7 +110,7 @@ class GroupSource : public SourceBase {
    * @param frequency is the frequency that will be used when mixing.
    */
   void MixSources(unsigned int frequency=22050) 
-    throw (InitError,FileError,FatalError,ValueError,MemoryError);
+    throw (InitError,FileError,FatalError,MemoryError,ValueError);
 
   /**
    * Includes a source in the group.

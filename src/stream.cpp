@@ -22,7 +22,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
-#include "openalpp/streamupdater.h"
 #include "openalpp/stream.h"
 
 namespace openalpp {
@@ -49,10 +48,8 @@ Stream &Stream::operator=(const Stream &stream) {
 }
 
 Stream::~Stream() {
-  if(buffer2_)
-    buffer2_->DeReference();
-  if(updater_)
-    updater_->DeReference();
+  buffer2_->DeReference();
+  updater_->DeReference();
 }
 
 void Stream::Record(ALuint sourcename) {

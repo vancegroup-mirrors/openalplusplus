@@ -24,12 +24,10 @@
 
 #ifndef STREAM_H_INCLUDED_C41983DF
 #define STREAM_H_INCLUDED_C41983DF
-
+#include "openalpp/streamupdater.h"
 #include "openalpp/sounddata.h"
 
 namespace openalpp {
-
-class StreamUpdater;
 
 /**
  * Base class for NetStream and InputDevice.
