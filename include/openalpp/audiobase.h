@@ -56,6 +56,11 @@ extern "C" {
  */
 namespace openalpp {
 
+/**
+ * Format for sound data. Mono/Stereo, 8 or 16 bits.
+ */
+typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
+
 /** 
  * Base class for enviroment, listener and source classes.
  * Takes care of initialisation/shutdown of anything necessary (e.g. ALut)
