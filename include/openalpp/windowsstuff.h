@@ -23,7 +23,11 @@
 
 #ifndef WINDOWSSTUFF_H_INCLUDED
 #define WINDOWSSTUFF_H_INCLUDED
-#ifdef WIN32
+#ifndef WIN32
+  
+#include <unistd.h>
+
+#else // WIN32
 
 //C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 #pragma warning( disable : 4290 )
@@ -51,5 +55,4 @@ inline OPENALPP_API ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALin
 
 #endif
 #else
-#include <unistd.h>
 #endif
