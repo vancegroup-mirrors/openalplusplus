@@ -32,7 +32,7 @@ void Stream::Record(ALuint sourcename) {
   if(!updater_)
     throw FatalError("No updater thread for stream!");
   updater_->AddSource(sourcename);
-  updater_->Start();
+  //  updater_->Start();
 }
 
 void Stream::Stop(ALuint sourcename) {
