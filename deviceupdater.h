@@ -7,6 +7,9 @@
 
 namespace openalpp {
 
+/**
+ * Updater for sound input devices (like microphones).
+ */
 class DeviceUpdater : public StreamUpdater {
   PortAudioStream *stream_;
  public:
@@ -24,6 +27,9 @@ class DeviceUpdater : public StreamUpdater {
 		SampleFormat format,
 		ALuint buffer1,ALuint buffer2);
 
+  /**
+   * Destructor.
+   */
   ~DeviceUpdater();
 
   /**
