@@ -38,15 +38,15 @@ class StreamUpdater : public ost::Thread {
    * @param sourcename is the OpenAL name of the source.
    */
   void RemoveSource(ALuint sourcename);
- protected:
+
   /**
    * Update the stream.
    * I.e. add new data to play.
    * @param buffer is a pointer to sound data.
    * @param length is the length of the sound data (in bytes).
    */
-  void Update(void *buffer,unsigned int length);
-
+  void Update(void *buffer,unsigned int length); 
+ protected:
   /**
    * Names of the buffers to update.
    */
