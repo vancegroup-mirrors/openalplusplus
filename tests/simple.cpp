@@ -41,6 +41,7 @@ int main(int argc,char **argv) {
 
   try {
     openalpp::ref_ptr<Source> bgsound = new Source; //(file);   // Create source and load sound
+    bgsound->stop();
     openalpp::ref_ptr<Sample> sample = new Sample(file);
     bgsound->setSound(sample.get());
     bgsound->setGain(0.6f);	  // Lower gain (volume) 
@@ -50,12 +51,11 @@ int main(int argc,char **argv) {
     
     
     std::cerr << "Press return to stop: " << std::endl;
-    //usleep(3000*1000);		  // Sleep for a while
+
     std::string str;
     std::getline(std::cin, str);
     bgsound->stop();
     std::cerr << "Done " << std::endl;
-    usleep(3000*1000);
 
   } catch(Error e) {
     std::cerr << e << "\n";
