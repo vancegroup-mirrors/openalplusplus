@@ -61,6 +61,7 @@ AMTAR = @AMTAR@
 AS = @AS@
 AWK = @AWK@
 CC = @CC@
+CCGNUCFLAGS = @CCGNUCFLAGS@
 CCGNULIBS = @CCGNULIBS@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
@@ -75,7 +76,6 @@ OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 RANLIB = @RANLIB@
-SOURCEFILES = @SOURCEFILES@
 STRIP = @STRIP@
 VERSION = @VERSION@
 am__include = @am__include@
@@ -91,7 +91,7 @@ pkgconfig_DATA = openalpp.pc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = openalpp.pc
 DIST_SOURCES =
 DATA = $(pkgconfig_DATA)
 
@@ -104,7 +104,7 @@ DIST_COMMON = COPYING INSTALL Makefile.am Makefile.in aclocal.m4 \
 	config/README config/config.guess config/config.sub \
 	config/depcomp config/install-sh config/ltmain.sh \
 	config/missing config/mkinstalldirs configure configure.in \
-	install-sh ltmain.sh missing mkinstalldirs
+	openalpp.pc.in
 DIST_SUBDIRS = $(SUBDIRS)
 all: all-recursive
 
@@ -133,6 +133,8 @@ $(srcdir)/configure:  $(srcdir)/configure.in $(ACLOCAL_M4) $(CONFIGURE_DEPENDENC
 
 $(ACLOCAL_M4):  configure.in 
 	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
+openalpp.pc: $(top_builddir)/config.status openalpp.pc.in
+	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= CONFIG_LINKS= $(SHELL) ./config.status
 uninstall-info-am:
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
@@ -255,7 +257,7 @@ GZIP_ENV = --best
 distdir: $(DISTFILES)
 	-chmod -R a+w $(distdir) >/dev/null 2>&1; rm -rf $(distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/config
+	$(mkinstalldirs) $(distdir)/. $(distdir)/config
 	@for file in $(DISTFILES); do \
 	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
 	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \

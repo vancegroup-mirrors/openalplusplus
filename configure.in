@@ -1,6 +1,20 @@
 # INITIATE AUTOCONF
 AC_INIT([src/Makefile.am])
 
+#BEGIN DEFAULT SETTINGS
+
+
+# General
+
+CXXFLAGS="-Wall -W"
+
+
+#END DEFAULT SETTINGS
+
+
+
+# BEGIN GENERAL AUTOCONF STUFF
+
 AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE(openalpp,0.2)
 
@@ -14,24 +28,62 @@ AC_PROG_MAKE_SET
 AC_PROG_INSTALL
 AM_PROG_LIBTOOL
 
-dnl Macros are defined here to get cleaner code in the library checks below
-AC_SUBST(SOURCEFILES)
+dnl Check system type
+AC_CANONICAL_HOST
+
+dnl create only shared libtool-libraries
+AC_ENABLE_SHARED(yes)
+
+dnl set the following to yes, if you want to create static
+dnl libtool-libraries
+AC_ENABLE_STATIC(no)
+
+# ***** DEBUGGING
+AC_ARG_ENABLE(debug,[  --enable-debug          enable debugging [default=no]])
+if test "$enable_debug" = "yes"; then
+    CXXFLAGS="-g $CXXFLAGS"
+else
+    CXXFLAGS="-O2 $CXXFLAGS"
+fi
+
+# ***** PROFILING
+AC_ARG_ENABLE(profiling,[  --enable-profiling  enable profiling [default=no]])
+if test "$enable_profiling" = "yes"; then
+    CXXFLAGS="-pg $CXXFLAGS"
+fi
+CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+
+# ***** VRLAB_PREFIX
+if test "$VRLAB_PREFIX"; then
+    if test "$prefix" = "NONE"; then
+        prefix="$VRLAB_PREFIX"
+    fi
+    CPPFLAGS="$CPPFLAGS -I$VRLAB_PREFIX/include"
+    LDFLAGS="$LDFLAGS -L$VRLAB_PREFIX/lib"
+fi
+
+
+# END GENERAL AUTOCONF STUFF
 
 dnl Checks for libraries.
-dnl If CommonC++ is not found, do not link stream/capture files in.
-dnl If PortAudio is not found, do not link capture files in.
+# OpelAL
 AC_CHECK_LIB(openal,main)
-AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="yes",,-lpthread -ldl)
-AC_CHECK_LIB(portaudio,main,WITH_PORTAUDIO="yes")
 
+# Common C++
+AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="yes",,-lpthread -ldl)
+AC_SUBST(CCGNULIBS)
+AC_SUBST(CCGNUCFLAGS)
+if test "$WITH_CCGNU" = "yes"; then
+    CCGNULIBS="`ccgnu2-config --libs`"
+    CCGNUCFLAGS="-I`ccgnu2-config --includes`"
+    CPPFLAGS="$CPPFLAGS $CCGNUCFLAGS"
+fi
 AM_CONDITIONAL(WITH_CCGNU, test "$WITH_CCGNU" = "yes")
+
+# PortAudio
+AC_CHECK_LIB(portaudio,main,WITH_PORTAUDIO="yes")
 AM_CONDITIONAL(WITH_PORTAUDIO, test "$WITH_PORTAUDIO" = "yes")
 
-
-CPPFLAGS="$CPPFLAGS -I`ccgnu2-config --includes`"
-
-AC_SUBST(CCGNULIBS)
-CCGNULIBS="$LIBS `ccgnu2-config --libs`"
 
 dnl Checks for header files.
 AC_HEADER_STDC
@@ -41,4 +93,4 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 
 dnl Checks for library functions.
 
-AC_OUTPUT(Makefile include/Makefile include/openalpp/Makefile src/Makefile tests/Makefile)
+AC_OUTPUT(Makefile include/Makefile include/openalpp/Makefile src/Makefile tests/Makefile openalpp.pc)
