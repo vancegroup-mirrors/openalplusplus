@@ -50,9 +50,22 @@ void FileStreamUpdater::run() {
     unsigned int count=0;
     int stream;
     while(count<buffersize_) {
-      unsigned int amt=ov_read(oggfile_,&((char *)buffer)[count],
-			       buffersize_-count,
-			       0,2,1,&stream);
+      unsigned int amt;
+      do {
+	amt=ov_read(oggfile_,&((char *)buffer)[count],
+		    buffersize_-count,
+		    0,2,1,&stream);
+	if(looping_ && amt==0) {
+	  if(!ov_seekable(oggfile_))
+	    break;
+	  if(!ov_time_seek(oggfile_,0.0))
+	    break;
+	}
+      } while(looping_ && amt==0);
+      // We must break if:
+      // * An error occurred
+      // * We hit EOF and the file was not looping 
+      // * We hit EOF and the file was looping, but we couldn't loop...
       if(amt<=0)
 	break;
       count+=amt;
@@ -66,6 +79,10 @@ void FileStreamUpdater::run() {
 
   runmutex_.leaveMutex();
   delete []buffer;
+}
+
+void FileStreamUpdater::SetLooping(bool loop) {
+  looping_=loop;
 }
 
 }

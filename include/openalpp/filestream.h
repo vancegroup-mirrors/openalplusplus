@@ -57,6 +57,12 @@ class OPENALPP_API  FileStream : public Stream {
   ~FileStream();
 
   FileStream &operator=(const FileStream &stream);
+
+  /**
+   * Turn on/off looping.
+   * @param loop is true if the stream should loop, false otherwise.
+   */
+  void SetLooping(bool loop = true);
 };
 
 }

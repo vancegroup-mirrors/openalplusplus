@@ -81,4 +81,8 @@ FileStream &FileStream::operator=(const FileStream &stream) {
   return *this;
 }
 
+void FileStream::SetLooping(bool loop) {
+  ((FileStreamUpdater *)updater_)->SetLooping(loop);
+}
+
 }

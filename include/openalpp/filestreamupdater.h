@@ -40,6 +40,7 @@ namespace openalpp {
 class FileStreamUpdater : public StreamUpdater {
   OggVorbis_File *oggfile_; // The file structure
   unsigned int buffersize_; // Size of the buffer in bytes
+  bool looping_;            // Are we looping or not?
  public:
   /**
    * Constructor.
@@ -65,6 +66,12 @@ class FileStreamUpdater : public StreamUpdater {
    * This will be called when the updater is Start():ed..
    */
   OPENALPP_API void run();
+
+  /**
+   * Turn on/off looping.
+   * @param loop is true if the stream should loop, false otherwise.
+   */
+  void SetLooping(bool loop = true);
 };
 
 }
