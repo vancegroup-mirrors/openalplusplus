@@ -25,13 +25,12 @@
 #ifndef GROUPSOURCE_H_INCLUDED_C427B440
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
-#include "openalpp/export.h"
-
 #include "openalpp/source.h"
 #include "openalpp/audioconvert.h"
 #include <vector>
 #include <math.h>
 #include <stdlib.h>
+#include "openalpp/export.h"
 
 namespace openalpp {
 
