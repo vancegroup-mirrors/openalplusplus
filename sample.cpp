@@ -5,13 +5,15 @@ namespace openalpp {
 Sample::Sample(const char *filename) throw (FileError)
   : SoundData(),filename_(filename) {
   ALsizei size,bits,freq;
-  ALenum format;
+  ALenum format,error;
   ALvoid *data;
-  ALboolean err;
+  ALboolean success;
 
-  err=alutLoadWAV(filename,&data,&format,&size,&bits,&freq);
-  if(err!=AL_FALSE) {
+  success=alutLoadWAV(filename,&data,&format,&size,&bits,&freq);
+  if(success==AL_TRUE) {
     alBufferData(buffername_,format,data,size,freq);
+    if((error=alGetError())!=AL_FALSE)
+      throw FileError("Error buffering sound");
     free(data);
   } else 
     throw FileError("Unable to load file");
