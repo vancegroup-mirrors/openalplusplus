@@ -2,6 +2,8 @@
 #include <iostream>
 #include <stdlib.h>
 
+// TODO: malloc/free should be changed to new/delete (as much as possible)
+
 namespace openalpp {
   
 GroupSource::GroupSource(float x,float y,float z) throw (NameError)
@@ -32,8 +34,8 @@ ALfloat FilterDoppler(ALuint source) {
 #endif
 
 ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
-  ALfloat gain,maxdist,refdist,rolloff,position[3],direction[3];
-  ALfloat iangle,oangle,ogain;
+  ALfloat gain,maxdist,refdist,rolloff,position[3],direction[3],orientation[6];
+  ALfloat iangle,oangle,ogain,dist,right[3];
   ALint relative;
 #ifdef WIN32
   alGetSourcefv(source,AL_GAIN,&gain);
@@ -53,11 +55,47 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   float theta=0;
   ALfloat listener[3];
   alGetListenerfv(AL_POSITION,listener);
-  // TODO: Get left/right displacement.. Somehow..
-  if(speaker==Left)
-    ; // Displace listener to the left
-  else
-    ; // Displace it to the right
+  alGetListenerfv(AL_ORIENTATION,orientation);
+  //Normalize at and up vectors
+  dist=sqrt(orientation[0]*orientation[0]+
+	    orientation[1]*orientation[1]+
+	    orientation[2]*orientation[2]);
+  if(dist<0.0001)
+    throw FatalError("Faulty at vector in AL_ORIENTATION!");
+  orientation[0]/=dist;
+  orientation[1]/=dist;
+  orientation[2]/=dist;
+  dist=sqrt(orientation[3]*orientation[3]+
+	    orientation[4]*orientation[4]+
+	    orientation[5]*orientation[5]);
+  if(dist<0.0001)
+    throw FatalError("Faulty up vector in AL_ORIENTATION!");
+  orientation[3]/=dist;
+  orientation[4]/=dist;
+  orientation[5]/=dist;
+
+  // TODO: The speaker position calculation should be moved so it's done
+  // _once_ instead of once per source and speaker..
+
+  // A vector pointing to the right from the listener can be found by
+  // calculating the cross product of at and up.
+  // rightx=aty*upz-upy*atz
+  // righty=upx*atz-atx*upz
+  // rightz=atx*upy-upx*aty
+  // TODO: Will this always be normalized?
+  right[0]=orientation[1]*orientation[5]-orientation[4]*orientation[2];
+  right[1]=orientation[3]*orientation[2]-orientation[0]*orientation[5];
+  right[2]=orientation[0]*orientation[4]-orientation[3]*orientation[1];
+  
+  if(speaker==Left) {
+    listener[0]-=5.0*right[0];
+    listener[1]-=5.0*right[1];
+    listener[2]-=5.0*right[2];
+  } else {
+    listener[0]+=5.0*right[0];
+    listener[1]+=5.0*right[1];
+    listener[2]+=5.0*right[2];
+  }
 
   if(relative==AL_FALSE) {  // Don't need to move it if it's relative..
     listener[0]-=position[0];
@@ -66,10 +104,18 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   }
   // Ok, listener moved, so that listener is actually a direction vector.
   // Now, we just have to normalize it, to calculate angle.
-  // direction should (?) already be normalized.
-  float dist=sqrt(listener[0]*listener[0]+
-		 listener[1]*listener[1]+
-		 listener[2]*listener[2]);
+  // direction must also be normalized.
+  dist=sqrt(direction[0]*direction[0]+
+	    direction[1]*direction[1]+
+	    direction[2]*direction[2]);
+  if(dist>0.0001) {
+    direction[0]/=dist;
+    direction[1]/=dist;
+    direction[2]/=dist;
+  }
+  dist=sqrt(listener[0]*listener[0]+
+	    listener[1]*listener[1]+
+	    listener[2]*listener[2]);
   if(dist>0.0001) {
     listener[0]/=dist;
     listener[1]/=dist;
@@ -145,24 +191,50 @@ void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size) {
 /**
  * Apply filters to source.
  */
-void GroupSource::ApplyFilters(Source *source,ALshort *buffer,ALsizei size) {
+ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
+				   ALsizei &size){
   //TODO: Implement
-  //1. Init (Monoify? - No!) (SplitSources? - Not really necessary..)
-  //2. Apply filters: doppler,pitch,{da,reverb,coning,minmax},listenergain
-  //                                 *   *      *      *         -
-  //   * coning & da could probably be one filter.
-  //   * listenergain should be removed, otherwise it will be applied twice 
-  //3. "_alSourceParamApply"
-  //TODO: This should be done for each speaker... Or, actually, it (probably)
-  //      only has to be done for Distance (da+coning)..
-  //      Another caveat: Because the data will have to be stored in a buffer,
-  //      we have to use stereo (or mono) format. So there's no point in
-  //      calculating anything for more than two channels.
+  //  Apply filters: doppler,pitch,{da,reverb,coning,minmax},listenergain
+  //                           +     *   *      *      *         -
+  //   * coning & da could probably be one filter => Done!
+  //   * remove listenergain, otherwise it will be applied twice => Done!
+
   ALuint sourcename=source->GetAlSource();
   ALfloat pitch,lgain,rgain;
+
+  //Pitch
   alGetSourcefv(sourcename,AL_PITCH,&pitch);
   pitch*=FilterDoppler(sourcename);
-  // Apply this pitch
+  if(pitch>0.0) {
+    ALsizei nsize=(ALsizei)(size/pitch);
+    ALshort *nbuffer=(ALshort *)malloc(nsize*sizeof(ALshort));
+    ALfloat index=0.0;
+    for(int i=0;i<(nsize/2);i++) {
+      if(index*2>size)
+	throw FatalError("index>size - we're all doomed!");
+      int iindex=(int)index;
+      float fracindex=index-(float)iindex;
+      int destl=i*2,destr=i*2+1;
+      int sourcel=iindex*2,sourcer=iindex*2+1;
+
+      // Left channel
+      nbuffer[destl]=buffer[sourcel];
+      if((sourcel+2)<size)
+	nbuffer[destl]+=(ALshort)fracindex*(buffer[sourcel+2]-
+					    buffer[sourcel]);
+
+      // Right channel
+      nbuffer[destr]=buffer[sourcer];
+      if((sourcer+2)<size)
+	nbuffer[destr]+=(ALshort)fracindex*(buffer[sourcer+2]-
+					    buffer[sourcer]);
+      index+=pitch;
+    }
+    free(buffer);
+    buffer=nbuffer;
+    size=nsize;
+  }
+
   lgain=FilterDistance(sourcename,Left);
   rgain=FilterDistance(sourcename,Right);
   FilterReverb(source,buffer,size);
@@ -185,7 +257,16 @@ void GroupSource::ApplyFilters(Source *source,ALshort *buffer,ALsizei size) {
     else
       buffer[i]=(ALshort)(buffer[i]*lgain);
   }
+  return buffer;
 }
+
+/*
+ * TODO: The next 1300 lines, or so, are copied from AL source.. I did this 
+ * so I wouldn't be depending on people having the linux source, but I didn't
+ * realise it would be so much... I'll fix it up a bit, i.e. make it C++ code,
+ * and probably move it to a file of its own. I'll also try to figure out if I
+ * really need all of this, as it's pretty general code.
+ */
 
 typedef struct _acAudioCVT {
   int needed;                     /* Set to 1 if conversion possible */
@@ -1573,7 +1654,7 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
   free(loaddata);
 
   std::cerr << "Apply filters to it\n";
-  ApplyFilters(sources_[0],bdata,bsize);
+  bdata=ApplyFilters(sources_[0],bdata,bsize);
 
   for(unsigned int s=1;s<sources_.size();s++) {
     unsigned int ss=s+1;
@@ -1595,7 +1676,7 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
     free(loaddata);
 
     std::cerr << "Apply filters to it\n";
-    ApplyFilters(sources_[s],data,size);
+    data=ApplyFilters(sources_[s],data,size);
 
     if(size>bsize) {
       std::cerr << "size>bsize\n";
