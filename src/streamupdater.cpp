@@ -83,7 +83,7 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
       newsources_.pop_back();
     } else {
       LEAVE_CRITICAL;
-      Sleep(50);
+      sleep(50);
       ENTER_CRITICAL;
     }
 

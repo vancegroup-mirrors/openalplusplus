@@ -53,7 +53,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
       attributes[i]=0;
     }
     context_=alcCreateContext(device_,attributes);
-    if(!context_ || alcGetError(device_)!=ALC_NO_ERROR) {
+    if(!context_ || alcGetError()!=ALC_NO_ERROR) {
       if(context_)
 	alcDestroyContext(context_);
       alcCloseDevice(device_);

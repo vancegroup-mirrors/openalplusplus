@@ -1,41 +1,44 @@
-dnl Process this file with autoconf to produce a configure script.
-AC_INIT(include/alpp.h)
+# INITIATE AUTOCONF
+AC_INIT([src/Makefile.am])
+
+AC_CONFIG_AUX_DIR(config)
+AM_INIT_AUTOMAKE(openalpp,0.2)
 
 dnl C++ style
 AC_LANG_CPLUSPLUS
-CXX=g++
+#CXX=g++
 AC_PROG_CXX
 AC_PROG_CXXCPP
-
-dnl Checks for programs.
-AC_PROG_CPP
 AC_PROG_LN_S
-AC_CHECK_PROG(make,gmake,gmake,make)
+AC_PROG_MAKE_SET
+AC_PROG_INSTALL
+AM_PROG_LIBTOOL
 
-dnl "OBJECTS" is all the object files that should be linked into OpenAL++
 dnl Macros are defined here to get cleaner code in the library checks below
-AC_SUBST(OBJECTS)
-AC_DEFUN(ALPP_BASIC,[OBJECTS="\$(BASICOBJECTS)"
-		     echo "** Excluding streaming and capture capabilities (CommonC++ 1.9 not found)"])
-AC_DEFUN(ALPP_STREAM,[OBJECTS="\$(BASICOBJECTS) \$(STREAMOBJECTS)"
-			echo "** Excluding capture capabilities! (PortAudio not found)"])
-AC_DEFUN(ALPP_FULL,OBJECTS="\$(BASICOBJECTS) \$(STREAMOBJECTS) \$(DEVICEOBJECTS)")
-
+AC_SUBST(SOURCEFILES)
 
 dnl Checks for libraries.
 dnl If CommonC++ is not found, do not link stream/capture files in.
 dnl If PortAudio is not found, do not link capture files in.
 AC_CHECK_LIB(openal,main)
-AC_CHECK_LIB(ccgnu,main,
-	AC_CHECK_LIB(portaudio,main,ALPP_FULL,ALPP_STREAM),
-	ALPP_BASIC,-lpthread -ldl)
+AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="yes",,-lpthread -ldl)
+AC_CHECK_LIB(portaudio,main,WITH_PORTAUDIO="yes")
+
+AM_CONDITIONAL(WITH_CCGNU, test "$WITH_CCGNU" = "yes")
+AM_CONDITIONAL(WITH_PORTAUDIO, test "$WITH_PORTAUDIO" = "yes")
+
+
+CPPFLAGS="$CPPFLAGS -I`ccgnu2-config --includes`"
+
+AC_SUBST(CCGNULIBS)
+CCGNULIBS="$LIBS `ccgnu2-config --libs`"
 
 dnl Checks for header files.
 AC_HEADER_STDC
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
+#AC_C_CONST
 
 dnl Checks for library functions.
 
-AC_OUTPUT(Makefile src/Makefile tests/Makefile)
+AC_OUTPUT(Makefile include/Makefile include/openalpp/Makefile src/Makefile tests/Makefile)

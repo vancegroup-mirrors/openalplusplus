@@ -36,24 +36,24 @@ namespace openalpp {
  * error can be displayed by using "cout << error;" where error is an instance
  * of Error (or one of its descendants)
  */
-  class Error : public std::exception {
+  class Error : public std::runtime_error {
  public:
   /**
    * Constructor.
    * Will use a default error message.
    */
-  Error() : exception("No error description") {}
+  Error() : runtime_error("No error description") {}
 
   /**
    * Constructor.
    * @param description is error message to use.
    */
-  Error(const char *description) : exception(description)  {}
+  Error(const char *description) : runtime_error(description)  {}
 
   /**
    * Copy constructor.
    */
-  Error(const Error &error) : exception(error.what())  {}
+  Error(const Error &error) : runtime_error(error.what())  {}
 
   /**
    * Function used for printing.

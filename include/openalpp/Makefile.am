@@ -1,0 +1,21 @@
+
+pkginclude_HEADERS = \
+    alpp.h \
+    audiobase.h \
+    audioconvert.h \
+    audioenvironment.h \
+    deviceupdater.h \
+    error.h \
+    groupsource.h \
+    inputdevice.h \
+    listener.h \
+    netstream.h \
+    netupdater.h \
+    positionedobject.h \
+    sample.h \
+    sounddata.h \
+    source.h \
+    sourcebase.h \
+    stream.h \
+    streamupdater.h \
+    windowsstuff.h 

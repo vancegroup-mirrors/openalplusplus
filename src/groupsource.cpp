@@ -357,7 +357,7 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
 }
 
 void GroupSource::MixSources(unsigned int frequency)
-  throw (InitError,FileError,FatalError,MemoryError,ValueError) {
+  throw (InitError,FileError,FatalError,ValueError,MemoryError) {
   ALshort *loaddata=NULL,*data=NULL,*bdata=NULL;
   ALsizei bsize=0,size=0,loadsize=0,bits,freq;
   ALenum format;
