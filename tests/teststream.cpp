@@ -32,16 +32,19 @@
 using namespace openalpp;
 
 int main(int argc,char **argv) {
-  unsigned int packetsize=10000;
+  // Buffersize in #samples. <-- This has changed from earlier releases!
+  unsigned int buffersize=4096;
   if(argc>1)
-    packetsize=atoi(argv[1]);
+    buffersize=atoi(argv[1]);
   
   try {
     // Create a socket and listen for streamed data
     ost::UDPSocket socket(ost::InetAddress("127.0.0.1"),33333);
 
     // Create a soundstream that will read its data from the socket
-    NetStream stream(&socket,Mono16,44100,packetsize);
+    // Unless you want to send lots of data, it's a good idea to go for a 
+    // low rate and/or small sample format. 
+    NetStream stream(&socket,Mono16,44100,buffersize);
 
     // Create a soundsource that uses the net-streamed soundstream.
     Source source(stream);

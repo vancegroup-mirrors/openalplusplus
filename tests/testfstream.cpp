@@ -40,7 +40,7 @@ int main(int argc,char **argv) {
   std::cout << argv[1] << "\n";
 
   try {
-    FileStream stream(argv[1],131072);
+    FileStream stream(argv[1]);
 
     Source source(stream);
 
