@@ -25,14 +25,11 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav and moves it left right. 
  */
-#include <openalpp/alpp.h>
 #include <cc++/thread.h>
+#include <openalpp/alpp.h>
 #include <iostream>
 
 using namespace openalpp;
-using namespace std;
-using namespace ost;
-
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -41,11 +38,11 @@ using namespace ost;
 
 int main() {
   try {
-    Source beesound("c:\\temp\\mono.wav");
+    Source beesound("bee.wav");
 	  beesound.SetGain(1);
 	  beesound.SetLooping();
 
-    float limits[2] = {0.5,-0.5};
+    float limits[2] = {5,-15};
     float delay=10;
     float time=0,angle=0;
     
@@ -54,10 +51,10 @@ int main() {
 
     const int no_laps=5;
 
-    std::cerr << "Moving sound 5 times..." << std::endl;
+    std::cerr << "Moving sound 5 laps..." << std::endl;
 
     // Do a cheat time loop.
-    while(angle<(M_PI*no_laps)) {
+    while(angle<(M_PI*2.0*no_laps)) {
       ost::Thread::sleep(delay); // Wait for delay milliseconds
 
       time +=delay/1000; // Calculate the time in the loop
@@ -67,7 +64,7 @@ int main() {
       beesound.SetPosition(limits[0]*cos(angle),0.0,limits[1]*sin(angle));
 	  }
   } catch(Error e) {
-    cerr << e << "\n";
+    std::cerr << e << "\n";
     return -1;
   }
   return 0;

@@ -38,7 +38,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     device_ =alcOpenDevice((unsigned char *)initString);
 
 #else
-    device_=alcOpenDevice((/*const */ALubyte *)"'((direction \"write\"))");
+    device_=alcOpenDevice((/*const */ALubyte *)"'((direction \"write\")) '((devices '(alsa sdl native null)))");
 #endif
     if(!device_)
       throw InitError("Couldn't open device.");

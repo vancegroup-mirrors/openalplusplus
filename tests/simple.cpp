@@ -24,13 +24,11 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav in the background.
  */
-#include <openalpp/alpp.h>
 #include <cc++/thread.h>
+#include <openalpp/alpp.h>
 #include <iostream>
 
 using namespace openalpp;
-using namespace std;
-using namespace ost;
 
 int main() {
   try {
@@ -44,7 +42,7 @@ int main() {
     std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
     ost::Thread::sleep(3000);		  // Sleep for a while
   } catch(Error e) {
-    cerr << e << "\n";
+    std::cerr << e << "\n";
     return -1;
   }
   return 0;
