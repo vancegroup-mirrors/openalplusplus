@@ -30,7 +30,8 @@ FileStreamUpdater::FileStreamUpdater(const OggVorbis_File &oggfile,
 				     const ALuint buffer1,ALuint buffer2,
 				     ALenum format,unsigned int frequency,
 				     unsigned int buffersize)
-  : StreamUpdater(buffer1,buffer2,format,frequency),buffersize_(buffersize) {
+  : StreamUpdater(buffer1,buffer2,format,frequency),buffersize_(buffersize),
+    looping_(false) {
   oggfile_=new OggVorbis_File(oggfile);
 }
 
