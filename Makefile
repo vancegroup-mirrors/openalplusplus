@@ -2,6 +2,7 @@ MAKE= gmake
 
 alpp:
 	cd src && $(MAKE) alpp
+.PHONY : tests
 tests:
 	cd tests && $(MAKE) all
 docs:   
