@@ -24,12 +24,14 @@ Windows
 -------
 OpenAL++ has been successfully compiled using Visual C++. It should work using other compilers too.
 
-There are three ways to compile and install OpenAl++:
+There are three ways to compile and install OpenAl++. Whichever way you choose, you should make sure that the necessary paths (include, lib etc.) are correct. For example (in DOS) by using "set INCLUDE=%INCLUDE%;additional path here".
 - 1 -
 Open up the workspace (openalpp.dsw) in Visual C++.
 Make sure openalpp is the active project (Build/Set Active Configuration. Openalpp - Win32 Release).
+Be sure to set any include paths that might be necessary for PortAudio, CommonC++ and/or OpenAL. This can be done under Project/Settings/C/C++/Additional include directories.
+Also, if you have installed libraries in "non-standard" places, additional library paths should be set under Project/Settings/Link/Input/Additional library path.
 Build the library (hit F7)
-Copy openalpp.lib from the Release directory to C:\WINDOWS\SYSTEM
+Copy openalpp.lib from the lib directory to C:\WINDOWS\SYSTEM (if the library is compiled in debug-mode, it will be called openalppd.lib)
 Create the directory alpp somewhere in your include path.
 Copy all the *.h files from include to the newly created directory.
 - 2 -
