@@ -1,7 +1,6 @@
 #ifndef GROUPSOURCE_H_INCLUDED_C427B440
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
-#include "sourcebase.h"
 #include "source.h"
 #include "audioconvert.h"
 #include <vector>

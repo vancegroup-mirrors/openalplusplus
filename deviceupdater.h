@@ -5,13 +5,12 @@
 
 namespace openalpp {
 
-typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
-
 //##ModelId=3BDD3A4301B4
 class DeviceUpdater : public StreamUpdater {
   public:
     //##ModelId=3BDD3AC20062
-    DeviceUpdater(SampleFormat format, unsigned int samplerate, ALuint buffer);
+    DeviceUpdater(ALenum format, unsigned int frequency,
+		  ALuint buffer1,ALuint buffer2);
 
 };
 

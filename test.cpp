@@ -80,27 +80,20 @@ int main() {
     source2.SetRolloffFactor(0.3);
     /* Best not to use reverb: OpenAL segfaults on some files.
        source.SetReverbDelay(1.0);
-       source.SetReverbScale(0.35);
-    */
+       source.SetReverbScale(0.35);*/
     /*
       source2.SetAmbient();
       source.SetAmbient();
-      source.SetPitch(0.2);
-      source2.SetPitch(0.2);
       cerr << "Pitch: " << source.GetPitch() << "," 
       << source2.GetPitch() << "\n";
     */
-
-    ALuint name=source.Link(source3);
-    source.Unlink(name);
-    source.Link(source2);
 
     SourceState state;
 
     cerr << "\nCreating group source...\n";
     GroupSource gsource;
     cerr << "Including sources to it...\n";
-    gsource.IncludeSource(&source);
+    //    gsource.IncludeSource(&source);
     gsource.IncludeSource(&source2);
     gsource.SetAmbient();
     cerr << "Mixing it...\n";
@@ -113,6 +106,8 @@ int main() {
     sleep(7);
     gsource.Stop();
     //source.SetReverbScale(1.0);
+    source.SetPitch(1.0);
+    source2.SetPitch(0.25);
     cerr << "Mixing again...\n";
     gsource.MixSources();
     cerr << "And playing...\n";
@@ -121,8 +116,11 @@ int main() {
     gsource.Stop();
     sleep(1);
 
+    ALuint name=source.Link(source3);
+    source.Unlink(name);
+    source.Link(source2);
     cerr << "\nPlaying source\n";
-    source.Play();
+    source2.Play();
     sleep(6);
     state=source.GetState();
     if(state!=Playing)

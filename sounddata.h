@@ -12,8 +12,9 @@ namespace openalpp {
  * Base class for sound data.
  */
 class SoundData {
+ protected:
   /**
-   * Private class to handle generation/deletion of OpenAL buffers correctly.
+   * Protected class to handle generation/deletion of OpenAL buffers correctly.
    */
   class SoundBuffer {
     ALuint buffername_;

@@ -285,12 +285,9 @@ void SourceBase::SetPitch(float pitch) {
     }
 }
 
-// TODO: Remove/modify error throw.. :)
 float SourceBase::GetPitch() const {
   ALfloat pitch;
   alGetSourcefv(sourcename_,AL_PITCH,&pitch);
-  if(alGetError()!=AL_FALSE)
-    throw FatalError("ARGH!");
   return pitch;
 }
 
