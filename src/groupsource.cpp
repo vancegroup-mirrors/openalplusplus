@@ -168,7 +168,7 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   right[1]=orientation[3]*orientation[2]-orientation[0]*orientation[5];
   right[2]=orientation[0]*orientation[4]-orientation[3]*orientation[1];
   // The length of the cross-product of two normalized vectors will be sqrt(2)
-  float dsqrt2=(float)5.0/sqrt(2);
+  float dsqrt2=(float)(5.0/sqrt(2.0));
   right[0]*=dsqrt2;
   right[1]*=dsqrt2;
   right[2]*=dsqrt2;
