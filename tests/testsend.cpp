@@ -14,16 +14,22 @@ int main(int argc,char **argv) {
   ALenum format;
   ALboolean success;
   unsigned int packetsize=10000;       // Default packet size = 10000 bytes
+  const char defaultfile[]="bee.wav";
+  const char *filename;
 
   if(argc>1)
-    packetsize=atoi(argv[1]);
+    filename=argv[1];
+  else
+    filename=defaultfile;
+  if(argc>2)
+    packetsize=atoi(argv[2]);
 
   try {
-    success=alutLoadWAV("bee.wav",&data,&format,&size,&bits,&freq);
+    success=alutLoadWAV(filename,&data,&format,&size,&bits,&freq);
     std::cerr << "Bits:  " << bits << " Freq: " << freq << std::endl;
 
     if(success==AL_FALSE) {
-      std::cerr << "Error loading\n";
+      std::cerr << "Error loading " << filename << "\n";
       exit(1);
     }
 
