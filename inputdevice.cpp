@@ -26,20 +26,18 @@ InputDevice::InputDevice(int device,unsigned int samplerate,unsigned int buffers
   updater_=new DeviceUpdater(device,samplerate,buffersize,format,buffername_,buffer2_->GetName());
 }
 
-InputDevice::InputDevice(const InputDevice &input) {
-  // TODO: Copy/Reference etc. updater..
+InputDevice::InputDevice(const InputDevice &input)
+  : Stream((const Stream &)input) {
 }
 
 InputDevice &InputDevice::operator=(const InputDevice &input) {
   if(this!=&input) {
-    // TODO: Delete/DeReference etc. updater..
-    // TODO: Copy/Reference etc. updater..
+    Stream::operator=((const Stream &)input);
   }
   return *this;
 }
 
 InputDevice::~InputDevice() {
-  delete updater_;
   nobjects_--;
   if(!nobjects_)
     Pa_Terminate();
