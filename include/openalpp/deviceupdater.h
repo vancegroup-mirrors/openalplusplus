@@ -25,16 +25,18 @@
 #ifndef DEVICEUPDATER_H_INCLUDED_C419EA9C
 #define DEVICEUPDATER_H_INCLUDED_C419EA9C
 
+
 #include "openalpp/streamupdater.h"
 #include "openalpp/error.h"
 #include <portaudio.h>
+#include "openalpp/export.h"
 
 namespace openalpp {
 
 /**
  * Updater for sound input devices (like microphones).
  */
-class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
+class  DeviceUpdater : public StreamUpdater, public ost::Semaphore {
   PortAudioStream *stream_;
   ost::Mutex inputmutex;
   char *tmpbuffer_;
@@ -51,30 +53,30 @@ class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
    * @param buffer1 and..
    * @param buffer2 are the (OpenAL) buffers to use.
    */
-  DeviceUpdater(int device, unsigned int frequency,unsigned int buffersize,
+  OPENALPP_API DeviceUpdater(int device, unsigned int frequency,unsigned int buffersize,
 		SampleFormat format,
 		ALuint buffer1,ALuint buffer2);
 
   /**
    * Destructor.
    */
-  ~DeviceUpdater();
+  OPENALPP_API ~DeviceUpdater();
 
   /**
    * Inherited from Thread.
    * This will be called when the updater is Start():ed..
    */
-  void run();
+  OPENALPP_API void run();
 
   /**
    * Enter critical section.
    */
-  inline void Enter() {inputmutex.enterMutex();}
+  OPENALPP_API inline void Enter() {inputmutex.enterMutex();}
 
   /**
    * Leave critical section.
    */
-  inline void Leave() {inputmutex.leaveMutex();}
+  OPENALPP_API inline void Leave() {inputmutex.leaveMutex();}
 
   /**
    * Copy input from callback to temporary buffer.
@@ -82,7 +84,7 @@ class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
    * @param tempbuffer is a pointer to the buffer
    * @param length is the length - in bytes - of the buffer
    */
-  void CopyInput(void *tempbuffer,int length);
+  OPENALPP_API void CopyInput(void *tempbuffer,int length);
 };
 
 }

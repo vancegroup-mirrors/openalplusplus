@@ -43,7 +43,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib ccgnu2.lib pastaticdsd.lib dsound.lib winmm.lib"
-				OutputFile="bin\testmic.exe"
+				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
@@ -70,7 +70,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\testmic___Win32_Debug"
+			OutputDirectory="..\bin"
 			IntermediateDirectory=".\testmic___Win32_Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -84,7 +84,7 @@
 				PreprocessorDefinitions="WIN32,_DEBUG,_CONSOLE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\testmic___Win32_Debug/testmic.pch"
 				AssemblerListingLocation=".\testmic___Win32_Debug/"
 				ObjectFile=".\testmic___Win32_Debug/"
@@ -97,8 +97,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib openalppd.lib openal32.lib alut.lib ccgnu2d.lib pastaticdsd.lib dsound.lib winmm.lib"
-				OutputFile="bin\testmic.exe"
+				AdditionalDependencies="ccgnu2d.lib"
+				OutputFile="$(OutDir)/$(ProjectName)d.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"

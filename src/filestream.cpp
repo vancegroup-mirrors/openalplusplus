@@ -26,6 +26,11 @@
 #include "openalpp/filestream.h"
 #include "openalpp/sample.h"
 
+#ifdef _WIN32 /* We need the following two to set stdin/stdout to binary */
+#include <io.h>
+#include <fcntl.h>
+#endif
+
 namespace openalpp {
 
 FileStream::FileStream(const char *filename,const int buffersize)
@@ -34,6 +39,13 @@ FileStream::FileStream(const char *filename,const int buffersize)
   FILE *filehandle=fopen(filename,"r");
   if(!filehandle)
     throw FileError("FileStream: Couldn't open file");
+
+#ifdef _WIN32 /* We need to set stdin/stdout to binary mode. Damn windows. */
+  /* Beware the evil ifdef. We avoid these where we can, but this one we 
+     cannot. Don't add any more, you'll probably go to hell if you do. */
+  _setmode( _fileno( filehandle ), _O_BINARY );
+  _setmode( _fileno( filehandle ), _O_BINARY );
+#endif
 
   // Check for file type, create a FileStreamUpdater if a known type is
   // detected, otherwise throw an error.

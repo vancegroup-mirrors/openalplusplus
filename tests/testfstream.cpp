@@ -51,8 +51,8 @@ int main(int argc,char **argv) {
     source.Stop();
   } catch(openalpp::Error e) {
     std::cerr << e << "\n";
-  } catch(...) {
-    std::cerr << "Unknown error!\n";
+  //} catch(...) {
+  //  std::cerr << "Unknown error!\n";
   }
   return 0;
 }

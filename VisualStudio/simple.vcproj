@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib ccgnu2.lib"
-				OutputFile="bin\simple.exe"
+				AdditionalDependencies="ccgnu2.lib"
+				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
@@ -69,7 +69,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
+			OutputDirectory="..\bin"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -97,8 +97,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib openalppd.lib openal32.lib alut.lib ccgnu2d.lib"
-				OutputFile="bin\simple.exe"
+				AdditionalDependencies="ccgnu2d.lib"
+				OutputFile="$(OutDir)/$(ProjectName)d.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"

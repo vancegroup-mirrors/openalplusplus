@@ -28,13 +28,14 @@
 #include <cc++/socket.h>
 #include "openalpp/streamupdater.h"
 #include "stdlib.h"
+#include "openalpp/export.h"
 
 namespace openalpp {
 
 /**
  * Updater for streams through sockets.
  */
-class NetUpdater : public StreamUpdater {
+class OPENALPP_API NetUpdater : public StreamUpdater {
   /**
    * Socket to receive sound data from.
    */

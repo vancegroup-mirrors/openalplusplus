@@ -25,11 +25,17 @@
 #ifndef STREAMUPDATER_H_INCLUDED_C419FA12
 #define STREAMUPDATER_H_INCLUDED_C419FA12
 
+
 #include <cc++/thread.h>
 #include <vector>
+
 extern "C" {
 #include <AL/al.h>
 }
+
+#include "openalpp/export.h"
+
+
 #include "openalpp/audiobase.h"
 #include "openalpp/error.h"
 #include "openalpp/windowsstuff.h"
@@ -53,25 +59,25 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * @param format is the (OpenAL) format of the sound.
    * @param frequency is the frequency of the sound.
    */
-  StreamUpdater(ALuint buffer1,ALuint buffer2,
+  OPENALPP_API StreamUpdater(ALuint buffer1,ALuint buffer2,
 		ALenum format,unsigned int frequency);
 
   /**
    * Destructor.
    */
-  ~StreamUpdater();
+  OPENALPP_API ~StreamUpdater();
 
   /**
    * Add a source to the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  void AddSource(ALuint sourcename);
+  OPENALPP_API void AddSource(ALuint sourcename);
 
   /**
    * Remove a source from the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  void RemoveSource(ALuint sourcename);
+  OPENALPP_API void RemoveSource(ALuint sourcename);
 
   /**
    * Update the stream.
@@ -80,24 +86,24 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * @param length is the length of the sound data (in bytes).
    * @return done flag. I.e. stoprunning_.
    */
-  bool Update(void *buffer,unsigned int length); 
+  OPENALPP_API bool Update(void *buffer,unsigned int length); 
 
   /**
    * Inherited from Thread.
    * Is called after Run() finishes, and deletes this.
    */
-  void final();
+  OPENALPP_API void final();
 
   /**
    * Reference this updater.
    * @return this.
    */
-  StreamUpdater *Reference();
+  OPENALPP_API StreamUpdater *Reference();
 
   /**
    * Dereference this updater.
    */
-  void DeReference() throw (FatalError);
+  OPENALPP_API void DeReference() throw (FatalError);
  protected:
   /**
    * Names of the buffers to update.
@@ -117,8 +123,8 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
   /**
    * Source to update.
    */
-  std::vector<ALuint> sources_,newsources_,removesources_;
 
+   std::vector<ALuint> sources_,newsources_,removesources_;
   /**
    * Flag for when Run should stop running..
    */ 

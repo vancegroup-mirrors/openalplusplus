@@ -28,11 +28,12 @@
 
 //C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 #pragma warning( disable : 4290 )
+#include "openalpp/export.h"
 
 #include <AL/alut.h>
 
 #define alGetSourceiv alGetSourcei
-inline ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALint *format,
+inline OPENALPP_API ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALint *format,
 			     ALsizei *size,ALsizei *bits,ALsizei *freq) {
   ALboolean loop;
   alutLoadWAVFile(const_cast<char *>(fname),format,buffer,size,freq,&loop);

@@ -24,18 +24,20 @@
 
 #ifndef FILESTREAMUPDATER_H_INCLUDED
 #define FILESTREAMUPDATER_H_INCLUDED
-
 #include "openalpp/streamupdater.h"
 #include "stdlib.h"
 #include <vorbis/codec.h>
 #include <vorbis/vorbisfile.h>
+#include "openalpp/export.h"
+
+
 
 namespace openalpp {
 
 /**
  * Updater for streams from files.
  */
-class FileStreamUpdater : public StreamUpdater {
+class OPENALPP_API FileStreamUpdater : public StreamUpdater {
   OggVorbis_File *oggfile_; // The file structure
   unsigned int buffersize_; // Size of the buffer in bytes
  public:

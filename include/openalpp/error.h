@@ -28,6 +28,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include "openalpp/export.h"
 namespace openalpp {
 
 /**
@@ -36,7 +37,7 @@ namespace openalpp {
  * error can be displayed by using "cout << error;" where error is an instance
  * of Error (or one of its descendants)
  */
-  class Error : public std::runtime_error {
+ class Error : public std::runtime_error {
  public:
   /**
    * Constructor.
@@ -72,7 +73,7 @@ namespace openalpp {
  * Fatal error.
  * Caused by error in implementation, corrupted memory etc.
  */
-class FatalError : public Error {
+class  FatalError : public Error {
  public:
   /**
    * Constructor.
@@ -85,7 +86,7 @@ class FatalError : public Error {
  * File error.
  * Caused by wrong file permissions, missing files etc.
  */
-class FileError : public Error {
+class   FileError : public Error {
  public:
   /**
    * Constructor.
@@ -98,7 +99,7 @@ class FileError : public Error {
  * Memory error.
  * Caused by insufficient memory etc.
  */
-class MemoryError : public Error {
+class   MemoryError : public Error {
  public:
   /**
    * Constructor.
@@ -111,7 +112,7 @@ class MemoryError : public Error {
  * Name error.
  * Caused by invalid (OpenAL) names.
  */
-class NameError : public Error {
+class   NameError : public Error {
  public:
   /**
    * Constructor.
@@ -124,7 +125,7 @@ class NameError : public Error {
  * Value error.
  * Caused by values out of range etc.
  */
-class ValueError : public Error {
+class   ValueError : public Error {
  public:
   /**
    * Constructor.
@@ -137,7 +138,7 @@ class ValueError : public Error {
  * Init error.
  * Caused by trying to do actions without proper initialization.
  */
-class InitError : public Error {
+class   InitError : public Error {
  public:
   /**
    * Constructor.
@@ -153,7 +154,7 @@ class InitError : public Error {
  * @param error is the error to print.
  * @return the stream.
  */
-std::ostream &operator<<(std::ostream &stream,const Error &error);
+ OPENALPP_API std::ostream &operator<<(std::ostream &stream,const Error &error);
 
 }
 

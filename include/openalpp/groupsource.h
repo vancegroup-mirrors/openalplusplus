@@ -25,6 +25,8 @@
 #ifndef GROUPSOURCE_H_INCLUDED_C427B440
 #define GROUPSOURCE_H_INCLUDED_C427B440
 
+#include "openalpp/export.h"
+
 #include "openalpp/source.h"
 #include "openalpp/audioconvert.h"
 #include <vector>
@@ -39,7 +41,7 @@ namespace openalpp {
  * be used to play more sounds with less processing power. Of course the
  * problem is that the sources cannot be moved separately.
  */
-class GroupSource : public SourceBase {
+class OPENALPP_API GroupSource : public SourceBase {
   /**
    * Flag for whether the sources have been mixed yet.
    */

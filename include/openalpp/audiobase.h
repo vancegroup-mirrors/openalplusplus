@@ -25,6 +25,7 @@
 #ifndef AUDIOBASE_H_INCLUDED_C41996D8
 #define AUDIOBASE_H_INCLUDED_C41996D8
 
+#include "openalpp/export.h"
 #include <cstdlib>
 extern "C" {
 #include <AL/al.h>
@@ -65,7 +66,7 @@ typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
  * Base class for enviroment, listener and source classes.
  * Takes care of initialisation/shutdown of anything necessary (e.g. ALut)
  */
-class AudioBase {
+class OPENALPP_API AudioBase {
   /**
    * Counter for #instances for enviroment, listener and source classes.
    * Used to determine when init and shutdown functions should be called
@@ -93,13 +94,13 @@ class AudioBase {
    * @param is a flag for syncronous context. Values <0 indicates that the
    * default should be used.
    */
-  AudioBase(int frequency=-1,int refresh=-1,int synchronous=-1)
+   AudioBase(int frequency=-1,int refresh=-1,int synchronous=-1)
     throw (InitError);
 
   /**
    * Destructor.
    */
-  virtual ~AudioBase();
+  virtual  ~AudioBase();
 
   /**
    * Flag for whether reverb has been initiated.

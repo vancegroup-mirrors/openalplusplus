@@ -35,6 +35,7 @@ Stream::Stream(const Stream &stream) : SoundData((const SoundData &)stream) {
 }
 
 Stream &Stream::operator=(const Stream &stream) {
+  return *this;
 }
 
 Stream::~Stream() {
@@ -63,6 +64,7 @@ NetStream::~NetStream() {
 }
 
 NetStream &NetStream::operator=(const NetStream &stream) {
+  return *this;
 }
 
 }

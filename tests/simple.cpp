@@ -33,7 +33,7 @@ using namespace openalpp;
 int main() {
   try {
     Source bgsound("bee.wav");   // Create source and load sound
-    bgsound.SetGain(0.6);	  // Lower gain (volume) 
+    bgsound.SetGain(0.6f);	  // Lower gain (volume) 
 	  bgsound.SetLooping();
     bgsound.SetAmbient();	  // Make sound ambient (i.e. not attenuated)
     bgsound.Play();		  // Start playing

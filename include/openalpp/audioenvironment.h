@@ -53,6 +53,9 @@ namespace openalpp {
  * - MIN_GAIN, MAX_GAIN and MAX_DISTANCE are values used for clamping gain
  *   and distance, respectively.
  */
+
+#include "openalpp/export.h"
+
 #ifdef None
 #undef None // Defined in X-headers
 #endif
@@ -63,7 +66,7 @@ typedef enum DistanceModel {None,InverseDistance,InverseDistanceClamped};
  * This doesn't have to be instantiated if one does not need to set global
  * parameters.
  */
-class AudioEnvironment : public AudioBase {
+class OPENALPP_API AudioEnvironment : public AudioBase {
 public:
   /**
    * Constructor.

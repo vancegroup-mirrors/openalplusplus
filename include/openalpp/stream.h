@@ -25,6 +25,7 @@
 #ifndef STREAM_H_INCLUDED_C41983DF
 #define STREAM_H_INCLUDED_C41983DF
 
+#include "openalpp/export.h"
 #include "openalpp/sounddata.h"
 
 namespace openalpp {
@@ -35,7 +36,7 @@ class StreamUpdater;
  * Base class for NetStream and InputDevice.
  * Used for audio streams.
  */
-class Stream : public SoundData {
+class OPENALPP_API Stream : public SoundData {
  protected:
   /**
    * For double-buffering of sounds.
@@ -47,35 +48,35 @@ class Stream : public SoundData {
   /**
    * Default constructor.
    */
-  Stream() throw (NameError);
+   Stream() throw (NameError);
 
   /**
    * Copy constructor.
    */
-  Stream(const Stream &stream);
+   Stream(const Stream &stream);
 
   /**
    * Assignment operator.
    */
-  Stream &operator=(const Stream &stream);
+   Stream &operator=(const Stream &stream);
 
   /**
    * Destructor.
    */
-  ~Stream();
+   ~Stream();
 
   /**
    * Start recording.
    * I.e. start copying data to buffers.
    * @param sourcename is the (OpenAL) name of the source.
    */
-  void Record(ALuint sourcename);
+   void Record(ALuint sourcename);
 
   /**
    * Stop recording.
    * @param sourcename is the (OpenAL) name of the source.
    */
-  void Stop(ALuint sourcename);
+   void Stop(ALuint sourcename);
 };
 
 }

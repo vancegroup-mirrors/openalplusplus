@@ -35,7 +35,7 @@ namespace openalpp {
 /**
  * Class for loading sampled files.
  */
-class Sample : public SoundData {
+class OPENALPP_API Sample : public SoundData {
  public:
   /**
    * Constructor.

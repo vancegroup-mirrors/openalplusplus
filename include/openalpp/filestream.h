@@ -26,6 +26,7 @@
 #define FILESTREAM_H_INCLUDED
 
 #include "openalpp/stream.h"
+#include "openalpp/export.h"
 
 namespace openalpp {
 
@@ -33,7 +34,7 @@ namespace openalpp {
  * Class for streaming audio data from a file. Presently it supports Ogg
  * Vorbis files (http://www.vorbis.com/).
  */
-class FileStream : public Stream {
+class OPENALPP_API  FileStream : public Stream {
  public:
   /**
    * Constructor. A FileError will be thrown if the file can't be opened or

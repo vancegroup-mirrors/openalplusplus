@@ -24,6 +24,7 @@
 
 #ifndef SOURCEBASE_H_INCLUDED_C419E330
 #define SOURCEBASE_H_INCLUDED_C419E330
+#include "openalpp/export.h"
 #include "openalpp/positionedobject.h"
 #include "openalpp/error.h"
 
@@ -43,7 +44,7 @@ typedef enum SourceState {Initial,Playing,Paused,Stopped};
  * cannot be instantiated, instead a source of either type (GroupSource or
  * Source) should be created.
  */
-class SourceBase : public PositionedObject {
+class OPENALPP_API SourceBase : public PositionedObject {
  public:
   /**
    * Play the source.

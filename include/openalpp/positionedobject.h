@@ -25,6 +25,7 @@
 #ifndef POSITIONEDOBJECT_H_INCLUDED_C4278579
 #define POSITIONEDOBJECT_H_INCLUDED_C4278579
 
+#include "openalpp/export.h"
 #include "openalpp/audiobase.h"
 
 namespace openalpp {
@@ -33,7 +34,7 @@ namespace openalpp {
  * Virtual base class for positioned objects.
  * (I.e. listeners and sources).
  */
-class PositionedObject : public AudioBase {
+class OPENALPP_API PositionedObject : public AudioBase {
 
  public:
 

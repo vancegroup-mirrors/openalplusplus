@@ -31,6 +31,7 @@
  * No other files are needed.
  */
 
+#include "openalpp/export.h"
 #include "openalpp/source.h"
 #include "openalpp/audioenvironment.h"
 #include "openalpp/listener.h"

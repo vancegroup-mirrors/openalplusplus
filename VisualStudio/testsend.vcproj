@@ -13,7 +13,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\testsend___Win32_Debug"
+			OutputDirectory="..\bin"
 			IntermediateDirectory=".\testsend___Win32_Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -40,8 +40,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="odbc32.lib odbccp32.lib openal32.lib alut.lib ccgnu2d.lib"
-				OutputFile="bin\testsend.exe"
+				AdditionalDependencies=" ccgnu2d.lib"
+				OutputFile="$(OutDir)/$(ProjectName)d.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				IgnoreDefaultLibraryNames="libcd"
@@ -97,7 +97,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib ccgnu2.lib wsock32.lib"
-				OutputFile="bin\testsend.exe"
+				OutputFile="$(OutDir)/$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"

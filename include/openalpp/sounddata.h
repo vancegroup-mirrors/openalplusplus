@@ -25,6 +25,7 @@
 #ifndef SOUNDDATA_H_INCLUDED_C4199A75
 #define SOUNDDATA_H_INCLUDED_C4199A75
 
+#include "openalpp/export.h"
 #include "openalpp/error.h"
 #include "openalpp/audiobase.h"
 
@@ -33,7 +34,7 @@ namespace openalpp {
 /**
  * Base class for sound data.
  */
-class SoundData : public AudioBase {
+class OPENALPP_API SoundData : public AudioBase {
  protected:
   /**
    * Protected class to handle generation/deletion of OpenAL buffers correctly.

@@ -22,9 +22,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
+
 #include "openalpp/audiobase.h"
 #include "stdio.h"
-
 namespace openalpp {
 
 AudioBase::AudioBase(int frequency,int refresh,int synchronous) 

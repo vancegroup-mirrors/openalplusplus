@@ -25,6 +25,7 @@
 #ifndef SOURCE_H_INCLUDED_C419B739
 #define SOURCE_H_INCLUDED_C419B739
 
+#include "openalpp/export.h"
 #include "openalpp/stream.h"
 #include "openalpp/sourcebase.h"
 #include "openalpp/sample.h"
@@ -35,7 +36,7 @@ namespace openalpp {
  * Class for "normal" sources.
  * This is used for standard OpenAL sources, whether streaming or not.
  */
-class Source : public SourceBase {
+class OPENALPP_API Source : public SourceBase {
  public:
   /**
    * Constructor.

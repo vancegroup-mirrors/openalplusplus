@@ -26,6 +26,7 @@
 #define NETSTREAM_H_INCLUDED_C419F72E
 
 #include "openalpp/stream.h"
+#include "openalpp/export.h"
 
 namespace ost {
 class UDPSocket;
@@ -39,7 +40,7 @@ namespace openalpp {
  * Preliminary tests indicate that packets smaller than ca 1 kb should not
  * be used (tests were done with Mono8, 11025 Hz). 
  */
-class NetStream : public Stream {
+class OPENALPP_API NetStream : public Stream {
  public:
   /**
    * Constructor.

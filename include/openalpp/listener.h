@@ -24,6 +24,9 @@
 
 #ifndef LISTENER_H_INCLUDED_C419EF1E
 #define LISTENER_H_INCLUDED_C419EF1E
+
+
+#include "openalpp/export.h"
 #include "openalpp/positionedobject.h"
 
 namespace openalpp {
@@ -31,7 +34,7 @@ namespace openalpp {
 /**
  * Class for listeners.
  */
-class Listener : public PositionedObject {
+class OPENALPP_API Listener : public PositionedObject {
   float position_[3];
   float orientation_[6];
   float velocity_[3];

@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.00"
 	Name="openalpp"
+	ProjectGUID="{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}"
 	SccProjectName=""
 	SccLocalPath="">
 	<Platforms>
@@ -12,36 +13,51 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\lib"
+			OutputDirectory="../lib"
 			IntermediateDirectory=".\Debug"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				OptimizeForProcessor="1"
-				AdditionalIncludeDirectories="..\include"
-				PreprocessorDefinitions="WIN32,_DEBUG,_LIB"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="../include"
+				PreprocessorDefinitions="_DEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderFile=".\Debug/openalpp.pch"
 				AssemblerListingLocation=".\Debug/"
 				ObjectFile=".\Debug/"
 				ProgramDataBaseFileName=".\Debug/"
+				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="4"/>
+				DebugInformationFormat="4"
+				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\openalpp.lib"
-				SuppressStartupBanner="TRUE"/>
+				Name="VCLinkerTool"
+				AdditionalOptions="/MACHINE:I386"
+				AdditionalDependencies="ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
+				OutputFile="../bin/openalppd.dll"
+				LinkIncremental="2"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="../lib,c:\projects\osgvr\lib,c:\projects\ConfigScript\lib,c:\projects\vrutils\lib,C:\tools\cmltoolkit\lib.chk\win32_single_msvcrt,c:\projects\openalpp\lib"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile=".\../lib/openalppd.pdb"
+				ImportLibrary=".\../lib/openalppd.lib"/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\../lib/openalpp.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -54,24 +70,27 @@
 				Culture="1053"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\lib"
+			OutputDirectory=".\../lib"
 			IntermediateDirectory=".\Release"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				OptimizeForProcessor="1"
-				AdditionalIncludeDirectories="..\include"
-				PreprocessorDefinitions="WIN32,NDEBUG,_LIB"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="../include"
+				PreprocessorDefinitions="NDEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderFile=".\Release/openalpp.pch"
 				AssemblerListingLocation=".\Release/"
@@ -83,11 +102,23 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\openalpp.lib"
-				SuppressStartupBanner="TRUE"/>
+				Name="VCLinkerTool"
+				AdditionalOptions="/MACHINE:I386"
+				AdditionalDependencies="ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
+				OutputFile="$(OutDir)/$(ProjectName).dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="./lib,c:\projects\osgvr\lib,c:\projects\ConfigScript\lib,c:\projects\vrutils\lib,C:\tools\cmltoolkit\lib.rel\win32_single_msvcrt,c:\projects\openalpp\lib"
+				IgnoreDefaultLibraryNames="LIBCD,MSVCRTD"
+				ProgramDatabaseFile=".\../lib/openalpp.pdb"
+				ImportLibrary=".\../lib/openalpp.lib"/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\../lib/openalpp.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -100,12 +131,14 @@
 				Culture="1053"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 		</Configuration>
 	</Configurations>
 	<Files>
 		<Filter
-			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Name="Source files"
+			Filter="">
 			<File
 				RelativePath="..\src\audiobase.cpp">
 			</File>
@@ -122,6 +155,12 @@
 				RelativePath="..\src\error.cpp">
 			</File>
 			<File
+				RelativePath="..\src\filestream.cpp">
+			</File>
+			<File
+				RelativePath="..\src\filestreamupdater.cpp">
+			</File>
+			<File
 				RelativePath="..\src\groupsource.cpp">
 			</File>
 			<File
@@ -135,6 +174,9 @@
 			</File>
 			<File
 				RelativePath="..\src\netupdater.cpp">
+			</File>
+			<File
+				RelativePath="..\src\openalpp.cpp">
 			</File>
 			<File
 				RelativePath="..\src\sample.cpp">
@@ -156,8 +198,8 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Name="Header files"
+			Filter="">
 			<File
 				RelativePath="..\include\openalpp\alpp.h">
 			</File>
@@ -175,6 +217,15 @@
 			</File>
 			<File
 				RelativePath="..\include\openalpp\error.h">
+			</File>
+			<File
+				RelativePath="..\include\openalpp\export.h">
+			</File>
+			<File
+				RelativePath="..\include\openalpp\filestream.h">
+			</File>
+			<File
+				RelativePath="..\include\openalpp\filestreamupdater.h">
 			</File>
 			<File
 				RelativePath="..\include\openalpp\groupsource.h">

@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.00"
-	Name="teststream"
+	Name="testfstream"
 	ProjectGUID="{3B36C471-B270-4A97-8A7E-0681ACAFB492}"
 	SccProjectName=""
 	SccLocalPath="">
@@ -14,7 +14,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\bin"
-			IntermediateDirectory=".\teststream___Win32_Debug"
+			IntermediateDirectory=".\testfstream___Win32_Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -28,10 +28,10 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\teststream___Win32_Debug/teststream.pch"
-				AssemblerListingLocation=".\teststream___Win32_Debug/"
-				ObjectFile=".\teststream___Win32_Debug/"
-				ProgramDataBaseFileName=".\teststream___Win32_Debug/"
+				PrecompiledHeaderFile=".\testfstream___Win32_Debug/testfstream.pch"
+				AssemblerListingLocation=".\testfstream___Win32_Debug/"
+				ObjectFile=".\testfstream___Win32_Debug/"
+				ProgramDataBaseFileName=".\testfstream___Win32_Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				DebugInformationFormat="4"
@@ -41,18 +41,18 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies=" ccgnu2d.lib"
+				AdditionalDependencies="ccgnu2.lib"
 				OutputFile="$(OutDir)/$(ProjectName)d.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
 				IgnoreDefaultLibraryNames="libcd"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile=".\teststream___Win32_Debug/teststream.pdb"
+				ProgramDatabaseFile=".\testfstream___Win32_Debug/testfstream.pdb"
 				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
-				TypeLibraryName=".\teststream___Win32_Debug/teststream.tlb"/>
+				TypeLibraryName=".\testfstream___Win32_Debug/testfstream.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -70,8 +70,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\teststream___Win32_Release"
-			IntermediateDirectory=".\teststream___Win32_Release"
+			OutputDirectory=".\testfstream___Win32_Release"
+			IntermediateDirectory=".\testfstream___Win32_Release"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="FALSE"
@@ -86,10 +86,10 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="TRUE"
 				UsePrecompiledHeader="2"
-				PrecompiledHeaderFile=".\teststream___Win32_Release/teststream.pch"
-				AssemblerListingLocation=".\teststream___Win32_Release/"
-				ObjectFile=".\teststream___Win32_Release/"
-				ProgramDataBaseFileName=".\teststream___Win32_Release/"
+				PrecompiledHeaderFile=".\testfstream___Win32_Release/testfstream.pch"
+				AssemblerListingLocation=".\testfstream___Win32_Release/"
+				ObjectFile=".\testfstream___Win32_Release/"
+				ProgramDataBaseFileName=".\testfstream___Win32_Release/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
 				CompileAs="0"/>
@@ -103,11 +103,11 @@
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\lib"
-				ProgramDatabaseFile=".\teststream___Win32_Release/teststream.pdb"
+				ProgramDatabaseFile=".\testfstream___Win32_Release/testfstream.pdb"
 				SubSystem="1"/>
 			<Tool
 				Name="VCMIDLTool"
-				TypeLibraryName=".\teststream___Win32_Release/teststream.tlb"/>
+				TypeLibraryName=".\testfstream___Win32_Release/testfstream.tlb"/>
 			<Tool
 				Name="VCPostBuildEventTool"/>
 			<Tool
@@ -129,7 +129,7 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
-				RelativePath="..\tests\teststream.cpp">
+				RelativePath="..\tests\testfstream.cpp">
 			</File>
 		</Filter>
 	</Files>

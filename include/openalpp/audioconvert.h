@@ -29,6 +29,7 @@
 #ifndef AUDIOCONVERT_H_INCLUDED
 #define AUDIOCONVERT_H_INCLUDED
 
+#include "openalpp/export.h"
 #include <AL/al.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,7 +40,7 @@ namespace openalpp {
 /**
  * Class for converting audio.
  */
-class AudioConvert {
+class OPENALPP_API AudioConvert {
   unsigned short channels_,bits_;
   unsigned int frequency_;
   ALenum format_;

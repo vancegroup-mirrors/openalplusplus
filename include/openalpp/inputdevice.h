@@ -25,6 +25,7 @@
 #ifndef INPUTDEVICE_H_INCLUDED_C41987DC
 #define INPUTDEVICE_H_INCLUDED_C41987DC
 
+#include "openalpp/export.h"
 #include "openalpp/stream.h"
 
 namespace openalpp {
@@ -32,7 +33,7 @@ namespace openalpp {
 /**
  * Class for handling input devices, like microphones.
  */
-class InputDevice : public Stream {
+class OPENALPP_API InputDevice : public Stream {
   static int nobjects_;
 
   /**
