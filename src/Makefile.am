@@ -12,24 +12,32 @@ basicfiles = \
     audioconvert.cpp \
     error.cpp \
     groupsource.cpp
+if WITH_CCGNU
 streamfiles = \
     netstream.cpp \
     streamupdater.cpp \
     netupdater.cpp \
     stream.cpp
+if WITH_OGGVORBIS
+oggfiles = \
+    filestream.cpp \
+    filestreamupdater.cpp
+else
+oggfiles = nofilestream.cpp
+endif
+if WITH_PORTAUDIO
 devicefiles = \
     deviceupdater.cpp \
     inputdevice.cpp
+else
+devicefiles = noinputdevice.cpp
+endif
+else
+streamfiles=nostreaming.cpp noinputdevice.cpp nofilestream.cpp
+endif
 
-if WITH_CCGNU
-if WITH_PORTAUDIO
-libopenalpp_la_SOURCES = $(basicfiles) $(streamfiles) $(devicefiles)
-else
-libopenalpp_la_SOURCES = $(basicfiles) $(streamfiles)
-endif
-else
-libopenalpp_la_SOURCES = $(basicfiles)
-endif
+libopenalpp_la_SOURCES = $(basicfiles) $(streamfiles) $(devicefiles) $(oggfiles)
+
 
 lib_LTLIBRARIES = libopenalpp.la
 
