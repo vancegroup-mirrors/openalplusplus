@@ -25,6 +25,11 @@ class Listener : public PositionedObject {
   Listener();
 
   /**
+   * Destructor.
+   */
+  ~Listener();
+  
+  /**
    * Copy constructor.
    */
   Listener(const Listener &listener);

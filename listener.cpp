@@ -19,12 +19,10 @@ void Listener::Init(float x,float y,float z,
     Select();
 }
 
-//##ModelId=3BDD2F86005D
 Listener::Listener() : PositionedObject() {
   Init(0,0,0, 0,0,0, 0,0,-1, 0,1,0);
 }
 
-//##ModelId=3BDD2F03016D
 Listener::Listener(const Listener &listener) : PositionedObject() {
   listener.GetPosition(position_[0],position_[1],position_[2]);
   listener.GetVelocity(velocity_[0],velocity_[1],velocity_[2]);
@@ -32,19 +30,21 @@ Listener::Listener(const Listener &listener) : PositionedObject() {
 			  orientation_[3],orientation_[4],orientation_[5]);
 }
 
-//##ModelId=3BD8691D00EC
 Listener::Listener(float x,float y,float z,
 		   float directionx, float directiony, float directionz,
 		   float upx, float upy, float upz) : PositionedObject() {
   Init(x,y,z, 0,0,0, directionx,directiony,directionz, upx,upy,upz);
 }
 
-//##ModelId=3BD868A100B1
 Listener::Listener(float x, float y, float z) : PositionedObject() {
   Init(x,y,z, 0,0,0, 0,0,-1, 0,1,0);
 }
 
-//##ModelId=3BD86891002C
+Listener::~Listener() {
+  if(selectedlistener_==this)
+    selectedlistener_=NULL;
+}
+
 void Listener::Select() {
   alListenerfv(AL_POSITION,position_);
   alListenerfv(AL_VELOCITY,velocity_);
@@ -56,7 +56,6 @@ bool Listener::IsSelected() {
   return (selectedlistener_==this);
 }
 
-//##ModelId=3BD8671102D3
 void Listener::SetOrientation(float directionx,float directiony,
 			      float directionz,
 			      float upx, float upy, float upz) {
@@ -70,7 +69,6 @@ void Listener::SetOrientation(float directionx,float directiony,
     alListenerfv(AL_ORIENTATION,orientation_);
 }
 
-//##ModelId=3BD8683B0191
 void Listener::GetOrientation(float &directionx,float &directiony,
 			      float &directionz,
 			      float &upx, float &upy, float &upz) const {
@@ -82,7 +80,6 @@ void Listener::GetOrientation(float &directionx,float &directiony,
   upz=orientation_[5];
 }
 
-//##ModelId=3BDD2F180253
 Listener &Listener::operator=(const Listener &listener) {
   if(this!=&listener) {
     listener.GetPosition(position_[0],position_[1],position_[2]);
