@@ -2,7 +2,6 @@
 #include <cc++/socket.h>
 #include <iostream>
 #include <stdlib.h>
-//#include <unistd.h>
 #include <AL/al.h>
 #include <AL/alut.h>
 #include "windowsstuff.h"
@@ -17,6 +16,8 @@ int main(int argc,char **argv) {
   unsigned int packetsize=1024;
 
   try {
+    alutInit(&argc,argv);
+
     success=alutLoadWAV("gamebeginning.wav",&data,&format,&size,&bits,&freq);
     if(success==AL_FALSE) {
       std::cerr << "Error loading\n";
@@ -24,7 +25,7 @@ int main(int argc,char **argv) {
     }
 
     UDPSocket socket;
-    socket.setPeer(InetHostAddress(),33333);
+    socket.setPeer(InetHostAddress("127.0.0.1"),33333);
 
     int totalsent=0;
     while(totalsent<size) {
