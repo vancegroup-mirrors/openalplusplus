@@ -41,7 +41,7 @@ namespace openalpp {
  * be used to play more sounds with less processing power. Of course the
  * problem is that the sources cannot be moved separately.
  */
-class OPENALPP_API GroupSource : public SourceBase {
+class GroupSource : public SourceBase {
   /**
    * Flag for whether the sources have been mixed yet.
    */
@@ -64,7 +64,7 @@ class OPENALPP_API GroupSource : public SourceBase {
    * @param source is the source to filter.
    * @return the gain.
    */
-  ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker);
+  OPENALPP_API ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker);
 
   /**
    * Reverb filter.
@@ -74,7 +74,7 @@ class OPENALPP_API GroupSource : public SourceBase {
    * @param frequency is the freguency of the sound.
    * @return new pointer to buffer.
    */
-  ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
+  OPENALPP_API ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
 				     ALsizei &size,unsigned int frequency);
 
   /**
@@ -85,7 +85,7 @@ class OPENALPP_API GroupSource : public SourceBase {
    * @param frequency is the frequency of the sound.
    * @return (new) pointer to buffer.
    */
-  ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size,
+  OPENALPP_API ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size,
 			unsigned int frequency);
  public:
   /**
@@ -95,13 +95,13 @@ class OPENALPP_API GroupSource : public SourceBase {
    * @param y y coordinate.
    * @param z z coordinate.
    */
-  GroupSource(float x = 0.0, float y = 0.0, float z = 0.0) throw (NameError);
+  OPENALPP_API GroupSource(float x = 0.0, float y = 0.0, float z = 0.0) throw (NameError);
 
   /**
    * Same as SourceBase::Play, except that this mixes the sources in the
    * group if it haven't been done yet.
    */
-  void Play() throw (InitError,FileError);
+  OPENALPP_API void Play() throw (InitError,FileError);
 
   /**
    * Mix all added sources into one. This function will be called by
@@ -111,7 +111,7 @@ class OPENALPP_API GroupSource : public SourceBase {
    * separately
    * @param frequency is the frequency that will be used when mixing.
    */
-  void MixSources(unsigned int frequency=22050) 
+  OPENALPP_API void MixSources(unsigned int frequency=22050) 
     throw (InitError,FileError,FatalError,MemoryError,ValueError);
 
   /**
@@ -121,36 +121,36 @@ class OPENALPP_API GroupSource : public SourceBase {
    * @param source is (a pointer to) the source to include.
    * @return identifier for the source.
    */
-  ALuint IncludeSource(Source *source) throw (ValueError);
+  OPENALPP_API ALuint IncludeSource(Source *source) throw (ValueError);
 
   /**
    * Removes a source from the group.
    * This will of course require the remaining sources to be mixed again.
    * @param source is the source to exclude.
    */
-  void ExcludeSource(const Source &source) throw (NameError);
+  OPENALPP_API void ExcludeSource(const Source &source) throw (NameError);
 
   /**
    * Removes a source from the group.
    * This will of course require the remaining sources to be mixed again.
    * @param source is the identifier of the source to exclude.
    */
-  void ExcludeSource(ALuint source) throw (NameError);
+  OPENALPP_API void ExcludeSource(ALuint source) throw (NameError);
 
   /**
    * Copy constructor.
    */
-  GroupSource(const GroupSource &groupsource);
+  OPENALPP_API GroupSource(const GroupSource &groupsource);
 
   /**
    * Destructor.
    */
-  ~GroupSource();
+  OPENALPP_API ~GroupSource();
 
   /**
    * Assignment operator.
    */
-  GroupSource &operator=(const GroupSource &groupsource);
+  OPENALPP_API GroupSource &operator=(const GroupSource &groupsource);
 };
 
 }
