@@ -76,7 +76,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\testfstream___Win32_Release"
+			OutputDirectory="..\bin"
 			IntermediateDirectory=".\testfstream___Win32_Release"
 			ConfigurationType="1"
 			UseOfMFC="0"

@@ -27,7 +27,7 @@ DISCLAIMER!!
 Recently (november 2003) there is a wrapper system for OpenAL.
 It searches for .dll files called *openal*.dll and loads them, thinking it is an implementation
 of OpenAL32. This does not work with the previous library name of this project (openalpp.lib/.dll).
-So for now it is called open++al.dll. Its not a nice name, but I cant find out any better solution to this
+So for now it is called oalpp.dll. Its not a nice name, but I cant find out any better solution to this
 problem.
 
 
@@ -41,7 +41,7 @@ Make sure openalpp is the active project (Build/Set Active Configuration. Openal
 Be sure to set any include paths that might be necessary for PortAudio, CommonC++ and/or OpenAL. This can be done under Project/Settings/C/C++/Additional include directories.
 Also, if you have installed libraries in "non-standard" places, additional library paths should be set under Project/Settings/Link/Input/Additional library path.
 Build the library (hit F7)
-The library and dll files are named open++al.lib open++al.dll and resides in the lib and the bin directory
+The library and dll files are named oalpp.lib oalpp.dll and resides in the lib and the bin directory
 in the project root.
 
 

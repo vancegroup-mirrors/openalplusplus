@@ -30,6 +30,7 @@
 
 using namespace openalpp;
 
+
 int main() {
   try {
     Source bgsound("bee.wav");   // Create source and load sound
@@ -41,6 +42,8 @@ int main() {
     
     std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
     ost::Thread::sleep(3000);		  // Sleep for a while
+    bgsound.Stop();
+
   } catch(Error e) {
     std::cerr << e << "\n";
     return -1;

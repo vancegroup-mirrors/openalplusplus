@@ -74,7 +74,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\testsend___Win32_Release"
+			OutputDirectory="..\bin"
 			IntermediateDirectory=".\testsend___Win32_Release"
 			ConfigurationType="1"
 			UseOfMFC="0"

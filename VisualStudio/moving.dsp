@@ -58,12 +58,12 @@ LINK32=link.exe
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir ".\Release"
+# PROP BASE Output_Dir "..\bin"
 # PROP BASE Intermediate_Dir ".\Release"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir ".\Release"
+# PROP Output_Dir "..\bin"
 # PROP Intermediate_Dir ".\Release"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GF /Gy /YX /Fp".\Release/moving.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
@@ -76,8 +76,8 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo 
 # ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  ccgnu2.lib /nologo /out:".\Release\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /pdb:".\Release\moving.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  ccgnu2.lib /nologo /out:".\Release\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /pdb:".\Release\moving.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  ccgnu2.lib /nologo /out:"..\bin\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /pdb:".\Release\moving.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  ccgnu2.lib /nologo /out:"..\bin\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /pdb:".\Release\moving.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
 
 !ENDIF
 
