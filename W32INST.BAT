@@ -11,7 +11,7 @@ set ALPPLIBPATH=C:\PROGRAM\MICROS~1\VC98\LIB
 
 mkdir %ALPPINCLUDEPATH%
 copy /Y include\*.h %ALPPINCLUDEPATH%
-copy /Y Release\openalpp.lib %ALPPLIBPATH%
+copy /Y lib\openalpp.lib %ALPPLIBPATH%
 
 set ALPPINCLUDEPATH=
 set ALPPLIBPATH=
