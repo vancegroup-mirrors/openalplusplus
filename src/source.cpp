@@ -103,14 +103,17 @@ void Source::Play(const Sample &buffer) {
 }
 
 void Source::Play(const Stream &stream) {
+  alSourcei(source_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
   SetSound(stream);
   ((Stream *)sounddata_)->Record(sourcename_);
   SourceBase::Play();
 }
 
 void Source::Play() {
-  if(streaming_)
+  if(streaming_) {
+    alSourcei(source_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
     ((Stream *)sounddata_)->Record(sourcename_);
+  }
   SourceBase::Play();
 }
 
