@@ -28,8 +28,6 @@ ALboolean _al_RAWFORMAT(ALenum format) {
     case AL_FORMAT_STEREO16:
     case AL_FORMAT_STEREO8:
       return AL_TRUE;
-    default:
-      break;
   }
   return AL_FALSE;
 }
@@ -1174,9 +1172,8 @@ void *acLoadWAV(void *data, ALuint *size, void **udata,
 		     AUDIO_S16,
 		     *chan,
 		     *freq) < 0) {
-    throw FatalError("Couldn't build audio conversion data structure!");
     free(udata);
-    return NULL;
+    throw FatalError("Couldn't build audio conversion data structure!");
   }
 
   endianConverter.buf = *udata;
@@ -1246,9 +1243,8 @@ void *AudioConvert(ALvoid *data,
 		     _al_AL2ACFMT(t_format),
 		     _al_ALCHANNELS(t_format),
 		     t_freq) < 0) {
-    throw FatalError("Couldn't build audio conversion data structure.");
     free(compressed);
-    return NULL;
+    throw FatalError("Couldn't build audio conversion data structure.");
   }
 
   s16le.buf = retval = malloc(f_size * s16le.len_mult);
