@@ -1,8 +1,4 @@
-/* g++ -Wall -O3 -L. -lopenal -lpthread -lccgnu -lportaudio -lopenalpp
- *     testmic.cpp -o testmic
- * LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH testmic
- */
-#include "alpp.h"
+#include "../include/alpp.h"
 #include <iostream>
 
 using namespace openalpp;
