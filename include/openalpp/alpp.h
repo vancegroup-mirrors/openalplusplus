@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,8 +36,8 @@
 #include "openalpp/listener.h"
 #include "openalpp/groupsource.h"
 #include "openalpp/sample.h"
-#include "openalpp/inputdevice.h"
-#include "openalpp/netstream.h"
+//#include "openalpp/inputdevice.h"
+//#include "openalpp/netstream.h"
 #include "openalpp/filestream.h"
 
 #endif

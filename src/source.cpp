@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,7 +23,7 @@
 
 #include "openalpp/source.h"
 
-namespace openalpp {
+using namespace openalpp;
 
 Source::Source(float x, float y, float z) : SourceBase(x,y,z) {
   streaming_=false;
@@ -35,17 +34,18 @@ Source::Source(const char *filename,float x,float y,float z)
   : SourceBase(x,y,z) {
   streaming_=false;
   sounddata_=new Sample(filename);
-  alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
 Source::Source(const Sample &buffer,float x,float y,float z)
   : SourceBase(x,y,z) {
   streaming_=false;
   sounddata_=new Sample(buffer);
-  alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
-Source::Source(const Stream &stream,float x,float y,float z) 
+
+  Source::Source(const Stream &stream,float x,float y,float z) 
   : SourceBase(x,y,z) {
   streaming_=true;
   sounddata_=new Stream(stream);
@@ -55,14 +55,14 @@ Source::Source(const Stream &stream,float x,float y,float z)
 Source::Source(const Source &source) : SourceBase(source) {
   streaming_=source.streaming_;
   if(streaming_)
-    sounddata_=new Stream((const Stream &)source.GetSound());
+    sounddata_=new Stream((const Stream &)source.getSound());
   else
-    sounddata_=new Sample((const Sample &)source.GetSound());
-  alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
+    sounddata_=new Sample((const Sample &)source.getSound());
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
 Source::~Source() {
-  Stop();
+  stop();
   if (sounddata_)
     delete sounddata_;
 
@@ -71,70 +71,70 @@ Source::~Source() {
 
 // TODO: Add flag for wether the sound should be loaded. This is useful for
 // dummy sources that will be used only for groupsources.
-void Source::SetSound(const char *filename) {
+void Source::setSound(const std::string& filename) {
   streaming_=false;
   if (sounddata_)
     delete sounddata_;
   sounddata_=new Sample(filename);
-  alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
-void Source::SetSound(const Sample &buffer) {
+void Source::setSound(const Sample &buffer) {
   streaming_=false;
   if (sounddata_)
     delete sounddata_;
   sounddata_=new Sample(buffer);
-  alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
-void Source::SetSound(const Stream &stream) {
+void Source::setSound(const Stream &stream) {
   streaming_=true;
   if (sounddata_)
     delete sounddata_;
   sounddata_=new Stream(stream);
 }
 
-const SoundData &Source::GetSound() const {
+const SoundData &Source::getSound() const {
   return *sounddata_;
 }
 
-void Source::Play(const char *filename) {
-  SetSound(filename);
-  SourceBase::Play();
+void Source::play(const std::string& filename) {
+  setSound(filename.c_str());
+  SourceBase::play();
 }
 
-void Source::Play(const Sample &buffer) {
-  SetSound(buffer);
-  SourceBase::Play();
+void Source::play(const Sample &buffer) {
+  setSound(buffer);
+  SourceBase::play();
 }
 
-void Source::Play(const Stream &stream) {
+void Source::play(const Stream &stream) {
   alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
-  SetSound(stream);
-  ((Stream *)sounddata_)->Record(sourcename_);
-  SourceBase::Play();
+  setSound(stream);
+  ((Stream *)sounddata_)->record(sourcename_);
+  SourceBase::play();
 }
 
-void Source::Play() {
+void Source::play() {
   if(streaming_) {
     alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
-    ((Stream *)sounddata_)->Record(sourcename_);
+    ((Stream *)sounddata_)->record(sourcename_);
   }
-  SourceBase::Play();
+  SourceBase::play();
 }
 
-void Source::Stop() {
+void Source::stop() {
   if(streaming_)
-    ((Stream *)sounddata_)->Stop(sourcename_);
-  SourceBase::Stop();
+    ((Stream *)sounddata_)->stop(sourcename_);
+  SourceBase::stop();
 }
 
-void Source::Pause() {
-  SourceBase::Pause();
+void Source::pause() {
+  SourceBase::pause();
 }
 
 
-bool Source::IsStreaming() {
+bool Source::isStreaming() {
   return streaming_;
 }
 
@@ -152,4 +152,3 @@ Source &Source::operator=(const Source &source) {
   return *this;
 }
 
-}

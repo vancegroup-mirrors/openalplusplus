@@ -43,7 +43,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
+				AdditionalDependencies="openthreadswin32d.lib alut.lib openal32.lib  winmm.lib  dsound.lib vorbisfile.lib ogg.lib pastaticdsd.lib"
 				OutputFile="../bin/$(ProjectName)d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
@@ -110,7 +110,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
+				AdditionalDependencies="openthreadswin32.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
 				OutputFile="../bin/$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
@@ -163,9 +163,6 @@
 				RelativePath="..\src\audioenvironment.cpp">
 			</File>
 			<File
-				RelativePath="..\src\deviceupdater.cpp">
-			</File>
-			<File
 				RelativePath="..\src\error.cpp">
 			</File>
 			<File
@@ -178,16 +175,7 @@
 				RelativePath="..\src\groupsource.cpp">
 			</File>
 			<File
-				RelativePath="..\src\inputdevice.cpp">
-			</File>
-			<File
 				RelativePath="..\src\listener.cpp">
-			</File>
-			<File
-				RelativePath="..\src\netstream.cpp">
-			</File>
-			<File
-				RelativePath="..\src\netupdater.cpp">
 			</File>
 			<File
 				RelativePath="..\src\openalpp.cpp">
@@ -227,9 +215,6 @@
 				RelativePath="..\include\openalpp\audioenvironment.h">
 			</File>
 			<File
-				RelativePath="..\include\openalpp\deviceupdater.h">
-			</File>
-			<File
 				RelativePath="..\include\openalpp\error.h">
 			</File>
 			<File
@@ -249,12 +234,6 @@
 			</File>
 			<File
 				RelativePath="..\include\openalpp\listener.h">
-			</File>
-			<File
-				RelativePath="..\include\openalpp\netstream.h">
-			</File>
-			<File
-				RelativePath="..\include\openalpp\netupdater.h">
 			</File>
 			<File
 				RelativePath="..\include\openalpp\positionedobject.h">

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,8 +23,8 @@
 
 #include "openalpp/groupsource.h"
 
-namespace openalpp {
-  
+using namespace openalpp;
+
 GroupSource::GroupSource(float x,float y,float z) throw (NameError)
   : SourceBase(x,y,z),mixed_(false) {
   alGenBuffers(1,&buffer_);
@@ -34,14 +33,14 @@ GroupSource::GroupSource(float x,float y,float z) throw (NameError)
   alSourcei(sourcename_,AL_BUFFER,buffer_);
 }
 
-void GroupSource::Play() throw (InitError,FileError) {
+void GroupSource::play() throw (InitError,FileError) {
   try {
     if(!mixed_)
-      MixSources();
+      mixSources();
   } catch(InitError error) {
     throw InitError("Sources must be included before trying to play");
   }
-  SourceBase::Play();
+  SourceBase::play();
 }
 
 ALfloat FilterDoppler(ALuint source) {
@@ -105,7 +104,7 @@ ALfloat DbToLinear(ALfloat dBs) {
   return ((float) mid / logmax);
 }
 
-ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
+ALfloat GroupSource::filterDistance(ALuint source,Speaker speaker) {
   ALfloat gain,maxdist,refdist,rolloff,position[3],direction[3],orientation[6];
   ALfloat iangle,oangle,ogain,dist,right[3];
   ALint relative;
@@ -243,14 +242,14 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   return gain;
 }
 
-ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
+ALshort *GroupSource::filterReverb(Source *source,ALshort *buffer,
 				   ALsizei &size,unsigned int frequency) {
   if(!reverbinitiated_)
     return buffer;
   // out=in[i]+scale*in[i-delay]
   ALfloat delay,scale;
-  delay=source->GetReverbDelay();
-  scale=source->GetReverbScale();
+  delay=source->getReverbDelay();
+  scale=source->getReverbScale();
   if(delay==0.0 || scale==0.0)
     return buffer;
 
@@ -280,12 +279,12 @@ ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
 /**
  * Apply filters to source.
  */
-ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
+ALshort *GroupSource::applyFilters(Source *source,ALshort *buffer,
 				   ALsizei &size,unsigned int frequency){
   //  Apply filters: doppler,pitch,{da,reverb,coning,minmax},listenergain
   //                   -       *     *   *      *      *         -
 
-  ALuint sourcename=source->GetAlSource();
+  ALuint sourcename=source->getAlSource();
   ALfloat pitch,lgain,rgain;
 
   //Pitch
@@ -326,9 +325,9 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
     size=nsize;
   }
 
-  lgain=FilterDistance(sourcename,Left);
-  rgain=FilterDistance(sourcename,Right);
-  buffer=FilterReverb(source,buffer,size,frequency);
+  lgain=filterDistance(sourcename,Left);
+  rgain=filterDistance(sourcename,Right);
+  buffer=filterReverb(source,buffer,size,frequency);
   ALfloat min,max;                          // minmax filter
 #ifndef WIN32
   alGetSourcefv(sourcename,AL_MIN_GAIN,&min);
@@ -356,7 +355,7 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
   return buffer;
 }
 
-void GroupSource::MixSources(unsigned int frequency)
+void GroupSource::mixSources(unsigned int frequency)
   throw (InitError,FileError,FatalError,MemoryError,ValueError) {
   ALshort *loaddata=NULL,*data=NULL,*bdata=NULL;
   ALsizei bsize=0,size=0,loadsize=0,bits,freq;
@@ -367,16 +366,16 @@ void GroupSource::MixSources(unsigned int frequency)
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
 
-  std::cerr << ((Sample &)sources_[0]->GetSound()).GetFileName().c_str() << "\n";
+  std::cerr << ((Sample &)sources_[0]->getSound()).getFileName() << "\n";
 
   success=
-    alutLoadWAV(((Sample &)sources_[0]->GetSound()).GetFileName().c_str(),
+    alutLoadWAV(((Sample &)sources_[0]->getSound()).getFileName().c_str(),
 		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
   if(success==AL_FALSE || !loaddata)
     throw FileError("Error opening file for mixing");
 
   bsize=loadsize;
-  bdata=(ALshort *)converter.Apply(loaddata,format,
+  bdata=(ALshort *)converter.apply(loaddata,format,
 				   (unsigned int)freq,(unsigned int)bsize);
 
   if(!bdata)
@@ -384,24 +383,24 @@ void GroupSource::MixSources(unsigned int frequency)
 
   free(loaddata);
 
-  bdata=ApplyFilters(sources_[0],bdata,bsize,frequency);
+  bdata=applyFilters(sources_[0],bdata,bsize,frequency);
 
   for(unsigned int s=1;s<sources_.size();s++) {
     success=
-      alutLoadWAV(((Sample &)sources_[s]->GetSound()).GetFileName().c_str(),
+      alutLoadWAV(((Sample &)sources_[s]->getSound()).getFileName().c_str(),
 		  (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
     if(success==AL_FALSE || !loaddata)
       throw FileError("Error opening file for mixing");
     
     size=loadsize;
-    data=(ALshort *)converter.Apply(loaddata,format,
+    data=(ALshort *)converter.apply(loaddata,format,
 				    (unsigned int)freq,(unsigned int)size);
     if(!data)
       throw FatalError("Error converting data to internal format!");
 
     free(loaddata);
 
-    data=ApplyFilters(sources_[s],data,size,frequency);
+    data=applyFilters(sources_[s],data,size,frequency);
 
     if(size>bsize) {
       loaddata=bdata;
@@ -437,21 +436,21 @@ void GroupSource::MixSources(unsigned int frequency)
   free(bdata);
 }
   
-ALuint GroupSource::IncludeSource(Source *source) throw (ValueError) {
-  if(source->IsStreaming())
+ALuint GroupSource::includeSource(Source *source) throw (ValueError) {
+  if(source->isStreaming())
     throw ValueError("Can't include streaming sources in group.");
   sources_.push_back(source);
-  return source->GetAlSource();
+  return source->getAlSource();
 }
 
-void GroupSource::ExcludeSource(const Source &source) throw (NameError) {
-  ALuint sourcename=source.GetAlSource();
-  ExcludeSource(sourcename);
+void GroupSource::excludeSource(const Source &source) throw (NameError) {
+  ALuint sourcename=source.getAlSource();
+  excludeSource(sourcename);
 }
 
-void GroupSource::ExcludeSource(ALuint sourcename) throw (NameError) {
+void GroupSource::excludeSource(ALuint sourcename) throw (NameError) {
   for(unsigned int i=0;i<sources_.size();i++) {
-    if(sourcename==sources_[i]->GetAlSource()) {
+    if(sourcename==sources_[i]->getAlSource()) {
       sources_[i]=sources_[sources_.size()-1];
       sources_.pop_back();
       return;
@@ -482,4 +481,4 @@ GroupSource &GroupSource::operator=(const GroupSource &groupsource) {
   return *this;
 }
 
-}
+

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -39,7 +38,7 @@ class OPENALPP_API InputDevice : public Stream {
   /**
    * Initialize input. Called by constructor(s).
    */
-  void Init();
+  void init();
  public:
   /**
    * Constructor.

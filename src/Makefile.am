@@ -14,9 +14,7 @@ basicfiles = \
     groupsource.cpp
 if WITH_CCGNU
 streamfiles = \
-    netstream.cpp \
     streamupdater.cpp \
-    netupdater.cpp \
     stream.cpp
 if WITH_OGGVORBIS
 oggfiles = \

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,7 +24,6 @@
 OpenAL++ is an Object Oriented version of OpenAL.
 Making OpenAL so much more accessable!
 Compare OpenAL++ to a scenegraph for OpenGL!
-
 
 Contact:
 Anders Backman, VRlab, andersb@cs.umu.se

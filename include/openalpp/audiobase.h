@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,12 +37,9 @@ extern "C" {
 /**
  * \mainpage
  * OpenAL++ is an object oriented API for OpenAL (www.openal.org). It also uses
- * PortAudio (www.portaudio.com) for audio capture and CommonC++ 
- * (cplusplus.sourceforge.net) for portable threads and sockets.
+ * PortAudio (www.portaudio.com) for audio capture.
  * In addition to the functionality of OpenAL and ALUT (the OpenAL utility
- * library), OpenAL++ has built-in support for streaming through network
- * sockets and input devices. OpenAL++ also supports "group sources," i.e.
- * sources that consist of several other sources mixed together.
+ * library).
  *
  * OpenAL++ has been tested on Windows and Linux. 
  *

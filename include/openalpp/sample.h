@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -41,7 +40,7 @@ class OPENALPP_API Sample : public SoundData {
    * Constructor.
    * @param filename is name of file to load.
    */
-  Sample(const char *filename) throw (FileError);
+   Sample(const std::string& filename ) throw (FileError);
 
   /**
    * Copy constructor.
@@ -52,7 +51,7 @@ class OPENALPP_API Sample : public SoundData {
    * Get file name of loaded file.
    * @return file name.
    */
-  std::string GetFileName() const;
+  std::string getFileName() const;
 
   /**
    * Assignment operator.
@@ -70,8 +69,8 @@ class OPENALPP_API Sample : public SoundData {
 /**
  * Check how large a sample is in the given format.
  */
-unsigned int SampleSize(SampleFormat format);
-unsigned int SampleSize(ALenum format);
+unsigned int sampleSize(SampleFormat format);
+unsigned int sampleSize(ALenum format);
 }
 
 #endif /* SAMPLE_H_INCLUDED_C4211F97 */

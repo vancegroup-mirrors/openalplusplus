@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,17 +28,17 @@ namespace openalpp {
 // Static
 int InputDevice::nobjects_=0;
 
-void InputDevice::Init() {
+void InputDevice::init() {
   throw InitError("No input device support compiled in.");
 }
 
 InputDevice::InputDevice() {
-  Init();
+  init();
 }
 
 InputDevice::InputDevice(int /*device*/, unsigned int /*samplerate*/, unsigned int /*buffersize*/,
 			 SampleFormat /*format*/) {
-  Init();
+  init();
 }
 
 InputDevice::InputDevice(const InputDevice &input)

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,6 +28,9 @@
 //C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 #pragma warning( disable : 4290 )
 #include "openalpp/export.h"
+
+#include <windows.h>
+#define usleep(x) Sleep((x)/1000)
 
 #include <AL/alut.h>
 

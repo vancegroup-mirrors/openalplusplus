@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -70,13 +69,13 @@ class OPENALPP_API Stream : public SoundData {
    * I.e. start copying data to buffers.
    * @param sourcename is the (OpenAL) name of the source.
    */
-   void Record(ALuint sourcename);
+   void record(ALuint sourcename);
 
   /**
    * Stop recording.
    * @param sourcename is the (OpenAL) name of the source.
    */
-   void Stop(ALuint sourcename);
+   void stop(ALuint sourcename);
 };
 
 }

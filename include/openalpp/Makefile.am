@@ -9,8 +9,6 @@ pkginclude_HEADERS = \
     groupsource.h \
     inputdevice.h \
     listener.h \
-    netstream.h \
-    netupdater.h \
     positionedobject.h \
     sample.h \
     sounddata.h \
@@ -23,3 +21,6 @@ pkginclude_HEADERS = \
     export.h \
     windowsstuff.h \
     config.h 
+
+#    netstream.h \
+#    netupdater.h \

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -63,7 +62,7 @@ class GroupSource : public SourceBase {
    * @param source is the source to filter.
    * @return the gain.
    */
-  OPENALPP_API ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker);
+  OPENALPP_API ALfloat filterDistance(ALuint source,Speaker speaker);
 
   /**
    * Reverb filter.
@@ -73,7 +72,7 @@ class GroupSource : public SourceBase {
    * @param frequency is the freguency of the sound.
    * @return new pointer to buffer.
    */
-  OPENALPP_API ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
+  OPENALPP_API ALshort *filterReverb(Source *source,ALshort *buffer,
 				     ALsizei &size,unsigned int frequency);
 
   /**
@@ -84,7 +83,7 @@ class GroupSource : public SourceBase {
    * @param frequency is the frequency of the sound.
    * @return (new) pointer to buffer.
    */
-  OPENALPP_API ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size,
+  OPENALPP_API ALshort *applyFilters(Source *source,ALshort *buffer,ALsizei &size,
 			unsigned int frequency);
  public:
   /**
@@ -100,7 +99,7 @@ class GroupSource : public SourceBase {
    * Same as SourceBase::Play, except that this mixes the sources in the
    * group if it haven't been done yet.
    */
-  OPENALPP_API void Play() throw (InitError,FileError);
+  OPENALPP_API void play() throw (InitError,FileError);
 
   /**
    * Mix all added sources into one. This function will be called by
@@ -110,7 +109,7 @@ class GroupSource : public SourceBase {
    * separately
    * @param frequency is the frequency that will be used when mixing.
    */
-  OPENALPP_API void MixSources(unsigned int frequency=22050) 
+  OPENALPP_API void mixSources(unsigned int frequency=22050) 
     throw (InitError,FileError,FatalError,MemoryError,ValueError);
 
   /**
@@ -120,21 +119,21 @@ class GroupSource : public SourceBase {
    * @param source is (a pointer to) the source to include.
    * @return identifier for the source.
    */
-  OPENALPP_API ALuint IncludeSource(Source *source) throw (ValueError);
+  OPENALPP_API ALuint includeSource(Source *source) throw (ValueError);
 
   /**
    * Removes a source from the group.
    * This will of course require the remaining sources to be mixed again.
    * @param source is the source to exclude.
    */
-  OPENALPP_API void ExcludeSource(const Source &source) throw (NameError);
+  OPENALPP_API void excludeSource(const Source &source) throw (NameError);
 
   /**
    * Removes a source from the group.
    * This will of course require the remaining sources to be mixed again.
    * @param source is the identifier of the source to exclude.
    */
-  OPENALPP_API void ExcludeSource(ALuint source) throw (NameError);
+  OPENALPP_API void excludeSource(ALuint source) throw (NameError);
 
   /**
    * Copy constructor.

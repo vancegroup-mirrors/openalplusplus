@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -39,7 +38,7 @@ class OPENALPP_API Listener : public PositionedObject {
   float orientation_[6];
   float velocity_[3];
   static Listener *selectedlistener_;
-  void Init(float x,float y,float z,
+  void init(float x,float y,float z,
 	    float vx,float vy,float vz,
 	    float directionx, float directiony, float directionz,
 	    float upx, float upy, float upz);
@@ -89,13 +88,13 @@ class OPENALPP_API Listener : public PositionedObject {
   /**
    * Select this listener.
    */
-  void Select();
+  void select();
 
   /**
    * Check if this listener is currently selected.
    * @return true if this listener is selected, false otherwise.
    */
-  bool IsSelected();
+  bool isSelected();
 
   /**
    * Set the current orientation of this listener.
@@ -106,7 +105,7 @@ class OPENALPP_API Listener : public PositionedObject {
    * @param upy y value of the up vector
    * @param upz z value of the up vector
    */
-  void SetOrientation(float directionx,float directiony,float directionz,
+  void setOrientation(float directionx,float directiony,float directionz,
 		      float upx, float upy, float upz);
 
   /**
@@ -118,7 +117,7 @@ class OPENALPP_API Listener : public PositionedObject {
    * @param upy y value of the up vector
    * @param upz z value of the up vector
    */
-  void GetOrientation(float &directionx,float &directiony,float &directionz, 
+  void getOrientation(float &directionx,float &directiony,float &directionz, 
 		      float &upx, float &upy, float &upz) const;
 
   /**
@@ -130,22 +129,22 @@ class OPENALPP_API Listener : public PositionedObject {
   /**
    * Inherited from PositionedObject.
    */
-  void SetPosition(float x, float y, float z);
+  void setPosition(float x, float y, float z);
 
   /**
    * Inherited from PositionedObject.
    */
-  void GetPosition(float &x, float &y, float &z) const;
+  void getPosition(float &x, float &y, float &z) const;
 
   /**
    * Inherited from PositionedObject.
    */
-  void SetVelocity(float vx, float vy, float vz);
+  void setVelocity(float vx, float vy, float vz);
 
   /**
    * Inherited from PositionedObject.
    */
-  void GetVelocity(float &vx, float &vy, float &vz) const;
+  void getVelocity(float &vx, float &vy, float &vz) const;
 };
 
 }

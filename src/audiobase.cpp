@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,7 +24,7 @@
 
 #include "openalpp/audiobase.h"
 #include "stdio.h"
-namespace openalpp {
+using namespace openalpp;
 
 AudioBase::AudioBase(int frequency,int refresh,int synchronous) 
   throw (InitError)
@@ -111,4 +110,3 @@ void *AudioBase::context_=NULL;
 struct ALCcontext_struct *AudioBase::context_=NULL;
 #endif
 
-}

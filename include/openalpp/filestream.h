@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -62,7 +61,7 @@ class OPENALPP_API  FileStream : public Stream {
    * Turn on/off looping.
    * @param loop is true if the stream should loop, false otherwise.
    */
-  void SetLooping(bool loop = true);
+  void setLooping(bool loop = true);
 };
 
 }

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -26,7 +25,7 @@
 #define STREAMUPDATER_H_INCLUDED_C419FA12
 
 
-#include <cc++/thread.h>
+//#include <cc++/thread.h>
 #include <vector>
 
 extern "C" {
@@ -39,13 +38,15 @@ extern "C" {
 #include "openalpp/audiobase.h"
 #include "openalpp/error.h"
 #include "openalpp/windowsstuff.h"
+#include "OpenThreads/Thread"
+#include "OpenThreads/Mutex"
 
 namespace openalpp {
 
 /**
  * Base class for (threaded) updating of stream buffers.
  */
-class StreamUpdater : public ost::Thread,ost::Mutex {
+  class StreamUpdater : public OpenThreads::Thread, public OpenThreads::Mutex { //ost::Mutex {
   /**
    * #references to this instance.
    * If zero => delete this.
@@ -71,13 +72,13 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * Add a source to the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  OPENALPP_API void AddSource(ALuint sourcename);
+  OPENALPP_API void addSource(ALuint sourcename);
 
   /**
    * Remove a source from the stream.
    * @param sourcename is the OpenAL name of the source.
    */
-  OPENALPP_API void RemoveSource(ALuint sourcename);
+  OPENALPP_API void removeSource(ALuint sourcename);
 
   /**
    * Update the stream.
@@ -86,24 +87,24 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * @param length is the length of the sound data (in bytes).
    * @return done flag. I.e. stoprunning_.
    */
-  OPENALPP_API bool Update(void *buffer,unsigned int length); 
+  OPENALPP_API bool update(void *buffer,unsigned int length); 
 
   /**
    * Inherited from Thread.
-   * Is called after Run() finishes, and deletes this.
+   * Is called after run() finishes, and deletes this.
    */
-  OPENALPP_API void final();
+  OPENALPP_API void cancelCleanup();
 
   /**
    * Reference this updater.
    * @return this.
    */
-  OPENALPP_API StreamUpdater *Reference();
+  OPENALPP_API StreamUpdater *reference();
 
   /**
    * Dereference this updater.
    */
-  OPENALPP_API void DeReference() throw (FatalError);
+  OPENALPP_API void deReference() throw (FatalError);
  protected:
   /**
    * Names of the buffers to update.
@@ -133,7 +134,8 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
   /**
    * Mutex for stoprunning_.
    */
-  ost::Mutex runmutex_;
+  //ost::Mutex runmutex_;
+  OpenThreads::Mutex runmutex_;
 
 };
 

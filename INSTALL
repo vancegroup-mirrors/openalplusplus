@@ -1,11 +1,19 @@
 Installation instructions for OpenAL++
 **************************************
-OpenAL++ uses the libraries OpenAL, PortAudio and CommonC++. However, it is possible to compile OpenAL++ without PortAudio and CommonC++, but then some features will be disabled.
+OpenAL++ uses the libraries OpenAL, PortAudio and OpenThreads. However, it is possible to compile OpenAL++ without PortAudio, but then some features will be disabled.
+
+
+Download
+---------
+Download OpenThreads from http://openthreads.sourceforge.net/ and install it.
+
+If you want to use PortAudio for microphone capture (not very tested!) download that from: http://www.portaudio.com/ and install it.
+
 
 Linux/Unix
 ----------
 Start by running configure ($ is the prompt):
- $ ./configure
+ $ ./autogen.sh
 This will create the Makefiles. Run configure --help to get information on the
 (optional) arguments. Now make the library:
  $ make
@@ -18,7 +26,9 @@ The next step is to install. You probably have to log in as root to do this:
 If you have created documentation, the man-files can also be installed:
  $ make install-docs
 
-By default, all the files will be installed under /usr/local (e.g. the include-files under /usr/local/include). This can be changed by using the --prefix flag for configure (e.g. configure --prefix=/usr).
+On some systems we have experienced problems with locking files. ("waiting for audioenvironment.o.lock) supplying --disable-libtool-lock to configure will remove that problem. This is done for you in the autogen.sh script.
+
+By default, all the files will be installed under /usr/local (e.g. the include-files under /usr/local/include). This can be changed by using the --prefix flag for autogen.sh (e.g. ./autogen.sh --prefix=/usr).
 
 Windows
 -------
@@ -49,5 +59,5 @@ Other platforms
 ---------------
 OpenAL++ has not been tested on other platforms than Linux and Windows. If you get it to work on another platform, contact me with information on how you did, and I'll add information to this file. Also be sure to tell me about any necessary changes to configure.in and other files to get it to work.
 
-/Tomas Hämälä, VRlab, 2002
-(tomash@hpc2n.umu.se)
+/Anders Backman, VRlab, 2004
+(andersb@cs.umu.se)

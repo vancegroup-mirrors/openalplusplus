@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,9 +23,10 @@
 
 #include "openalpp/filestreamupdater.h"
 
-namespace openalpp {
+using namespace openalpp;
 
-FileStreamUpdater::FileStreamUpdater(const OggVorbis_File &oggfile,
+FileStreamUpdater::FileStreamUpdater(
+             const OggVorbis_File &oggfile,
 				     const ALuint buffer1,ALuint buffer2,
 				     ALenum format,unsigned int frequency,
 				     unsigned int buffersize)
@@ -44,46 +44,44 @@ FileStreamUpdater::~FileStreamUpdater() {
 void FileStreamUpdater::run() {
   ALshort *buffer=new ALshort[buffersize_/sizeof(ALshort)];
 
-  runmutex_.enterMutex();
+  runmutex_.lock();
   while(!stoprunning_) {
-    runmutex_.leaveMutex();
+    runmutex_.unlock();
 
     unsigned int count=0;
     int stream;
     while(count<buffersize_) {
       unsigned int amt;
       do {
-	amt=ov_read(oggfile_,&((char *)buffer)[count],
+	      amt=ov_read(oggfile_,&((char *)buffer)[count],
 		    buffersize_-count,
 		    0,2,1,&stream);
-	if(looping_ && amt==0) {
-	  if(!ov_seekable(oggfile_))
-	    break;
-	  if(!ov_time_seek(oggfile_,0.0))
-	    break;
-	}
+	      if(looping_ && amt==0) {
+	        if(!ov_seekable(oggfile_))
+	          break;
+	        if(!ov_time_seek(oggfile_,0.0))
+	          break;
+	      }
       } while(looping_ && amt==0);
       // We must break if:
       // * An error occurred
       // * We hit EOF and the file was not looping 
       // * We hit EOF and the file was looping, but we couldn't loop...
       if(amt<=0)
-	break;
+	      break;
       count+=amt;
     }
 
     if(count)
-      Update(buffer,count);
+      update(buffer,count);
 
-    runmutex_.enterMutex();
+    runmutex_.lock();
   }
 
-  runmutex_.leaveMutex();
+  runmutex_.unlock();
   delete []buffer;
 }
 
-void FileStreamUpdater::SetLooping(bool loop) {
+void FileStreamUpdater::setLooping(bool loop) {
   looping_=loop;
-}
-
 }

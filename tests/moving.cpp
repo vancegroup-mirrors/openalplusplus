@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,9 +24,9 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav and moves it left right. 
  */
-#include <cc++/thread.h>
 #include <openalpp/alpp.h>
 #include <iostream>
+#include <unistd.h>
 
 using namespace openalpp;
 
@@ -38,32 +37,31 @@ using namespace openalpp;
 
 int main() {
   try {
-    Source *asd = new Source("bee.wav");
     Source beesound("bee.wav");
-	  beesound.SetGain(1);
-	  beesound.SetLooping();
+    beesound.setGain(1);
+    beesound.setLooping();
 
     float limits[2] = {5,-15};
     float delay=10;
     float time=0,angle=0;
     
-    beesound.SetPosition(limits[0],0.0,0.0);
-	  beesound.Play();
-
+    beesound.setPosition(limits[0],0.0,0.0);
+    beesound.play();
+    
     const int no_laps=5;
-
+    
     std::cerr << "Moving sound 5 laps..." << std::endl;
-
+    
     // Do a cheat time loop.
     while(angle<(M_PI*2.0*no_laps)) {
-      ost::Thread::sleep(delay); // Wait for delay milliseconds
+      usleep(delay*1000); // Wait for delay milliseconds
 
       time +=delay/1000; // Calculate the time in the loop
       angle=M_PI *time;  // What is the resulting angle
       
       // Calculate a new position
-      beesound.SetPosition(limits[0]*cos(angle),0.0,limits[1]*sin(angle));
-	  }
+      beesound.setPosition(limits[0]*cos(angle),0.0,limits[1]*sin(angle));
+    }
   } catch(Error e) {
     std::cerr << e << "\n";
     return -1;

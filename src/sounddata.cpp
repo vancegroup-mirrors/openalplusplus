@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,7 +23,7 @@
 
 #include "openalpp/sounddata.h"
 
-namespace openalpp {
+using namespace openalpp;
 
 SoundData::SoundBuffer::SoundBuffer() throw (NameError) {
   alGenBuffers(1,&buffername_);
@@ -37,12 +36,12 @@ SoundData::SoundBuffer::~SoundBuffer() {
   alDeleteBuffers(1,&buffername_);
 }
 
-SoundData::SoundBuffer *SoundData::SoundBuffer::Reference() {
+SoundData::SoundBuffer *SoundData::SoundBuffer::reference() {
   refcount_++;
   return this;
 }
 
-void SoundData::SoundBuffer::DeReference() throw (FatalError) {
+void SoundData::SoundBuffer::deReference() throw (FatalError) {
   refcount_--;
   if(!refcount_)
     delete this;
@@ -54,30 +53,29 @@ void SoundData::SoundBuffer::DeReference() throw (FatalError) {
 
 SoundData::SoundData() throw (NameError,InitError) : AudioBase() {
   buffer_=new SoundBuffer();
-  buffername_=buffer_->GetName();
+  buffername_=buffer_->getName();
 }
 
 SoundData::SoundData(const SoundData &sounddata)
   : AudioBase(/*(const AudioBase &)sounddata*/) {
-  buffer_=sounddata.buffer_->Reference();
-  buffername_=buffer_->GetName();
+  buffer_=sounddata.buffer_->reference();
+  buffername_=buffer_->getName();
 }
 
 SoundData::~SoundData() {
-  buffer_->DeReference();
+  buffer_->deReference();
 }
 
-ALuint SoundData::GetAlBuffer() const {
+ALuint SoundData::getAlBuffer() const {
   return buffername_;
 }
 
 SoundData &SoundData::operator=(const SoundData &sounddata) {
   if(this!=&sounddata) {
-    buffer_->DeReference();
-    buffer_=sounddata.buffer_->Reference();
-    buffername_=buffer_->GetName();
+    buffer_->deReference();
+    buffer_=sounddata.buffer_->reference();
+    buffername_=buffer_->getName();
   }
   return *this;
 }
 
-}

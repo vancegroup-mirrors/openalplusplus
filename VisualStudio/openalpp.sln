@@ -14,22 +14,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testmic", "testmic.vcproj",
 		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testsend", "testsend.vcproj", "{9740C9CE-674E-4083-80FE-9ADE598B0000}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "teststream", "teststream.vcproj", "{3B36C471-B270-4A97-8A7E-0681ACAFB492}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testfstream", "testfstream.vcproj", "{3B36C471-B270-4A97-8A7E-0681ACAFB492}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openalpp", "openalpp.vcproj", "{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oalpp", "openalpp.vcproj", "{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -51,14 +41,6 @@ Global
 		{F98212F5-A462-4F75-9AF6-4ED4E79A4B1F}.Debug.Build.0 = Debug|Win32
 		{F98212F5-A462-4F75-9AF6-4ED4E79A4B1F}.Release.ActiveCfg = Release|Win32
 		{F98212F5-A462-4F75-9AF6-4ED4E79A4B1F}.Release.Build.0 = Release|Win32
-		{9740C9CE-674E-4083-80FE-9ADE598B0000}.Debug.ActiveCfg = Debug|Win32
-		{9740C9CE-674E-4083-80FE-9ADE598B0000}.Debug.Build.0 = Debug|Win32
-		{9740C9CE-674E-4083-80FE-9ADE598B0000}.Release.ActiveCfg = Release|Win32
-		{9740C9CE-674E-4083-80FE-9ADE598B0000}.Release.Build.0 = Release|Win32
-		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Debug.ActiveCfg = Debug|Win32
-		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Debug.Build.0 = Debug|Win32
-		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Release.ActiveCfg = Release|Win32
-		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Release.Build.0 = Release|Win32
 		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Debug.ActiveCfg = Debug|Win32
 		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Debug.Build.0 = Debug|Win32
 		{3B36C471-B270-4A97-8A7E-0681ACAFB492}.Release.ActiveCfg = Release|Win32

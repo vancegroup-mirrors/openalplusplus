@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,15 +23,14 @@
 
 #include "openalpp/error.h"
 
-namespace openalpp {
+using namespace openalpp;
 
 //##ModelId=3BDD35A001D5
-std::ostream &Error::Put(std::ostream &stream) const {
+std::ostream &openalpp::Error::put(std::ostream &stream) const {
   return (stream << what());
 }
 
-std::ostream &operator<<(std::ostream &stream,const Error &error) {
-  return error.Put(stream);
+std::ostream &openalpp::operator<<(std::ostream &stream,const Error &error) {
+  return error.put(stream);
 }
 
-}

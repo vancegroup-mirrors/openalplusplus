@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -61,7 +60,7 @@ namespace openalpp {
    * @param stream is stream to print to
    * @return the stream with the error message appended.
    */
-  std::ostream &Put(std::ostream &stream) const;
+  std::ostream &put(std::ostream &stream) const;
 
  protected:
   /**

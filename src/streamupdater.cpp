@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,7 +26,10 @@
 
 #include "openalpp/streamupdater.h"
 
-namespace openalpp {
+#define ENTER_CRITICAL lock()
+#define LEAVE_CRITICAL unlock()
+
+using namespace openalpp;
 
 StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
 			     ALenum format,unsigned int frequency) 
@@ -35,14 +37,15 @@ StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
   nrefs_=1;
-  setCancel(ost::Thread::cancelDisabled);
+  //setCancel(ost::Thread::cancelDisabled);
 }
 
 StreamUpdater::~StreamUpdater() {
-  terminate();
+  //terminate();
+  cancel();
 }
 
-void StreamUpdater::AddSource(ALuint sourcename) {
+void StreamUpdater::addSource(ALuint sourcename) {
   alSourceStop(sourcename);
   ENTER_CRITICAL;
   newsources_.push_back(sourcename);
@@ -51,13 +54,13 @@ void StreamUpdater::AddSource(ALuint sourcename) {
   LEAVE_CRITICAL;
 }
 
-void StreamUpdater::RemoveSource(ALuint sourcename) {
+void StreamUpdater::removeSource(ALuint sourcename) {
   ENTER_CRITICAL;
   removesources_.push_back(sourcename);
   LEAVE_CRITICAL;
 }
 
-bool StreamUpdater::Update(void *buffer,unsigned int length) {
+bool StreamUpdater::update(void *buffer,unsigned int length) {
   if(!(length && buffer))     // Zero length or NULL pointer => return
     return false;
 
@@ -69,115 +72,114 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
   while(sources_.size() && removesources_.size()) {
     for(unsigned int i=0;i<sources_.size();i++)
       if(removesources_.back()==sources_[i]) {
-	alSourceStop(removesources_.back());
-	ALuint dump[2];
-	ALint nqueued;
-	alGetSourceiv(removesources_.back(),AL_BUFFERS_QUEUED,&nqueued);
-	if(nqueued)
-	  alSourceUnqueueBuffers(removesources_.back(),nqueued,dump);
-	alGetError();
-	while((i+1)<sources_.size())
-	  sources_[i]=sources_[i+1];
-	break;
+	      alSourceStop(removesources_.back());
+	      ALuint dump[2];
+	      ALint nqueued;
+	      alGetSourceiv(removesources_.back(),AL_BUFFERS_QUEUED,&nqueued);
+	      if(nqueued)
+	        alSourceUnqueueBuffers(removesources_.back(),nqueued,dump);
+	      alGetError();
+	      while((i+1)<sources_.size())
+	        sources_[i]=sources_[i+1];
+	      break;
       }
-    sources_.pop_back();
-    removesources_.pop_back();
-  }
-
-  while(newsources_.size() || !sources_.size()) // Add any new sources
-    if(newsources_.size()) {
-      while(newsources_.size()) {
-	sources_.push_back(newsources_.back());
-	alSourceStop(newsources_.back());
-	newsources_.pop_back();
-      }
-    } else {
-      LEAVE_CRITICAL;
-      sleep(50);
-      ENTER_CRITICAL;
+      sources_.pop_back();
+      removesources_.pop_back();
     }
 
-  processed=0;
-  while(!processed) {
-    state=AL_PLAYING;
-    for(unsigned int i=0;i<sources_.size();i++) {
-      alGetSourceiv(sources_[i],AL_SOURCE_STATE,&state);
-      if(state!=AL_PLAYING)
-	break;
-    }
-
-    if(state!=AL_PLAYING) {
-      ALuint dump[2];
-      for(unsigned int i=0;i<sources_.size();i++) {
-	// Yeah, this sucks, but how else could the sources be kept
-	// synchronized (they have to be unless we start using different
-	// buffers for each source)...
-	alSourceStop(sources_[i]);
-	ALint nqueued;
-	alGetSourceiv(sources_[i],AL_BUFFERS_QUEUED,&nqueued);
-	if(nqueued)
-	  alSourceUnqueueBuffers(sources_[i],nqueued,dump);
-      }
-      alBufferData(buffers_[0],format_,buffer,length/2,frequency_);
-      alBufferData(buffers_[1],format_,
-		   (char *)buffer+length/2,length/2,frequency_);
-      for(unsigned int i=0;i<sources_.size();i++) {
-        alSourceQueueBuffers(sources_[i],2,buffers_);
-	alSourcePlay(sources_[i]);  // TODO: This would be better handled by
-	                 // alSourcePlayv((ALuint *)&sources_[0]..)...;
-      }
-      processed=1;
-    } else {
-      processed=1;
-      for(unsigned int i=0;i<sources_.size();i++) {
-        alGetSourceiv(sources_[i],AL_BUFFERS_PROCESSED,&processed);
-	if(!processed)
-	  break;
-      }
-      if(processed) {
-	for(unsigned int i=0;i<sources_.size();i++)
-          alSourceUnqueueBuffers(sources_[i],1,&albuffer);
-        alBufferData(albuffer,format_,buffer,length,frequency_);
-	for(unsigned int i=0;i<sources_.size();i++)
-          alSourceQueueBuffers(sources_[i],1,&albuffer);
+    while(newsources_.size() || !sources_.size()) // Add any new sources
+      if(newsources_.size()) {
+        while(newsources_.size()) {
+	        sources_.push_back(newsources_.back());
+	        alSourceStop(newsources_.back());
+	        newsources_.pop_back();
+        }
       } else {
-	LEAVE_CRITICAL;
-	yield();
-	ENTER_CRITICAL;
-	// Not sure if this is necessary, but just in case...
-	if(removesources_.size()) {
-	  LEAVE_CRITICAL;
-	  return Update(buffer,length);
-	}
-      } // if(processed) else
-    } // if(state!=AL_PLAYING) else
-  } // while(!processed)
+        LEAVE_CRITICAL;
+        usleep(50*1000);
+        ENTER_CRITICAL;
+      }
 
-  LEAVE_CRITICAL;
-  bool ret;
-  runmutex_.enterMutex();
-  ret=stoprunning_;
-  runmutex_.leaveMutex();
-  return ret;
+      processed=0;
+      while(!processed) {
+        state=AL_PLAYING;
+        for(unsigned int i=0;i<sources_.size();i++) {
+          alGetSourceiv(sources_[i],AL_SOURCE_STATE,&state);
+          if(state!=AL_PLAYING)
+	          break;
+        }
+
+        if(state!=AL_PLAYING) {
+          ALuint dump[2];
+          for(unsigned int i=0;i<sources_.size();i++) {
+	        // Yeah, this sucks, but how else could the sources be kept
+	        // synchronized (they have to be unless we start using different
+	        // buffers for each source)...
+	          alSourceStop(sources_[i]);
+	          ALint nqueued;
+	          alGetSourceiv(sources_[i],AL_BUFFERS_QUEUED,&nqueued);
+	          if(nqueued)
+	            alSourceUnqueueBuffers(sources_[i],nqueued,dump);
+          }
+          alBufferData(buffers_[0],format_,buffer,length/2,frequency_);
+          alBufferData(buffers_[1],format_,
+		      (char *)buffer+length/2,length/2,frequency_);
+          for(unsigned int i=0;i<sources_.size();i++) {
+            alSourceQueueBuffers(sources_[i],2,buffers_);
+	          alSourcePlay(sources_[i]);  // TODO: This would be better handled by
+	                 // alSourcePlayv((ALuint *)&sources_[0]..)...;
+          }
+          processed=1;
+        } else {
+          processed=1;
+          for(unsigned int i=0;i<sources_.size();i++) {
+            alGetSourceiv(sources_[i],AL_BUFFERS_PROCESSED,&processed);
+	          if(!processed)
+	            break;
+          }
+          if(processed) {
+	          for(unsigned int i=0;i<sources_.size();i++)
+              alSourceUnqueueBuffers(sources_[i],1,&albuffer);
+            alBufferData(albuffer,format_,buffer,length,frequency_);
+	          for(unsigned int i=0;i<sources_.size();i++)
+              alSourceQueueBuffers(sources_[i],1,&albuffer);
+          } else {
+	          LEAVE_CRITICAL;
+            YieldCurrentThread();
+	          ENTER_CRITICAL;
+	          // Not sure if this is necessary, but just in case...
+	          if(removesources_.size()) {
+	            LEAVE_CRITICAL;
+	            return update(buffer,length);
+	        }
+        } // if(processed) else
+      } // if(state!=AL_PLAYING) else
+    } // while(!processed)
+
+    LEAVE_CRITICAL;
+    bool ret;
+    runmutex_.lock();
+    ret=stoprunning_;
+    runmutex_.unlock();
+    return ret;
 }
 
-void StreamUpdater::final() {
+void StreamUpdater::cancelCleanup() {
   delete this;
 } 
 
-StreamUpdater *StreamUpdater::Reference() {
+StreamUpdater *StreamUpdater::reference() {
   nrefs_++;
   return this;
 }
 
-void StreamUpdater::DeReference() throw (FatalError) {
+void StreamUpdater::deReference() throw (FatalError) {
   nrefs_--;
   if(!nrefs_) {
-    runmutex_.enterMutex();
+    runmutex_.lock();
     stoprunning_=true;
-    runmutex_.leaveMutex();
+    runmutex_.unlock();
   } else if(nrefs_<0)
     throw FatalError("StreamUpdater dereferenced too many times!");
 }
 
-}

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,25 +23,35 @@
  * Simple example for using OpenAL++.
  * Plays a file bee.wav in the background.
  */
-#include <cc++/thread.h>
 #include <openalpp/alpp.h>
 #include <iostream>
+#include <unistd.h>
 
 using namespace openalpp;
 
 
-int main() {
+int main(int argc,char **argv) {
+
+  std::string file;
+  file = "bee.wav";
+
+  if (argc > 1)
+    file = argv[1];
+
+  std::cout << "Playing " << file << "\n";
+
   try {
-    Source bgsound("bee.wav");   // Create source and load sound
-    bgsound.SetGain(0.6f);	  // Lower gain (volume) 
-	  bgsound.SetLooping();
-    bgsound.SetAmbient();	  // Make sound ambient (i.e. not attenuated)
-    bgsound.Play();		  // Start playing
+    Source bgsound(file);   // Create source and load sound
+    bgsound.setGain(0.6f);	  // Lower gain (volume) 
+    bgsound.setLooping();
+    bgsound.setAmbient();	  // Make sound ambient (i.e. not attenuated)
+    bgsound.play();		  // Start playing
     
     
     std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
-    ost::Thread::sleep(3000);		  // Sleep for a while
-    bgsound.Stop();
+    usleep(3000*1000);		  // Sleep for a while
+    std::cerr << "Done " << std::endl;
+    bgsound.stop();
 
   } catch(Error e) {
     std::cerr << e << "\n";

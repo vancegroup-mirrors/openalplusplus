@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -100,13 +99,13 @@ public:
    * This is used in doppler calculations.
    * @param speed is the speed of sound in length units per second.
    */
-  void SetSoundSpeed(float speed) throw (ValueError,FatalError);
+  void setSoundVelocity(float speed) throw (ValueError,FatalError);
 
   /**
    * Get the speed of sound in the enviroment.
    * @return speed of sound in length units per second.
    */
-  float GetSoundSpeed() throw (FatalError);
+  float getSoundVelocity() throw (FatalError);
 
   /**
    * Sets the doppler factor.
@@ -114,13 +113,13 @@ public:
    * doppler effect.
    * @param factor has a default value of one.
    */
-  void SetDopplerFactor(float factor) throw (ValueError,FatalError);
+  void setDopplerFactor(float factor) throw (ValueError,FatalError);
 
   /**
    * Gets the doppler factor.
    * @return doppler factor.
    */
-  float GetDopplerFactor() throw (FatalError);
+  float getDopplerFactor() throw (FatalError);
 
   /**
    * Sets global gain (volume).
@@ -130,37 +129,32 @@ public:
    * This will be changed in future releases of OpenAL.
    * @param gain is the gain [0.0,...
    */
-  void SetGain(float gain);
+  void setGain(float gain);
     
   /**
    * Gets the global gain
    * @return global gain
    */
-  float GetGain() throw (FatalError);
+  float getGain() throw (FatalError);
 
   /**
    * Sets the distance model used in attenuation calculations.
    * @param model is one of: None, InverseDistance, InverseDistanceClamped.
    */
-  void SetDistanceModel(DistanceModel model) throw (FatalError);
+  void setDistanceModel(DistanceModel model) throw (FatalError);
 
   /**
    * Gets the distance model used in attenuation calculations.
    * @return the model.
    */
-  DistanceModel GetDistanceModel() throw (FatalError);
+  DistanceModel getDistanceModel() throw (FatalError);
     
   /**
    * Initiates Loki's reverb implementation.
    */
-  void InitiateReverb() throw (InitError);
+  void initiateReverb() throw (InitError);
 };
 
 }
 
 #endif /* AUDIOENVIROMENT_H_INCLUDED_C4211030 */
-
-
-
-
-

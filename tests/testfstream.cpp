@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -41,15 +40,15 @@ int main(int argc,char **argv) {
 
   try {
     FileStream stream(argv[1]);
-    stream.SetLooping();  // Remove this to play file once only.
+    stream.setLooping();  // Remove this to play file once only.
 
     Source source(stream);
 
-    source.SetAmbient();
-    source.Play();
+    source.setAmbient();
+    source.play();
     std::cerr << "Press return to continue\n";
     std::cin.get();
-    source.Stop();
+    source.stop();
   } catch(openalpp::Error e) {
     std::cerr << e << "\n";
   //} catch(...) {

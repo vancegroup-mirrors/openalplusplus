@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -47,7 +46,7 @@ class OPENALPP_API PositionedObject : public AudioBase {
    * @param y y coordinate.
    * @param z z coordinate.
    */
-  virtual void SetPosition(float x, float y, float z)=0;
+  virtual void setPosition(float x, float y, float z)=0;
 
   /**
    * Get position.
@@ -55,7 +54,7 @@ class OPENALPP_API PositionedObject : public AudioBase {
    * @param y y coordinate.
    * @param z z coordinate.
    */
-  virtual void GetPosition(float &x, float &y, float &z) const =0;
+  virtual void getPosition(float &x, float &y, float &z) const =0;
 
   /**
    * Set velocity.
@@ -63,7 +62,7 @@ class OPENALPP_API PositionedObject : public AudioBase {
    * @param vy y member of velocity vector.
    * @param vz z member of velocity vector.
    */
-  virtual void SetVelocity(float vx, float vy, float vz)=0;
+  virtual void setVelocity(float vx, float vy, float vz)=0;
 
   /**
    * Get velocity.
@@ -71,7 +70,7 @@ class OPENALPP_API PositionedObject : public AudioBase {
    * @param vy y member of velocity vector.
    * @param vz z member of velocity vector.
    */
-  virtual void GetVelocity(float &vx, float &vy, float &vz) const =0;
+  virtual void getVelocity(float &vx, float &vy, float &vz) const =0;
 };
 
 }

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,7 +23,7 @@
 
 #include "openalpp/audioenvironment.h"
 
-namespace openalpp {
+using namespace openalpp;
 
 AudioEnvironment::AudioEnvironment() throw (InitError): AudioBase() {
 }
@@ -38,7 +37,7 @@ AudioEnvironment::AudioEnvironment(int frequency,int refresh) throw (InitError)
   : AudioBase(frequency,refresh) {
 }
 
-void AudioEnvironment::SetSoundSpeed(float speed) throw(ValueError,FatalError){
+void AudioEnvironment::setSoundVelocity(float speed) throw(ValueError,FatalError){
   alDopplerVelocity(speed);
   ALenum error;
   if((error=alGetError())!=AL_FALSE)
@@ -52,15 +51,15 @@ void AudioEnvironment::SetSoundSpeed(float speed) throw(ValueError,FatalError){
     }
 }
 
-float AudioEnvironment::GetSoundSpeed() throw (FatalError) {
+float AudioEnvironment::getSoundVelocity() throw (FatalError) {
   ALfloat speed;
   alGetFloatv(AL_DOPPLER_VELOCITY,&speed);
   if(alGetError()!=AL_FALSE)  // This isn't strictly necessary...
-    throw FatalError("Unknown error in AudioEnviroment::GetSoundSpeed()");
+    throw FatalError("Unknown error in AudioEnviroment::GetSoundVelocity()");
   return speed;
 }
 
-void AudioEnvironment::SetDopplerFactor(float factor) 
+void AudioEnvironment::setDopplerFactor(float factor) 
   throw (ValueError,FatalError) {
   alDopplerFactor(factor);
   ALenum error;
@@ -75,7 +74,7 @@ void AudioEnvironment::SetDopplerFactor(float factor)
     }
 }
 
-float AudioEnvironment::GetDopplerFactor() throw (FatalError) {
+float AudioEnvironment::getDopplerFactor() throw (FatalError) {
   ALfloat(factor);
   alGetFloatv(AL_DOPPLER_FACTOR,&factor);
   if(alGetError()!=AL_FALSE)  // This isn't strictly necessary...
@@ -83,7 +82,7 @@ float AudioEnvironment::GetDopplerFactor() throw (FatalError) {
   return factor;
 }
 
-void AudioEnvironment::SetGain(float gain) {
+void AudioEnvironment::setGain(float gain) {
   alListenerf(AL_GAIN,gain);
   ALenum error=alGetError();
   if(error!=AL_FALSE)
@@ -96,7 +95,7 @@ void AudioEnvironment::SetGain(float gain) {
     }
 }
 
-float AudioEnvironment::GetGain() throw (FatalError) {  
+float AudioEnvironment::getGain() throw (FatalError) {  
   ALfloat gain;
   alGetListenerf(AL_GAIN,&gain);
   if(alGetError()!=AL_FALSE)          // This isn't strictly necessary...
@@ -104,7 +103,7 @@ float AudioEnvironment::GetGain() throw (FatalError) {
   return gain;
 }
 
-void AudioEnvironment::SetDistanceModel(DistanceModel model)
+void AudioEnvironment::setDistanceModel(DistanceModel model)
   throw (FatalError){
   switch(model) {
     case(None):
@@ -123,7 +122,7 @@ void AudioEnvironment::SetDistanceModel(DistanceModel model)
     throw FatalError("alDistanceModel failed in AudioEnvironment::SetDistanceModel()");
 }
 
-DistanceModel AudioEnvironment::GetDistanceModel() throw (FatalError) {
+DistanceModel AudioEnvironment::getDistanceModel() throw (FatalError) {
   int almodel;
   alGetIntegerv(AL_DISTANCE_MODEL,&almodel);
   switch(almodel) {
@@ -143,7 +142,7 @@ bool AudioBase::reverbinitiated_;
 void (*AudioBase::alReverbScale)(ALuint sid, ALfloat param);
 void (*AudioBase::alReverbDelay)(ALuint sid, ALfloat param);
 
-void AudioEnvironment::InitiateReverb() throw (InitError) {
+void AudioEnvironment::initiateReverb() throw (InitError) {
   if (reverbinitiated_)
     return;
  
@@ -157,5 +156,3 @@ void AudioEnvironment::InitiateReverb() throw (InitError) {
   reverbinitiated_=true;
 }
 
-
-}

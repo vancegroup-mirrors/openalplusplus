@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -42,7 +41,7 @@ FileStream &FileStream::operator=(const FileStream &/*stream*/) {
   return *this;
 }
 
-void FileStream::SetLooping(bool loop) {
+void FileStream::setLooping(bool) {
 }
 
 }

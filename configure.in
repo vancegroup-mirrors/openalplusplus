@@ -70,9 +70,11 @@ dnl Checks for libraries.
 AC_CHECK_LIB(openal,main)
 
 # Common C++
-AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="yes",,-lpthread -ldl)
-AC_SUBST(CCGNULIBS)
-AC_SUBST(CCGNUCFLAGS)
+#AC_CHECK_LIB(ccgnu2,main,WITH_CCGNU="no",,-lpthread -ldl)
+#AC_SUBST(CCGNULIBS)
+#AC_SUBST(CCGNUCFLAGS)
+WITH_CCGNU="no"
+
 if test "$WITH_CCGNU" = "yes"; then
     CCGNULIBS="`ccgnu2-config --libs`"
     CCGNUCFLAGS="-I`ccgnu2-config --includes`"

@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,7 +30,7 @@
 #include <fcntl.h>
 #endif
 
-namespace openalpp {
+using namespace openalpp;
 
 FileStream::FileStream(const char *filename,const int buffersize)
   throw (NameError,InitError,FileError) : Stream() {
@@ -57,10 +56,11 @@ FileStream::FileStream(const char *filename,const int buffersize)
       format=AL_FORMAT_MONO16;
     else
       format=AL_FORMAT_STEREO16;
+    
     updater_=new FileStreamUpdater(oggfile,
-				   buffername_,buffer2_->GetName(),
+				   buffername_,buffer2_->getName(),
 				   format,ogginfo->rate,
-				   buffersize*SampleSize(format)); 
+				   buffersize*sampleSize(format)); 
   } else {
     fclose(filehandle);
     throw FileError("FileStream: File of unknown type");
@@ -81,8 +81,7 @@ FileStream &FileStream::operator=(const FileStream &stream) {
   return *this;
 }
 
-void FileStream::SetLooping(bool loop) {
-  ((FileStreamUpdater *)updater_)->SetLooping(loop);
+void FileStream::setLooping(bool loop) {
+  ((FileStreamUpdater *)updater_)->setLooping(loop);
 }
 
-}

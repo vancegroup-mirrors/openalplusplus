@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,7 +24,7 @@
 #include "openalpp/streamupdater.h"
 #include "openalpp/stream.h"
 
-namespace openalpp {
+using namespace openalpp;
 
 Stream::Stream() throw (NameError) : SoundData() {
   buffer2_=new SoundBuffer();
@@ -33,38 +32,36 @@ Stream::Stream() throw (NameError) : SoundData() {
 }
 
 Stream::Stream(const Stream &stream) : SoundData((const SoundData &)stream) {
-  buffer2_=stream.buffer2_->Reference();
-  updater_=stream.updater_->Reference();
+  buffer2_=stream.buffer2_->reference();
+  updater_=stream.updater_->reference();
 }
 
 Stream &Stream::operator=(const Stream &stream) {
   if(this!=&stream) {
     SoundData::operator=((const SoundData &)stream);
-    buffer2_->DeReference();
-    buffer2_=stream.buffer2_->Reference();
-    updater_->DeReference();
-    updater_=stream.updater_->Reference();
+    buffer2_->deReference();
+    buffer2_=stream.buffer2_->reference();
+    updater_->deReference();
+    updater_=stream.updater_->reference();
   }
   return *this;
 }
 
 Stream::~Stream() {
   if(buffer2_)
-    buffer2_->DeReference();
+    buffer2_->deReference();
   if(updater_)
-    updater_->DeReference();
+    updater_->deReference();
 }
 
-void Stream::Record(ALuint sourcename) {
+void Stream::record(ALuint sourcename) {
   if(!updater_)
     throw FatalError("No updater thread for stream!");
-  updater_->AddSource(sourcename);
+  updater_->addSource(sourcename);
 }
 
-void Stream::Stop(ALuint sourcename) {
+void Stream::stop(ALuint sourcename) {
   if(!updater_)
     throw FatalError("No updater thread for stream!");
-  updater_->RemoveSource(sourcename);
-}
-
+  updater_->removeSource(sourcename);
 }

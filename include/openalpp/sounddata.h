@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -45,16 +44,16 @@ class OPENALPP_API SoundData : public AudioBase {
   public:
     SoundBuffer() throw (NameError);
     ~SoundBuffer();
-    SoundBuffer *Reference();
-    void DeReference() throw (FatalError);
-    ALuint GetName() {return buffername_;}
+    SoundBuffer *reference();
+    void deReference() throw (FatalError);
+    ALuint getName() {return buffername_;}
   };
  public:
   /**
    * Get the OpenAL name for the buffer.
    * @return the OpenAL name.
    */
-  ALuint GetAlBuffer() const;
+  ALuint getAlBuffer() const;
 
   /**
    * Constructor.

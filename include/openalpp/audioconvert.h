@@ -9,7 +9,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -59,7 +58,7 @@ class OPENALPP_API AudioConvert {
    * @param frequency is the frequency of the data.
    * @param size is the size of the data. It will be updated to the new size.
    */
-  void *Apply(void *data,ALenum format,unsigned int frequency,unsigned int &size);
+  void *apply(void *data,ALenum format,unsigned int frequency,unsigned int &size);
 };
 
 typedef struct _acAudioCVT {

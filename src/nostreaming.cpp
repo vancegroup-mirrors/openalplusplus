@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,27 +33,27 @@ Stream::Stream() throw (NameError) : SoundData() {
 Stream::Stream(const Stream &stream) : SoundData((const SoundData &)stream) {
 }
 
-Stream &Stream::operator=(const Stream &stream) {
+Stream &Stream::operator=(const Stream &) {
   return *this;
 }
 
 Stream::~Stream() {
 }
 
-void Stream::Record(ALuint sourcename) {
+void Stream::record(ALuint) {
 }
 
-void Stream::Stop(ALuint sourcename) {
+void Stream::stop(ALuint) {
 }
 
-NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
+/*NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
   : Stream() {
 }
 
 NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
 		     unsigned int frequency,unsigned int packetsize) 
   : Stream() {
-}
+}*/
 
 
 NetStream::NetStream(const NetStream &stream) : Stream((const Stream &)stream){
@@ -63,7 +62,7 @@ NetStream::NetStream(const NetStream &stream) : Stream((const Stream &)stream){
 NetStream::~NetStream() {
 }
 
-NetStream &NetStream::operator=(const NetStream &stream) {
+NetStream &NetStream::operator=(const NetStream&) {
   return *this;
 }
 

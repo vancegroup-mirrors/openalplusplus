@@ -9,7 +9,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -39,7 +38,7 @@
  * general code.
  */
 
-namespace openalpp {
+using namespace openalpp;
 
 void *acLoadWAV(void *data, ALuint *size, void **udata, 
                 ALushort *fmt, ALushort *chan, ALushort *freq);
@@ -93,7 +92,7 @@ AudioConvert::AudioConvert(ALenum format,unsigned int frequency)
     throw FatalError("Unknown format in AudioConvert!");
 }
 
-void *AudioConvert::Apply(void *data,ALenum format,
+void *AudioConvert::apply(void *data,ALenum format,
 			  unsigned int frequency,unsigned int &size) {
   if(format==format_ && frequency==frequency_) {
     void *ret=malloc(size);
@@ -1428,4 +1427,3 @@ void *AudioConvert(ALvoid *data,
   return s16le.buf;
 }
 
-}

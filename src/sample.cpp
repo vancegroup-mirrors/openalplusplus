@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,16 +24,16 @@
 #include "openalpp/sample.h"
 #include <sstream>
 
-namespace openalpp {
+using namespace openalpp;
 
-Sample::Sample(const char *filename) throw (FileError)
+  Sample::Sample(const std::string& filename) throw (FileError)
   : SoundData(),filename_(filename) {
   ALsizei size,bits,freq;
   ALenum format,error;
   ALvoid *data;
   ALboolean success;
 
-  success=alutLoadWAV(filename,&data,&format,&size,&bits,&freq);
+  success=alutLoadWAV(filename.c_str(),&data,&format,&size,&bits,&freq);
   if(success==AL_TRUE && data ) {
     alBufferData(buffername_,format,data,size,freq);
     if((error=alGetError())!=AL_FALSE)
@@ -51,7 +50,7 @@ Sample::Sample(const Sample &sample)
   : SoundData((const SoundData &)sample), filename_(sample.filename_) {
 }
 
-std::string Sample::GetFileName() const {
+std::string Sample::getFileName() const {
   return filename_;
 }
 
@@ -64,7 +63,7 @@ Sample &Sample::operator=(const Sample &sample) {
 }
 
 // A couple of utility functions. Might move them to their own file later...
-unsigned int SampleSize(SampleFormat format) {
+unsigned int openalpp::sampleSize(SampleFormat format) {
   switch(format) {
     case(Mono8):
       return 1;
@@ -81,7 +80,7 @@ unsigned int SampleSize(SampleFormat format) {
   }
 }
 
-unsigned int SampleSize(ALenum format) {
+unsigned int openalpp::sampleSize(ALenum format) {
   switch(format) {
     case(AL_FORMAT_MONO8):
       return 1;
@@ -98,4 +97,3 @@ unsigned int SampleSize(ALenum format) {
   }
 }
 
-}

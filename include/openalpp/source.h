@@ -5,7 +5,6 @@
  * OpenAL++ was created using the libraries:
  *                 OpenAL (http://www.openal.org), 
  *              PortAudio (http://www.portaudio.com/), and
- *              CommonC++ (http://cplusplus.sourceforge.net/)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -83,73 +82,73 @@ class OPENALPP_API Source : public SourceBase {
    * The source should _not_ be playing when doing this.
    * @param filename is the name of the file.
    */
-  void SetSound(const char *filename);
+  void setSound(const std::string& filename);
 
   /**
    * Sets a new buffer for the source.
    * The source should _not_ be playing when doing this.
    * @param buffer is the new buffer.
    */
-  void SetSound(const Sample &buffer);
+  void setSound(const Sample &buffer);
 
   /**
    * Sets a new (streamed) buffer for the source.
    * The source should _not_ be playing when doing this.
    * @param stream is the new buffer.
    */
-  void SetSound(const Stream &stream);
+  void setSound(const Stream &stream);
 
   /**
    * Gets the buffer associated with the source.
    * @return the buffer.
    */
-  const SoundData &GetSound() const;
+  const SoundData &getSound() const;
 
   /**
    * Play a file on the source.
    * This will change the source's buffer.
    * @param filename is the name of the file to play.
    */
-  void Play(const char *filename);
+  void play(const std::string& filename);
 
   /**
    * Play a buffer on the source.
    * This will change the source's buffer.
    * @param buffer is the buffer to play.
    */
-  void Play(const Sample &buffer);
+  void play(const Sample &buffer);
     
   /**
    * Play a stream on the source.
    * This will change the source's buffer.
    * @param stream is the stream to play.
    */
-  void Play(const Stream &stream);
+  void play(const Stream &stream);
     
   /**
    * Play this source.
    * This is only here, because the above Play(...) hides SourceBase::Play()
    */
-  void Play();
+  void play();
 
   /**
    * Stop this source.
    * This is needed here for streaming sources...
    */
-  void Stop();
+  void stop();
 
   /**
    * Pause this source.
    * This is needed here for streaming sources...
    */
-  void Pause();
+  void pause();
 
 
   /**
    * Check if the source is streaming.
    * @return true if the source is streaming, false otherwise.
    */
-  bool IsStreaming();
+  bool isStreaming();
     
   /**
    * Assignment operator.
