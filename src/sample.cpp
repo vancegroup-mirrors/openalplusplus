@@ -63,4 +63,39 @@ Sample &Sample::operator=(const Sample &sample) {
   return *this;
 }
 
+// A couple of utility functions. Might move them to their own file later...
+unsigned int SampleSize(SampleFormat format) {
+  switch(format) {
+    case(Mono8):
+      return 1;
+      break;
+    case(Stereo8):
+    case(Mono16):
+      return 2;
+      break;
+    case(Stereo16):
+      return 4;
+      break;
+    default:
+      return 0;
+  }
+}
+
+unsigned int SampleSize(ALenum format) {
+  switch(format) {
+    case(AL_FORMAT_MONO8):
+      return 1;
+      break;
+    case(AL_FORMAT_STEREO8):
+    case(AL_FORMAT_MONO16):
+      return 2;
+      break;
+    case(AL_FORMAT_STEREO16):
+      return 4;
+      break;
+    default:
+      return 0;
+  }
+}
+
 }
