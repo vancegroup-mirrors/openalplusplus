@@ -22,6 +22,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
 
+// TODO: Need to update this so that frequency and format can be changed after
+// the class has been instantiated (the ogg vorbis format allows this)
+
 #include "openalpp/streamupdater.h"
 
 namespace openalpp {
@@ -40,6 +43,7 @@ StreamUpdater::~StreamUpdater() {
 }
 
 void StreamUpdater::AddSource(ALuint sourcename) {
+  alSourceStop(sourcename);
   ENTER_CRITICAL;
   newsources_.push_back(sourcename);
   if(!sources_.size())
@@ -50,9 +54,6 @@ void StreamUpdater::AddSource(ALuint sourcename) {
 void StreamUpdater::RemoveSource(ALuint sourcename) {
   ENTER_CRITICAL;
   removesources_.push_back(sourcename);
-  alSourceStop(sourcename);
-  alSourceUnqueueBuffers(sourcename,2,buffers_);
-  alGetError();
   LEAVE_CRITICAL;
 }
 
@@ -60,15 +61,23 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
   if(!(length && buffer))     // Zero length or NULL pointer => return
     return false;
 
-  ALint processed,nprocessed,state,nstate;
+  ALint processed,state;
   ALuint albuffer;
 
   ENTER_CRITICAL;
 
-  while(sources_.size() && removesources_.size()>0) {
+  while(sources_.size() && removesources_.size()) {
     for(unsigned int i=0;i<sources_.size();i++)
-      if(removesources_.back()==sources_[i] && (i+1)<sources_.size()) {
-	sources_[i]=sources_[i+1];
+      if(removesources_.back()==sources_[i]) {
+	alSourceStop(removesources_.back());
+	ALuint dump[2];
+	ALint nqueued;
+	alGetSourceiv(removesources_.back(),AL_BUFFERS_QUEUED,&nqueued);
+	if(nqueued)
+	  alSourceUnqueueBuffers(removesources_.back(),nqueued,dump);
+	alGetError();
+	while((i+1)<sources_.size())
+	  sources_[i]=sources_[i+1];
 	break;
       }
     sources_.pop_back();
@@ -77,10 +86,11 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
 
   while(newsources_.size() || !sources_.size()) // Add any new sources
     if(newsources_.size()) {
-      sources_.push_back(newsources_.back());
-      alSourceQueueBuffers(newsources_.back(),2,buffers_);
-      alSourceStop(newsources_.back());
-      newsources_.pop_back();
+      while(newsources_.size()) {
+	sources_.push_back(newsources_.back());
+	alSourceStop(newsources_.back());
+	newsources_.pop_back();
+      }
     } else {
       LEAVE_CRITICAL;
       sleep(50);
@@ -91,14 +101,22 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
   while(!processed) {
     state=AL_PLAYING;
     for(unsigned int i=0;i<sources_.size();i++) {
-      alGetSourceiv(sources_[i],AL_SOURCE_STATE,&nstate);
-      state&=nstate;
+      alGetSourceiv(sources_[i],AL_SOURCE_STATE,&state);
+      if(state!=AL_PLAYING)
+	break;
     }
 
     if(state!=AL_PLAYING) {
+      ALuint dump[2];
       for(unsigned int i=0;i<sources_.size();i++) {
+	// Yeah, this sucks, but how else could the sources be kept
+	// synchronized (they have to be unless we start using different
+	// buffers for each source)...
 	alSourceStop(sources_[i]);
-        alSourceUnqueueBuffers(sources_[i],2,buffers_);
+	ALint nqueued;
+	alGetSourceiv(sources_[i],AL_BUFFERS_QUEUED,&nqueued);
+	if(nqueued)
+	  alSourceUnqueueBuffers(sources_[i],nqueued,dump);
       }
       alBufferData(buffers_[0],format_,buffer,length/2,frequency_);
       alBufferData(buffers_[1],format_,
@@ -108,11 +126,11 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
 	alSourcePlay(sources_[i]);  // TODO: This would be better handled by
 	                 // alSourcePlayv((ALuint *)&sources_[0]..)...;
       }
+      processed=1;
     } else {
       processed=1;
       for(unsigned int i=0;i<sources_.size();i++) {
-        alGetSourceiv(sources_[i],AL_BUFFERS_PROCESSED,&nprocessed);
-	processed=processed && nprocessed;
+        alGetSourceiv(sources_[i],AL_BUFFERS_PROCESSED,&processed);
 	if(!processed)
 	  break;
       }
@@ -124,36 +142,17 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
           alSourceQueueBuffers(sources_[i],1,&albuffer);
       } else {
 	LEAVE_CRITICAL;
-  ost::Thread::yield(); //ost::ccxx_sleep(50);
+	yield();
 	ENTER_CRITICAL;
-	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
+	// Not sure if this is necessary, but just in case...
+	if(removesources_.size()) {
 	  LEAVE_CRITICAL;
 	  return Update(buffer,length);
 	}
-      }
-    }
-  }
-/*
-  processed=0;
-  while(!processed) {
-    alGetSourceiv(sources_[0],AL_SOURCE_STATE,&state);
-    if(state!=AL_PLAYING) {
-      alBufferData(buffers_[0],format_,buffer,length/2,frequency_);
-      alBufferData(buffers_[1],format_,
-		   (char *)buffer+length/2,length/2,frequency_);
-      alSourceQueueBuffers(sources_[0],2,buffers_);
-      alSourcePlay(sources_[0]);
-      break;
-    }
-    alGetSourceiv(sources_[0],AL_BUFFERS_PROCESSED,&processed);
-    if(processed) {
-      alSourceUnqueueBuffers(sources_[0],1,&albuffer);
-      alBufferData(albuffer,format_,buffer,length,frequency_);
-      alSourceQueueBuffers(sources_[0],1,&albuffer);
-    } else
-      Sleep(50);
-  }
-*/  
+      } // if(processed) else
+    } // if(state!=AL_PLAYING) else
+  } // while(!processed)
+
   LEAVE_CRITICAL;
   bool ret;
   runmutex_.enterMutex();
