@@ -34,8 +34,12 @@ namespace openalpp {
  * (I.e. listeners and sources).
  */
 class PositionedObject : public AudioBase {
+
  public:
-  /**
+
+   virtual ~PositionedObject() {}
+ 
+ /**
    * Set position.
    * @param x x coordinate.
    * @param y y coordinate.

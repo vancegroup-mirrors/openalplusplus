@@ -27,7 +27,7 @@
 
 #include <iostream>
 #include <string>
-
+#include <stdexcept>
 namespace openalpp {
 
 /**
@@ -36,24 +36,24 @@ namespace openalpp {
  * error can be displayed by using "cout << error;" where error is an instance
  * of Error (or one of its descendants)
  */
-class Error {
+  class Error : public std::exception {
  public:
   /**
    * Constructor.
    * Will use a default error message.
    */
-  Error() : errorstring_("No error description") {}
+  Error() : exception("No error description") {}
 
   /**
    * Constructor.
    * @param description is error message to use.
    */
-  Error(const char *description) : errorstring_(description) {}
+  Error(const char *description) : exception(description)  {}
 
   /**
    * Copy constructor.
    */
-  Error(const Error &error) : errorstring_(error.errorstring_) {}
+  Error(const Error &error) : exception(error.what())  {}
 
   /**
    * Function used for printing.
@@ -66,7 +66,6 @@ class Error {
   /**
    * A description of the error
    */
-  std::string errorstring_;
 };
 
 /**

@@ -28,7 +28,7 @@ namespace openalpp {
 
 //##ModelId=3BDD35A001D5
 std::ostream &Error::Put(std::ostream &stream) const {
-  return (stream << errorstring_);
+  return (stream << what());
 }
 
 std::ostream &operator<<(std::ostream &stream,const Error &error) {
