@@ -4,14 +4,16 @@ namespace openalpp {
 
 NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
   : Stream() {
-  // TODO: Implement this
-  if(controlsocket)
-    ; // read stuff from it
-  else
-    ; // set defaults
-  /*  updater_=new NetUpdater(socket_,controlsocket_,
+  unsigned int frequency=11025,packetsize=1024;
+  ALenum format=AL_FORMAT_MONO8;
+  if(controlsocket) {
+    *controlsocket >> format;
+    *controlsocket >> frequency;
+    *controlsocket >> packetsize;
+  }
+  updater_=new NetUpdater(socket,controlsocket,
 			  buffername_,buffer2_->GetName(),
-			  format_,frequency_,packetsize_);*/
+			  format,frequency,packetsize);
 }
 
 NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
@@ -38,18 +40,14 @@ NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
 
 
 NetStream::NetStream(const NetStream &stream) : Stream((const Stream &)stream){
-  // TODO: Copy/Reference etc. updater..
 }
 
 NetStream::~NetStream() {
-  delete updater_;
 }
 
 NetStream &NetStream::operator=(const NetStream &stream) {
   if(&stream!=this) {
     Stream::operator=((const Stream &)stream);
-    // TODO: Delete/Dereference updater..
-    // TODO: Copy/Reference etc. updater..
   }
   return *this;
 }
