@@ -4,6 +4,7 @@ namespace openalpp {
 
 NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
   : Stream() {
+  // TODO: Implement this
   if(controlsocket)
     ; // read stuff from it
   else
@@ -37,12 +38,19 @@ NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
 
 
 NetStream::NetStream(const NetStream &stream) : Stream((const Stream &)stream){
+  // TODO: Copy/Reference etc. updater..
 }
 
 NetStream::~NetStream() {
+  delete updater_;
 }
 
 NetStream &NetStream::operator=(const NetStream &stream) {
+  if(&stream!=this) {
+    Stream::operator=((const Stream &)stream);
+    // TODO: Delete/Dereference updater..
+    // TODO: Copy/Reference etc. updater..
+  }
   return *this;
 }
 
