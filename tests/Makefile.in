@@ -2,9 +2,9 @@ MAKE=gmake
 CC=@CXX@
 LDFLAGS= -L../lib
 CFLAGS= -Wall -O3 -I../include
-LIBS= -lopenalpp
+LIBS= -lopenalpp -lopenal -lccgnu -lportaudio
 
-all:	teststream testsend testmic testlib
+all:	teststream testsend testmic simple
 	@echo "If OpenAL++ is not installed yet, Use the following to run: "
 	@echo "LD_LIBRARY_PATH=../lib/:$LD_LIBRARY_PATH ./testlib"
 
@@ -17,6 +17,8 @@ testsend: testsend.o Makefile
 	$(CC) $(LDFLAGS) $(LIBS) -o testsend testsend.o
 testmic: testmic.o Makefile
 	$(CC) $(LDFLAGS) $(LIBS) -o testmic testmic.o
+simple: simple.o Makefile
+	$(CC) $(LDFLAGS) $(LIBS) -o simple simple.o
 
 clean:
 	rm -f *.o core core.* *~
