@@ -7,6 +7,7 @@ StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
   : format_(format), frequency_(frequency), source_(0) {
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
+  nrefs_=1;
 }
 
 // TODO: Neither AddSource nor RemoveSource work as they should now...
@@ -42,6 +43,19 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
       Sleep(50);
   }
   // Unlock mutex?
+}
+
+StreamUpdater *StreamUpdater::Reference() {
+  nrefs_++;
+  return this;
+}
+
+void StreamUpdater::DeReference() throw (FatalError) {
+  nrefs_--;
+  if(!nrefs_)
+    delete this;
+  else if(nrefs_<0)
+    throw FatalError("StreamUpdater dereferenced too many times!");
 }
 
 }

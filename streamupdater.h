@@ -2,7 +2,10 @@
 #define STREAMUPDATER_H_INCLUDED_C419FA12
 
 #include <cc++/thread.h>
+extern "C" {
 #include <AL/al.h>
+}
+#include "error.h"
 #include "windowsstuff.h"
 
 namespace openalpp {
@@ -16,6 +19,11 @@ typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
  * Base class for (threaded) updating of stream buffers.
  */
 class StreamUpdater : public ost::Thread {
+  /**
+   * #references to this instance.
+   * If zero => delete this.
+   */
+  int nrefs_;
  public:
   /**
    * Constructor.
@@ -46,6 +54,17 @@ class StreamUpdater : public ost::Thread {
    * @param length is the length of the sound data (in bytes).
    */
   void Update(void *buffer,unsigned int length); 
+
+  /**
+   * Reference this updater.
+   * @return this.
+   */
+  StreamUpdater *Reference();
+
+  /**
+   * Dereference this updater.
+   */
+  void DeReference() throw (FatalError);
  protected:
   /**
    * Names of the buffers to update.
