@@ -6,21 +6,48 @@
 
 namespace openalpp {
 
-//##ModelId=3BD87B580197
+/**
+ * Class for handling streams through sockets.
+ * Preliminary tests indicate that packets smaller than ca 1 kb should not
+ * be used (tests were done with Mono8, 11025 Hz). 
+ */
 class NetStream : public Stream {
-  //##ModelId=3BDEC206031E
-  NetUpdater *updater_;
  public:
-  //##ModelId=3BD87B7402AF
-  NetStream(/*SOCKET*/int socket);
+  /**
+   * Constructor.
+   * @param socket is the socket to stream data through.
+   * @param controlsocket is an (optional) TCPStream that can be used to send
+   * information about the stream. The constructor will begin with trying to
+   * read SampleFormat, frequency, and packetsize. The sender can also use the
+   * control socket to send "EXIT" when it's run out of data to send. If
+   * this parameter is not given, defaults will be used (format=Mono8,
+   * frequency=11025, packetsize=1024).
+   */
+  NetStream(UDPSocket *socket,TCPStream *controlsocket=NULL);
 
-  //##ModelId=3BDD2D1D0069
+  /**
+   * Constructor.
+   * @param socket is the socket to stream data through.
+   * @param format is the format the data will be in.
+   * @param frequency is the frequency of the sound.
+   * @param packetsize is the size of the packets the sound will be sent in.
+   */
+  NetStream(UDPSocket *socket,SampleFormat format,unsigned int frequency,
+	    unsigned int packetsize);
+
+  /**
+   * Copy constructor.
+   */
   NetStream(const NetStream &stream);
 
-  //##ModelId=3BE6462F030C
+  /**
+   * Destructor.
+   */
   ~NetStream();
 
-  //##ModelId=3BDD2D420059
+  /**
+   * Assignment operator.
+   */
   NetStream &operator=(const NetStream &stream);
 };
 

@@ -1,8 +1,9 @@
 #ifndef SOURCE_H_INCLUDED_C419B739
 #define SOURCE_H_INCLUDED_C419B739
+
+#include "stream.h"
 #include "sourcebase.h"
 #include "sample.h"
-#include "stream.h"
 
 namespace openalpp {
 
@@ -105,6 +106,12 @@ class Source : public SourceBase {
    * This is only here, because the above Play(...) hides SourceBase::Play()
    */
   void Play();
+
+  /**
+   * Stop this source.
+   * This is needed here for streaming sources...
+   */
+  void Stop();
 
   /**
    * Check if the source is streaming.

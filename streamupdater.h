@@ -7,6 +7,11 @@
 namespace openalpp {
 
 /**
+ * Format for sound data. Mono/Stereo, 8 or 16 bits.
+ */
+typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
+
+/**
  * Base class for (threaded) updating of stream buffers.
  */
 #ifdef WIN32
@@ -17,31 +22,53 @@ class StreamUpdater : public Thread {
  public:
   /**
    * Constructor.
-   * @param buffer is the buffer to update.
+   * @param buffer1 and...
+   * @param buffer2 are the buffers used for double-buffered streaming.
+   * @param format is the (OpenAL) format of the sound.
+   * @param frequency is the frequency of the sound.
    */
-  StreamUpdater(ALuint buffer);
+  StreamUpdater(ALuint buffer1,ALuint buffer2,
+		ALenum format,unsigned int frequency);
 
   /**
-   * Dereference this instance.
+   * Add a source to the stream.
+   * @param sourcename is the OpenAL name of the source.
    */
-  void DeReference();
+  void AddSource(ALuint sourcename);
 
   /**
-   * Reference this instance.
-   * @return a pointer to this instance.
+   * Remove a source from the stream.
+   * @param sourcename is the OpenAL name of the source.
    */
-  StreamUpdater *Reference();
-
+  void RemoveSource(ALuint sourcename);
  protected:
   /**
-   * 
+   * Update the stream.
+   * I.e. add new data to play.
+   * @param buffer is a pointer to sound data.
+   * @param length is the length of the sound data (in bytes).
    */
-  void Update();
+  void Update(void *buffer,unsigned int length);
 
   /**
-   * Name of the buffer to update.
+   * Names of the buffers to update.
    */
-  ALuint buffername_;
+  ALuint buffers_[2];
+
+  /**
+   * OpenAL format of the sound data.
+   */
+  ALenum format_;
+
+  /**
+   * Frequency of the sound data.
+   */
+  unsigned int frequency_;
+
+  /**
+   * Source to update.
+   */
+  ALuint source_;
 };
 
 }

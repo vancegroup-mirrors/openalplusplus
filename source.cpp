@@ -28,14 +28,15 @@ Source::Source(const Sample &buffer,float x,float y,float z)
 Source::Source(const Stream &stream,float x,float y,float z) 
   : SourceBase(x,y,z) {
   streaming_=true;
-  // TODO: Streaming!!!
+  sounddata_=new Stream(stream);
+  //  Don't need to buffer anything; Updater should handle queueing...
 }
 
 //##ModelId=3BDD2E5D01FA
 Source::Source(const Source &source) : SourceBase(source) {
   streaming_=source.streaming_;
   if(streaming_)
-    ; // TODO: Implement streaming!!!
+    sounddata_=new Stream((const Stream &)source.GetSound());
   else
     sounddata_=new Sample((const Sample &)source.GetSound());
   alSourcei(sourcename_,AL_BUFFER,sounddata_->GetAlBuffer());
@@ -67,7 +68,8 @@ void Source::SetSound(const Sample &buffer) {
 //##ModelId=3BDD31AF02ED
 void Source::SetSound(const Stream &stream) {
   streaming_=true;
-  // TODO: Streaming !!!
+  delete sounddata_;
+  sounddata_=new Stream(stream);
 }
 
 //##ModelId=3BD8779500C0
@@ -90,11 +92,19 @@ void Source::Play(const Sample &buffer) {
 //##ModelId=3BD87875009A
 void Source::Play(const Stream &stream) {
   SetSound(stream);
+  ((Stream *)sounddata_)->Record(sourcename_);
   Play();
 }
 
 void Source::Play() {
+  if(streaming_)
+    ((Stream *)sounddata_)->Record(sourcename_);
   SourceBase::Play();
+}
+
+void Source::Stop() {
+  if(streaming_)
+    ((Stream *)sounddata_)->Stop(sourcename_);
 }
 
 //##ModelId=3BD8788F00C9
