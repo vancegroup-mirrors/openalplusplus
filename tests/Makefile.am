@@ -1,9 +1,6 @@
 
 INCLUDES = -I$(top_builddir)/include
 
-if WITH_CCGNU
-ccgnulibs = @CCGNULIBS@
-endif
 if WITH_PORTAUDIO
 portaudiolibs = -lportaudio
 endif
@@ -12,7 +9,7 @@ ogglibs = -lvorbisfile -lvorbis -logg
 endif
 
 
-LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs) $(ogglibs) -lOpenThreads
+LDADD = ../src/libopenalpp.la -lopenal $(portaudiolibs) $(ogglibs) -lOpenThreads
 
 
 noinst_PROGRAMS = testfstream multiple testmic simple moving 

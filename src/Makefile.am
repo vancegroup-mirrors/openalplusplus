@@ -13,7 +13,6 @@ basicfiles = \
     error.cpp \
     groupsource.cpp \
     referenced.cpp
-if WITH_CCGNU
 streamfiles = \
     streamupdater.cpp \
     stream.cpp
@@ -31,9 +30,7 @@ devicefiles = \
 else
 devicefiles = noinputdevice.cpp
 endif
-else
-streamfiles=nostreaming.cpp noinputdevice.cpp nofilestream.cpp
-endif
+#streamfiles=nostreaming.cpp noinputdevice.cpp nofilestream.cpp
 
 libopenalpp_la_SOURCES = $(basicfiles) $(streamfiles) $(devicefiles) $(oggfiles)
 
