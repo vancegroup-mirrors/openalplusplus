@@ -115,14 +115,13 @@ DeviceUpdater::~DeviceUpdater() {
 
 void DeviceUpdater::Run() {
   Pa_StartStream(stream_);
-  Wait();
-  Enter();
-  while(!Update(tmpbuffer_,tmpbufsize_)) {
-    Leave();
+  bool done=false;
+  do {
     Wait();
     Enter();
-  }
-  Leave();
+    done=Update(tmpbuffer_,tmpbufsize_);
+    Leave();
+  } while(!done);
   Pa_StopStream(stream_);
 }
 
