@@ -25,7 +25,6 @@
  */
 #include <openalpp/alpp.h>
 #include <iostream>
-#include <unistd.h>
 
 using namespace openalpp;
 
@@ -48,7 +47,7 @@ int main(int argc,char **argv) {
     bgsound.play();		  // Start playing
     
     
-    std::cerr << "playing " << file << " for 3 seconds: " << std::endl;
+    std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
     usleep(3000*1000);		  // Sleep for a while
     std::cerr << "Done " << std::endl;
     bgsound.stop();

@@ -26,7 +26,7 @@
  */
 #include <openalpp/alpp.h>
 #include <iostream>
-#include <unistd.h>
+
 
 using namespace openalpp;
 
@@ -35,12 +35,9 @@ using namespace openalpp;
 #endif
 
 
-int main(int argc, char **argv) {
-  std::string file = "bee.wav";
-  if (argc > 1)
-    file = argv[1];
+int main() {
   try {
-    Source beesound(file);
+    Source beesound("bee.wav");
     beesound.setGain(1);
     beesound.setLooping();
 
@@ -53,11 +50,11 @@ int main(int argc, char **argv) {
     
     const int no_laps=5;
     
-    std::cerr << "Moving " << file << " 5 laps..." << std::endl;
+    std::cerr << "Moving sound 5 laps..." << std::endl;
     
     // Do a cheat time loop.
     while(angle<(M_PI*2.0*no_laps)) {
-      usleep(int(delay*1000)); // Wait for delay milliseconds
+      usleep(delay*1000); // Wait for delay milliseconds
 
       time +=delay/1000; // Calculate the time in the loop
       angle=M_PI *time;  // What is the resulting angle
