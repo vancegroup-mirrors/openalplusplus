@@ -23,5 +23,4 @@ pkginclude_HEADERS = \
     config.h \
     referenced.h \
     ref_ptr.h
-#    netstream.h \
-#    netupdater.h \
+

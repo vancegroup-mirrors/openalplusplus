@@ -43,7 +43,7 @@ void GroupSource::play() throw (InitError,FileError) {
   SourceBase::play();
 }
 
-ALfloat FilterDoppler(ALuint source) {
+ALfloat FilterDoppler(ALuint) {
   // This space intentionally left blank. Doppler effects don't really make
   // much sense for group sources.
   return 1.0;
@@ -375,8 +375,11 @@ void GroupSource::mixSources(unsigned int frequency)
     throw FileError("Error opening file for mixing");
 
   bsize=loadsize;
+
+  // Fix to make g++3.4.2 happy
+  unsigned int usize=bsize;
   bdata=(ALshort *)converter.apply(loaddata,format,
-				   (unsigned int)freq,(unsigned int)bsize);
+				   (unsigned int)freq,usize);
 
   if(!bdata)
     throw FatalError("Error converting data to internal format!");
@@ -393,8 +396,9 @@ void GroupSource::mixSources(unsigned int frequency)
       throw FileError("Error opening file for mixing");
     
     size=loadsize;
+    unsigned int usize = size;
     data=(ALshort *)converter.apply(loaddata,format,
-				    (unsigned int)freq,(unsigned int)size);
+				    (unsigned int)freq,usize);
     if(!data)
       throw FatalError("Error converting data to internal format!");
 
@@ -411,7 +415,7 @@ void GroupSource::mixSources(unsigned int frequency)
       size=loadsize;
     } 
     ALint amp;
-    for(unsigned int i=0;i<(size/2);i++) {
+    for(ALsizei i=0;i<(size/2);i++) {
       amp=bdata[i]+data[i];
       if(amp>32767)
 	amp=32767;

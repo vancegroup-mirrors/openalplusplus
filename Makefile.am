@@ -1,7 +1,7 @@
 
 SUBDIRS =       src include tests
 
-EXTRA_DIST =    diff_ignore autogen.sh openalpp.pc.in
+EXTRA_DIST =    diff_ignore autogen.sh openalpp.pc.in VisualStudio
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = openalpp.pc

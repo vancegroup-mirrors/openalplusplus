@@ -14,18 +14,15 @@ endif
 
 LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs) $(ogglibs) -lOpenThreads
 
-bin_PROGRAMS = testfstream multiple testmic simple moving #testsend teststream  
 
-#teststream_SOURCES = teststream.cpp
-
-#testsend_SOURCES = testsend.cpp
+bin_PROGRAMS = testfstream multiple testmic simple moving 
+noinst_PROGRAMS = testfstream multiple testmic simple moving 
 
 testmic_SOURCES = testmic.cpp
 
 simple_SOURCES = simple.cpp
 
 moving_SOURCES = moving.cpp
-
 
 testfstream_SOURCES = testfstream.cpp
 

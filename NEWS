@@ -1,6 +1,9 @@
 NEWS
+2005-02-07 Anders Backman
+Minor patches applied to buildsystem
+
 2005-01-21 Anders Backman:
-Changed default device to NULL when initializing OpenAL. THis is regarded to be Best quality/performance. (See OpenAL website)
+Changed default device to NULL when initializing OpenAL. This is regarded to be Best quality/performance. (See OpenAL website)
 
 2004-11-23 Anders Backman:
 Added contructor to Sample taking raw data as parameter directly.
