@@ -617,7 +617,7 @@ ALenum _al_AC2ALFMT( ALuint acformat, ALuint channels ) {
  * audioconvert formats do not have channel information, so this should be
  * combined with _al_ALCHANNELS.
  */
-ALshort _al_AL2ACFMT( ALenum alformat ) {
+ALushort _al_AL2ACFMT( ALenum alformat ) {
   std::cerr << "_al_AL2ACFMT\n";
 
   switch( alformat ) {
