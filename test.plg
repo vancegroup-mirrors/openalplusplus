@@ -1,0 +1,46 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: test - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP1225.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib /nologo /subsystem:console /incremental:no /pdb:"Release/test.pdb" /machine:I386 /nodefaultlib:"msvcrt.lib" /out:"Release/test.exe" /libpath:"./Release" 
+.\Release\test.obj
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP1225.TMP"
+<h3>Output Window</h3>
+Linking...
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: __thiscall std::ios_base::Init::Init(void)" (??0Init@ios_base@std@@QAE@XZ) already defined in libcpmt.lib(iostream.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: __thiscall std::ios_base::Init::~Init(void)" (??1Init@ios_base@std@@QAE@XZ) already defined in libcpmt.lib(iostream.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: __thiscall std::_Winit::_Winit(void)" (??0_Winit@std@@QAE@XZ) already defined in libcpmt.lib(wiostrea.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: __thiscall std::_Winit::~_Winit(void)" (??1_Winit@std@@QAE@XZ) already defined in libcpmt.lib(wiostrea.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "private: void __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Tidy(bool)" (?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEX_N@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "private: void __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Eos(unsigned int)" (?_Eos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXI@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "private: bool __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Grow(unsigned int,bool)" (?_Grow@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAE_NI_N@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "private: void __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Split(void)" (?_Split@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXXZ) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "void __cdecl std::_Xran(void)" (?_Xran@std@@YAXXZ) already defined in libcpmt.lib(string.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "private: void __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Copy(unsigned int)" (?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAEXI@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "void __cdecl std::_Xlen(void)" (?_Xlen@std@@YAXXZ) already defined in libcpmt.lib(string.obj)
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::operator<<(float)" (??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@M@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl std::operator<<(class std::basic_ostream<char,struct std::char_traits<char> > &,char const *)" (??6std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@PBD@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::~basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(void)" (??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@XZ) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::operator<<(unsigned int)" (??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@I@Z) already defined in test.obj
+msvcprt.lib(MSVCP60.dll) : error LNK2005: "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > & __thiscall std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::assign(char const *,unsigned int)" (?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBDI@Z) already defined in libcpmt.lib(iostream.obj)
+LINK : warning LNK4049: locally defined symbol "_memmove" imported
+LINK : warning LNK4049: locally defined symbol "_malloc" imported
+LINK : warning LNK4049: locally defined symbol "_free" imported
+LINK : warning LNK4049: locally defined symbol "_realloc" imported
+Release/test.exe : fatal error LNK1169: one or more multiply defined symbols found
+Error executing link.exe.
+
+
+
+<h3>Results</h3>
+test.exe - 17 error(s), 4 warning(s)
+</pre>
+</body>
+</html>
