@@ -5,7 +5,6 @@
 #else
 #include <windows.h>
 #include <winbase.h>
-#define sleep(x) Sleep(x*1000)
 #endif
 
 using namespace std;

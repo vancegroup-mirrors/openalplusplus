@@ -6,6 +6,8 @@
 #include <AL/al.h>
 #include <AL/alut.h>
 
+using namespace ost;
+
 int main(int argc,char **argv) {
   ALvoid *data;
   ALsizei bits,freq,size;

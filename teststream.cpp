@@ -3,6 +3,7 @@
 #include "alpp.h"
 
 using namespace openalpp;
+using namespace ost;
 
 int main() {
   try {
