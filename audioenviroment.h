@@ -37,12 +37,12 @@ typedef enum DistanceModel {None,InverseDistance,InverseDistanceClamped};
  * This doesn't have to be instantiated if one does not need to set global
  * parameters.
  */
-class AudioEnviroment : public AudioBase {
+class AudioEnvironment : public AudioBase {
 public:
   /**
    * Constructor.
    */
-  AudioEnviroment() throw (InitError);
+  AudioEnvironment() throw (InitError);
     
   /**
    * Constructor.
@@ -52,7 +52,7 @@ public:
    * @param refresh is the refresh rate of the enviroment (in Hz)
    * @param synchronous is true if the enviroment is synchronous
    */
-  AudioEnviroment(int frequency,int refresh,bool synchronous)
+  AudioEnvironment(int frequency,int refresh,bool synchronous)
     throw (InitError);
 
 
@@ -63,7 +63,7 @@ public:
    * @param frequency is the playing frequency of the enviroment (in Hz)
    * @param refresh is the refresh rate of the enviroment (in Hz)
    */
-  AudioEnviroment(int frequency,int refresh=-1)
+  AudioEnvironment(int frequency,int refresh=-1)
     throw (InitError);
 
   /**

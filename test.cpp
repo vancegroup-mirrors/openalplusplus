@@ -10,7 +10,7 @@
 
 using namespace ost;
 using namespace std;
-using openalpp::AudioEnviroment;
+using openalpp::AudioEnvironment;
 using openalpp::None;
 using openalpp::InverseDistance;
 using openalpp::InverseDistanceClamped;
@@ -24,8 +24,8 @@ using openalpp::Error;
 
 int main() {
   try {
-    AudioEnviroment test;
-    //test.InitiateReverb();
+    AudioEnvironment test;
+    //    test.InitiateReverb();
     cerr << "Distance model used is: ";
     switch(test.GetDistanceModel()) {
       case(None):
@@ -79,9 +79,9 @@ int main() {
     source.SetRolloffFactor(0.3);
     source2.SetPosition(2,2,3);
     source2.SetRolloffFactor(0.3);
-    /* Best not to use reverb: OpenAL segfaults on some files.
-       source.SetReverbDelay(1.0);
-       source.SetReverbScale(0.35);*/
+    /* Best not to use reverb: OpenAL segfaults on some files. */
+    //source.SetReverbDelay(1.0);
+    //source.SetReverbScale(0.35);
     /*
       source2.SetAmbient();
       source.SetAmbient();
@@ -94,7 +94,7 @@ int main() {
     cerr << "\nCreating group source...\n";
     GroupSource gsource;
     cerr << "Including sources to it...\n";
-    //    gsource.IncludeSource(&source);
+    gsource.IncludeSource(&source);
     gsource.IncludeSource(&source2);
     gsource.SetAmbient();
     cerr << "Mixing it...\n";
@@ -121,7 +121,7 @@ int main() {
     source.Unlink(name);
     source.Link(source2);
     cerr << "\nPlaying source\n";
-    source2.Play();
+    source.Play();
     sleep(6);
     state=source.GetState();
     if(state!=Playing)
@@ -139,8 +139,5 @@ int main() {
   } catch(Error e) {
     cerr << e << "\n";
   }
-  ALenum error=alGetError();
-  if(error!=AL_FALSE)
-    cerr << "AL error not caught by OpenAL++ !\n";
   return 0;
 }
