@@ -13,13 +13,15 @@ int main(int argc,char **argv) {
   ALsizei bits,freq,size;
   ALenum format;
   ALboolean success;
-  unsigned int packetsize=1024;
+  unsigned int packetsize=10000;       // Default packet size = 10000 bytes
+
+  if(argc>1)
+    packetsize=atoi(argv[1]);
 
   try {
-    alutInit(&argc,argv);
-
-    success=alutLoadWAV("asd.wav",&data,&format,&size,&bits,&freq);
+    success=alutLoadWAV("bee.wav",&data,&format,&size,&bits,&freq);
     std::cerr << "Bits:  " << bits << " Freq: " << freq << std::endl;
+
     if(success==AL_FALSE) {
       std::cerr << "Error loading\n";
       exit(1);
@@ -29,10 +31,11 @@ int main(int argc,char **argv) {
     socket.setPeer(InetHostAddress("127.0.0.1"),33333);
 
     int totalsent=0;
-    while(totalsent<size) {
+    while(totalsent<size) {        // Send data in packets with a 100 ms delay between packets
       if((totalsent+packetsize)>size)
 	      packetsize=size-totalsent;
       totalsent+=socket.Send((char *)data+totalsent,packetsize);
+      ccxx_sleep(100);
     }
 
     free(data);
