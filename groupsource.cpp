@@ -130,11 +130,15 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   // rightx=aty*upz-upy*atz
   // righty=upx*atz-atx*upz
   // rightz=atx*upy-upx*aty
-  // TODO: Will this always be normalized?
   right[0]=orientation[1]*orientation[5]-orientation[4]*orientation[2];
   right[1]=orientation[3]*orientation[2]-orientation[0]*orientation[5];
   right[2]=orientation[0]*orientation[4]-orientation[3]*orientation[1];
-  
+  // The length of the cross-product of two normalized vectors will be sqrt(2)
+  float sqrt2=sqrt(2);
+  right[0]/=sqrt2;
+  right[1]/=sqrt2;
+  right[2]/=sqrt2;
+
   if(speaker==Left) {
     listener[0]-=5.0*right[0];
     listener[1]-=5.0*right[1];
@@ -366,7 +370,7 @@ void GroupSource::MixSources(unsigned int frequency)
     free(data);
   }
     
-  alBufferData(buffer_,AL_FORMAT_STEREO16,bdata,bsize,22050);
+  alBufferData(buffer_,AL_FORMAT_STEREO16,bdata,bsize,frequency);
   mixed_=true;
   
   free(bdata);
