@@ -37,7 +37,7 @@ namespace openalpp {
 /**
  * Updater for streams from files.
  */
-class OPENALPP_API FileStreamUpdater : public StreamUpdater {
+class FileStreamUpdater : public StreamUpdater {
   OggVorbis_File *oggfile_; // The file structure
   unsigned int buffersize_; // Size of the buffer in bytes
  public:
@@ -50,7 +50,7 @@ class OPENALPP_API FileStreamUpdater : public StreamUpdater {
    * @param frequency is the frequency of the sound data.
    * @param buffersize is the size of the buffer (in bytes)
    */
-  FileStreamUpdater(const OggVorbis_File &oggfile,
+  OPENALPP_API FileStreamUpdater(const OggVorbis_File &oggfile,
 		    const ALuint buffer1,ALuint buffer2,
 		    ALenum format,unsigned int frequency,
 		    unsigned int buffersize);
@@ -58,13 +58,13 @@ class OPENALPP_API FileStreamUpdater : public StreamUpdater {
   /**
    * Destructor.
    */
-  ~FileStreamUpdater();
+  OPENALPP_API ~FileStreamUpdater();
 
   /**
    * Inherited from Thread.
    * This will be called when the updater is Start():ed..
    */
-  void run();
+  OPENALPP_API void run();
 };
 
 }
