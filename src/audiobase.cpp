@@ -23,6 +23,7 @@
  */
 
 #include "openalpp/audiobase.h"
+#include "stdio.h"
 
 namespace openalpp {
 
