@@ -1,6 +1,4 @@
 # Microsoft Developer Studio Generated NMAKE File, Based on openalpp.dsp
-!MESSAGE Compiling openalpp.lib...
-
 !IF "$(CFG)" == ""
 CFG=openalpp - Win32 Release
 !MESSAGE No configuration specified. Defaulting to openalpp - Win32 Release.
@@ -34,11 +32,8 @@ RSC=rc.exe
 
 OUTDIR=.\Release
 INTDIR=.\Release
-# Begin Custom Macros
-OutDir=.\Release
-# End Custom Macros
 
-ALL : "$(OUTDIR)\openalpp.lib"
+ALL : ".\lib\openalpp.lib"
 
 
 CLEAN :
@@ -59,7 +54,7 @@ CLEAN :
 	-@erase "$(INTDIR)\stream.obj"
 	-@erase "$(INTDIR)\streamupdater.obj"
 	-@erase "$(INTDIR)\vc60.idb"
-	-@erase "$(OUTDIR)\openalpp.lib"
+	-@erase ".\lib\openalpp.lib"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
@@ -70,7 +65,7 @@ BSC32_FLAGS=/nologo /o"$(OUTDIR)\openalpp.bsc"
 BSC32_SBRS= \
 	
 LIB32=link.exe -lib
-LIB32_FLAGS=/nologo /out:"$(OUTDIR)\openalpp.lib" 
+LIB32_FLAGS=/nologo /out:"lib\openalpp.lib" 
 LIB32_OBJS= \
 	"$(INTDIR)\audiobase.obj" \
 	"$(INTDIR)\audioconvert.obj" \
@@ -89,7 +84,7 @@ LIB32_OBJS= \
 	"$(INTDIR)\stream.obj" \
 	"$(INTDIR)\streamupdater.obj"
 
-"$(OUTDIR)\openalpp.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+".\lib\openalpp.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
   $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
 <<
@@ -98,11 +93,8 @@ LIB32_OBJS= \
 
 OUTDIR=.\Debug
 INTDIR=.\Debug
-# Begin Custom Macros
-OutDir=.\Debug
-# End Custom Macros
 
-ALL : "$(OUTDIR)\openalpp.lib"
+ALL : ".\lib\openalppd.lib"
 
 
 CLEAN :
@@ -124,7 +116,7 @@ CLEAN :
 	-@erase "$(INTDIR)\streamupdater.obj"
 	-@erase "$(INTDIR)\vc60.idb"
 	-@erase "$(INTDIR)\vc60.pdb"
-	-@erase "$(OUTDIR)\openalpp.lib"
+	-@erase ".\lib\openalppd.lib"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
@@ -135,7 +127,7 @@ BSC32_FLAGS=/nologo /o"$(OUTDIR)\openalpp.bsc"
 BSC32_SBRS= \
 	
 LIB32=link.exe -lib
-LIB32_FLAGS=/nologo /out:"$(OUTDIR)\openalpp.lib" 
+LIB32_FLAGS=/nologo /out:"lib\openalppd.lib" 
 LIB32_OBJS= \
 	"$(INTDIR)\audiobase.obj" \
 	"$(INTDIR)\audioconvert.obj" \
@@ -154,7 +146,7 @@ LIB32_OBJS= \
 	"$(INTDIR)\stream.obj" \
 	"$(INTDIR)\streamupdater.obj"
 
-"$(OUTDIR)\openalpp.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+".\lib\openalppd.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
   $(LIB32_FLAGS) $(DEF_FLAGS) $(LIB32_OBJS)
 <<
