@@ -1,5 +1,4 @@
 #include "netupdater.h"
-#include <iostream>
 
 namespace openalpp {
 
@@ -9,11 +8,9 @@ NetUpdater::NetUpdater(ost::UDPSocket *socket,ost::TCPStream *controlsocket,
 		       unsigned int packetsize) 
   : StreamUpdater(buffer1,buffer2,format,frequency), socket_(socket)
   , controlsocket_(controlsocket), packetsize_(packetsize) {
-  cerr << "Netupdater::NetUpdater()\n";
 }
 
 void NetUpdater::Run() {
-  cerr << "NetUpdater::Run()\n";
   void *buffer=malloc(packetsize_);
   unsigned int len;
 
@@ -27,7 +24,6 @@ void NetUpdater::Run() {
 	 controlsocket_->isPending(ost::SOCKET_PENDING_INPUT,100)) {
 	char instr[100];
 	*controlsocket_ >> instr;
-	cerr << instr << " received\n";
 	break;
       }
     }
