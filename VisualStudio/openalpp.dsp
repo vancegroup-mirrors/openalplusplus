@@ -41,7 +41,7 @@ RSC=rc.exe
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD CPP /nologo /G5 /MD /W3 /GX /O2 /I "include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
+# ADD CPP /nologo /G5 /MD /W3 /GX /O2 /I "../include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
 # ADD BASE RSC /l 0x41d /d "NDEBUG"
 # ADD RSC /l 0x41d /d "NDEBUG"
 BSC32=bscmake.exe
@@ -49,7 +49,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"lib\openalpp.lib"
+# ADD LIB32 /nologo /out:"../lib\openalpp.lib"
 
 !ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
 
@@ -64,7 +64,7 @@ LIB32=link.exe -lib
 # PROP Intermediate_Dir "Debug"
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
+# ADD CPP /nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /I "../include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
 # ADD BASE RSC /l 0x41d /d "_DEBUG"
 # ADD RSC /l 0x41d /d "_DEBUG"
 BSC32=bscmake.exe
@@ -72,7 +72,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"lib\openalppd.lib"
+# ADD LIB32 /nologo /out:"../lib\openalppd.lib"
 
 !ENDIF 
 
@@ -80,292 +80,152 @@ LIB32=link.exe -lib
 
 # Name "openalpp - Win32 Release"
 # Name "openalpp - Win32 Debug"
-# Begin Group "Source Files"
+# Begin Group "Source"
 
-# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\src\audiobase.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\audiobase.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\audioconvert.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\audioconvert.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\audioenvironment.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\audioenvironment.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\deviceupdater.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\deviceupdater.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\error.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\error.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\groupsource.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\groupsource.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\inputdevice.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\inputdevice.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\listener.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\listener.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\netstream.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\netstream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\netupdater.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\netupdater.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\sample.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\sample.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\sounddata.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\sounddata.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\source.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\source.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\sourcebase.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\sourcebase.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\stream.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\stream.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\streamupdater.cpp
-
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
-
-# ADD CPP /I ".\include"
-
-!ENDIF 
-
+SOURCE=..\src\streamupdater.cpp
 # End Source File
 # End Group
-# Begin Group "Header Files"
+# Begin Group "Include"
 
-# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\include\audiobase.h
+SOURCE=..\include\openalpp\alpp.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\audioconvert.h
+SOURCE=..\include\openalpp\audiobase.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\audioenvironment.h
+SOURCE=..\include\openalpp\audioconvert.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\deviceupdater.h
+SOURCE=..\include\openalpp\audioenvironment.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\error.h
+SOURCE=..\include\openalpp\deviceupdater.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\groupsource.h
+SOURCE=..\include\openalpp\error.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\inputdevice.h
+SOURCE=..\include\openalpp\groupsource.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\listener.h
+SOURCE=..\include\openalpp\inputdevice.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\netstream.h
+SOURCE=..\include\openalpp\listener.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\netupdater.h
+SOURCE=..\include\openalpp\netstream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\positionedobject.h
+SOURCE=..\include\openalpp\netupdater.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\sample.h
+SOURCE=..\include\openalpp\positionedobject.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\sounddata.h
+SOURCE=..\include\openalpp\sample.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\source.h
+SOURCE=..\include\openalpp\sounddata.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\sourcebase.h
+SOURCE=..\include\openalpp\source.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\stream.h
+SOURCE=..\include\openalpp\sourcebase.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\streamupdater.h
+SOURCE=..\include\openalpp\stream.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\include\windowsstuff.h
+SOURCE=..\include\openalpp\streamupdater.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\openalpp\windowsstuff.h
 # End Source File
 # End Group
 # End Target

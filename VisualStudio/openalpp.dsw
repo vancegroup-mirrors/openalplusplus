@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "moving"=.\tests\moving.dsp - Package Owner=<4>
+Project: "moving"=.\moving.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -30,7 +30,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "simple"=.\tests\simple.dsp - Package Owner=<4>
+Project: "simple"=.\simple.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -45,7 +45,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "testmic"=.\tests\testmic.dsp - Package Owner=<4>
+Project: "testmic"=.\testmic.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -60,7 +60,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "testsend"=.\tests\testsend.dsp - Package Owner=<4>
+Project: "testsend"=.\testsend.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -75,7 +75,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "teststream"=.\tests\teststream.dsp - Package Owner=<4>
+Project: "teststream"=.\teststream.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
