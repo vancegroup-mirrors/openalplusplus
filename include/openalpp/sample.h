@@ -48,6 +48,16 @@ class OPENALPP_API Sample : public SoundData {
   Sample(const Sample &sample);
 
   /**
+    * Constructor.
+    * @param format to use to create sample from data.
+    * @param data use to create sample.
+    * @param size of data.
+    * @param freq of data.
+    */
+    Sample(ALenum format,ALvoid* data,ALsizei size,ALsizei freq) throw (FileError);
+ 
+
+  /**
    * Get file name of loaded file.
    * @return file name.
    */

@@ -50,6 +50,15 @@ Sample::Sample(const Sample &sample)
   : SoundData(/*(const SoundData &)*/sample), filename_(sample.filename_) {
 }
 
+Sample::Sample(ALenum format,ALvoid* data,ALsizei size,ALsizei freq) throw (FileError)
+   : SoundData() {
+   ALenum error;
+ 
+   alBufferData(buffername_,format,data,size,freq);
+   if((error=alGetError())!=AL_FALSE)
+     throw FileError("Error buffering sound");
+ }
+
 std::string Sample::getFileName() const {
   return filename_;
 }
