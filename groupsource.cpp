@@ -143,19 +143,19 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   right[1]=orientation[3]*orientation[2]-orientation[0]*orientation[5];
   right[2]=orientation[0]*orientation[4]-orientation[3]*orientation[1];
   // The length of the cross-product of two normalized vectors will be sqrt(2)
-  float sqrt2=sqrt(2);
-  right[0]/=sqrt2;
-  right[1]/=sqrt2;
-  right[2]/=sqrt2;
+  float dsqrt2=5.0/sqrt(2);
+  right[0]*=dsqrt2;
+  right[1]*=dsqrt2;
+  right[2]*=dsqrt2;
 
   if(speaker==Left) {
-    listener[0]-=5.0*right[0];
-    listener[1]-=5.0*right[1];
-    listener[2]-=5.0*right[2];
+    listener[0]-=right[0];
+    listener[1]-=right[1];
+    listener[2]-=right[2];
   } else {
-    listener[0]+=5.0*right[0];
-    listener[1]+=5.0*right[1];
-    listener[2]+=5.0*right[2];
+    listener[0]+=right[0];
+    listener[1]+=right[1];
+    listener[2]+=right[2];
   }
 
   if(relative==AL_FALSE) {  // Don't need to move it if it's relative..
@@ -218,22 +218,27 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   return gain;
 }
 
-void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size,
-			       unsigned int frequency) {
+ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
+				   ALsizei &size,unsigned int frequency) {
   if(!reverbinitiated_)
-    return;
+    return buffer;
   // out=in[i]+scale*in[i-delay]
   ALfloat delay,scale;
   delay=source->GetReverbDelay();
   scale=source->GetReverbScale();
   if(delay==0.0 || scale==0.0)
-    return;
+    return buffer;
 
   // Modify delay; 2 is for 2 channels (stereo)
   //               frequency*2==#samples
   int idelay=(int)(delay*2.0*(float)frequency*2.0);
 
-  // TODO: realloc buffer to be idelay bigger.. 
+  ALshort *tbuffer=(ALshort *)realloc(buffer,size+idelay*sizeof(ALshort));
+  if(!tbuffer)
+    throw MemoryError("Out of memory");
+  buffer=tbuffer;
+  memset(((char *)buffer)+size,0,idelay*sizeof(ALshort));
+  size+=idelay*sizeof(ALshort);
 
   ALint amp;
   for(unsigned int i=idelay;i<(size/sizeof(ALshort));i++) {
@@ -244,6 +249,7 @@ void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size,
       amp=-32768;
     buffer[i]=(ALshort)amp;
   }
+  return buffer;
 }
 
 /**
@@ -297,7 +303,7 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
 
   lgain=FilterDistance(sourcename,Left);
   rgain=FilterDistance(sourcename,Right);
-  FilterReverb(source,buffer,size,frequency);
+  buffer=FilterReverb(source,buffer,size,frequency);
   ALfloat min,max;                          // minmax filter
 #ifndef WIN32
   alGetSourcefv(sourcename,AL_MIN_GAIN,&min);
@@ -335,8 +341,9 @@ void GroupSource::MixSources(unsigned int frequency)
 
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
-  
+
   std::cerr << ((Sample &)sources_[0]->GetSound()).GetFileName().c_str() << "\n";
+
   success=
     alutLoadWAV(((Sample &)sources_[0]->GetSound()).GetFileName().c_str(),
 		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
@@ -344,7 +351,8 @@ void GroupSource::MixSources(unsigned int frequency)
     throw FileError("Error opening file for mixing");
 
   bsize=loadsize;
-  bdata=(ALshort *)converter.Apply(loaddata,format,freq,bsize);
+  bdata=(ALshort *)converter.Apply(loaddata,format,
+				   (unsigned int)freq,(unsigned int)bsize);
 
   if(!bdata)
     throw FatalError("Error converting data to internal format!");
@@ -361,7 +369,8 @@ void GroupSource::MixSources(unsigned int frequency)
       throw FileError("Error opening file for mixing");
     
     size=loadsize;
-    data=(ALshort *)converter.Apply(loaddata,format,freq,size);
+    data=(ALshort *)converter.Apply(loaddata,format,
+				    (unsigned int)freq,(unsigned int)size);
     if(!data)
       throw FatalError("Error converting data to internal format!");
 

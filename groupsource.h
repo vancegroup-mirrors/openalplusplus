@@ -46,9 +46,10 @@ class GroupSource : public SourceBase {
    * @param buffer is (a pointer to) the buffer (=memory area).
    * @param size is the size of the buffer.
    * @param frequency is the freguency of the sound.
+   * @return new pointer to buffer.
    */
-  void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size,
-				 unsigned int frequency);
+  ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
+				     ALsizei &size,unsigned int frequency);
 
   /**
    * Apply filters.
