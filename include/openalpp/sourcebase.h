@@ -84,6 +84,11 @@ class OPENALPP_API SourceBase : public PositionedObject {
   bool isLooping() const;
 
   /**
+  * @return true if source is paused, false otherwise.
+  */
+  bool isPaused() const;
+
+  /**
    * Sets the direction of the source.
    * @param directionx x value of the direction vector.
    * @param directiony y value of the direction vector.

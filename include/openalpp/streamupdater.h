@@ -83,6 +83,12 @@ namespace openalpp {
   void removeSource(ALuint sourcename);
 
   /**
+  * Seeks to specified time
+  */
+  virtual void seek(float time_s) {};
+
+
+  /**
    * Update the stream.
    * I.e. add new data to play.
    * @param buffer is a pointer to sound data.

@@ -27,6 +27,16 @@
 #include "openalpp/stream.h"
 #include "openalpp/export.h"
 
+#ifdef _DEBUG
+// for memory leak reporting
+#include <crtdbg.h>
+#define DEBUG_NEW new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+#else
+#define DEBUG_NEW new
+#endif
+
+struct OggVorbis_File;
+
 namespace openalpp {
 
 /**
@@ -42,7 +52,7 @@ class OPENALPP_API  FileStream : public Stream {
    * @param buffersize is an optional parameter specifying how large the
    * buffer should be (in samples per second).
    */
-   FileStream(const std::string& filename,const int buffersize=65536) 
+   FileStream(const std::string& filename,const int buffersize=4096) 
     throw (NameError,InitError,FileError);
 
   /**
@@ -63,6 +73,8 @@ protected:
    * Destructor.
    */
   virtual ~FileStream();
+
+    OggVorbis_File* oggfile;
 
 };
 

@@ -68,12 +68,19 @@ class OPENALPP_API Stream : public SoundData {
    Stream &operator=(const Stream &stream);
 
 
+   void prepareForDeletion() {updater_->cancel();}
+
   /**
    * Start recording.
    * I.e. start copying data to buffers.
    * @param sourcename is the (OpenAL) name of the source.
    */
    void record(ALuint sourcename);
+
+   /**
+   * Seeks to specified time
+   */
+   void seek(float time_s); 
 
   /**
    * Stop recording.

@@ -61,9 +61,15 @@ SourceBase::SourceBase(float x,float y,float z)
 
 SourceBase::~SourceBase() {
   stop();
+
   alDeleteSources(1,&sourcename_);
   //free(linkedsources_);
   delete [] linkedsources_;
+
+  if (alGetError() != AL_FALSE)
+  {
+      std::cerr << "~SourceBase() - Warning - Error deleting sources\n";
+  }
 }
   
 SourceBase::SourceBase(const SourceBase &sourcebase)
@@ -120,15 +126,38 @@ SourceBase &SourceBase::operator=(const SourceBase &sourcebase) {
 }
 
 void SourceBase::play() {
-  alSourcePlayv(nlinkedsources_,linkedsources_);
+    alSourcePlayv(nlinkedsources_,linkedsources_);
+
+    if (alGetError() != AL_NO_ERROR)
+    {
+        std::cerr << "SourceBase::play() - Warning - Error playing sources\n";
+    }
 }
 
-void SourceBase::pause() {
-  alSourcePausev(nlinkedsources_,linkedsources_);
+void SourceBase::pause() 
+{
+    if (getState() != Playing) return; // only pause when playing
+
+    alSourcePausev(nlinkedsources_,linkedsources_);
+
+    if (alGetError() != AL_NO_ERROR)
+    {
+        std::cerr << "SourceBase::pause() - Warning - Error pausing sources\n";
+    }
 }
 
 void SourceBase::stop() {
-  alSourceStopv(nlinkedsources_,linkedsources_);
+
+    SourceState state = getState();
+
+    if (state == Stopped) return; // already stopped
+
+    alSourceStopv(nlinkedsources_,linkedsources_);
+
+    if (alGetError() != AL_FALSE)
+    {
+        std::cerr << "SourceBase::stop() - Warning - Error stopping sources\n";
+    }
 }
 
 void SourceBase::rewind() {
@@ -138,6 +167,16 @@ void SourceBase::rewind() {
 SourceState SourceBase::getState() const {
   ALint state;
   alGetSourceiv(sourcename_,AL_SOURCE_STATE,&state);
+
+  if (ALenum errorCode = alGetError() != AL_FALSE)
+  {
+      /** error occurs here when switching files
+      fprintf(stderr, "SourceBase::getState() - Warning - Error getting state (%d)\n",
+          errorCode);
+      */
+  }
+  
+
   switch(state) {
     case(AL_INITIAL):
       return Initial;
@@ -163,6 +202,11 @@ bool SourceBase::isLooping() const {
   ALint looping;
   alGetSourceiv(sourcename_,AL_LOOPING,&looping);
   return (looping==AL_TRUE);
+}
+
+bool SourceBase::isPaused() const
+{
+    return (getState() == Paused);
 }
 
 void SourceBase::setDirection(float directionx, float directiony, float directionz) {

@@ -48,8 +48,6 @@ Stream &Stream::operator=(const Stream &stream) {
 }
 
 Stream::~Stream() {
-  std::cerr << "~Stream: " << buffername_ << std::endl;
-
   //if(buffer2_)
   //  buffer2_->deReference();
   //if(updater_)
@@ -60,6 +58,16 @@ void Stream::record(ALuint sourcename) {
   if(!updater_)
     throw FatalError("No updater thread for stream!");
   updater_->addSource(sourcename);
+}
+
+
+
+void Stream::seek(float time_s)
+{
+    if (updater_.valid())
+    {
+        updater_->seek(time_s);
+    }
 }
 
 void Stream::stop(ALuint sourcename) {

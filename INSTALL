@@ -16,14 +16,15 @@ OggVorbis - http://www.vorbis.com/
 OpenThreads -  http://openthreads.sourceforge.net/
   Portable thread library
 
-Portaudio - 
-  Portable library for handling input/output devices in a platform independent way.
+Deprecated:
+(Portaudio - 
+  Portable library for handling input/output devices in a platform independent way.)
 
 Download
 ---------
 To build OpenAL++ you first need to download and install OggVorbis, OpenAL, OpenThreads.
 
-The use of Portaudio is not well tested and should be considered unstable!
+(The use of Portaudio is not well tested and should be considered unstable!)
 
 Building OpenAL++ under Linux/Unix
 -----------------------------------
@@ -44,6 +45,8 @@ If you have created documentation, the man-files can also be installed:
 On some systems we have experienced problems with locking files. ("waiting for audioenvironment.o.lock) supplying --disable-libtool-lock to configure will remove that problem. This is done for you in the autogen.sh script.
 
 By default, all the files will be installed under /usr/local (e.g. the include-files under /usr/local/include). This can be changed by using the --prefix flag for autogen.sh (e.g. ./autogen.sh --prefix=/usr).
+
+The CMake configurationfiles should be considered out of date.
 
 Windows
 -------

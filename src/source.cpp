@@ -83,8 +83,28 @@ void Source::setSound(const Sample *buffer) {
   alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
 }
 
+void Source::setSound(Stream *stream) {
+  streaming_=true;
+
+  if (sounddata_.valid())
+  {
+      fprintf(stderr, "Source::setSound(Stream *stream) - "
+          "resetting stream not supported, create new source\n");
+      return;
+  }
+  sounddata_= stream;
+  alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
+}
+
 void Source::setSound(const Stream *stream) {
   streaming_=true;
+
+  if (sounddata_.valid())
+  {
+      fprintf(stderr, "Source::setSound(Stream *stream) - "
+          "resetting stream not supported, create new source\n");
+      return;
+  }
 
   sounddata_=new Stream(*stream);
   alSourcei(sourcename_,AL_BUFFER,sounddata_->getAlBuffer());
@@ -112,11 +132,21 @@ void Source::play(const Stream *stream) {
 }
 
 void Source::play() {
-  if(streaming_) {
+  if(streaming_ && !isPaused()) {
     alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
     ((Stream *)sounddata_.get())->record(sourcename_);
   }
   SourceBase::play();
+}
+
+void Source::seek(float time_s)
+{
+    if (streaming_)
+    {
+        /* continuing to use downcast for this to avoid 
+        ** modifying SoundData for now */
+        static_cast<Stream *>(sounddata_.get())->seek(time_s);
+    }
 }
 
 void Source::stop() {

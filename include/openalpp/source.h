@@ -92,6 +92,8 @@ class OPENALPP_API Source : public SourceBase {
    * The source should _not_ be playing when doing this.
    * @param stream is the new buffer.
    */
+  void setSound(Stream *stream);
+
   void setSound(const Stream *stream);
 
   /**
@@ -139,6 +141,12 @@ class OPENALPP_API Source : public SourceBase {
    */
   void pause();
 
+
+  /**
+  * Seek this source to specified time
+  * (streaming sources)
+  */
+  void seek(float time_s);
 
   /**
    * Check if the source is streaming.

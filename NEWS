@@ -1,4 +1,10 @@
 NEWS
+2005-03-23 Dewitt Colclough [dewitt@twcny.rr.com]
+Added seek() method to move in ogg streams.
+Major stability, memory leak fix for streaming ogg files.
+Fixed pause() method when streaming.
+
+
 2005-02-07 Anders Backman
 Minor patches applied to buildsystem
 

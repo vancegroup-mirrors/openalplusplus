@@ -20,33 +20,63 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
  */
-
-#ifndef __openalpp_export_h__
-#define __openalpp_export_h__
-
-#ifdef _WIN32
-
-#pragma once
-#include <windows.h>
-
-#ifdef OPENALPP_EXPORTS
-#define OPENALPP_API __declspec(dllexport)
-#else
-#define OPENALPP_API __declspec(dllimport)
-#endif
-#else
-#define OPENALPP_API
-#endif
-
-// This class is exported from the openalpp.dll
-//class OPENALPP_API Copenalpp {
-//public:
-//	Copenalpp(void);
-//	// TODO: add your methods here.
-//};
-
-//extern OPENALPP_API int nopenalpp;
-
-//OPENALPP_API int fnopenalpp(void);
-#endif
-
+
+
+#ifndef __openalpp_export_h__
+
+#define __openalpp_export_h__
+
+
+
+#ifdef _WIN32
+
+
+
+#pragma once
+
+#include <windows.h>
+
+
+
+#ifdef OPENALPP_EXPORTS
+
+#define OPENALPP_API __declspec(dllexport)
+
+#else
+
+#define OPENALPP_API __declspec(dllimport)
+
+#endif
+
+#else
+
+#define OPENALPP_API
+
+#endif
+
+
+
+// This class is exported from the openalpp.dll
+
+//class OPENALPP_API Copenalpp {
+
+//public:
+
+//	Copenalpp(void);
+
+//	// TODO: add your methods here.
+
+//};
+
+
+
+//extern OPENALPP_API int nopenalpp;
+
+
+
+//OPENALPP_API int fnopenalpp(void);
+
+#endif
+
+
+

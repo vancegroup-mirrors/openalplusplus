@@ -26,8 +26,11 @@ using namespace openalpp;
 
 SoundData::SoundBuffer::SoundBuffer() throw (NameError) {
   alGenBuffers(1,&buffername_);
+
   if(alGetError()!=AL_FALSE)
+  {
     throw NameError("Error generating buffer name");
+  }
 }
 
 SoundData::SoundBuffer::~SoundBuffer() {
@@ -44,6 +47,7 @@ SoundData::SoundData(const SoundData &sounddata)
   : AudioBase() {
     buffer_=sounddata.buffer_;
   buffername_=buffer_->getName();
+
 }
 
 SoundData::~SoundData() {
