@@ -5,9 +5,7 @@ namespace openalpp {
 static int RecordCallback(void *inputbuffer,void *outputbuffer,
 			  unsigned long nframes,
 			  PaTimestamp outtime, void *object) {
-  ((DeviceUpdater *)object)->Update(inputbuffer,nframes*2);
-
-  return 0;
+  return (int)((DeviceUpdater *)object)->Update(inputbuffer,nframes*2);
 }
 
 DeviceUpdater::DeviceUpdater(int device, unsigned int frequency,unsigned int buffersize,
