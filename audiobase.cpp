@@ -29,14 +29,15 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
       attributes[i]=0;
     }
     context_=alcCreateContext(device_,attributes);
-    if(!context_ || alcGetError(device_)!=AL_FALSE) {
+    if(!context_ || alcGetError(device_)!=ALC_NO_ERROR) {
       if(context_)
 	alcDestroyContext(context_);
       else
 	alcCloseDevice(device_);
-      throw InitError("Couldn't create context.");
-    }    
-    alcMakeContextCurrent(context_);
+      throw InitError("Couldn't create context");
+    } 
+    if(alcMakeContextCurrent(context_)!=ALC_TRUE)
+      throw InitError("Couldn't make context current");
     reverbinitiated_=false;
   }
   instances_++;
@@ -49,7 +50,13 @@ AudioBase::~AudioBase() {
   }
 }
 
-// Static member
+// Static members
 int AudioBase::instances_=0;
+ALCdevice *AudioBase::device_;
+#ifndef WIN32
+void *AudioBase::context_;
+#else
+struct ALCcontext_struct *AudioBase::context_;
+#endif
 
 }

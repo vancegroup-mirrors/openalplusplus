@@ -34,15 +34,15 @@ class AudioBase {
   /**
    * Pointer to device.
    */
-  ALCdevice *device_;
+  static ALCdevice *device_;
 
   /**
    * Pointer to context.
    */
 #ifndef WIN32
-  void *context_;
+  static void *context_;
 #else
-  struct ALCcontext_struct *context_;
+  static struct ALCcontext_struct *context_;
 #endif
  protected:
   /**
