@@ -1,3 +1,27 @@
+/**
+ * OpenAL++ - an object oriented toolkit for spatial sound
+ * Copyright (C) 2002 VRlab, Umeå University
+ *
+ * OpenAL++ was created using the libraries:
+ *                 OpenAL (http://www.openal.org), 
+ *              PortAudio (http://www.portaudio.com/), and
+ *              CommonC++ (http://cplusplus.sourceforge.net/)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
+ */
+
 #include "sourcebase.h"
 
 /**
@@ -197,6 +221,8 @@ void SourceBase::SetAmbient(bool ambient) {
   if(ambient) {
     alSourcei(sourcename_,AL_SOURCE_RELATIVE,AL_TRUE);
     alSourcef(sourcename_,AL_ROLLOFF_FACTOR,0.0);
+    // TODO: if AL_ROLLOFF_FACTOR doesn't work; set
+    // AL_MAX_GAIN=AL_MIN_GAIN=AL_GAIN for this source..
     MakeOmniDirectional();
   } else {
     alSourcei(sourcename_,AL_SOURCE_RELATIVE,AL_FALSE);

@@ -1,3 +1,27 @@
+/**
+ * OpenAL++ - an object oriented toolkit for spatial sound
+ * Copyright (C) 2002 VRlab, Umeå University
+ *
+ * OpenAL++ was created using the libraries:
+ *                 OpenAL (http://www.openal.org), 
+ *              PortAudio (http://www.portaudio.com/), and
+ *              CommonC++ (http://cplusplus.sourceforge.net/)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
+ */
+
 #ifndef AUDIOBASE_H_INCLUDED_C41996D8
 #define AUDIOBASE_H_INCLUDED_C41996D8
 
@@ -12,7 +36,19 @@ extern "C" {
 
 /**
  * \mainpage
- * This should be a short (?) text that describes OpenAL++
+ * OpenAL++ is an object oriented API for OpenAL (www.openal.org). It also uses
+ * PortAudio (www.portaudio.com) for audio capture and CommonC++ 
+ * (cplusplus.sourceforge.net) for portable threads and sockets.
+ * In addition to the functionality of OpenAL and ALUT (the OpenAL utility
+ * library), OpenAL++ has built-in support for streaming through network
+ * sockets and input devices. OpenAL++ also supports "group sources," i.e.
+ * sources that consist of several other sources mixed together.
+ *
+ * OpenAL++ has been tested on Windows and Linux. 
+ *
+ * Every class in OpenAL++ that is available to the user is a descendant of the
+ * virtual base class AudioBase. This class takes care of initialization and
+ * shutdown, so there is no need to do it explicitly.
  */
 
 /**

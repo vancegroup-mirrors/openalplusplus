@@ -1,3 +1,27 @@
+/**
+ * OpenAL++ - an object oriented toolkit for spatial sound
+ * Copyright (C) 2002 VRlab, Umeå University
+ *
+ * OpenAL++ was created using the libraries:
+ *                 OpenAL (http://www.openal.org), 
+ *              PortAudio (http://www.portaudio.com/), and
+ *              CommonC++ (http://cplusplus.sourceforge.net/)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
+ */
+
 #include "deviceupdater.h"
 
 namespace openalpp {
@@ -5,6 +29,10 @@ namespace openalpp {
 static int RecordCallback(void *inputbuffer,void *outputbuffer,
 			  unsigned long nframes,
 			  PaTimestamp outtime, void *object) {
+  // TODO: This is (probably) illegal to do in this callback. That might
+  // be the explanation for the failures on small buffer sizes. Should
+  // Implement an alternative solution that copies data and uses a semaphore
+  // to signal that data has arrived..
   return (int)((DeviceUpdater *)object)->Update(inputbuffer,nframes*2);
 }
 
