@@ -24,6 +24,7 @@
 
 #include "openalpp/deviceupdater.h"
 #include "openalpp/inputdevice.h"
+#include "openalpp/sample.h"
 #include <portaudio.h>
 
 namespace openalpp {
@@ -49,7 +50,7 @@ InputDevice::InputDevice(int device,unsigned int samplerate,unsigned int buffers
 			 SampleFormat format) {
   Init();
 
-  updater_=new DeviceUpdater(device,samplerate,buffersize,format,buffername_,buffer2_->GetName());
+  updater_=new DeviceUpdater(device,samplerate,buffersize*SampleFormat(format),format,buffername_,buffer2_->GetName());
 }
 
 InputDevice::InputDevice(const InputDevice &input)

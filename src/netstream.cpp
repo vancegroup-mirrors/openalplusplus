@@ -24,25 +24,26 @@
 
 #include "openalpp/netupdater.h"
 #include "openalpp/netstream.h"
+#include "openalpp/sample.h"
 
 namespace openalpp {
 
 NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
   : Stream() {
-  unsigned int frequency=11025,packetsize=1024;
+  unsigned int frequency=11025,buffersize=2048;
   ALenum format=AL_FORMAT_MONO8;
   if(controlsocket) {
     *controlsocket >> format;
     *controlsocket >> frequency;
-    *controlsocket >> packetsize;
+    *controlsocket >> buffersize;
   }
   updater_=new NetUpdater(socket,controlsocket,
 			  buffername_,buffer2_->GetName(),
-			  format,frequency,packetsize);
+			  format,frequency,buffersize*SampleSize(format));
 }
 
 NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
-		     unsigned int frequency,unsigned int packetsize) 
+		     unsigned int frequency,unsigned int buffersize) 
   : Stream() {
   ALenum alformat=0;
   switch(format) {
@@ -60,7 +61,7 @@ NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
       break;
   }
   updater_=new NetUpdater(socket,NULL,buffername_,buffer2_->GetName(),
-			  alformat,frequency,packetsize);
+			  alformat,frequency,buffersize*SampleSize(format));
 }
 
 

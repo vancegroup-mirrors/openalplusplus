@@ -24,6 +24,7 @@
 
 #include "openalpp/filestreamupdater.h"
 #include "openalpp/filestream.h"
+#include "openalpp/sample.h"
 
 namespace openalpp {
 
@@ -47,7 +48,7 @@ FileStream::FileStream(const char *filename,const int buffersize)
     updater_=new FileStreamUpdater(oggfile,
 				   buffername_,buffer2_->GetName(),
 				   format,ogginfo->rate,
-				   buffersize); 
+				   buffersize*SampleSize(format)); 
   } else {
     fclose(filehandle);
     throw FileError("FileStream: File of unknown type");
