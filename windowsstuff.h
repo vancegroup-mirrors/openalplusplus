@@ -13,9 +13,7 @@ inline ALboolean alutLoadWAV(const char *fname,ALvoid **buffer,ALint *format,
 }
 
 // This should take care of VC++ strange way of handling loop variables...
-#ifdef WIN32
 #define for if(0); else for
-#endif
 
 #endif
 #endif
