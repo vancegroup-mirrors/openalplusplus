@@ -23,7 +23,7 @@ class NetStream : public Stream {
    * this parameter is not given, defaults will be used (format=Mono8,
    * frequency=11025, packetsize=1024).
    */
-  NetStream(UDPSocket *socket,TCPStream *controlsocket=NULL);
+  NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket=NULL);
 
   /**
    * Constructor.
@@ -32,7 +32,7 @@ class NetStream : public Stream {
    * @param frequency is the frequency of the sound.
    * @param packetsize is the size of the packets the sound will be sent in.
    */
-  NetStream(UDPSocket *socket,SampleFormat format,unsigned int frequency,
+  NetStream(ost::UDPSocket *socket,SampleFormat format,unsigned int frequency,
 	    unsigned int packetsize);
 
   /**

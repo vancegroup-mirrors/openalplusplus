@@ -2,7 +2,7 @@
 
 namespace openalpp {
 
-NetStream::NetStream(UDPSocket *socket,TCPStream *controlsocket) 
+NetStream::NetStream(ost::UDPSocket *socket,ost::TCPStream *controlsocket) 
   : Stream() {
   if(controlsocket)
     ; // read stuff from it
@@ -13,7 +13,7 @@ NetStream::NetStream(UDPSocket *socket,TCPStream *controlsocket)
 			  format_,frequency_,packetsize_);*/
 }
 
-NetStream::NetStream(UDPSocket *socket,SampleFormat format,
+NetStream::NetStream(ost::UDPSocket *socket,SampleFormat format,
 		     unsigned int frequency,unsigned int packetsize) 
   : Stream() {
   ALenum alformat=0;

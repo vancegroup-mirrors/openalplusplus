@@ -14,12 +14,12 @@ class NetUpdater : public StreamUpdater {
   /**
    * Socket to receive sound data from.
    */
-  UDPSocket *socket_;
+  ost::UDPSocket *socket_;
 
   /**
    * Stream to receive control messages from.
    */
-  TCPStream *controlsocket_;
+  ost::TCPStream *controlsocket_;
 
   /**
    * Size of sound packets (in bytes).
@@ -37,7 +37,7 @@ class NetUpdater : public StreamUpdater {
    * @param frequency is the frequency of the sound data.
    * @param packetsize is the size of the sound packets.
    */
-  NetUpdater(UDPSocket *socket,TCPStream *controlsocket,
+  NetUpdater(ost::UDPSocket *socket,ost::TCPStream *controlsocket,
 	     const ALuint buffer1,ALuint buffer2,
 	     ALenum format,unsigned int frequency,
 	     unsigned int packetsize);

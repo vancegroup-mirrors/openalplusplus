@@ -14,11 +14,7 @@ typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
 /**
  * Base class for (threaded) updating of stream buffers.
  */
-#ifdef WIN32
 class StreamUpdater : public ost::Thread {
-#else
-class StreamUpdater : public Thread {
-#endif
  public:
   /**
    * Constructor.
