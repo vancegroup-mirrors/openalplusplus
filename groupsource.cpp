@@ -218,7 +218,8 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   return gain;
 }
 
-void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size) {
+void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size,
+			       unsigned int frequency) {
   if(!reverbinitiated_)
     return;
   // out=in[i]+scale*in[i-delay]
@@ -229,8 +230,8 @@ void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size) {
     return;
 
   // Modify delay; 2 is for 2 channels (stereo)
-  //               22050*2 is the frequency*2 (= #samples)
-  int idelay=(int)(delay*2.0*22050.0*2.0);
+  //               frequency*2==#samples
+  int idelay=(int)(delay*2.0*(float)frequency*2.0);
 
   // TODO: realloc buffer to be idelay bigger.. 
 
@@ -249,7 +250,7 @@ void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size) {
  * Apply filters to source.
  */
 ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
-				   ALsizei &size){
+				   ALsizei &size,unsigned int frequency){
   //  Apply filters: doppler,pitch,{da,reverb,coning,minmax},listenergain
   //                   -       *     *   *      *      *         -
 
@@ -296,7 +297,7 @@ ALshort *GroupSource::ApplyFilters(Source *source,ALshort *buffer,
 
   lgain=FilterDistance(sourcename,Left);
   rgain=FilterDistance(sourcename,Right);
-  FilterReverb(source,buffer,size);
+  FilterReverb(source,buffer,size,frequency);
   ALfloat min,max;                          // minmax filter
 #ifndef WIN32
   alGetSourcefv(sourcename,AL_MIN_GAIN,&min);
@@ -349,7 +350,7 @@ void GroupSource::MixSources(unsigned int frequency)
 
   free(loaddata);
 
-  bdata=ApplyFilters(sources_[0],bdata,bsize);
+  bdata=ApplyFilters(sources_[0],bdata,bsize,frequency);
 
   for(unsigned int s=1;s<sources_.size();s++) {
     success=
@@ -366,7 +367,7 @@ void GroupSource::MixSources(unsigned int frequency)
 
     free(loaddata);
 
-    data=ApplyFilters(sources_[s],data,size);
+    data=ApplyFilters(sources_[s],data,size,frequency);
 
     if(size>bsize) {
       loaddata=bdata;

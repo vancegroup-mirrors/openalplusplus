@@ -45,17 +45,21 @@ class GroupSource : public SourceBase {
    * @param source is (a pointer to) the source.
    * @param buffer is (a pointer to) the buffer (=memory area).
    * @param size is the size of the buffer.
+   * @param frequency is the freguency of the sound.
    */
-  void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size);
+  void GroupSource::FilterReverb(Source *source,ALshort *buffer,ALsizei size,
+				 unsigned int frequency);
 
   /**
    * Apply filters.
    * @param source is (a pointer to) the source.
    * @param buffer is the buffer containing the sound.
    * @param size is the size of the buffer.
+   * @param frequency is the frequency of the sound.
    * @return (new) pointer to buffer.
    */
-  ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size);
+  ALshort *ApplyFilters(Source *source,ALshort *buffer,ALsizei &size,
+			unsigned int frequency);
  public:
   /**
    * Constructor.
@@ -81,7 +85,7 @@ class GroupSource : public SourceBase {
    * @param frequency is the frequency that will be used when mixing.
    */
   void MixSources(unsigned int frequency=22050) 
-    throw (InitError,FileError,FatalError);
+    throw (InitError,FileError,FatalError,ValueError,MemoryError);
 
   /**
    * Includes a source in the group.
