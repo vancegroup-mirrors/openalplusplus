@@ -3,9 +3,6 @@
 
 #include "error.h"
 #include "audiobase.h"
-extern "C" {
-#include <AL/al.h>
-}
 
 namespace openalpp {
 

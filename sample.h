@@ -4,10 +4,6 @@
 #include "windowsstuff.h"
 #include "sounddata.h"
 #include "error.h"
-extern "C" {
-#include <AL/al.h>
-#include <AL/alut.h>
-}
 #include <string>
 
 namespace openalpp {
