@@ -8,7 +8,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
   if(!instances_) {
     // Open a write (output) device. This should (in theory) make it possible
     // to open a read (input) device later.. 
-    device_=alcOpenDevice((const ALubyte *)"'((direction \"write\"))");
+    device_=alcOpenDevice((/*const */ALubyte *)"'((direction \"write\"))");
     if(!device_)
       throw InitError("Couldn't open device.");
     int attributes[7],i=0;
