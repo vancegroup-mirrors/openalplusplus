@@ -70,7 +70,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     reverbinitiated_=false;
 
     // Check for EAX 2.0 support
-    unsigned char *szFnName=0L;
+    unsigned char szFnName[256];
     ALboolean g_bEAX = alIsExtensionPresent((ALubyte*)"EAX2.0");
     if (g_bEAX == AL_TRUE)
     {
