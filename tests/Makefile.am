@@ -9,7 +9,7 @@ if WITH_PORTAUDIO
     portaudiolibs = -lportaudio
 endif
 
-LDADD = ../src/libopenalpp.la $(ccgnulibs) $(portaudiolibs)
+LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs)
 
 if WITH_PORTAUDIO
     portaudiotests = testmic

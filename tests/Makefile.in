@@ -88,7 +88,7 @@ INCLUDES = -I$(top_builddir)/include
 
 @WITH_PORTAUDIO_TRUE@portaudiolibs = -lportaudio
 
-LDADD = ../src/libopenalpp.la $(ccgnulibs) $(portaudiolibs)
+LDADD = ../src/libopenalpp.la $(ccgnulibs) -lopenal $(portaudiolibs)
 
 @WITH_PORTAUDIO_TRUE@portaudiotests = testmic
 
