@@ -5,7 +5,7 @@ CC=g++
 LDFLAGS= -shared -Wl,-soname,libopenalpp.so.1
 CFLAGS= -Wall -O3 -fPIC -I../include
 LIBS= -lopenal -lpthread -lccgnu -lportaudio
-OBJECTS= audioenviroment.o listener.o audiobase.o sourcebase.o source.o sample.o sounddata.o stream.o error.o groupsource.o inputdevice.o netstream.o streamupdater.o deviceupdater.o netupdater.o audioconvert.o
+OBJECTS= audioenvironment.o listener.o audiobase.o sourcebase.o source.o sample.o sounddata.o stream.o error.o groupsource.o inputdevice.o netstream.o streamupdater.o deviceupdater.o netupdater.o audioconvert.o
 INCL=../include/
 
 alpp: $(OBJECTS) Makefile
@@ -14,7 +14,7 @@ alpp: $(OBJECTS) Makefile
 %.o: %.cpp $(INCL)%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 listener.o: $(INCL)positionedobject.h $(INCL)audiobase.h
-audioenviroment.o: $(INCL)audiobase.h
+audioenvironment.o: $(INCL)audiobase.h
 sourcebase.o: $(INCL)positionedobject.h $(INCL)audiobase.h $(INCL)error.h
 source.o: $(INCL)positionedobject.h $(INCL)sourcebase.h $(INCL)audiobase.h
 groupsource.o: $(INCL)positionedobject.h $(INCL)sourcebase.h $(INCL)audiobase.h $(INCL)audioconvert.h

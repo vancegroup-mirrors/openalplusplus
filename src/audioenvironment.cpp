@@ -1,4 +1,4 @@
-#include "audioenviroment.h"
+#include "audioenvironment.h"
 
 namespace openalpp {
 
