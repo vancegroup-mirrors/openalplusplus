@@ -33,9 +33,11 @@
 /*! Undef this if you intent to compile with portaudio for
     the use of device input (microphone etc).
 */
-#define USE_PORTAUDIO
+#ifdef WIN32
+#define WITH_PORTAUDIO
+#endif
 
-#ifdef USE_PORTAUDIO
+#ifdef WITH_PORTAUDIO
 #define ALPP_USE_PORTAUDIO 1
 #endif
 
