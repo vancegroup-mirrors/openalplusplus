@@ -14,20 +14,24 @@ void NetUpdater::Run() {
   void *buffer=malloc(packetsize_);
   unsigned int len;
 
-  while(1) {
-    if(socket_->isPending(ost::SOCKET_PENDING_INPUT,2000)) {
+  runmutex_.EnterMutex();
+  while(!stoprunning_) {
+    runmutex_.LeaveMutex();
+    if(socket_->isPending(ost::SOCKET_PENDING_INPUT,1000)) {
       len=socket_->Recv(buffer,packetsize_);
       Update(buffer,len);
     } else {
-      Sleep(50);
       if(controlsocket_ && 
 	 controlsocket_->isPending(ost::SOCKET_PENDING_INPUT,100)) {
 	char instr[100];
 	*controlsocket_ >> instr;
+	runmutex_.EnterMutex();
 	break;
       }
     }
+    runmutex_.EnterMutex();
   }
+  runmutex_.LeaveMutex();
   
   free(buffer);
 }
