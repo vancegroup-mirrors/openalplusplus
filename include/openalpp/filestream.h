@@ -40,9 +40,9 @@ class FileStream : public Stream {
    * isn't recognized.
    * @param filename is the name of the file to try to open.
    * @param buffersize is an optional parameter specifying how large the
-   * buffer should be.
+   * buffer should be (in samples per second).
    */
-  FileStream(const char *filename,const int buffersize=131072) 
+  FileStream(const char *filename,const int buffersize=65536) 
     throw (NameError,InitError,FileError);
 
   /**

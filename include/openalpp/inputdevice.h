@@ -49,7 +49,7 @@ class InputDevice : public Stream {
    * Constructor.
    * @param device is the device to open. -1 for default input.
    * @param samplerate is the desired sample rate.
-   * @param buffersize is the desired buffer size.
+   * @param buffersize is the desired buffer size _in samples_.
    * @param format is the desired sample format.
    */
   InputDevice(int device,unsigned int samplerate,unsigned int buffersize=1024, 
