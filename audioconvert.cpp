@@ -630,7 +630,7 @@ ALushort _al_AL2ACFMT( ALenum alformat ) {
     default:
       break;
   }
-  return -1;
+  return 0;
 }
 
 int acConvertAudio(acAudioCVT *cvt) {
