@@ -33,7 +33,7 @@
     the use of device input (microphone etc).
 */
 #ifdef WIN32
-#define WITH_PORTAUDIO
+//#define WITH_PORTAUDIO
 #endif
 
 #ifdef WITH_PORTAUDIO

@@ -7,7 +7,7 @@ OpenAL++ used to depend on CommonC++, which caused problems as CommonC++ is GLP 
 Also the initial capital letter of method names is now changed to lower-case.
 So a SetPosition() is now a setPosition()
 
-
+Portaudio is not enabled by default anymore. 
 
 2003-12-11 Anders Backman: 
 

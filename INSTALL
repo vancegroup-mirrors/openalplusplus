@@ -32,6 +32,11 @@ By default, all the files will be installed under /usr/local (e.g. the include-f
 
 Windows
 -------
+Portaudio is not included by default.
+If you want to use it, edit config.h to reflect your usage.
+Also you have to add the necessary includepath, libpath and library to the project.
+
+
 DISCLAIMER!!
 
 Recently (november 2003) there is a wrapper system for OpenAL.

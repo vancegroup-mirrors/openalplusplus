@@ -25,7 +25,7 @@
 
 namespace openalpp {
 
-FileStream::FileStream(const char *,const int)
+FileStream::FileStream(const std::string& ,const int)
   throw (NameError,InitError,FileError) : Stream() {
   throw InitError("No support for streaming from files compiled in.");
 }

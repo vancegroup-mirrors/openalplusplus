@@ -42,7 +42,7 @@ class OPENALPP_API  FileStream : public Stream {
    * @param buffersize is an optional parameter specifying how large the
    * buffer should be (in samples per second).
    */
-  FileStream(const char *filename,const int buffersize=65536) 
+   FileStream(const std::string& filename,const int buffersize=65536) 
     throw (NameError,InitError,FileError);
 
   /**

@@ -22,8 +22,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories="../include,../../portaudio/pa_common"
+				OptimizeForProcessor="3"
+				AdditionalIncludeDirectories="../include"
 				PreprocessorDefinitions="_DEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -43,11 +43,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="openthreadswin32d.lib alut.lib openal32.lib  winmm.lib  dsound.lib vorbisfile.lib ogg.lib pastaticdsd.lib"
+				AdditionalDependencies="openthreadswin32d.lib alut.lib openal32.lib  winmm.lib  dsound.lib vorbisfile_d.lib ogg_d.lib"
 				OutputFile="../bin/$(ProjectName)d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="../../portaudio/lib"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\../lib/openalppd.pdb"
 				ImportLibrary="../lib/$(ProjectName)d.lib"/>
@@ -91,7 +92,7 @@
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
 				OptimizeForProcessor="3"
-				AdditionalIncludeDirectories="../include,../../portaudio/pa_common"
+				AdditionalIncludeDirectories="../include"
 				PreprocessorDefinitions="NDEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -110,12 +111,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="openthreadswin32.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib"
+				AdditionalDependencies="openthreadswin32.lib alut.lib openal32.lib vorbisfile.lib ogg.lib winmm.lib wsock32.lib dsound.lib"
 				OutputFile="../bin/$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="../../portaudio/lib"
-				IgnoreDefaultLibraryNames="LIBCD,MSVCRTD"
+				AdditionalLibraryDirectories=""
+				IgnoreDefaultLibraryNames="LIBC"
 				ProgramDatabaseFile=".\../lib/openalpp.pdb"
 				ImportLibrary="../lib/$(ProjectName).lib"/>
 			<Tool
@@ -213,6 +214,9 @@
 			</File>
 			<File
 				RelativePath="..\include\openalpp\audioenvironment.h">
+			</File>
+			<File
+				RelativePath="..\include\openalpp\config.h">
 			</File>
 			<File
 				RelativePath="..\include\openalpp\error.h">

@@ -41,8 +41,8 @@ RSC=rc.exe
 # PROP Output_Dir "../lib"
 # PROP Intermediate_Dir ".\Debug"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
-# ADD CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
+# ADD BASE CPP /nologo /MDd /I "../include" /ZI /W3 /Od /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
+# ADD CPP /nologo /MDd /I "../include" /ZI /W3 /Od /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
 # ADD BASE MTL /nologo /D"_DEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
 # ADD MTL /nologo /D"_DEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
 # ADD BASE RSC /l 1053 /d "_DEBUG" 
@@ -51,8 +51,8 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo 
 # ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /libpath:"../../portaudio/lib" /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /libpath:"../../portaudio/lib" /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openthreadswin32d.lib alut.lib openal32.lib  winmm.lib  dsound.lib vorbisfile_d.lib ogg_d.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openthreadswin32d.lib alut.lib openal32.lib  winmm.lib  dsound.lib vorbisfile_d.lib ogg_d.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
 
 !ELSEIF  "$(CFG)" == "oalpp - Win32 Release"
 
@@ -66,8 +66,8 @@ LINK32=link.exe
 # PROP Output_Dir "../lib"
 # PROP Intermediate_Dir ".\Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
-# ADD CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
+# ADD BASE CPP /nologo /MD /I "../include" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
+# ADD CPP /nologo /MD /I "../include" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
 # ADD BASE MTL /nologo /D"NDEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
 # ADD MTL /nologo /D"NDEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
 # ADD BASE RSC /l 1053 /d "NDEBUG" 
@@ -76,8 +76,8 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo 
 # ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /libpath:"../../portaudio/lib" /nodefaultlib:"LIBCD" /nodefaultlib:"MSVCRTD" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /libpath:"../../portaudio/lib" /nodefaultlib:"LIBCD" /nodefaultlib:"MSVCRTD" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openthreadswin32.lib alut.lib openal32.lib vorbisfile.lib ogg.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /nodefaultlib:"LIBC" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openthreadswin32.lib alut.lib openal32.lib vorbisfile.lib ogg.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /nodefaultlib:"LIBC" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
 
 !ENDIF
 
@@ -102,10 +102,6 @@ SOURCE=..\src\audioenvironment.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\deviceupdater.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\error.cpp
 # End Source File
 # Begin Source File
@@ -122,19 +118,7 @@ SOURCE=..\src\groupsource.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\inputdevice.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\listener.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\netstream.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=..\src\netupdater.cpp
 # End Source File
 # Begin Source File
 
@@ -186,7 +170,7 @@ SOURCE=..\include\openalpp\audioenvironment.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\include\openalpp\deviceupdater.h
+SOURCE=..\include\openalpp\config.h
 # End Source File
 # Begin Source File
 
@@ -215,14 +199,6 @@ SOURCE=..\include\openalpp\inputdevice.h
 # Begin Source File
 
 SOURCE=..\include\openalpp\listener.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\openalpp\netstream.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\openalpp\netupdater.h
 # End Source File
 # Begin Source File
 

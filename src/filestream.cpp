@@ -32,12 +32,12 @@
 
 using namespace openalpp;
 
-FileStream::FileStream(const char *filename,const int buffersize)
+FileStream::FileStream(const std::string& filename,const int buffersize)
   throw (NameError,InitError,FileError) : Stream() {
 
-  FILE *filehandle=fopen(filename,"r");
+  FILE *filehandle=fopen(filename.c_str(),"r");
   if(!filehandle)
-    throw FileError("FileStream: Couldn't open file");
+    throw FileError("FileStream: Couldn't open file: ");
 
 #ifdef _WIN32 /* We need to set stdin/stdout to binary mode. Damn windows. */
   /* Beware the evil ifdef. We avoid these where we can, but this one we 

@@ -39,30 +39,6 @@ Package=<4>
 
 ###############################################################################
 
-Project: "testsend"=testsend.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-}}}
-
-###############################################################################
-
-Project: "teststream"=teststream.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-}}}
-
-###############################################################################
-
 Project: "testfstream"=testfstream.dsp - Package Owner=<4>
 
 Package=<5>
@@ -75,7 +51,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "openalpp"=openalpp.dsp - Package Owner=<4>
+Project: "oalpp"=openalpp.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
