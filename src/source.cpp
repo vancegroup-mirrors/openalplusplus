@@ -111,16 +111,16 @@ void Source::Play(const Sample &buffer) {
 void Source::Play(const Stream &stream) {
   alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
   SetSound(stream);
+  SourceBase::Play(); // This is needed because there might be linked sources
   ((Stream *)sounddata_)->Record(sourcename_);
-  SourceBase::Play();
 }
 
 void Source::Play() {
+  SourceBase::Play();
   if(streaming_) {
-    alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop...
+    alSourcei(sourcename_,AL_LOOPING,AL_FALSE); //Streaming sources can't loop.
     ((Stream *)sounddata_)->Record(sourcename_);
   }
-  SourceBase::Play();
 }
 
 void Source::Stop() {
