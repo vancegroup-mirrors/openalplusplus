@@ -4,6 +4,7 @@
 
 using namespace openalpp;
 using namespace ost;
+using namespace std;
 
 int main() {
   try {
@@ -12,10 +13,11 @@ int main() {
     Source source(stream);
     source.SetAmbient();
     source.Play();
-
     ccxx_sleep(10000);
-  } catch(Error e) {
+  } catch(openalpp::Error e) {
     cerr << e << "\n";
+  } catch(...) {
+    cerr << "Unknown error!\n";
   }
 
   return 0;
