@@ -32,7 +32,7 @@ void StreamUpdater::RemoveSource(ALuint sourcename) {
   LEAVE_CRITICAL;
 }
 
-void StreamUpdater::Update(void *buffer,unsigned int length) {
+bool StreamUpdater::Update(void *buffer,unsigned int length) {
   ALint processed,nprocessed,state,nstate;
   ALuint albuffer;
 
@@ -101,8 +101,7 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
 	ENTER_CRITICAL;
 	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
 	  LEAVE_CRITICAL;
-	  Update(buffer,length);
-	  return;
+	  return Update(buffer,length);
 	}
       }
     }
@@ -129,6 +128,11 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
   }
 */  
   LEAVE_CRITICAL;
+  bool ret;
+  runmutex_.EnterMutex();
+  ret=stoprunning_;
+  runmutex_.LeaveMutex();
+  return ret;
 }
 
 void StreamUpdater::Final() {

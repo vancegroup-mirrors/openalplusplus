@@ -58,8 +58,9 @@ class StreamUpdater : public ost::Thread,ost::Mutex {
    * I.e. add new data to play.
    * @param buffer is a pointer to sound data.
    * @param length is the length of the sound data (in bytes).
+   * @return done flag. I.e. stoprunning_.
    */
-  void Update(void *buffer,unsigned int length); 
+  bool Update(void *buffer,unsigned int length); 
 
   /**
    * Inherited from Thread.
