@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: testsend - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP6284.TMP" with contents
+[
+/nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"testsend___Win32_Debug/testsend.pch" /YX /Fo"testsend___Win32_Debug/" /Fd"testsend___Win32_Debug/" /FD /GZ /c 
+"C:\Source\alpp\tests\testsend.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP6284.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP6285.TMP" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openal32.lib alut.lib ccgnu32v2.lib /nologo /subsystem:console /incremental:yes /pdb:"testsend___Win32_Debug/testsend.pdb" /debug /machine:I386 /out:"testsend___Win32_Debug/testsend.exe" /pdbtype:sept 
+.\testsend___Win32_Debug\testsend.obj
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP6285.TMP"
+<h3>Output Window</h3>
+Compiling...
+testsend.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+testsend.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
