@@ -2,6 +2,7 @@
 #define STREAMUPDATER_H_INCLUDED_C419FA12
 
 #include <cc++/thread.h>
+#include <vector>
 extern "C" {
 #include <AL/al.h>
 }
@@ -18,7 +19,7 @@ typedef enum SampleFormat {Mono8,Stereo8,Mono16,Stereo16};
 /**
  * Base class for (threaded) updating of stream buffers.
  */
-class StreamUpdater : public ost::Thread {
+class StreamUpdater : public ost::Thread,ost::Mutex {
   /**
    * #references to this instance.
    * If zero => delete this.
@@ -84,7 +85,7 @@ class StreamUpdater : public ost::Thread {
   /**
    * Source to update.
    */
-  ALuint source_;
+  vector<ALuint> sources_,newsources_,removesources_;
 };
 
 }
