@@ -47,7 +47,7 @@ class AudioBase {
  protected:
   /**
    * Constructor.
-   * @param frequencey is the output frequency, in Hz.
+   * @param frequency is the output frequency, in Hz.
    * @param refresh is the refresh rate, in Hz.
    * @param is a flag for syncronous context. Values <0 indicates that the
    * default should be used.

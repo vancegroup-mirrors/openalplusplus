@@ -21,7 +21,8 @@ void GroupSource::Play() throw (InitError,FileError) {
 }
 
 ALfloat FilterDoppler(ALuint source) {
-  // TODO: Implement.. This isn't really necessary, for obvious reasons...
+  // This space intentionally left blank. Doppler effects don't really make
+  // much sense for group sources.
   return 1.0;
 }
 
@@ -233,12 +234,12 @@ ALshort *GroupSource::FilterReverb(Source *source,ALshort *buffer,
   //               frequency*2==#samples
   int idelay=(int)(delay*2.0*(float)frequency*2.0);
 
-  ALshort *tbuffer=(ALshort *)realloc(buffer,size+idelay*sizeof(ALshort));
+  ALshort *tbuffer=(ALshort *)realloc(buffer,size+2*idelay*sizeof(ALshort));
   if(!tbuffer)
     throw MemoryError("Out of memory");
   buffer=tbuffer;
-  memset(((char *)buffer)+size,0,idelay*sizeof(ALshort));
-  size+=idelay*sizeof(ALshort);
+  memset(((char *)buffer)+size,0,2*idelay*sizeof(ALshort));
+  size+=2*idelay*sizeof(ALshort);
 
   ALint amp;
   for(unsigned int i=idelay;i<(size/sizeof(ALshort));i++) {

@@ -1,7 +1,6 @@
 #ifndef LISTENER_H_INCLUDED_C419EF1E
 #define LISTENER_H_INCLUDED_C419EF1E
 #include "positionedobject.h"
-#include "error.h"
 
 namespace openalpp {
 

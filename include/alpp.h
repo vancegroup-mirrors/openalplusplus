@@ -7,9 +7,9 @@
  * No other files are needed.
  */
 
+#include "source.h"
 #include "audioenviroment.h"
 #include "listener.h"
-#include "source.h"
 #include "groupsource.h"
 #include "sample.h"
 #include "netstream.h"

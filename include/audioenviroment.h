@@ -2,7 +2,6 @@
 #define AUDIOENVIROMENT_H_INCLUDED_C4211030
 
 #include "audiobase.h"
-#include "error.h"
 
 namespace openalpp {
 
