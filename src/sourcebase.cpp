@@ -120,8 +120,7 @@ SourceBase &SourceBase::operator=(const SourceBase &sourcebase) {
 }
 
 void SourceBase::play() {
-  //alSourcePlayv(nlinkedsources_,linkedsources_);
-  alSourcePlay(nlinkedsources_);
+  alSourcePlayv(nlinkedsources_,linkedsources_);
 }
 
 void SourceBase::pause() {
