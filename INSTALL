@@ -22,23 +22,28 @@ By default, all the files will be installed under /usr/local (e.g. the include-f
 
 Windows
 -------
-OpenAL++ has been successfully compiled using Visual C++. It should work using other compilers too.
+DISCLAIMER!!
+
+Recently (november 2003) there is a wrapper system for OpenAL.
+It searches for .dll files called *openal*.dll and loads them, thinking it is an implementation
+of OpenAL32. This does not work with the previous library name of this project (openalpp.lib/.dll).
+So for now it is called open++al.dll. Its not a nice name, but I cant find out any better solution to this
+problem.
+
+
+OpenAL++ has been successfully compiled using Visual C++ 6.0/.NET2000/.NET2003. 
+It should work using other compilers too.
 
 There are three ways to compile and install OpenAl++. Whichever way you choose, you should make sure that the necessary paths (include, lib etc.) are correct. For example (in DOS) by using "set INCLUDE=%INCLUDE%;additional path here".
 - 1 -
-Open up the workspace (openalpp.dsw) in Visual C++.
+Open up the workspace (openalpp.dsw/openalpp.sln) in Visual C++.
 Make sure openalpp is the active project (Build/Set Active Configuration. Openalpp - Win32 Release).
 Be sure to set any include paths that might be necessary for PortAudio, CommonC++ and/or OpenAL. This can be done under Project/Settings/C/C++/Additional include directories.
 Also, if you have installed libraries in "non-standard" places, additional library paths should be set under Project/Settings/Link/Input/Additional library path.
 Build the library (hit F7)
-Copy openalpp.lib from the lib directory to C:\WINDOWS\SYSTEM (if the library is compiled in debug-mode, it will be called openalppd.lib)
-Create the directory alpp somewhere in your include path.
-Copy all the *.h files from include to the newly created directory.
-- 2 -
-Edit W32INST.BAT to make sure the paths are correct
-Run W32INST.BAT. nmake must be installed for this to work.
-- 3 -
-Use another compiler to compile the library and do the last three steps in 1 to install it.
+The library and dll files are named open++al.lib open++al.dll and resides in the lib and the bin directory
+in the project root.
+
 
 Other platforms
 ---------------

@@ -4,7 +4,7 @@
 
 # TARGTYPE "Win32 (x86) Console Application" 0x0103
 
-CFG=testmic - Win32 Debug
+CFG=testmic - Win32 Release
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,7 +13,7 @@ CFG=testmic - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "testmic.mak" CFG="testmic - Win32 Debug"
+!MESSAGE NMAKE /f "testmic.mak" CFG="testmic - Win32 Release"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
@@ -26,57 +26,60 @@ CFG=testmic - Win32 Debug
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 CPP=cl.exe
+MTL=midl.exe
 RSC=rc.exe
 
 !IF  "$(CFG)" == "testmic - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "testmic___Win32_Release"
-# PROP BASE Intermediate_Dir "testmic___Win32_Release"
+# PROP BASE Output_Dir ".\testmic___Win32_Release"
+# PROP BASE Intermediate_Dir ".\testmic___Win32_Release"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "testmic___Win32_Release"
-# PROP Intermediate_Dir "testmic___Win32_Release"
-# PROP Ignore_Export_Lib 0
+# PROP Output_Dir ".\testmic___Win32_Release"
+# PROP Intermediate_Dir ".\testmic___Win32_Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /G5 /MD /W3 /GX /O2 /I "..\include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FR /YX /FD /c
-# ADD BASE RSC /l 0x41d /d "NDEBUG"
-# ADD RSC /l 0x41d /d "NDEBUG"
+# ADD BASE CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GF /Gy /YX /Fp".\testmic___Win32_Release/testmic.pch" /Fo".\testmic___Win32_Release/" /Fd".\testmic___Win32_Release/" /FR /c /GX 
+# ADD CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GF /Gy /YX /Fp".\testmic___Win32_Release/testmic.pch" /Fo".\testmic___Win32_Release/" /Fd".\testmic___Win32_Release/" /FR /c /GX 
+# ADD BASE MTL /nologo /tlb".\testmic___Win32_Release\testmic.tlb" /win32 
+# ADD MTL /nologo /tlb".\testmic___Win32_Release\testmic.tlb" /win32 
+# ADD BASE RSC /l 1053 /d "NDEBUG" 
+# ADD RSC /l 1053 /d "NDEBUG" 
 BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openalpp.lib openal32.lib alut.lib ccgnu2.lib pastaticdsd.lib dsound.lib winmm.lib /nologo /subsystem:console /machine:I386 /nodefaultlib:"libcd" /out:"../bin\testmic.exe" /libpath:"..\lib"
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib pastaticdsd.lib dsound.lib winmm.lib /nologo /out:".\testmic___Win32_Release\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /libpath:"..\..\portaudio\lib" /nodefaultlib:"libcd" /pdb:".\testmic___Win32_Release\testmic.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib pastaticdsd.lib dsound.lib winmm.lib /nologo /out:".\testmic___Win32_Release\$(ProjectName).exe" /incremental:no /libpath:"..\lib" /libpath:"..\..\portaudio\lib" /nodefaultlib:"libcd" /pdb:".\testmic___Win32_Release\testmic.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
 
 !ELSEIF  "$(CFG)" == "testmic - Win32 Debug"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "testmic___Win32_Debug"
-# PROP BASE Intermediate_Dir "testmic___Win32_Debug"
+# PROP BASE Output_Dir "..\bin"
+# PROP BASE Intermediate_Dir ".\testmic___Win32_Debug"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "testmic___Win32_Debug"
-# PROP Intermediate_Dir "testmic___Win32_Debug"
-# PROP Ignore_Export_Lib 0
+# PROP Output_Dir "..\bin"
+# PROP Intermediate_Dir ".\testmic___Win32_Debug"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
-# ADD CPP /nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /I "../include" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
-# ADD BASE RSC /l 0x41d /d "_DEBUG"
-# ADD RSC /l 0x41d /d "_DEBUG"
+# ADD BASE CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" PRECOMP_VC7_TOBEREMOVED /Fp".\testmic___Win32_Debug/testmic.pch" /Fo".\testmic___Win32_Debug/" /Fd".\testmic___Win32_Debug/" /GZ /c /GX 
+# ADD CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" PRECOMP_VC7_TOBEREMOVED /Fp".\testmic___Win32_Debug/testmic.pch" /Fo".\testmic___Win32_Debug/" /Fd".\testmic___Win32_Debug/" /GZ /c /GX 
+# ADD BASE MTL /nologo /tlb".\testmic___Win32_Debug\testmic.tlb" /win32 
+# ADD MTL /nologo /tlb".\testmic___Win32_Debug\testmic.tlb" /win32 
+# ADD BASE RSC /l 1053 /d "_DEBUG" 
+# ADD RSC /l 1053 /d "_DEBUG" 
 BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib openalppd.lib openal32.lib alut.lib ccgnu2.lib pastaticdsd.lib dsound.lib winmm.lib /nologo /subsystem:console /debug /machine:I386 /nodefaultlib:"libcd.lib" /out:"../bin\testmic.exe" /pdbtype:sept /libpath:"..\lib"
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib /nologo /out:"..\bin\$(ProjectName)d.exe" /incremental:yes /libpath:"..\lib" /libpath:"..\..\portaudio\lib" /nodefaultlib:"libcd.lib" /debug /pdb:".\testmic___Win32_Debug\testmic.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib /nologo /out:"..\bin\$(ProjectName)d.exe" /incremental:yes /libpath:"..\lib" /libpath:"..\..\portaudio\lib" /nodefaultlib:"libcd.lib" /debug /pdb:".\testmic___Win32_Debug\testmic.pdb" /pdbtype:sept /subsystem:console /MACHINE:I386
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 
@@ -92,3 +95,4 @@ SOURCE=..\tests\testmic.cpp
 # End Group
 # End Target
 # End Project
+

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding = "Windows-1252"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
-	Name="openalpp"
+	Version="7.10"
+	Name="open++al"
 	ProjectGUID="{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}"
 	SccProjectName=""
 	SccLocalPath="">
@@ -23,7 +23,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories="../include"
+				AdditionalIncludeDirectories="../include,../../portaudio/pa_common"
 				PreprocessorDefinitions="_DEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -47,10 +47,10 @@
 				OutputFile="../bin/$(ProjectName)d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="../lib,c:\projects\osgvr\lib,c:\projects\ConfigScript\lib,c:\projects\vrutils\lib,C:\tools\cmltoolkit\lib.chk\win32_single_msvcrt,c:\projects\openalpp\lib"
+				AdditionalLibraryDirectories="../../portaudio/lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\../lib/openalppd.pdb"
-				ImportLibrary=".\../lib/openalppd.lib"/>
+				ImportLibrary="../lib/$(ProjectName)d.lib"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="_DEBUG"
@@ -71,7 +71,13 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -84,8 +90,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories="../include"
+				OptimizeForProcessor="3"
+				AdditionalIncludeDirectories="../include,../../portaudio/pa_common"
 				PreprocessorDefinitions="NDEBUG;_WINDOWS;_USRDLL;OPENALPP_EXPORTS;WIN32"
 				StringPooling="TRUE"
 				RuntimeLibrary="2"
@@ -108,10 +114,10 @@
 				OutputFile="../bin/$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
-				AdditionalLibraryDirectories="./lib,c:\projects\osgvr\lib,c:\projects\ConfigScript\lib,c:\projects\vrutils\lib,C:\tools\cmltoolkit\lib.rel\win32_single_msvcrt,c:\projects\openalpp\lib"
+				AdditionalLibraryDirectories="../../portaudio/lib"
 				IgnoreDefaultLibraryNames="LIBCD,MSVCRTD"
 				ProgramDatabaseFile=".\../lib/openalpp.pdb"
-				ImportLibrary=".\../lib/openalpp.lib"/>
+				ImportLibrary="../lib/$(ProjectName).lib"/>
 			<Tool
 				Name="VCMIDLTool"
 				PreprocessorDefinitions="NDEBUG"
@@ -132,9 +138,17 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
+	<References>
+	</References>
 	<Files>
 		<Filter
 			Name="Source files"

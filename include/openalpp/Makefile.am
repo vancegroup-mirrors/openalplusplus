@@ -21,4 +21,5 @@ pkginclude_HEADERS = \
     filestream.h \
     filestreamupdater.h \
     export.h \
-    windowsstuff.h 
+    windowsstuff.h \
+    config.h 

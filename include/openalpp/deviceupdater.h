@@ -28,8 +28,10 @@
 
 #include "openalpp/streamupdater.h"
 #include "openalpp/error.h"
-#include <portaudio.h>
 #include "openalpp/export.h"
+
+#ifdef ALPP_USE_PORT_AUDIO
+#include <portaudio.h>
 
 namespace openalpp {
 
@@ -88,5 +90,6 @@ class  DeviceUpdater : public StreamUpdater, public ost::Semaphore {
 };
 
 }
+#endif // ifdef ALPP_USE_PORTAUDIO
 
 #endif /* DEVICEUPDATER_H_INCLUDED_C419EA9C */

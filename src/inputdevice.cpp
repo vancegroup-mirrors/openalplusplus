@@ -25,6 +25,9 @@
 #include "openalpp/deviceupdater.h"
 #include "openalpp/inputdevice.h"
 #include "openalpp/sample.h"
+
+#ifdef ALPP_USE_PORTAUDIO
+
 #include <portaudio.h>
 
 namespace openalpp {
@@ -71,3 +74,4 @@ InputDevice::~InputDevice() {
 }
 
 }
+#endif

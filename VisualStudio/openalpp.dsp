@@ -1,24 +1,24 @@
-# Microsoft Developer Studio Project File - Name="openalpp" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="open++al" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
-# TARGTYPE "Win32 (x86) Static Library" 0x0104
+# TARGTYPE "Win32 (x86) Dynamic-Link Library" 0x0102
 
-CFG=openalpp - Win32 Debug
+CFG=open++al - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
-!MESSAGE NMAKE /f "openalpp.mak".
+!MESSAGE NMAKE /f "open++al.mak".
 !MESSAGE 
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "openalpp.mak" CFG="openalpp - Win32 Debug"
+!MESSAGE NMAKE /f "open++al.mak" CFG="open++al - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "openalpp - Win32 Release" (based on "Win32 (x86) Static Library")
-!MESSAGE "openalpp - Win32 Debug" (based on "Win32 (x86) Static Library")
+!MESSAGE "open++al - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
+!MESSAGE "open++al - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE 
 
 # Begin Project
@@ -26,61 +26,66 @@ CFG=openalpp - Win32 Debug
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 CPP=cl.exe
+MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "openalpp - Win32 Release"
-
-# PROP BASE Use_MFC 0
-# PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "Release"
-# PROP BASE Intermediate_Dir "Release"
-# PROP BASE Target_Dir ""
-# PROP Use_MFC 0
-# PROP Use_Debug_Libraries 0
-# PROP Output_Dir "Release"
-# PROP Intermediate_Dir "Release"
-# PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD CPP /nologo /G5 /MD /W3 /GX /O2 /I "../include" /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /YX /FD /c
-# ADD BASE RSC /l 0x41d /d "NDEBUG"
-# ADD RSC /l 0x41d /d "NDEBUG"
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"../lib\openalpp.lib"
-
-!ELSEIF  "$(CFG)" == "openalpp - Win32 Debug"
+!IF  "$(CFG)" == "open++al - Win32 Debug"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "Debug"
-# PROP BASE Intermediate_Dir "Debug"
+# PROP BASE Output_Dir "../lib"
+# PROP BASE Intermediate_Dir ".\Debug"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "Debug"
-# PROP Intermediate_Dir "Debug"
+# PROP Output_Dir "../lib"
+# PROP Intermediate_Dir ".\Debug"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD CPP /nologo /G5 /MDd /W3 /Gm /GX /ZI /Od /I "../include" /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /YX /FD /GZ /c
-# ADD BASE RSC /l 0x41d /d "_DEBUG"
-# ADD RSC /l 0x41d /d "_DEBUG"
+# ADD BASE CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
+# ADD CPP /nologo /MDd /I "../include" /I "../../portaudio/pa_common" /ZI /W3 /Od /G6 /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GR /YX /Fp".\Debug/openalpp.pch" /Fo".\Debug/" /Fd".\Debug/" /FR /GZ /c /GX 
+# ADD BASE MTL /nologo /D"_DEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
+# ADD MTL /nologo /D"_DEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
+# ADD BASE RSC /l 1053 /d "_DEBUG" 
+# ADD RSC /l 1053 /d "_DEBUG" 
 BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo /out:"../lib\openalppd.lib"
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
+LINK32=link.exe
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /libpath:"../../portaudio/lib" /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2d.lib alut.lib openal32.lib vorbisfile_d.lib ogg_d.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName)d.dll" /incremental:yes /libpath:"../../portaudio/lib" /debug /pdb:".\..\lib\openalppd.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName)d.lib" /MACHINE:I386
 
-!ENDIF 
+!ELSEIF  "$(CFG)" == "open++al - Win32 Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "../lib"
+# PROP BASE Intermediate_Dir ".\Release"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "../lib"
+# PROP Intermediate_Dir ".\Release"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
+# ADD CPP /nologo /MD /I "../include" /I "../../portaudio/pa_common" /W3 /Ob1 /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENALPP_EXPORTS" /D "WIN32" /D "_MBCS" /GF /Gy /GR /YX /Fp".\Release/openalpp.pch" /Fo".\Release/" /Fd".\Release/" /c /GX 
+# ADD BASE MTL /nologo /D"NDEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
+# ADD MTL /nologo /D"NDEBUG" /mktyplib203 /tlb".\..\lib\openalpp.tlb" /win32 
+# ADD BASE RSC /l 1053 /d "NDEBUG" 
+# ADD RSC /l 1053 /d "NDEBUG" 
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo 
+# ADD BSC32 /nologo 
+LINK32=link.exe
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /libpath:"../../portaudio/lib" /nodefaultlib:"LIBCD" /nodefaultlib:"MSVCRTD" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ccgnu2.lib alut.lib openal32.lib vorbisfile.lib ogg.lib pastaticdsd.lib winmm.lib wsock32.lib dsound.lib /nologo /dll /out:"..\bin\$(ProjectName).dll" /incremental:no /libpath:"../../portaudio/lib" /nodefaultlib:"LIBCD" /nodefaultlib:"MSVCRTD" /pdb:".\..\lib\openalpp.pdb" /pdbtype:sept /subsystem:windows /implib:"../lib/$(ProjectName).lib" /MACHINE:I386
+
+!ENDIF
 
 # Begin Target
 
-# Name "openalpp - Win32 Release"
-# Name "openalpp - Win32 Debug"
-# Begin Group "Source"
+# Name "open++al - Win32 Debug"
+# Name "open++al - Win32 Release"
+# Begin Group "Source files"
 
 # PROP Default_Filter ""
 # Begin Source File
@@ -105,6 +110,14 @@ SOURCE=..\src\error.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\filestream.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\filestreamupdater.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\groupsource.cpp
 # End Source File
 # Begin Source File
@@ -122,6 +135,10 @@ SOURCE=..\src\netstream.cpp
 # Begin Source File
 
 SOURCE=..\src\netupdater.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\openalpp.cpp
 # End Source File
 # Begin Source File
 
@@ -148,7 +165,7 @@ SOURCE=..\src\stream.cpp
 SOURCE=..\src\streamupdater.cpp
 # End Source File
 # End Group
-# Begin Group "Include"
+# Begin Group "Header files"
 
 # PROP Default_Filter ""
 # Begin Source File
@@ -174,6 +191,18 @@ SOURCE=..\include\openalpp\deviceupdater.h
 # Begin Source File
 
 SOURCE=..\include\openalpp\error.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\openalpp\export.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\openalpp\filestream.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\openalpp\filestreamupdater.h
 # End Source File
 # Begin Source File
 
@@ -230,3 +259,4 @@ SOURCE=..\include\openalpp\windowsstuff.h
 # End Group
 # End Target
 # End Project
+

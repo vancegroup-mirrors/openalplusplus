@@ -38,6 +38,7 @@ class OPENALPP_API PositionedObject : public AudioBase {
 
  public:
 
+   PositionedObject() {}
    virtual ~PositionedObject() {}
  
  /**

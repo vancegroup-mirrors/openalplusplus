@@ -34,6 +34,10 @@ using namespace openalpp;
 #endif
 
 int main() {
+
+#ifdef ALPP_USE_PORTAUDIO
+
+
   try {
     InputDevice mic;
 
@@ -83,6 +87,10 @@ int main() {
   std::cerr << "Press return to continue\n";
 
   std::cin.get();
+#else
+    std::cerr << "Use of portaudio is not compiled to the project" << std::endl;
+    std::cerr << "Look into the config.h and modify that if you inted to use PortAudio" << std::endl;
+#endif
 
   return 0;
 

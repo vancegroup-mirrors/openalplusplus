@@ -3,22 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "moving"=.\moving.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-    Begin Project Dependency
-    Project_Dep_Name openalpp
-    End Project Dependency
-}}}
-
-###############################################################################
-
-Project: "openalpp"=.\openalpp.dsp - Package Owner=<4>
+Project: "moving"=moving.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -30,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "simple"=.\simple.dsp - Package Owner=<4>
+Project: "simple"=simple.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -38,14 +23,11 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name openalpp
-    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "testmic"=.\testmic.dsp - Package Owner=<4>
+Project: "testmic"=testmic.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -53,14 +35,11 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name openalpp
-    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "testsend"=.\testsend.dsp - Package Owner=<4>
+Project: "testsend"=testsend.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -68,14 +47,11 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name openalpp
-    End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "teststream"=.\teststream.dsp - Package Owner=<4>
+Project: "teststream"=teststream.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -83,9 +59,30 @@ Package=<5>
 
 Package=<4>
 {{{
-    Begin Project Dependency
-    Project_Dep_Name openalpp
-    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "testfstream"=testfstream.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "openalpp"=openalpp.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
 }}}
 
 ###############################################################################
