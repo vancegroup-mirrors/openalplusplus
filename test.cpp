@@ -1,3 +1,4 @@
+#include <cc++/thread.h>
 #include "alpp.h"
 #include <iostream>
 #ifndef WIN32
@@ -7,6 +8,7 @@
 #include <winbase.h>
 #endif
 
+using namespace ost;
 using namespace std;
 using openalpp::AudioEnviroment;
 using openalpp::None;
