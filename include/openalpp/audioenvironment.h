@@ -53,6 +53,9 @@ namespace openalpp {
  * - MIN_GAIN, MAX_GAIN and MAX_DISTANCE are values used for clamping gain
  *   and distance, respectively.
  */
+#ifdef None
+#undef None // Defined in X-headers
+#endif
 typedef enum DistanceModel {None,InverseDistance,InverseDistanceClamped};
 
 /**
