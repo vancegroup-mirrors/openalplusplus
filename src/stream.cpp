@@ -48,8 +48,10 @@ Stream &Stream::operator=(const Stream &stream) {
 }
 
 Stream::~Stream() {
-  buffer2_->DeReference();
-  updater_->DeReference();
+  if(buffer2_)
+    buffer2_->DeReference();
+  if(updater_)
+    updater_->DeReference();
 }
 
 void Stream::Record(ALuint sourcename) {
