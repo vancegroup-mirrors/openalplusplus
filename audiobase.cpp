@@ -36,7 +36,7 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
 	alcCloseDevice(device_);
       throw InitError("Couldn't create context");
     } 
-    if(alcMakeContextCurrent(context_)!=ALC_TRUE)
+    if(alcMakeContextCurrent(context_)!=ALC_NO_ERROR)
       throw InitError("Couldn't make context current");
     reverbinitiated_=false;
   }
@@ -52,11 +52,11 @@ AudioBase::~AudioBase() {
 
 // Static members
 int AudioBase::instances_=0;
-ALCdevice *AudioBase::device_;
+ALCdevice *AudioBase::device_=NULL;
 #ifndef WIN32
-void *AudioBase::context_;
+void *AudioBase::context_=NULL;
 #else
-struct ALCcontext_struct *AudioBase::context_;
+struct ALCcontext_struct *AudioBase::context_=NULL;
 #endif
 
 }
