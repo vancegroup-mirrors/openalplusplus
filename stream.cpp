@@ -9,7 +9,7 @@ Stream::Stream() throw (NameError) : SoundData() {
 
 Stream::Stream(const Stream &stream) : SoundData((const SoundData &)stream) {
   buffer2_=stream.buffer2_->Reference();
-  updater_=stream.updater_;
+  updater_=stream.updater_->Reference();
 }
 
 Stream &Stream::operator=(const Stream &stream) {
@@ -17,12 +17,15 @@ Stream &Stream::operator=(const Stream &stream) {
     SoundData::operator=((const SoundData &)stream);
     buffer2_->DeReference();
     buffer2_=stream.buffer2_->Reference();
+    updater_->DeReference();
+    updater_=stream.updater_->Reference();
   }
   return *this;
 }
 
 Stream::~Stream() {
   buffer2_->DeReference();
+  updater_->DeReference();
 }
 
 void Stream::Record(ALuint sourcename) {
@@ -36,7 +39,7 @@ void Stream::Stop(ALuint sourcename) {
   if(!updater_)
     throw FatalError("No updater thread for stream!");
   updater_->RemoveSource(sourcename);
-  updater_->Suspend();   // FIXME: This isn't correct!
+  //  updater_->Suspend();   // FIXME: This isn't correct!
 }
 
 }
