@@ -1,0 +1,79 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: openalpp - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSPF3.TMP" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/openalpp.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Windows\Skrivbord\alpp\audiobase.cpp"
+"C:\Windows\Skrivbord\alpp\audioenviroment.cpp"
+"C:\Windows\Skrivbord\alpp\deviceupdater.cpp"
+"C:\Windows\Skrivbord\alpp\error.cpp"
+"C:\Windows\Skrivbord\alpp\groupsource.cpp"
+"C:\Windows\Skrivbord\alpp\inputdevice.cpp"
+"C:\Windows\Skrivbord\alpp\listener.cpp"
+"C:\Windows\Skrivbord\alpp\netstream.cpp"
+"C:\Windows\Skrivbord\alpp\netupdater.cpp"
+"C:\Windows\Skrivbord\alpp\sample.cpp"
+"C:\Windows\Skrivbord\alpp\sounddata.cpp"
+"C:\Windows\Skrivbord\alpp\source.cpp"
+"C:\Windows\Skrivbord\alpp\sourcebase.cpp"
+"C:\Windows\Skrivbord\alpp\stream.cpp"
+"C:\Windows\Skrivbord\alpp\streamupdater.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSPF3.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP00F4.TMP" with contents
+[
+/nologo /out:"Release\openalpp.lib" 
+.\Release\audiobase.obj
+.\Release\audioenviroment.obj
+.\Release\deviceupdater.obj
+.\Release\error.obj
+.\Release\groupsource.obj
+.\Release\inputdevice.obj
+.\Release\listener.obj
+.\Release\netstream.obj
+.\Release\netupdater.obj
+.\Release\sample.obj
+.\Release\sounddata.obj
+.\Release\source.obj
+.\Release\sourcebase.obj
+.\Release\stream.obj
+.\Release\streamupdater.obj
+]
+Creating command line "link.exe -lib @C:\WINDOWS\TEMP\RSP00F4.TMP"
+<h3>Output Window</h3>
+Compiling...
+audiobase.cpp
+audioenviroment.cpp
+deviceupdater.cpp
+error.cpp
+groupsource.cpp
+C:\Windows\Skrivbord\alpp\groupsource.cpp(105) : warning C4305: '+=' : truncation from 'const double' to 'float'
+C:\Windows\Skrivbord\alpp\groupsource.cpp(110) : warning C4305: '=' : truncation from 'const double' to 'float'
+C:\Windows\Skrivbord\alpp\groupsource.cpp(859) : warning C4305: 'return' : truncation from 'const int' to 'short'
+C:\Windows\Skrivbord\alpp\groupsource.cpp(859) : warning C4309: 'return' : truncation of constant value
+C:\Windows\Skrivbord\alpp\groupsource.cpp(1042) : warning C4390: ';' : empty controlled statement found; is this the intent?
+inputdevice.cpp
+listener.cpp
+netstream.cpp
+netupdater.cpp
+sample.cpp
+sounddata.cpp
+source.cpp
+sourcebase.cpp
+stream.cpp
+streamupdater.cpp
+Creating library...
+
+
+
+<h3>Results</h3>
+openalpp.lib - 0 error(s), 5 warning(s)
+</pre>
+</body>
+</html>
