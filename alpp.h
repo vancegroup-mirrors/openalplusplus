@@ -12,6 +12,7 @@
 #include "source.h"
 #include "groupsource.h"
 #include "sample.h"
-#include "stream.h"
+#include "netstream.h"
+#include "inputdevice.h"
 
 #endif
