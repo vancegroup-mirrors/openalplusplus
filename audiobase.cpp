@@ -32,12 +32,10 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
     if(!context_ || alcGetError(device_)!=ALC_NO_ERROR) {
       if(context_)
 	alcDestroyContext(context_);
-      else
-	alcCloseDevice(device_);
+      alcCloseDevice(device_);
       throw InitError("Couldn't create context");
     } 
-    if(alcMakeContextCurrent(context_)!=ALC_NO_ERROR)
-      throw InitError("Couldn't make context current");
+    alcMakeContextCurrent(context_);
     reverbinitiated_=false;
   }
   instances_++;
@@ -46,7 +44,9 @@ AudioBase::AudioBase(int frequency,int refresh,int synchronous)
 AudioBase::~AudioBase() {
   instances_--;
   if(!instances_) {
+    alcMakeContextCurrent(NULL);
     alcDestroyContext(context_);
+    alcCloseDevice(device_);
   }
 }
 
