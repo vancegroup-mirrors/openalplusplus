@@ -39,7 +39,11 @@ class AudioBase {
   /**
    * Pointer to context.
    */
+#ifndef WIN32
   void *context_;
+#else
+  struct ALCcontext_struct *context_;
+#endif
  protected:
   /**
    * Constructor.

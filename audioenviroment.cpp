@@ -119,9 +119,9 @@ void (*AudioBase::alReverbDelay)(ALuint sid, ALfloat param);
 
 void AudioEnviroment::InitiateReverb() throw (InitError) {
   alReverbScale=(void (*)(ALuint sid, ALfloat param))
-    alGetProcAddress((const ALubyte *)"alReverbScale_LOKI");
+    alGetProcAddress((ALubyte *)"alReverbScale_LOKI");
   alReverbDelay=(void (*)(ALuint sid, ALfloat param))
-    alGetProcAddress((const ALubyte *)"alReverbDelay_LOKI");
+    alGetProcAddress((ALubyte *)"alReverbDelay_LOKI");
   if(!(alReverbScale && alReverbDelay)) {
     throw InitError("Couldn't initiate reverb");
   } else

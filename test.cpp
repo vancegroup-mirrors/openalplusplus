@@ -1,7 +1,14 @@
 #include "alpp.h"
 #include <iostream>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <windows.h>
+#include <winbase.h>
+#define sleep(x) Sleep(x*1000)
+#endif
 
+using namespace std;
 using openalpp::AudioEnviroment;
 using openalpp::None;
 using openalpp::InverseDistance;

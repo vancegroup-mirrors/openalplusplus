@@ -3,11 +3,11 @@
 
 #include "sourcebase.h"
 #include "source.h"
-#ifndef WIN32
-extern "C" {
-#include "AL/alexttypes.h"
-}
-#endif
+//#ifndef WIN32
+//extern "C" {
+//#include "AL/alexttypes.h"
+//}
+//#endif
 #include <vector>
 #include <math.h>
 

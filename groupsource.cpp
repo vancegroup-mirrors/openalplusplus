@@ -27,11 +27,19 @@ ALfloat FilterDoppler(ALuint source) {
   return 1.0;
 }
 
+#ifndef WIN32
+#define AL_GAIN_LINEAR_LOKI                      0x20000
+#endif
+
 ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   ALfloat gain,maxdist,refdist,rolloff,position[3],direction[3];
   ALfloat iangle,oangle,ogain;
   ALint relative;
+#ifdef WIN32
+  alGetSourcefv(source,AL_GAIN,&gain);
+#else
   alGetSourcefv(source,AL_GAIN_LINEAR_LOKI,&gain);
+#endif
   alGetSourcefv(source,AL_MAX_DISTANCE,&maxdist);
   alGetSourcefv(source,AL_REFERENCE_DISTANCE,&refdist);
   alGetSourcefv(source,AL_ROLLOFF_FACTOR,&rolloff);
@@ -90,20 +98,20 @@ ALfloat GroupSource::FilterDistance(ALuint source,Speaker speaker) {
   }  
 
   if(theta<(iangle/2.0)) {
-    cerr << "theta<(iangle/2.0)\n";
+    std::cerr << "theta<(iangle/2.0)\n";
     // Should be empty, as it uses "normal" attenuation, as computed above
   } else if(theta<(oangle/2.0)) {
-    cerr << "theta<(oangle/2.0)\n";
+    std::cerr << "theta<(oangle/2.0)\n";
     gain+=0.01;     // This is a bit weird.. Shouldn't ogain be part of this?
     gain/=2.0;
   } else {
-    cerr << "theta>(oangle/2.0)\n";
+    std::cerr << "theta>(oangle/2.0)\n";
     if(ogain<0.01)
       gain=0.01;
     else
       gain=ogain;
   }
-  cerr << "gain=" << gain << "\n";
+  std::cerr << "gain=" << gain << "\n";
   return gain;
 }
 
@@ -226,6 +234,10 @@ typedef struct _acAudioCVT {
 #define RIFF            0x46464952
 #define WAVE            0x45564157
 #define FMT             0x20746D66
+
+#define AL_FORMAT_IMA_ADPCM_MONO16_EXT            0x10000
+#define AL_FORMAT_IMA_ADPCM_STEREO16_EXT          0x10001
+#define AL_FORMAT_WAVE_EXT                        0x10002
 
 #define NELEMS(x) ((sizeof x) / (sizeof *x))
 
@@ -882,6 +894,27 @@ struct MS_ADPCM_decodestate_FULL {
   ALshort iSamp2;
 };
 
+typedef struct WaveFMT {
+        ALushort encoding;
+        ALushort channels;               /* 1 = mono, 2 = stereo */
+        ALuint frequency;              /* One of 11025, 22050, or 44100 Hz */
+        ALuint byterate;               /* Average bytes per second */
+        ALushort blockalign;             /* Bytes per sample block */
+        ALushort bitspersample;
+} alWaveFMT_LOKI;
+
+typedef struct IMA_ADPCM_decodestate_s {
+        ALint valprev;  /* Previous output value */
+        ALbyte index;           /* Index into stepsize table */
+} alIMAADPCM_decodestate_LOKI;
+
+typedef struct IMA_ADPCM_decoder {
+        alWaveFMT_LOKI wavefmt;
+        ALushort wSamplesPerBlock;
+        /* * * */
+        alIMAADPCM_decodestate_LOKI state[2];
+} alIMAADPCM_state_LOKI;
+
 static struct MS_ADPCM_decoder_FULL {
   alWaveFMT_LOKI wavefmt;
   ALushort wSamplesPerBlock;
@@ -1522,8 +1555,8 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
   if(sources_.size()<1)
     throw InitError("Sources must be included before trying to mix");
   
-  cerr << "Load first WAV (" 
-       << ((Sample &)sources_[0]->GetSound()).GetFileName() << ")\n";
+  std::cerr << "Load first WAV (" 
+	    << ((Sample &)sources_[0]->GetSound()).GetFileName() << ")\n";
   success=
     alutLoadWAV(((Sample &)sources_[0]->GetSound()).GetFileName().c_str(),
 		(ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
@@ -1539,20 +1572,20 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
 
   free(loaddata);
 
-  cerr << "Apply filters to it\n";
+  std::cerr << "Apply filters to it\n";
   ApplyFilters(sources_[0],bdata,bsize);
 
   for(unsigned int s=1;s<sources_.size();s++) {
     unsigned int ss=s+1;
-    cerr << "Load " << ss << ((ss==1)?"st":(ss==2)?"nd":(ss==3)?"rd":"th")
-	 << " WAV\n";
+    std::cerr << "Load " << ss << ((ss==1)?"st":(ss==2)?"nd":(ss==3)?"rd":"th")
+	      << " WAV\n";
     success=
       alutLoadWAV(((Sample &)sources_[s]->GetSound()).GetFileName().c_str(),
 		  (ALvoid **)&loaddata,&format,&loadsize,&bits,&freq);
     if(success==AL_FALSE)
       throw FileError("Error opening file for mixing");
     
-    cerr << "Convert it\n";
+    std::cerr << "Convert it\n";
     data=(ALshort *)_alConvert(loaddata,format,loadsize,freq,
 			       AL_FORMAT_STEREO16,
 			       22050,(ALuint *)&size);  
@@ -1561,11 +1594,11 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
 
     free(loaddata);
 
-    cerr << "Apply filters to it\n";
+    std::cerr << "Apply filters to it\n";
     ApplyFilters(sources_[s],data,size);
 
     if(size>bsize) {
-      cerr << "size>bsize\n";
+      std::cerr << "size>bsize\n";
       loaddata=bdata;
       bdata=data;
       data=loaddata;
@@ -1586,7 +1619,7 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
 	 bsize=size;
       */
     } 
-    cerr << "bdata+=data\n";
+    std::cerr << "bdata+=data\n";
     ALint amp;
     for(int i=0;i<(size/2);i++) {
       amp=bdata[i]+data[i];
@@ -1600,7 +1633,7 @@ void GroupSource::MixSources() throw (InitError,FileError,FatalError) {
     free(data);
   }
     
-  cerr << "bsize=" << bsize << "\n";
+  std::cerr << "bsize=" << bsize << "\n";
     
   alBufferData(buffer_,AL_FORMAT_STEREO16,bdata,bsize,22050);
   mixed_=true;
