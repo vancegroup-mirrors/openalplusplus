@@ -8,8 +8,14 @@ using namespace std;
 
 int main() {
   try {
+    
+    // Create a socket and listen for streamed data
     UDPSocket socket(InetAddress("127.0.0.1"),33333);
-    NetStream stream(&socket,Mono8,11025,1024);
+
+    // Create a soundstream that will read its data from the socket
+    NetStream stream(&socket,Mono8,22500,1024);
+
+    // Create a soundsource that uses the net-streamed soundstream.
     Source source(stream);
     source.SetAmbient();
     source.Play();

@@ -18,7 +18,8 @@ int main(int argc,char **argv) {
   try {
     alutInit(&argc,argv);
 
-    success=alutLoadWAV("gamebeginning.wav",&data,&format,&size,&bits,&freq);
+    success=alutLoadWAV("asd.wav",&data,&format,&size,&bits,&freq);
+    std::cerr << "Bits:  " << bits << " Freq: " << freq << std::endl;
     if(success==AL_FALSE) {
       std::cerr << "Error loading\n";
       exit(1);
@@ -30,7 +31,7 @@ int main(int argc,char **argv) {
     int totalsent=0;
     while(totalsent<size) {
       if((totalsent+packetsize)>size)
-	packetsize=size-totalsent;
+	      packetsize=size-totalsent;
       totalsent+=socket.Send((char *)data+totalsent,packetsize);
     }
 

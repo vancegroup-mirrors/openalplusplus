@@ -1,8 +1,8 @@
 /**
  * Simple example for using OpenAL++.
- * Plays a file (named back.wav, not included) in the background.
+ * Plays a file bee.wav in the background.
  */
-#include <alpp/alpp.h>
+#include <alpp.h>
 #include <cc++/thread.h>
 #include <iostream>
 
@@ -12,7 +12,7 @@ using namespace ost;
 
 int main() {
   try {
-    Source bgsound("back.wav");   // Create source and load sound
+    Source bgsound("bee.wav");   // Create source and load sound
     bgsound.SetGain(0.6);	  // Lower gain (volume) 
     bgsound.SetAmbient();	  // Make sound ambient (i.e. not attenuated)
     bgsound.Play();		  // Start playing

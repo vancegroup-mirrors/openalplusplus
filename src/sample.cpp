@@ -23,6 +23,7 @@
  */
 
 #include "sample.h"
+#include <strstream>
 
 namespace openalpp {
 
@@ -34,13 +35,16 @@ Sample::Sample(const char *filename) throw (FileError)
   ALboolean success;
 
   success=alutLoadWAV(filename,&data,&format,&size,&bits,&freq);
-  if(success==AL_TRUE) {
+  if(success==AL_TRUE && data ) {
     alBufferData(buffername_,format,data,size,freq);
     if((error=alGetError())!=AL_FALSE)
       throw FileError("Error buffering sound");
     free(data);
-  } else 
-    throw FileError("Unable to load file");
+  } else {
+    std::strstream str;
+    str << "Unable to load file: " << filename << std::ends;
+    throw FileError(str.str());
+  }
 }
 
 Sample::Sample(const Sample &sample)
