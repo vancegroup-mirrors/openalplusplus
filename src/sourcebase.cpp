@@ -63,7 +63,8 @@ SourceBase::~SourceBase() {
   free(linkedsources_);
 }
   
-SourceBase::SourceBase(const SourceBase &sourcebase) {
+SourceBase::SourceBase(const SourceBase &sourcebase)
+  : PositionedObject(sourcebase) {
   float a,b,c;
   sourcebase.GetPosition(a,b,c);
   SetPosition(a,b,c);
