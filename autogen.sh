@@ -3,4 +3,4 @@ aclocal
 libtoolize --force
 automake --foreign --add-missing
 autoconf
-./configure $@
+./configure --disable-libtool-lock $@
