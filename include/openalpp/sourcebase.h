@@ -277,13 +277,13 @@ class OPENALPP_API SourceBase : public PositionedObject {
    * @return identifier for the linked source. This is also the OpenAL name for
    * it.
    */
-  ALuint link(const SourceBase &source) throw (MemoryError);
+  ALuint link(const SourceBase *source) throw (MemoryError);
 
   /**
    * Unlink this source from another.
    * @param source is the source to unlink.
    */
-  void unlink(const SourceBase &source) throw (NameError);
+  void unlink(const SourceBase *source) throw (NameError);
 
   /**
    * Unlink this source from another.

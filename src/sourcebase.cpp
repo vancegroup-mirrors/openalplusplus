@@ -354,7 +354,7 @@ float SourceBase::getReverbDelay() throw (InitError) {
   return reverbdelay_;
 }
 
-ALuint SourceBase::link(const SourceBase &source) throw (MemoryError) {
+ALuint SourceBase::link(const SourceBase *source) throw (MemoryError) {
   if(nlinkedsources_>=alloclinkedsources_) {
     alloclinkedsources_+=5;
     linkedsources_=(ALuint *)realloc(linkedsources_,
@@ -362,15 +362,15 @@ ALuint SourceBase::link(const SourceBase &source) throw (MemoryError) {
     if(!linkedsources_)
       throw MemoryError("realloc failed");
   }
-  linkedsources_[nlinkedsources_++]=source.getAlSource();
-  return source.getAlSource();
+  linkedsources_[nlinkedsources_++]=source->getAlSource();
+  return source->getAlSource();
 }
 
-void SourceBase::unlink(const SourceBase &source) throw (NameError) {
-  if(source.sourcename_==sourcename_)
+void SourceBase::unlink(const SourceBase *source) throw (NameError) {
+  if(source->sourcename_==sourcename_)
     throw(NameError("Can't unlink a source from itself!"));
   for(unsigned int i=0;i<nlinkedsources_;i++)
-    if(linkedsources_[i]==source.sourcename_) {
+    if(linkedsources_[i]==source->sourcename_) {
       linkedsources_[i]=linkedsources_[--nlinkedsources_];
       return;
     }
