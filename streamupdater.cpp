@@ -4,18 +4,17 @@ namespace openalpp {
 
 StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
 			     ALenum format,unsigned int frequency) 
-  : format_(format), frequency_(frequency) {
+  : format_(format), frequency_(frequency), stoprunning_(false) {
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
   nrefs_=1;
-  setCancel(ost::THREAD_CANCEL_IMMEDIATE);
+  setCancel(ost::THREAD_CANCEL_DISABLED);
 }
 
 StreamUpdater::~StreamUpdater() {
   Terminate();
 }
 
-// TODO: Neither AddSource nor RemoveSource work as they should now...
 void StreamUpdater::AddSource(ALuint sourcename) {
   ENTER_CRITICAL;
   newsources_.push_back(sourcename);
@@ -39,14 +38,12 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
 
   ENTER_CRITICAL;
 
-  while(removesources_.size()>0) {
-    bool found=false;
-    for(unsigned int i=0;i<sources_.size();i++) {
-      if(removesources_.back()==sources_[i])
-	found=true;
-      if(found && (i+1)<sources_.size())
+  while(sources_.size() && removesources_.size()>0) {
+    for(unsigned int i=0;i<sources_.size();i++)
+      if(removesources_.back()==sources_[i] && (i+1)<sources_.size()) {
 	sources_[i]=sources_[i+1];
-    }
+	break;
+      }
     sources_.pop_back();
     removesources_.pop_back();
   }
@@ -81,7 +78,8 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
 		   (char *)buffer+length/2,length/2,frequency_);
       for(unsigned int i=0;i<sources_.size();i++) {
         alSourceQueueBuffers(sources_[i],2,buffers_);
-	alSourcePlay(sources_[i]);  // TODO: This would be better handled by alSourcePlayv..
+	alSourcePlay(sources_[i]);  // TODO: This would be better handled by
+	                 // alSourcePlayv((ALuint *)&sources_[0]..)...;
       }
     } else {
       processed=1;
@@ -133,6 +131,10 @@ void StreamUpdater::Update(void *buffer,unsigned int length) {
   LEAVE_CRITICAL;
 }
 
+void StreamUpdater::Final() {
+  delete this;
+} 
+
 StreamUpdater *StreamUpdater::Reference() {
   nrefs_++;
   return this;
@@ -140,9 +142,11 @@ StreamUpdater *StreamUpdater::Reference() {
 
 void StreamUpdater::DeReference() throw (FatalError) {
   nrefs_--;
-  if(!nrefs_)
-    delete this;
-  else if(nrefs_<0)
+  if(!nrefs_) {
+    runmutex_.EnterMutex();
+    stoprunning_=true;
+    runmutex_.LeaveMutex();
+  } else if(nrefs_<0)
     throw FatalError("StreamUpdater dereferenced too many times!");
 }
 
