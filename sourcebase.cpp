@@ -33,6 +33,7 @@ SourceBase::SourceBase(float x,float y,float z)
 }
 
 SourceBase::~SourceBase() {
+  Stop();
   alDeleteSources(1,&sourcename_);
   free(linkedsources_);
 }
@@ -80,27 +81,22 @@ SourceBase &SourceBase::operator=(const SourceBase &sourcebase) {
   return *this;
 }
 
-//##ModelId=3BD86A43017B
 void SourceBase::Play() {
   alSourcePlayv(nlinkedsources_,linkedsources_);
 }
 
-//##ModelId=3BD86A5E01AC
 void SourceBase::Pause() {
   alSourcePausev(nlinkedsources_,linkedsources_);
 }
 
-//##ModelId=3BD86A6E001E
 void SourceBase::Stop() {
   alSourceStopv(nlinkedsources_,linkedsources_);
 }
 
-//##ModelId=3BD86A75032B
 void SourceBase::Rewind() {
   alSourceRewindv(nlinkedsources_,linkedsources_);
 }
 
-//##ModelId=3BDD292C009B
 SourceState SourceBase::GetState() const {
   ALint state;
   alGetSourceiv(sourcename_,AL_SOURCE_STATE,&state);
@@ -118,7 +114,6 @@ SourceState SourceBase::GetState() const {
   }
 }
 
-//##ModelId=3BD86A9603B5
 void SourceBase::SetLooping(bool loop) {
   if(loop)
     alSourcei(sourcename_,AL_LOOPING,AL_TRUE);
@@ -126,19 +121,16 @@ void SourceBase::SetLooping(bool loop) {
     alSourcei(sourcename_,AL_LOOPING,AL_FALSE);
 }
 
-//##ModelId=3BD86C3F0149
 bool SourceBase::IsLooping() const {
   ALint looping;
   alGetSourceiv(sourcename_,AL_LOOPING,&looping);
   return (looping==AL_TRUE);
 }
 
-//##ModelId=3BD86B310322
 void SourceBase::SetDirection(float directionx, float directiony, float directionz) {
   alSource3f(sourcename_,AL_DIRECTION,directionx,directiony,directionz);
 }
 
-//##ModelId=3BD86BEC01CC
 void SourceBase::GetDirection(float &directionx, float &directiony, float &directionz) const {
   ALfloat direction[3];
   alGetSourcefv(sourcename_,AL_DIRECTION,direction);
@@ -147,26 +139,22 @@ void SourceBase::GetDirection(float &directionx, float &directiony, float &direc
   directionz=direction[2];
 }
 
-//##ModelId=3BD86F7100D7
 void SourceBase::MakeOmniDirectional() {
   alSource3f(sourcename_,AL_DIRECTION,0.0,0.0,0.0);
 }
 
-//##ModelId=3BD86C6F00EE
 void SourceBase::SetSoundCone(float innerangle, float outerangle, float outergain) {
   alSourcef(sourcename_,AL_CONE_INNER_ANGLE,innerangle);
   alSourcef(sourcename_,AL_CONE_OUTER_ANGLE,outerangle);
   alSourcef(sourcename_,AL_CONE_OUTER_GAIN,outergain);
 }
 
-//##ModelId=3BD86E0000CD
 void SourceBase::GetSoundCone(float &innerangle, float &outerangle, float &outergain) const {
   alGetSourcefv(sourcename_,AL_CONE_INNER_ANGLE,&innerangle);
   alGetSourcefv(sourcename_,AL_CONE_OUTER_ANGLE,&outerangle);
   alGetSourcefv(sourcename_,AL_CONE_OUTER_GAIN,&outergain);
 }
 
-//##ModelId=3BD86E5002E4
 void SourceBase::SetGain(float gain) {
   alSourcef(sourcename_,AL_GAIN,gain);
   ALenum error=alGetError();
@@ -180,14 +168,12 @@ void SourceBase::SetGain(float gain) {
     }
 }
 
-//##ModelId=3BD86E5002EE
 float SourceBase::GetGain() const {
   ALfloat gain;
   alGetSourcefv(sourcename_,AL_GAIN,&gain);
   return gain;
 }
 
-//##ModelId=3BD86E600283
 void SourceBase::SetMinMaxGain(float min, float max) {
   alSourcef(sourcename_,AL_MIN_GAIN,min);
   alSourcef(sourcename_,AL_MAX_GAIN,max);
@@ -202,13 +188,11 @@ void SourceBase::SetMinMaxGain(float min, float max) {
     }
 }
 
-//##ModelId=3BD86ECD01E0
 void SourceBase::GetMinMaxGain(float & min, float &max) const {
   alGetSourcefv(sourcename_,AL_MIN_GAIN,&min);
   alGetSourcefv(sourcename_,AL_MAX_GAIN,&max);
 }
 
-//##ModelId=3BD86FB501BB
 void SourceBase::SetAmbient(bool ambient) {
   if(ambient) {
     alSourcei(sourcename_,AL_SOURCE_RELATIVE,AL_TRUE);
@@ -222,7 +206,6 @@ void SourceBase::SetAmbient(bool ambient) {
     throw FatalError("Error trying to make/unmake sound ambient!");
 }
 
-//##ModelId=3BD8703E03D5
 bool SourceBase::IsAmbient() const {
   ALint relative;
   alGetSourceiv(sourcename_,AL_SOURCE_RELATIVE,&relative);
@@ -231,7 +214,6 @@ bool SourceBase::IsAmbient() const {
   return (relative==AL_TRUE && rolloff<0.001);
 }
 
-//##ModelId=3BD8704C0078
 void SourceBase::SetReferenceDistance(float distance) {
   alSourcef(sourcename_,AL_REFERENCE_DISTANCE,distance);
   if(alGetError()!=AL_FALSE)
@@ -244,7 +226,6 @@ float SourceBase::GetReferenceDistance() const {
   return ref;
 }
 
-//##ModelId=3BD8708D0067
 void SourceBase::SetMaxDistance(float distance) {
   alSourcef(sourcename_,AL_MAX_DISTANCE,distance);
   if(alGetError()!=AL_FALSE)
@@ -257,21 +238,18 @@ float SourceBase::GetMaxDistance() const {
   return maxdistance;
 }
 
-//##ModelId=3BD870C700CF
 void SourceBase::SetRolloffFactor(float factor) {
   alSourcef(sourcename_,AL_ROLLOFF_FACTOR,factor);
   if(alGetError()!=AL_FALSE)
     throw FatalError("Error trying to set rolloff factor!");
 }
 
-//##ModelId=3BD871130395
 float SourceBase::GetRolloffFactor() const {
   ALfloat factor;
   alGetSourcefv(sourcename_,AL_ROLLOFF_FACTOR,&factor);
   return factor;
 }
 
-//##ModelId=3BD871230117
 void SourceBase::SetPitch(float pitch) {
   alSourcef(sourcename_,AL_PITCH,pitch);
   ALenum error=alGetError();
@@ -291,7 +269,6 @@ float SourceBase::GetPitch() const {
   return pitch;
 }
 
-//##ModelId=3BD8716202C7
 void SourceBase::SetReverbScale(float scale) throw (InitError,ValueError) {
   if(reverbinitiated_) {
     alReverbScale(sourcename_,scale);
@@ -302,7 +279,6 @@ void SourceBase::SetReverbScale(float scale) throw (InitError,ValueError) {
     throw InitError("Reverb not initialized");
 }
 
-//##ModelId=3BD871D303B9
 void SourceBase::SetReverbDelay(float delay) throw (InitError,ValueError) {
   if(reverbinitiated_) {
     alReverbDelay(sourcename_,delay);
@@ -325,7 +301,6 @@ float SourceBase::GetReverbDelay() throw (InitError) {
   return reverbdelay_;
 }
 
-//##ModelId=3BD8720F0239
 ALuint SourceBase::Link(const SourceBase &source) throw (MemoryError) {
   if(nlinkedsources_>=alloclinkedsources_) {
     alloclinkedsources_+=5;
@@ -338,7 +313,6 @@ ALuint SourceBase::Link(const SourceBase &source) throw (MemoryError) {
   return source.GetAlSource();
 }
 
-//##ModelId=3BD872F6028B
 void SourceBase::Unlink(const SourceBase &source) throw (NameError) {
   if(source.sourcename_==sourcename_)
     throw(NameError("Can't unlink a source from itself!"));
@@ -361,12 +335,10 @@ void SourceBase::Unlink(const ALuint name) throw (NameError) {
   throw NameError("Source not linked");
 }
 
-//##ModelId=3BD87310027F
 void SourceBase::UnlinkAll() {
   nlinkedsources_=1;
 }
 
-//##ModelId=3BD86F0102AD
 ALuint SourceBase::GetAlSource() const {
   return sourcename_;
 }
