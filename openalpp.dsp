@@ -89,6 +89,10 @@ SOURCE=.\audiobase.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\audioconvert.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\audioenviroment.cpp
 # End Source File
 # Begin Source File
@@ -150,6 +154,10 @@ SOURCE=.\streamupdater.cpp
 # Begin Source File
 
 SOURCE=.\audiobase.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audioconvert.h
 # End Source File
 # Begin Source File
 
