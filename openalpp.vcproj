@@ -12,7 +12,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\Debug"
+			OutputDirectory="./lib"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="4"
 			UseOfMFC="0"
@@ -37,7 +37,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="lib\openalppd.lib"
+				OutputFile="$(OutDir)/openalppd.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -56,7 +56,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\Release"
+			OutputDirectory="./lib"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="4"
 			UseOfMFC="0"
@@ -83,7 +83,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="lib\openalpp.lib"
+				OutputFile="$(OutDir)/openalpp.lib"
 				SuppressStartupBanner="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -166,37 +166,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\inputdevice.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=".\include;$(NoInherit)"
-						CompileAs="0"/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\src\listener.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=".\include;$(NoInherit)"
-						CompileAs="0"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\src\netstream.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=".\include;$(NoInherit)"
-						CompileAs="0"/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\src\netupdater.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool

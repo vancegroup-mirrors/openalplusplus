@@ -50,7 +50,7 @@ int main() {
     source.SetGain(2);
 	  //source.SetLooping();
     source.Play();
-    ccxx_sleep(3000);
+    ost::Thread::sleep(3000);
 
     float limits[2] = {0.5,-0.5};
     float delay=10;
@@ -78,10 +78,10 @@ int main() {
 #else
     std::cerr << "Moved to the left" << std::endl;
     source.SetPosition(-0.5,0.0,0);
-  ccxx_sleep(3000);
+    ost::Thread::sleep(3000);
     std::cerr << "Moved to the right" << std::endl;
     source.SetPosition(+0.5,0.0,0);
-  ccxx_sleep(3000);
+    ost::Thread::sleep(3000);
 #endif
   } catch(Error e) {
     cerr << e << "\n";

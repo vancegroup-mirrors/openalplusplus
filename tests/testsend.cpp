@@ -67,8 +67,8 @@ int main(int argc,char **argv) {
     while(totalsent<size) {        // Send data in packets with a 100 ms delay between packets
       if((totalsent+packetsize)>size)
 	      packetsize=size-totalsent;
-      totalsent+=socket.Send((char *)data+totalsent,packetsize);
-      ccxx_sleep(100);
+      totalsent+=socket.send((char *)data+totalsent,packetsize);
+      ost::Thread::sleep(100);
     }
 
     free(data);

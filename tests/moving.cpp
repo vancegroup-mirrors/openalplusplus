@@ -58,7 +58,7 @@ int main() {
 
     // Do a cheat time loop.
     while(angle<(M_PI*no_laps)) {
-	    ccxx_sleep(delay); // Wait for delay milliseconds
+      ost::Thread::sleep(delay); // Wait for delay milliseconds
 
       time +=delay/1000; // Calculate the time in the loop
       angle=M_PI *time;  // What is the resulting angle

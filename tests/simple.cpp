@@ -42,7 +42,7 @@ int main() {
     
     
     std::cerr << "playing bee.wav for 3 seconds: " << std::endl;
-    ccxx_sleep(3000);		  // Sleep for a while
+    ost::Thread::sleep(3000);		  // Sleep for a while
   } catch(Error e) {
     cerr << e << "\n";
     return -1;

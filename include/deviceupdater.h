@@ -69,12 +69,12 @@ class DeviceUpdater : public StreamUpdater, public ost::Semaphore {
   /**
    * Enter critical section.
    */
-  inline void Enter() {inputmutex.EnterMutex();}
+  inline void Enter() {inputmutex.enterMutex();}
 
   /**
    * Leave critical section.
    */
-  inline void Leave() {inputmutex.LeaveMutex();}
+  inline void Leave() {inputmutex.leaveMutex();}
 
   /**
    * Copy input from callback to temporary buffer.

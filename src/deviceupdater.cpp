@@ -31,8 +31,8 @@ static int RecordCallback(void *inputbuffer,void *outputbuffer,
 			  PaTimestamp outtime, void *object) {
   ((DeviceUpdater *)object)->Enter();
   ((DeviceUpdater *)object)->CopyInput(inputbuffer,nframes);
-  ((DeviceUpdater *)object)->Post();
-  ((DeviceUpdater *)object)->Leave();
+  ((DeviceUpdater *)object)->post();
+  ((DeviceUpdater *)object)->wait();
   return 0;
 }
 
@@ -117,10 +117,10 @@ void DeviceUpdater::Run() {
   Pa_StartStream(stream_);
   bool done=false;
   do {
-    Wait();
+    wait();
     Enter();
     done=Update(tmpbuffer_,tmpbufsize_);
-    Leave();
+    post();
   } while(!done);
   Pa_StopStream(stream_);
 }

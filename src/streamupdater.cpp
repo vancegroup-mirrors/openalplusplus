@@ -32,18 +32,18 @@ StreamUpdater::StreamUpdater(ALuint buffer1,ALuint buffer2,
   buffers_[0]=buffer1;
   buffers_[1]=buffer2;
   nrefs_=1;
-  setCancel(ost::THREAD_CANCEL_DISABLED);
+  setCancel(ost::Thread::cancelDisabled);
 }
 
 StreamUpdater::~StreamUpdater() {
-  Terminate();
+  terminate();
 }
 
 void StreamUpdater::AddSource(ALuint sourcename) {
   ENTER_CRITICAL;
   newsources_.push_back(sourcename);
   if(!sources_.size())
-    Start();
+    start();
   LEAVE_CRITICAL;
 }
 
@@ -124,7 +124,7 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
           alSourceQueueBuffers(sources_[i],1,&albuffer);
       } else {
 	LEAVE_CRITICAL;
-        ost::ccxx_yield(); //ost::ccxx_sleep(50);
+  ost::Thread::yield(); //ost::ccxx_sleep(50);
 	ENTER_CRITICAL;
 	if(removesources_.size()) { // Not sure if this is necessary, but just in case...
 	  LEAVE_CRITICAL;
@@ -156,9 +156,9 @@ bool StreamUpdater::Update(void *buffer,unsigned int length) {
 */  
   LEAVE_CRITICAL;
   bool ret;
-  runmutex_.EnterMutex();
+  runmutex_.enterMutex();
   ret=stoprunning_;
-  runmutex_.LeaveMutex();
+  runmutex_.leaveMutex();
   return ret;
 }
 
@@ -174,9 +174,9 @@ StreamUpdater *StreamUpdater::Reference() {
 void StreamUpdater::DeReference() throw (FatalError) {
   nrefs_--;
   if(!nrefs_) {
-    runmutex_.EnterMutex();
+    runmutex_.enterMutex();
     stoprunning_=true;
-    runmutex_.LeaveMutex();
+    runmutex_.leaveMutex();
   } else if(nrefs_<0)
     throw FatalError("StreamUpdater dereferenced too many times!");
 }
