@@ -175,6 +175,20 @@ class SourceBase : public PositionedObject {
   bool IsAmbient() const;
 
   /**
+   * Makes the source's position relative (or makes it stop being relative).
+   * This means that the position in space will not be absolute, but rather
+   * relative to the listener.
+   * @param relative is true if the source should be relative, false otherwise.
+   */
+  void SetRelative(bool relative = true);
+
+  /**
+   * Check if the source's position is relative.
+   * @return true if the source is relative, false otherwise.
+   */
+  bool IsRelative() const;
+
+  /**
    * Sets the reference distance for this source.
    * The reference distance is used in attenuation calculations.
    * @param distance is the reference distance.

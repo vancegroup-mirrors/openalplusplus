@@ -240,6 +240,19 @@ bool SourceBase::IsAmbient() const {
   return (relative==AL_TRUE && rolloff<0.001);
 }
 
+void SourceBase::SetRelative(bool relative) {
+  if(relative)
+    alSourcei(sourcename_,AL_SOURCE_RELATIVE,AL_TRUE);
+  else
+    alSourcei(sourcename_,AL_SOURCE_RELATIVE,AL_FALSE);
+}
+
+bool SourceBase::IsRelative() const {
+  ALint relative;
+  alGetSourceiv(sourcename_,AL_SOURCE_RELATIVE,&relative);
+  return (relative==AL_TRUE);
+}
+
 void SourceBase::SetReferenceDistance(float distance) {
   alSourcef(sourcename_,AL_REFERENCE_DISTANCE,distance);
   if(alGetError()!=AL_FALSE)
