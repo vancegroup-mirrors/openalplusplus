@@ -27,6 +27,7 @@
  */
 
 #include <openalpp/alpp.h>
+#include <iostream>
 
 using namespace openalpp;
 
@@ -46,7 +47,7 @@ int main(int argc,char **argv) {
     source.SetAmbient();
     source.Play();
     std::cerr << "Press return to continue\n";
-    cin.get();
+    std::cin.get();
     source.Stop();
   } catch(openalpp::Error e) {
     std::cerr << e << "\n";
