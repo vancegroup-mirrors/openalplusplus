@@ -26,6 +26,9 @@
 #define WINDOWSSTUFF_H_INCLUDED
 #ifdef WIN32
 
+//C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+#pragma warning( disable : 4290 )
+
 #include <AL/alut.h>
 
 #define alGetSourceiv alGetSourcei
