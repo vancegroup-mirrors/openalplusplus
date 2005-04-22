@@ -34,7 +34,8 @@
 #include "openalpp/export.h"
 
 #include <windows.h>
-#define usleep(x) Sleep((x)/1000)
+
+inline void usleep( int x ) { Sleep( x /1000 ); };
 
 #include <AL/alut.h>
 
