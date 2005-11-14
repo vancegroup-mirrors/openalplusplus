@@ -103,7 +103,7 @@ bool StreamUpdater::update(void *buffer, unsigned int length)
     }
 
     ALint processed,state;
-    ALuint albuffer;
+    ALuint albuffer=0;
 
     ENTER_CRITICAL;
 
