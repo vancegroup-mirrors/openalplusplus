@@ -1,4 +1,7 @@
 NEWS
+2005-11-14 Anders Backman
+Added playstream example to be able to play ogg files from cmd-line.
+
 2005-03-23 Dewitt Colclough [dewitt@twcny.rr.com]
 Added seek() method to move in ogg streams.
 Major stability, memory leak fix for streaming ogg files.
