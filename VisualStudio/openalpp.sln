@@ -30,6 +30,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multiple", "multiple.vcproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "playstream", "playstream.vcproj", "{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}"
 	ProjectSection(ProjectDependencies) = postProject
+		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
 	EndProjectSection
 EndProject
 Global
