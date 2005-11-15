@@ -28,6 +28,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multiple", "multiple.vcproj
 		{2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3} = {2BA79A95-C0A7-4F13-9D84-7912AEA4A8B3}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "playstream", "playstream.vcproj", "{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -58,6 +62,10 @@ Global
 		{B9EDEBD3-BCA0-4FDB-A2BE-CAA2FB2D5271}.Debug.Build.0 = Debug|Win32
 		{B9EDEBD3-BCA0-4FDB-A2BE-CAA2FB2D5271}.Release.ActiveCfg = Release|Win32
 		{B9EDEBD3-BCA0-4FDB-A2BE-CAA2FB2D5271}.Release.Build.0 = Release|Win32
+		{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}.Debug.ActiveCfg = Debug|Win32
+		{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}.Debug.Build.0 = Debug|Win32
+		{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}.Release.ActiveCfg = Release|Win32
+		{2ACDFA12-B270-4A97-8A7E-0681ACAFB492}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
