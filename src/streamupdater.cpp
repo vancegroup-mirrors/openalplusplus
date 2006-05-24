@@ -75,8 +75,8 @@ StreamUpdater::~StreamUpdater() {
 }
 
 void StreamUpdater::addSource(ALuint sourcename) {
-    alSourceStop(sourcename);
     ENTER_CRITICAL;
+    alSourceStop(sourcename);
     newsources_.push_back(sourcename);
     if(!sources_.size())
         start();

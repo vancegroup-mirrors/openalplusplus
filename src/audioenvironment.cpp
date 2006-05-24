@@ -88,10 +88,10 @@ void AudioEnvironment::setGain(float gain) {
   if(error!=AL_FALSE)
     switch(error) {
       case(AL_INVALID_VALUE):
-	throw ValueError("Invalid value for gain");
-	break;
+	      throw ValueError("Invalid value for gain");
+	      break;
       default:
-	throw FatalError("Error trying to set gain!");
+	      throw FatalError("Error trying to set gain!");
     }
 }
 

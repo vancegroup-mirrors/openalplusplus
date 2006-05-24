@@ -66,7 +66,8 @@ SourceBase::~SourceBase() {
   //free(linkedsources_);
   delete [] linkedsources_;
 
-  if (alGetError() != AL_FALSE)
+  ALenum status = alGetError();
+  if (status != AL_FALSE)
   {
       std::cerr << "~SourceBase() - Warning - Error deleting sources\n";
   }
